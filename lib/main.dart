@@ -26,14 +26,17 @@ class MyAppState extends State<MyApp> {
     Widget build(BuildContext context) {
         return MaterialApp(
             theme: ThemeData(
-            primarySwatch: Colors.red,
-            primaryTextTheme: TextTheme(
-                title: TextStyle(color: Colors.white),
-              )
+                primarySwatch: Colors.red,
+                primaryTextTheme: TextTheme(
+                    title: TextStyle(color: Colors.white),
+                )
             ),
             home: SafeArea( 
                 child: Scaffold(
-                    body: _pageOptions[_selectedTab],
+                    body: Container(
+                        padding: EdgeInsets.only(top: 40.0),
+                        child: _pageOptions[_selectedTab]
+                    ),
                     bottomNavigationBar: BottomNavigationBar(
                         currentIndex: _selectedTab,
                         onTap: (int index) {
@@ -57,7 +60,7 @@ class MyAppState extends State<MyApp> {
                         ],
                     )
                 ),
-            )
+            ),
         );
     }
 }

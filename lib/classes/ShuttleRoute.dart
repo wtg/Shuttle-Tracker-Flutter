@@ -13,7 +13,6 @@ class ShuttleRoute {
   List<int> stopIds;
   String created;
   String updated;
-  List<ShuttlePoint> shuttlePoints;
   bool active;
 
   List<LatLng> points;
@@ -34,7 +33,7 @@ class ShuttleRoute {
 
   ShuttleRoute.fromJson(Map<String, dynamic> json) {
     var list = json['points'] as List;
-    List<ShuttlePoint> shuttlePointsList = list.map((i) => ShuttlePoint.fromJson(i)).toList();
+   
     List<LatLng> pointsList = list.map((i) => ShuttlePoint.fromJson(i).convertToLatLng()).toList();
     
     id = json['id'];
@@ -48,7 +47,7 @@ class ShuttleRoute {
     created = json['created'];
     updated = json['updated'];
     points = pointsList;
-    shuttlePoints = shuttlePointsList;
+    
     
   }
 }

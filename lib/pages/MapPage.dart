@@ -1,13 +1,19 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
-
 import 'package:geolocation/geolocation.dart';
 import 'package:latlong/latlong.dart';
+import 'package:http/http.dart' as http;
+import 'dart:io';
+import 'package:path_provider/path_provider.dart';
+import 'package:flutter_shuttletracker/widgets/ShuttleRoute.dart';
+
 
 
 class MapPage extends StatefulWidget {
+
   MapPage({Key key, this.title}) : super(key: key);
   final String title;
 
@@ -17,9 +23,42 @@ class MapPage extends StatefulWidget {
 
 class _MapPageState extends State<MapPage> {
 
-  getPermission() async {
-    //double lat;
-    //double lng;
+  List<Polyline> _routes = List<Polyline>();
+  List<Marker> _markers = List<Marker>();
+  
+  
+  Future <List<Polyline>> fetchRoutes(http.Client client) async {
+    final response = await client.get('https://shuttles.rpi.edu/routes');
+    
+    final Directory directory = await getApplicationDocumentsDirectory();
+    final File file = File('${directory.path}/routes.json');
+    await file.writeAsString(response.body);
+
+    var routes = List<ShuttleRoute>();
+    var polylines = List<Polyline>();
+
+
+    if (response.statusCode == 200){
+      var routesJSON = json.decode(response.body);
+
+      for (var routeJSON in routesJSON) {
+        routes.add(ShuttleRoute.fromJson(routeJSON));
+        polylines.add(Polyline(
+          points: ShuttleRoute.fromJson(routeJSON).points,
+          strokeWidth: ShuttleRoute.fromJson(routeJSON).width,
+          color: ShuttleRoute.fromJson(routeJSON).color,
+        ));
+      }
+    }
+    return polylines;
+  }
+
+  Future<List<Marker>> getPermission() async {
+
+    double lat = 0.00;
+    double lng = 0.00;
+    var markers = List<Marker>();
+
     final GeolocationResult result = await Geolocation.requestLocationPermission(
       permission: const LocationPermission(
         android: LocationPermissionAndroid.fine,
@@ -27,50 +66,40 @@ class _MapPageState extends State<MapPage> {
       ),
       openSettingsIfDenied: true,
     );
+    
 
-    return result;
-    /*
-    LocationResult value = await Geolocation.lastKnownLocation();
-
+    final LocationResult value = await Geolocation.lastKnownLocation();
+    print(value);
     if(result.isSuccessful && value.isSuccessful){
-      print('yeet');
+
       lat = value.location.latitude;
       lng = value.location.longitude;
       
-      print(lat);
-      print(lng);
+      markers.add(
+        Marker(
+          point: LatLng(lat,lng)
+        )
+      );
     }
 
-    else{
-      lat = 0;
-      lng = 0;
-      print('nah');
-    }
-
-    return [lat,lng];
-    */
+    return markers;
   }
 
   @override
   Widget build(BuildContext context) {
+    fetchRoutes(http.Client()).then((value) {
+      //setState(() {
+      _routes.addAll(value);
+     // });
+    });
+    print(_routes.length);
+    
+    getPermission().then((value) {
+   
+      _markers.addAll(value);
 
-    var markers = <Marker>[ //TEST MARKER
-      Marker(
-        width: 30.0,
-        height: 30.0,
-        point: LatLng(42.73, -73.68),
-        builder: (ctx) => Container(
-          child: IconButton(
-            icon: Icon(Icons.fiber_manual_record),
-            color: Colors.orange,
-            onPressed: (){
-              print('Button Pressed');
-            },
-          )
-        ),
-      ),
-    ];
-
+    });
+    
     return Scaffold(
       body: Center(
         child: Column(
@@ -80,7 +109,7 @@ class _MapPageState extends State<MapPage> {
               child: FlutterMap(
                 options: MapOptions(
                   center: LatLng(42.73, -73.677),
-                  zoom: 14.7,
+                  zoom: 14.4,
                   maxZoom: 16,
                 ),
                 layers: [
@@ -94,7 +123,10 @@ class _MapPageState extends State<MapPage> {
                     tileProvider: CachedNetworkTileProvider(),
                   ),
                   MarkerLayerOptions(
-                    markers: markers
+                    markers: _markers
+                  ),
+                  PolylineLayerOptions(
+                    polylines: _routes
                   )
                 ],
               ),

@@ -14,7 +14,6 @@ class MyApp extends StatefulWidget {
 }
 
 class MyAppState extends State<MyApp> {
-
     int _selectedTab = 0;
     final _pageOptions = [
         MapPage(),
@@ -33,10 +32,7 @@ class MyAppState extends State<MyApp> {
             ),
             home: SafeArea( 
                 child: Scaffold(
-                    body: Container(
-                        padding: EdgeInsets.only(top: 40.0),
-                        child: _pageOptions[_selectedTab]
-                    ),
+                    body: _pageOptions[_selectedTab],
                     bottomNavigationBar: BottomNavigationBar(
                         currentIndex: _selectedTab,
                         onTap: (int index) {

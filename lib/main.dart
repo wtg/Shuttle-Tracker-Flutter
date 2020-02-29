@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import './pages/MapPage.dart';
 import './pages/SchedulesPage.dart';
 import './pages/SettingsPage.dart';
+import 'dart:ui';
 
 void main() => runApp(MyApp());
 
@@ -32,7 +33,18 @@ class MyAppState extends State<MyApp> {
             ),
             home: SafeArea( 
                 child: Scaffold(
-                    body: _pageOptions[_selectedTab],
+                    appBar: AppBar(
+                      backgroundColor: Colors.white,
+                      title: Image(
+                        image: ExactAssetImage('assets/img/icon.png'),
+                        height: 40,
+                        width: 500,
+                        // Come back to this section I think I did this wrong
+                        // yet it kinda works 
+                      ),
+                    ),
+                    
+                    body: _pageOptions[_selectedTab], 
                     bottomNavigationBar: BottomNavigationBar(
                         currentIndex: _selectedTab,
                         onTap: (int index) {

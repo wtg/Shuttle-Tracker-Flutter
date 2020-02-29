@@ -20,7 +20,6 @@ class _MapPageState extends State<MapPage> {
 
   List<Polyline> _routes = List<Polyline>();
   List<Marker> _markers = List<Marker>();
-  
 
   @override
   Widget build(BuildContext context) {

@@ -4,6 +4,7 @@ import 'dart:core';
 import 'dart:ui';
 
 class ShuttleRoute {
+
   int id;
   String name;
   String desc;
@@ -32,8 +33,8 @@ class ShuttleRoute {
   );
 
   ShuttleRoute.fromJson(Map<String, dynamic> json) {
+    
     var list = json['points'] as List;
-   
     List<LatLng> pointsList = list.map((i) => ShuttlePoint.fromJson(i).convertToLatLng()).toList();
     
     id = json['id'];

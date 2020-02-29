@@ -1,5 +1,7 @@
 import 'package:latlong/latlong.dart';
+
 class ShuttlePoint {
+  
   double latitude;
   double longitude;
 

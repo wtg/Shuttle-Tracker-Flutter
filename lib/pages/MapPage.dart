@@ -17,22 +17,31 @@ class MapPage extends StatefulWidget {
 }
 
 class _MapPageState extends State<MapPage> {
-
-  List<Polyline> _routes = List<Polyline>();
-  List<Marker> _markers = List<Marker>();
+  var _routes = <Polyline>[];
+  var _markers = <Marker>[];
 
   @override
-  Widget build(BuildContext context) {
+  initState() {
+    print('INIT STATE');
+    super.initState();
+
     fetchRoutes(http.Client()).then((value) {
-      //setState(() {
+      setState(() {}); // COME BACK TO THIS IM PRETTY SURE I DID THIS WRONG BUT IT WORKS 
       _routes.addAll(value);
-     // });
     });
-    
+
     fetchLocation().then((value) {
       _markers.addAll(value);
     });
-    
+
+    fetchStops(http.Client()).then((value) {
+      _markers.addAll(value);
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+
     return Scaffold(
       body: Center(
         child: Column(
@@ -55,12 +64,12 @@ class _MapPageState extends State<MapPage> {
                     // NetworkTileProvider or CachedNetworkTileProvider
                     tileProvider: CachedNetworkTileProvider(),
                   ),
-                  MarkerLayerOptions(
-                    markers: _markers
-                  ),
                   PolylineLayerOptions(
                     polylines: _routes
-                  )
+                  ),
+                   MarkerLayerOptions(
+                    markers: _markers
+                  ),
                 ],
               ),
             ),

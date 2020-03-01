@@ -17,6 +17,7 @@ class MapPage extends StatefulWidget {
 }
 
 class _MapPageState extends State<MapPage> {
+  
   var _routes = <Polyline>[];
   var _markers = <Marker>[];
 
@@ -45,12 +46,11 @@ class _MapPageState extends State<MapPage> {
     return Scaffold(
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Flexible(
               child: FlutterMap(
                 options: MapOptions(
-                  center: LatLng(42.73, -73.677),
+                  center: LatLng(42.73, -73.6767),
                   zoom: 14.2,
                   maxZoom: 16,
                 ),

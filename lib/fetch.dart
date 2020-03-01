@@ -115,6 +115,5 @@ Future<List<Marker>> fetchLocation() async {
     )
   ];
   
-
   return markers;
 }

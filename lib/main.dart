@@ -34,14 +34,13 @@ class MyAppState extends State<MyApp> {
             home: SafeArea( 
                 child: Scaffold(
                     appBar: AppBar(
+                        centerTitle: true,
                         backgroundColor: Colors.white,
-                        title: Image(
-                            image: ExactAssetImage('assets/img/icon.png'),
+                        title: Image.asset(
+                            'assets/img/icon.png',
                             height: 40,
-                            width: 500,
-                            // Come back to this section I think I did this wrong
-                            // yet it kinda works 
-                        ),
+                            width: 40,
+                        )
                     ),
                     
                     body: _pageOptions[_selectedTab], 

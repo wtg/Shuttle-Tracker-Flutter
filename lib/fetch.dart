@@ -60,20 +60,11 @@ Future <List<Marker>> fetchUpdates(http.Client client) async {
       updates.add(
         Marker(
           point: ShuttleVehicle.fromJson(updateJSON).convertToLatLng(),
-          width: 10.0, // width and height do not affect the size of the icon
-          height: 10.0,
+          width: 30.0, 
+          height: 30.0,
           builder: (ctx) => RotationTransition(
-            turns: AlwaysStoppedAnimation(ShuttleVehicle.fromJson(updateJSON).heading / 360),
-            child: Container(
-              child: IconButton(
-                iconSize: 35,
-                icon: Icon(Icons.navigation),
-                color: Colors.black,
-                onPressed: (){
-                  print('Button Pressed!');
-                },
-              ),
-            )
+            turns: AlwaysStoppedAnimation((ShuttleVehicle.fromJson(updateJSON).heading - 45) / 360),
+            child: Image.asset('assets/img/shuttle.png')
           )
         )
       );
@@ -98,18 +89,9 @@ Future <List<Marker>> fetchStops(http.Client client) async {
       stops.add(
         Marker(
           point: ShuttleStop.fromJson(stopJSON).convertToLatLng(),
-          width: 10.0, // width and height do not affect the size of the icon
+          width: 10.0, 
           height: 10.0,
-          builder: (ctx) => Container(
-            child: IconButton(
-              iconSize: 17,
-              icon: Icon(Icons.fiber_manual_record),
-              color: Colors.blue[800],
-              onPressed: (){
-                print('Button Pressed!');
-              },
-            ),
-          )
+          builder: (ctx) => Image.asset('assets/img/circle.png')
         )
       );
     }
@@ -145,18 +127,9 @@ Future<List<Marker>> fetchLocation() async {
   markers = [
     Marker(
       point: LatLng(lat,lng),
-      width: 10.0, // width and height do not affect the size of the icon
+      width: 10.0, 
       height: 10.0,
-      builder: (ctx) => Container(
-        child: IconButton(
-          iconSize: 17,
-          icon: Icon(Icons.fiber_manual_record),
-          color: Colors.orange,
-          onPressed: (){
-            print('Button Pressed!');
-          },
-        ),
-      )
+      builder: (ctx) => Image.asset('assets/img/user.png')
     )
   ];
   

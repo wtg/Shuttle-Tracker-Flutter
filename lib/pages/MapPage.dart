@@ -19,24 +19,32 @@ class MapPage extends StatefulWidget {
 class _MapPageState extends State<MapPage> {
   
   var _routes = <Polyline>[];
-  var _markers = <Marker>[];
+  var _location = <Marker>[];
+  var _updates = <Marker>[];
+  var _stops = <Marker>[];
 
   @override
   initState() {
     print('INIT STATE');
     super.initState();
 
+    fetchUpdates(http.Client()).then((value) {
+      setState(() {});
+      _updates.addAll(value);
+    });
+
     fetchRoutes(http.Client()).then((value) {
-      setState(() {}); // COME BACK TO THIS IM PRETTY SURE I DID THIS WRONG BUT IT WORKS 
+      setState(() {});
       _routes.addAll(value);
     });
 
     fetchLocation().then((value) {
-      _markers.addAll(value);
+      _location.addAll(value);
     });
 
+    
     fetchStops(http.Client()).then((value) {
-      _markers.addAll(value);
+      _stops.addAll(value);
     });
   }
 
@@ -51,8 +59,8 @@ class _MapPageState extends State<MapPage> {
               child: FlutterMap(
                 options: MapOptions(
                   center: LatLng(42.73, -73.6767),
-                  zoom: 14.2,
-                  maxZoom: 16,
+                  zoom: 14,
+                  maxZoom: 18,
                 ),
                 layers: [
                   TileLayerOptions(
@@ -67,8 +75,14 @@ class _MapPageState extends State<MapPage> {
                   PolylineLayerOptions(
                     polylines: _routes
                   ),
-                   MarkerLayerOptions(
-                    markers: _markers
+                  MarkerLayerOptions(
+                    markers: _location
+                  ),
+                  MarkerLayerOptions(
+                    markers: _stops
+                  ),
+                  MarkerLayerOptions(
+                    markers: _updates
                   ),
                 ],
               ),

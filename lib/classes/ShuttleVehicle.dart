@@ -4,8 +4,8 @@ class ShuttleVehicle extends ShuttlePoint{
 
   int id;
   String trackerId;
-  int heading;
-  double speed;
+  num heading;
+  num speed;
   String time;
   String created;
   int vehicleId;
@@ -34,6 +34,7 @@ class ShuttleVehicle extends ShuttlePoint{
     id = json['id'];
     trackerId = json['tracker_id'];
     heading = json['heading'];
+    heading = heading.toDouble();
     speed = json['speed'];
     time = json['time'];
     created = json['created'];

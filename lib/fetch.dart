@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_map/flutter_map.dart';
+import 'package:flutter_shuttletracker/classes/ShuttleVehicle.dart';
 import 'package:geolocation/geolocation.dart';
 import 'package:latlong/latlong.dart';
 import 'package:http/http.dart' as http;
@@ -10,13 +11,19 @@ import 'package:path_provider/path_provider.dart';
 import 'package:flutter_shuttletracker/classes/ShuttleRoute.dart';
 import 'package:flutter_shuttletracker/classes/ShuttleStop.dart';
 
+Future createJSONFile(String fileName, http.Response response) async {
+
+  final Directory directory = await getApplicationDocumentsDirectory();
+  final File file = File('${directory.path}/$fileName.json');
+  await file.writeAsString(response.body);
+
+}
+
 
 Future <List<Polyline>> fetchRoutes(http.Client client) async {
 
   final response = await client.get('https://shuttles.rpi.edu/routes');
-  final Directory directory = await getApplicationDocumentsDirectory();
-  final File file = File('${directory.path}/routes.json');
-  await file.writeAsString(response.body);
+  createJSONFile('routes', response);
 
   var routes = List<Polyline>();
 
@@ -36,12 +43,50 @@ Future <List<Polyline>> fetchRoutes(http.Client client) async {
   return routes;
 }
 
+
+Future <List<Marker>> fetchUpdates(http.Client client) async {
+
+  final response = await client.get('https://shuttles.rpi.edu/updates');
+  createJSONFile('updates', response);
+
+  var updates = List<Marker>();
+
+  if (response.statusCode == 200){
+
+    var updatesJSON = json.decode(response.body);
+
+    for (var updateJSON in updatesJSON) {
+
+      updates.add(
+        Marker(
+          point: ShuttleVehicle.fromJson(updateJSON).convertToLatLng(),
+          width: 10.0, // width and height do not affect the size of the icon
+          height: 10.0,
+          builder: (ctx) => RotationTransition(
+            turns: AlwaysStoppedAnimation(ShuttleVehicle.fromJson(updateJSON).heading / 360),
+            child: Container(
+              child: IconButton(
+                iconSize: 35,
+                icon: Icon(Icons.navigation),
+                color: Colors.black,
+                onPressed: (){
+                  print('Button Pressed!');
+                },
+              ),
+            )
+          )
+        )
+      );
+    }
+  }
+
+  return updates;
+}
+
 Future <List<Marker>> fetchStops(http.Client client) async {
 
   final response = await client.get('https://shuttles.rpi.edu/stops');
-  final Directory directory = await getApplicationDocumentsDirectory();
-  final File file = File('${directory.path}/stops.json');
-  await file.writeAsString(response.body);
+  createJSONFile('stops', response);
 
   var stops = List<Marker>();
 

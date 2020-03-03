@@ -60,7 +60,7 @@ class _MapPageState extends State<MapPage> {
                 options: MapOptions(
                   center: LatLng(42.73, -73.6767),
                   zoom: 14,
-                  maxZoom: 18,
+                  maxZoom: 20,
                 ),
                 layers: [
                   TileLayerOptions(

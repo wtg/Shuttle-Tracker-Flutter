@@ -6,9 +6,7 @@ import 'package:latlong/latlong.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_shuttletracker/fetch.dart';
 
-
 class MapPage extends StatefulWidget {
-
   MapPage({Key key, this.title}) : super(key: key);
   final String title;
 
@@ -17,7 +15,6 @@ class MapPage extends StatefulWidget {
 }
 
 class _MapPageState extends State<MapPage> {
-  
   var _routes = <Polyline>[];
   var _location = <Marker>[];
   var _updates = <Marker>[];
@@ -25,7 +22,6 @@ class _MapPageState extends State<MapPage> {
 
   @override
   initState() {
-    
     print('INIT STATE');
     super.initState();
 
@@ -36,22 +32,17 @@ class _MapPageState extends State<MapPage> {
 
     fetchRoutes(http.Client()).then((value) {
       setState(() {});
-      _routes.addAll(value);
+      _routes.addAll(value.item1);
+      _stops.addAll(value.item2);
     });
 
     fetchLocation().then((value) {
       _location.addAll(value);
     });
-
-    
-    fetchStops(http.Client()).then((value) {
-      _stops.addAll(value);
-    });
   }
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       body: Center(
         child: Column(
@@ -73,22 +64,14 @@ class _MapPageState extends State<MapPage> {
                     // NetworkTileProvider or CachedNetworkTileProvider
                     tileProvider: CachedNetworkTileProvider(),
                   ),
-                  PolylineLayerOptions(
-                    polylines: _routes
-                  ),
-                  MarkerLayerOptions(
-                    markers: _location
-                  ),
-                  MarkerLayerOptions(
-                    markers: _stops
-                  ),
-                  MarkerLayerOptions(
-                    markers: _updates
-                  ),
+                  PolylineLayerOptions(polylines: _routes),
+                  MarkerLayerOptions(markers: _location),
+                  MarkerLayerOptions(markers: _stops),
+                  MarkerLayerOptions(markers: _updates),
                 ],
               ),
             ),
-          ], 
+          ],
         ),
       ),
     );

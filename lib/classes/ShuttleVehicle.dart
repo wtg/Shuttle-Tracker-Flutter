@@ -1,7 +1,6 @@
 import 'ShuttlePoint.dart';
 
-class ShuttleVehicle extends ShuttlePoint{
-
+class ShuttleVehicle extends ShuttlePoint {
   int id;
   String trackerId;
   num heading;
@@ -11,24 +10,11 @@ class ShuttleVehicle extends ShuttlePoint{
   int vehicleId;
   int routeId;
 
-  
+  ShuttleVehicle(latitude, longitude, this.id, this.trackerId, this.heading,
+      this.speed, this.time, this.created, this.vehicleId, this.routeId)
+      : super(0.0, 0.0);
 
-  ShuttleVehicle(
-
-    latitude, 
-    longitude, 
-    this.id, 
-    this.trackerId,
-    this.heading,
-    this.speed,
-    this.time,
-    this.created, 
-    this.vehicleId, 
-    this.routeId
-  ) : super(0.0, 0.0);
-
-  ShuttleVehicle.fromJson(Map<String, dynamic> json) : super.fromJson(json){
-
+  ShuttleVehicle.fromJson(Map<String, dynamic> json) : super.fromJson(json) {
     latitude = json['latitude'];
     longitude = json['longitude'];
     id = json['id'];
@@ -41,5 +27,4 @@ class ShuttleVehicle extends ShuttlePoint{
     vehicleId = json['vehicle_id'];
     routeId = json['route_id'];
   }
-
 }

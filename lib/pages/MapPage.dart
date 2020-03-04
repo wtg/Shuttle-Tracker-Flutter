@@ -25,6 +25,7 @@ class _MapPageState extends State<MapPage> {
 
   @override
   initState() {
+    
     print('INIT STATE');
     super.initState();
 

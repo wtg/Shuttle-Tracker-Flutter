@@ -48,6 +48,7 @@ class ShuttleRoute {
     created = json['created'];
     updated = json['updated'];
     points = pointsList;
+    active = json['active'];
     
     
   }

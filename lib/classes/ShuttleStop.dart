@@ -1,7 +1,7 @@
 import 'ShuttlePoint.dart';
 
 class ShuttleStop extends ShuttlePoint{
-
+  int id;
   String name;
   String created;
   String updated;
@@ -22,6 +22,7 @@ class ShuttleStop extends ShuttlePoint{
 
     latitude = json['latitude'];
     longitude = json['longitude'];
+    id = json['id'];
     name = json['name'];
     created = json['created'];
     updated = json['updated'];

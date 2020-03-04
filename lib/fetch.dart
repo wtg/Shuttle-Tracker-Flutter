@@ -13,10 +13,11 @@ import 'package:flutter_shuttletracker/classes/ShuttleStop.dart';
 
 Future createJSONFile(String fileName, http.Response response) async {
 
-  final Directory directory = await getApplicationDocumentsDirectory();
-  final File file = File('${directory.path}/$fileName.json');
-  await file.writeAsString(response.body);
-
+  if (response.statusCode == 200){
+    final Directory directory = await getApplicationDocumentsDirectory();
+    final File file = File('${directory.path}/$fileName.json');
+    await file.writeAsString(response.body);
+  }
 }
 
 
@@ -32,11 +33,13 @@ Future <List<Polyline>> fetchRoutes(http.Client client) async {
     var routesJSON = json.decode(response.body);
 
     for (var routeJSON in routesJSON) {
-      routes.add(Polyline(
-        points: ShuttleRoute.fromJson(routeJSON).points,
-        strokeWidth: ShuttleRoute.fromJson(routeJSON).width,
-        color: ShuttleRoute.fromJson(routeJSON).color,
-      ));
+      if (ShuttleRoute.fromJson(routeJSON).active && ShuttleRoute.fromJson(routeJSON).enabled){
+          routes.add(Polyline(
+          points: ShuttleRoute.fromJson(routeJSON).points,
+          strokeWidth: ShuttleRoute.fromJson(routeJSON).width,
+          color: ShuttleRoute.fromJson(routeJSON).color,
+        ));
+      }
     }
   }
 
@@ -56,7 +59,6 @@ Future <List<Marker>> fetchUpdates(http.Client client) async {
     var updatesJSON = json.decode(response.body);
 
     for (var updateJSON in updatesJSON) {
-
       updates.add(
         Marker(
           point: ShuttleVehicle.fromJson(updateJSON).convertToLatLng(),
@@ -74,9 +76,11 @@ Future <List<Marker>> fetchUpdates(http.Client client) async {
   return updates;
 }
 
+
 Future <List<Marker>> fetchStops(http.Client client) async {
 
   final response = await client.get('https://shuttles.rpi.edu/stops');
+
   createJSONFile('stops', response);
 
   var stops = List<Marker>();
@@ -85,7 +89,7 @@ Future <List<Marker>> fetchStops(http.Client client) async {
 
     var stopsJSON = json.decode(response.body);
 
-    for (var stopJSON in stopsJSON) {
+    for (var stopJSON in stopsJSON ) {
       stops.add(
         Marker(
           point: ShuttleStop.fromJson(stopJSON).convertToLatLng(),
@@ -99,7 +103,6 @@ Future <List<Marker>> fetchStops(http.Client client) async {
 
   return stops;
 }
-
 
 
 Future<List<Marker>> fetchLocation() async {

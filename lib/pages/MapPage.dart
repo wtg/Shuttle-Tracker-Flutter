@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_shuttletracker/classes/InitShuttleVehicles.dart';
 import 'package:latlong/latlong.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_shuttletracker/fetch.dart';
+import 'package:flutter_shuttletracker/classes/InitShuttleRoutes.dart';
 
 class MapPage extends StatefulWidget {
   MapPage({Key key, this.title}) : super(key: key);
@@ -19,26 +21,44 @@ class _MapPageState extends State<MapPage> {
   var _location = <Marker>[];
   var _updates = <Marker>[];
   var _stops = <Marker>[];
+  var _stopIds = <int>[];
+  
+
+  
 
   @override
   initState() {
     print('INIT STATE');
     super.initState();
 
+    fetchRoutes(http.Client()).then((value) {
+      setState(() {});
+      var initRoutes = InitShuttleRoutes(value);
+      _routes = initRoutes.getPolylines();
+      _stopIds = initRoutes.getStopIds();
+    });
+    
+
     fetchUpdates(http.Client()).then((value) {
       setState(() {});
       _updates.addAll(value);
     });
 
-    fetchRoutes(http.Client()).then((value) {
+    fetchStops(http.Client()).then((value) {
       setState(() {});
-      _routes.addAll(value.item1);
-      _stops.addAll(value.item2);
+      _stops.addAll(value);
     });
 
+    /*
+    fetchRoutes(http.Client()).then((value) {
+      setState(() {});
+      _routes.addAll(value);
+    });
+    */
     fetchLocation().then((value) {
       _location.addAll(value);
     });
+
   }
 
   @override

@@ -2,45 +2,27 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_map/flutter_map.dart';
+import 'package:flutter_shuttletracker/classes/ShuttleRoute.dart';
 import 'package:geolocation/geolocation.dart';
 import 'package:latlong/latlong.dart';
 import 'package:http/http.dart' as http;
-import 'package:flutter_shuttletracker/classes/ShuttleRoute.dart';
-import 'package:flutter_shuttletracker/classes/ShuttleStop.dart';
-import 'package:tuple/tuple.dart';
 import 'create.dart';
 
-Future<Tuple2<List<Polyline>, List<Marker>>> fetchRoutes(http.Client client) async {
-  final responseRoutes = await client.get('https://shuttles.rpi.edu/routes');
-  final responseStops = await client.get('https://shuttles.rpi.edu/stops');
+Future<List<ShuttleRoute>> fetchRoutes(http.Client client) async {
+  final response = await client.get('https://shuttles.rpi.edu/routes');
+  createJSONFile('routes', response);
 
-  createJSONFile('routes', responseRoutes);
-  createJSONFile('stops', responseStops);
+  var routes = List<ShuttleRoute>();
 
-  List<Marker> stops = [];
-  List<Polyline> routes = [];
-  List<int> ids = [];
-
-  if (responseRoutes.statusCode == 200 && responseStops.statusCode == 200) {
-    var routesJSON = json.decode(responseRoutes.body);
-    var stopsJSON = json.decode(responseStops.body);
+  if (response.statusCode == 200) {
+    var routesJSON = json.decode(response.body);
 
     for (var routeJSON in routesJSON) {
-      if (ShuttleRoute.fromJson(routeJSON).active &&
-          ShuttleRoute.fromJson(routeJSON).enabled) {
-        ids.addAll(ShuttleRoute.fromJson(routeJSON).stopIds);
-        routes.add(createRoute(routeJSON));
-      }
-    }
-
-    for (var stopJSON in stopsJSON) {
-      if (ids.contains(ShuttleStop.fromJson(stopJSON).id)) {
-        stops.add(createStop(stopJSON));
-      }
+      routes.add(ShuttleRoute.fromJson(routeJSON));
     }
   }
-
-  return Tuple2<List<Polyline>, List<Marker>>(routes, stops);
+ 
+  return routes;
 }
 
 Future<List<Marker>> fetchUpdates(http.Client client) async {
@@ -58,6 +40,23 @@ Future<List<Marker>> fetchUpdates(http.Client client) async {
   }
 
   return updates;
+}
+
+Future<List<Marker>> fetchStops(http.Client client) async {
+  final response = await client.get('https://shuttles.rpi.edu/stops');
+  createJSONFile('stops', response);
+
+  var stops = List<Marker>();
+
+  if (response.statusCode == 200) {
+    var stopsJSON = json.decode(response.body);
+
+    for (var stopJSON in stopsJSON) {
+      stops.add(createStop(stopJSON));
+    }
+  }
+
+  return stops;
 }
 
 Future<List<Marker>> fetchLocation() async {

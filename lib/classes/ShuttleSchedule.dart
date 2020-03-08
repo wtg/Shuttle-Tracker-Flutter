@@ -2,9 +2,9 @@ class ShuttleSchedule {
   int id;
   int routeId;
   int startDay;
-  DateTime startTime;
+  String startTime; // CHANGE THIS TO A DateTime TYPE LATER
   int endDay;
-  DateTime endTime;
+  String endTime;
 
   ShuttleSchedule(this.id, this.routeId, this.startDay, this.startTime,
       this.endDay, this.endTime);
@@ -13,8 +13,8 @@ class ShuttleSchedule {
     id = json['id'];
     routeId = json['route_id'];
     startDay = json['start_day'];
-    //startTime = json['start_time'];
+    startTime = json['start_time'];
     endDay = json['end_day'];
-    //endTime = json['end_time'];
+    endTime = json['end_time'];
   }
 }

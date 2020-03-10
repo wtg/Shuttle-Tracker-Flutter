@@ -1,6 +1,6 @@
-import 'package:flutter_shuttletracker/classes/ShuttleRoute.dart';
-import 'package:flutter_shuttletracker/classes/ShuttleStop.dart';
-import 'package:flutter_shuttletracker/classes/ShuttleVehicle.dart';
+import 'package:flutter_shuttletracker/models/ShuttleRoute.dart';
+import 'package:flutter_shuttletracker/models/ShuttleStop.dart';
+import 'package:flutter_shuttletracker/models/ShuttleVehicle.dart';
 import 'package:flutter_map/plugin_api.dart';
 import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;

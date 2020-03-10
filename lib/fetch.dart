@@ -5,12 +5,13 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:geolocation/geolocation.dart';
 import 'package:latlong/latlong.dart';
 import 'package:http/http.dart' as http;
-import 'package:flutter_shuttletracker/classes/ShuttleRoute.dart';
-import 'package:flutter_shuttletracker/classes/ShuttleStop.dart';
+import 'package:flutter_shuttletracker/models/ShuttleRoute.dart';
+import 'package:flutter_shuttletracker/models/ShuttleStop.dart';
 import 'package:tuple/tuple.dart';
 import 'create.dart';
 
-Future<Tuple2<List<Polyline>, List<Marker>>> fetchRoutes(http.Client client) async {
+Future<Tuple2<List<Polyline>, List<Marker>>> fetchRoutes(
+    http.Client client) async {
   final responseRoutes = await client.get('https://shuttles.rpi.edu/routes');
   final responseStops = await client.get('https://shuttles.rpi.edu/stops');
 

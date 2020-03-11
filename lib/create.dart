@@ -25,7 +25,7 @@ Polyline createRoute(Map<String, dynamic> routeJSON) {
 
 Marker createStop(Map<String, dynamic> routeJSON) {
   return Marker(
-      point: ShuttleStop.fromJson(routeJSON).convertToLatLng(),
+      point: ShuttleStop.fromJson(routeJSON).getLatLng,
       width: 10.0,
       height: 10.0,
       builder: (ctx) => Image.asset('assets/img/circle.png'));
@@ -33,7 +33,7 @@ Marker createStop(Map<String, dynamic> routeJSON) {
 
 Marker createUpdate(Map<String, dynamic> updateJSON) {
   return Marker(
-      point: ShuttleVehicle.fromJson(updateJSON).convertToLatLng(),
+      point: ShuttleVehicle.fromJson(updateJSON).getLatLng,
       width: 30.0,
       height: 30.0,
       builder: (ctx) => RotationTransition(

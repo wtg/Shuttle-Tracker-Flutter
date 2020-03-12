@@ -9,7 +9,6 @@ class SchedulesPage extends StatefulWidget {
 }
 
 class _SchedulesPageState extends State<SchedulesPage> {
- 
   @override
   Widget build(BuildContext context) {
     return Scaffold(

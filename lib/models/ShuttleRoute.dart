@@ -1,4 +1,5 @@
 import 'ShuttlePoint.dart';
+import 'ShuttleSchedule.dart';
 import 'package:latlong/latlong.dart';
 import 'dart:core';
 import 'dart:ui';
@@ -15,6 +16,7 @@ class ShuttleRoute {
   String updated;
   List<LatLng> points;
   bool active;
+  List<ShuttleSchedule> schedules;
 
   ShuttleRoute(
     this.id,
@@ -33,11 +35,13 @@ class ShuttleRoute {
   ShuttleRoute.fromJson(Map<String, dynamic> json) {
     var tempPointsList = json['points'] as List;
     var tempStopList = json['stop_ids'] as List;
+    var tempScheduleList = json['schedule'] as List;
 
-    List<LatLng> pointsList = tempPointsList
-        .map((i) => ShuttlePoint.fromJson(i).convertToLatLng())
-        .toList();
+    List<LatLng> pointsList =
+        tempPointsList.map((i) => ShuttlePoint.fromJson(i).getLatLng).toList();
     List<int> stopIdsList = List<int>.from(tempStopList);
+    List<ShuttleSchedule> schedulesList =
+        tempScheduleList.map((i) => ShuttleSchedule.fromJson(i)).toList();
 
     id = json['id'];
     name = json['name'].toString();
@@ -51,5 +55,6 @@ class ShuttleRoute {
     updated = json['updated'];
     points = pointsList;
     active = json['active'];
+    schedules = schedulesList;
   }
 }

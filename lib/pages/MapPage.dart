@@ -3,8 +3,7 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:latlong/latlong.dart';
-import 'package:http/http.dart' as http;
-import 'package:flutter_shuttletracker/fetch.dart';
+import 'package:flutter_shuttletracker/data/ShuttleRepository.dart';
 
 class MapPage extends StatefulWidget {
   MapPage({Key key, this.title}) : super(key: key);
@@ -25,18 +24,25 @@ class _MapPageState extends State<MapPage> {
     print('INIT STATE');
     super.initState();
 
-    fetchUpdates(http.Client()).then((value) {
+    var repository = ShuttleRepository();
+
+    repository.fetchRoutes().then((value) {
+      setState(() {
+        _routes.addAll(value);
+      });
+
+      repository.fetchStops().then((value) {
+        setState(() {});
+        _stops.addAll(value);
+      });
+    });
+
+    repository.fetchUpdates().then((value) {
       setState(() {});
       _updates.addAll(value);
     });
 
-    fetchRoutes(http.Client()).then((value) {
-      setState(() {});
-      _routes.addAll(value.item1);
-      _stops.addAll(value.item2);
-    });
-
-    fetchLocation().then((value) {
+    repository.fetchLocation().then((value) {
       _location.addAll(value);
     });
   }

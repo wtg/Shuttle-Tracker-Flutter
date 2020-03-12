@@ -15,6 +15,20 @@ class MyApp extends StatefulWidget {
 
 class MyAppState extends State<MyApp> {
   int _selectedTab = 0;
+  final _items = [
+    BottomNavigationBarItem(
+      icon: Icon(Icons.near_me),
+      title: Text('Map'),
+    ),
+    BottomNavigationBarItem(
+      icon: Icon(Icons.list),
+      title: Text('Schedules'),
+    ),
+    BottomNavigationBarItem(
+      icon: Icon(Icons.settings),
+      title: Text('Settings'),
+    )
+  ];
   final _pageOptions = [
     MapPage(),
     SchedulesPage(),
@@ -39,7 +53,6 @@ class MyAppState extends State<MyApp> {
                   height: 40,
                   width: 40,
                 )),
-            body: _pageOptions[_selectedTab],
             bottomNavigationBar: BottomNavigationBar(
               currentIndex: _selectedTab,
               onTap: (int index) {
@@ -47,20 +60,11 @@ class MyAppState extends State<MyApp> {
                   _selectedTab = index;
                 });
               },
-              items: [
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.near_me),
-                  title: Text('Map'),
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.list),
-                  title: Text('Schedules'),
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.settings),
-                  title: Text('Settings'),
-                )
-              ],
+              items: _items,
+            ),
+            body: IndexedStack(
+              index: _selectedTab,
+              children: _pageOptions,
             )),
       ),
     );

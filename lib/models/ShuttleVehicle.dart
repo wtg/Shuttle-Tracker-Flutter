@@ -1,3 +1,5 @@
+import 'package:flutter/rendering.dart';
+import 'ShuttleImage.dart';
 import 'ShuttlePoint.dart';
 
 class ShuttleVehicle extends ShuttlePoint {
@@ -9,10 +11,17 @@ class ShuttleVehicle extends ShuttlePoint {
   String created;
   int vehicleId;
   int routeId;
+  Color color;
+  ShuttleImage image;
 
   ShuttleVehicle(latitude, longitude, this.id, this.trackerId, this.heading,
       this.speed, this.time, this.created, this.vehicleId, this.routeId)
       : super(0.0, 0.0);
+
+  set setImage(Color color) {
+    this.color = color;
+    image = ShuttleImage(color);
+  }
 
   ShuttleVehicle.fromJson(Map<String, dynamic> json) : super.fromJson(json) {
     latitude = json['latitude'];

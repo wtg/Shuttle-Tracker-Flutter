@@ -42,7 +42,7 @@ class ShuttleRoute {
     List<int> stopIdsList = List<int>.from(tempStopList);
     List<ShuttleSchedule> schedulesList =
         tempScheduleList.map((i) => ShuttleSchedule.fromJson(i)).toList();
-        
+
     id = json['id'];
     name = json['name'].toString();
     desc = json['description'].toString();

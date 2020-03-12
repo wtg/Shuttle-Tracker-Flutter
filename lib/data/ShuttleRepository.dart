@@ -5,18 +5,26 @@ import 'package:geolocation/geolocation.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_shuttletracker/models/ShuttleRoute.dart';
 import 'package:flutter_shuttletracker/models/ShuttleStop.dart';
-import 'package:flutter_shuttletracker/create.dart';
+import 'create.dart';
 import 'package:latlong/latlong.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter/services.dart' show rootBundle;
 
 class ShuttleRepository {
   List<Marker> stops = [];
   List<Polyline> routes = [];
   List<Marker> updates = [];
-  
+  Map<int, Color> colors = {};
+
   List<int> _ids = [];
-  Map<int, Color> _colors = {};
+
+  Future<List<String>> fetchLocal(String fileName) async {
+    List<dynamic> jsonDecoded = [];
+    jsonDecoded = json
+        .decode(await rootBundle.loadString('assets/test_json/$fileName.json'));
+    return jsonDecoded;
+  }
 
   Future fetch(String type) async {
     List<dynamic> jsonDecoded = [];
@@ -40,7 +48,7 @@ class ShuttleRepository {
         _ids.addAll(ShuttleRoute.fromJson(routeJSON).stopIds);
         routes.add(createRoute(routeJSON));
         for (var schedule in ShuttleRoute.fromJson(routeJSON).schedules) {
-          _colors[schedule.id] = ShuttleRoute.fromJson(routeJSON).color;
+          colors[schedule.routeId] = ShuttleRoute.fromJson(routeJSON).color;
         }
       }
     }
@@ -50,7 +58,7 @@ class ShuttleRepository {
 
   Future<List<Marker>> fetchStops() async {
     final stopsJSON = await fetch('stops');
-    print(_ids);
+
     for (var stopJSON in stopsJSON) {
       if (_ids.contains(ShuttleStop.fromJson(stopJSON).id)) {
         stops.add(createStop(stopJSON));
@@ -64,7 +72,7 @@ class ShuttleRepository {
     final updatesJSON = await fetch('updates');
 
     for (var updateJSON in updatesJSON) {
-      updates.add(createUpdate(updateJSON));
+      updates.add(createUpdate(updateJSON, colors));
     }
 
     return updates;
@@ -75,7 +83,7 @@ class ShuttleRepository {
     double lng = 0.00;
     List<Marker> location = [];
 
-    final GeolocationResult result =
+    final GeolocationResult permission =
         await Geolocation.requestLocationPermission(
       permission: const LocationPermission(
           android: LocationPermissionAndroid.fine,
@@ -84,8 +92,9 @@ class ShuttleRepository {
     );
 
     final LocationResult value = await Geolocation.lastKnownLocation();
-
-    if (result.isSuccessful && value.isSuccessful) {
+    print(value);
+    if (permission.isSuccessful && value.isSuccessful) {
+      print('yeet');
       lat = value.location.latitude;
       lng = value.location.longitude;
     }

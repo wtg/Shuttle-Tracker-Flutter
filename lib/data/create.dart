@@ -38,8 +38,7 @@ Marker createUpdate(Map<String, dynamic> updateJSON, Map<int, Color> colors) {
 
   if (colors[shuttle.routeId] != null) {
     shuttle.setImage = colors[shuttle.routeId];
-  } 
-  else {
+  } else {
     shuttle.setImage = Colors.white;
   }
 
@@ -49,6 +48,5 @@ Marker createUpdate(Map<String, dynamic> updateJSON, Map<int, Color> colors) {
       height: 30.0,
       builder: (ctx) => RotationTransition(
           turns: AlwaysStoppedAnimation((shuttle.heading - 45) / 360),
-          child: shuttle.image.getSVG)
-      ); 
+          child: shuttle.image.getSVG));
 }

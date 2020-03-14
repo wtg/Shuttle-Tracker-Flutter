@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_shuttletracker/bloc/shuttle_bloc.dart';
-import 'package:flutter_shuttletracker/data/ShuttleRepository.dart';
+import 'package:flutter_shuttletracker/data/repository/ShuttleRepository.dart';
 import './pages/MapPage.dart';
 import './pages/SchedulesPage.dart';
 import './pages/SettingsPage.dart';

@@ -13,7 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/services.dart' show rootBundle;
 
-class ShuttleRepository {
+class ShuttleApiProvider {
   List<Marker> stops = [];
   List<Polyline> routes = [];
   List<Marker> updates = [];

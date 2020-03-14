@@ -5,7 +5,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_shuttletracker/bloc/shuttle_bloc.dart';
 import 'package:latlong/latlong.dart';
-import 'package:flutter_shuttletracker/data/ShuttleRepository.dart';
 
 class MapPage extends StatefulWidget {
   MapPage({Key key, this.title}) : super(key: key);
@@ -16,6 +15,7 @@ class MapPage extends StatefulWidget {
 }
 
 class _MapPageState extends State<MapPage> {
+  /*
   @override
   initState() {
     print('INIT STATE');
@@ -23,6 +23,7 @@ class _MapPageState extends State<MapPage> {
     final shuttleBloc = BlocProvider.of<ShuttleBloc>(context);
     shuttleBloc.add(GetShuttleMap());
   }
+  */
 
   @override
   Widget build(BuildContext context) {
@@ -31,12 +32,14 @@ class _MapPageState extends State<MapPage> {
         child:
             BlocBuilder<ShuttleBloc, ShuttleState>(builder: (context, state) {
           if (state is ShuttleInitial) {
-            print('i');
+            print('state is initial');
             return buildInitialMap();
           } else if (state is ShuttleLoaded) {
-            print('state');
-            return buildShuttleMap(
+            print('state is loaded');
+            return buildLoadedMap(
                 state.routes, state.location, state.stops, state.updates);
+          } else {
+            return buildInitialMap(); //TODO: MODFIY THIS LATER
           }
         }),
       ),
@@ -70,7 +73,7 @@ Widget buildInitialMap() {
   );
 }
 
-Widget buildShuttleMap(_routes, _location, _stops, _updates) {
+Widget buildLoadedMap(routes, location, stops, updates) {
   return Column(
     children: [
       Flexible(
@@ -89,10 +92,10 @@ Widget buildShuttleMap(_routes, _location, _stops, _updates) {
               // NetworkTileProvider or CachedNetworkTileProvider
               tileProvider: CachedNetworkTileProvider(),
             ),
-            PolylineLayerOptions(polylines: _routes),
-            MarkerLayerOptions(markers: _location),
-            MarkerLayerOptions(markers: _stops),
-            MarkerLayerOptions(markers: _updates),
+            PolylineLayerOptions(polylines: routes),
+            MarkerLayerOptions(markers: location),
+            MarkerLayerOptions(markers: stops),
+            MarkerLayerOptions(markers: updates),
           ],
         ),
       ),

@@ -21,7 +21,7 @@ class ShuttleApiProvider {
   List<int> _ids = [];
 
   Future fetch(String type) async {
-    List<dynamic> jsonDecoded;
+    List<dynamic> jsonDecoded = [];
     http.Client client = http.Client();
     try {
       final response = await client.get('https://shuttles.rpi.edu/$type');
@@ -29,11 +29,9 @@ class ShuttleApiProvider {
 
       if (response.statusCode == 200) {
         jsonDecoded = json.decode(response.body);
-      } else {
-        jsonDecoded = [];
       }
-    } catch (c) {
-      jsonDecoded = [];
+    } catch (error) {
+      print(error);
     }
 
     return jsonDecoded;
@@ -118,16 +116,18 @@ Future createJSONFile(String fileName, http.Response response) async {
 }
 
 Polyline createRoute(Map<String, dynamic> routeJSON) {
+  ShuttleRoute route = ShuttleRoute.fromJson(routeJSON);
   return Polyline(
-    points: ShuttleRoute.fromJson(routeJSON).points,
-    strokeWidth: ShuttleRoute.fromJson(routeJSON).width,
-    color: ShuttleRoute.fromJson(routeJSON).color,
+    points: route.points,
+    strokeWidth: route.width,
+    color: route.color,
   );
 }
 
 Marker createStop(Map<String, dynamic> routeJSON) {
+  ShuttleStop stop = ShuttleStop.fromJson(routeJSON);
   return Marker(
-      point: ShuttleStop.fromJson(routeJSON).getLatLng,
+      point: stop.getLatLng,
       width: 10.0,
       height: 10.0,
       builder: (ctx) => Image.asset('assets/img/circle.png'));

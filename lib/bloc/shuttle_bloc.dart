@@ -21,28 +21,20 @@ class ShuttleBloc extends Bloc<ShuttleEvent, ShuttleState> {
   Stream<ShuttleState> mapEventToState(
     ShuttleEvent event,
   ) async* {
+    var routes = <Polyline>[];
+    var location = <Marker>[];
+    var updates = <Marker>[];
+    var stops = <Marker>[];
     if (event is GetShuttleMap) {
+      yield ShuttleLoading();
       try {
-        var routes = <Polyline>[];
-        var location = <Marker>[];
-        var updates = <Marker>[];
-        var stops = <Marker>[];
-        repository.fetchRoutes().then((value) {
-          routes.addAll(value);
-          repository.fetchStops().then((value) {
-            stops.addAll(value);
-          });
-        });
-        repository.fetchUpdates().then((value) {
-          updates.addAll(value);
-        });
-
-        repository.fetchLocation().then((value) {
-          location.addAll(value);
-        });
+        routes = await repository.fetchRoutes();
+        stops = await repository.fetchStops();
+        location = await repository.fetchLocation();
+        updates = await repository.fetchUpdates();
         yield ShuttleLoaded(routes, location, updates, stops);
-      } catch (c) {
-        print('TEST ERROR'); // TODO: ADD BETTER ERROR HERE
+      } catch (e) {
+        yield ShuttleError(message: e.toString());
       }
     }
   }

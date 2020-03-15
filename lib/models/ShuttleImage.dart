@@ -9,7 +9,7 @@ class ShuttleImage {
   Color svgColor;
   DrawableRoot svgRoot;
 
-  ShuttleImage(this.svgColor);
+  ShuttleImage({this.svgColor});
 
   Widget get getSVG {
     String svgInput =

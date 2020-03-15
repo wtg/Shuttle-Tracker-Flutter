@@ -29,7 +29,7 @@ class ShuttleLoaded extends ShuttleState {
 
 class ShuttleError extends ShuttleState {
   final String message;
-  const ShuttleError(this.message);
+  const ShuttleError({this.message});
   @override
   List<Object> get props => [message];
 }

@@ -11,7 +11,6 @@ import 'package:path_provider/path_provider.dart';
 import 'package:latlong/latlong.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter/services.dart' show rootBundle;
 
 class ShuttleApiProvider {
   List<Marker> stops = [];
@@ -21,21 +20,20 @@ class ShuttleApiProvider {
 
   List<int> _ids = [];
 
-  Future<List<String>> fetchLocal(String fileName) async {
-    List<dynamic> jsonDecoded = [];
-    jsonDecoded = json
-        .decode(await rootBundle.loadString('assets/test_json/$fileName.json'));
-    return jsonDecoded;
-  }
-
   Future fetch(String type) async {
-    List<dynamic> jsonDecoded = [];
+    List<dynamic> jsonDecoded;
     http.Client client = http.Client();
-    final response = await client.get('https://shuttles.rpi.edu/$type');
-    createJSONFile('$type', response);
+    try {
+      final response = await client.get('https://shuttles.rpi.edu/$type');
+      createJSONFile('$type', response);
 
-    if (response.statusCode == 200) {
-      jsonDecoded = json.decode(response.body);
+      if (response.statusCode == 200) {
+        jsonDecoded = json.decode(response.body);
+      } else {
+        jsonDecoded = [];
+      }
+    } catch (c) {
+      jsonDecoded = [];
     }
 
     return jsonDecoded;

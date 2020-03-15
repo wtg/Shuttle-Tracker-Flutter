@@ -32,6 +32,22 @@ class MyAppState extends State<MyApp> {
       title: Text('Settings'),
     )
   ];
+/*
+  final test = MultiBlocProvider(providers: [
+    BlocProvider(
+      create: (context) => ShuttleBloc(ShuttleRepository()),
+      child: MapPage(),
+    ),
+    BlocProvider(
+      create: (context) => ShuttleBloc(ShuttleRepository()),
+      child: SchedulesPage(),
+    ),
+    BlocProvider(
+      create: (context) => ShuttleBloc(ShuttleRepository()),
+      child: SettingsPage(),
+    ),
+  ],);
+*/
   final _pageOptions = [
     BlocProvider(
       create: (context) => ShuttleBloc(ShuttleRepository()),

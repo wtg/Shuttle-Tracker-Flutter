@@ -6,8 +6,6 @@ abstract class ShuttleEvent extends Equatable {
 
 class GetShuttleMap extends ShuttleEvent {
   const GetShuttleMap();
-
   @override
-  // TODO: implement props
   List<Object> get props => null;
 }

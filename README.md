@@ -1,6 +1,6 @@
 # Flutter ShuttleTracker
 
-Flutter ShuttleTracker is a port for RPI ShuttleTracker, that utilizes the Flutter framework to create a cross-platform apps for iOS and Android. Flutter is an open-source UI software development created by Google.
+Flutter ShuttleTracker is a port for RPI ShuttleTracker that utilizes the Flutter framework for development. Flutter is an open-source UI software development kit created by Google that can be used to create apps for iOS and Android. 
 
 ## Installing
 

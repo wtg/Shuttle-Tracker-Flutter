@@ -1,17 +1,18 @@
 import 'dart:convert';
+import 'dart:io';
 import 'dart:ui';
 import 'package:flutter_map/flutter_map.dart';
+import 'package:flutter_shuttletracker/models/ShuttleVehicle.dart';
 import 'package:geolocation/geolocation.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_shuttletracker/models/ShuttleRoute.dart';
 import 'package:flutter_shuttletracker/models/ShuttleStop.dart';
-import 'create.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:latlong/latlong.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter/services.dart' show rootBundle;
 
-class ShuttleRepository {
+class ShuttleApiProvider {
   List<Marker> stops = [];
   List<Polyline> routes = [];
   List<Marker> updates = [];
@@ -19,21 +20,18 @@ class ShuttleRepository {
 
   List<int> _ids = [];
 
-  Future<List<String>> fetchLocal(String fileName) async {
-    List<dynamic> jsonDecoded = [];
-    jsonDecoded = json
-        .decode(await rootBundle.loadString('assets/test_json/$fileName.json'));
-    return jsonDecoded;
-  }
-
   Future fetch(String type) async {
     List<dynamic> jsonDecoded = [];
     http.Client client = http.Client();
-    final response = await client.get('https://shuttles.rpi.edu/$type');
-    createJSONFile('$type', response);
+    try {
+      final response = await client.get('https://shuttles.rpi.edu/$type');
+      createJSONFile('$type', response);
 
-    if (response.statusCode == 200) {
-      jsonDecoded = json.decode(response.body);
+      if (response.statusCode == 200) {
+        jsonDecoded = json.decode(response.body);
+      }
+    } catch (error) {
+      print(error);
     }
 
     return jsonDecoded;
@@ -92,9 +90,7 @@ class ShuttleRepository {
     );
 
     final LocationResult value = await Geolocation.lastKnownLocation();
-    print(value);
     if (permission.isSuccessful && value.isSuccessful) {
-      print('yeet');
       lat = value.location.latitude;
       lng = value.location.longitude;
     }
@@ -109,4 +105,48 @@ class ShuttleRepository {
 
     return location;
   }
+}
+
+Future createJSONFile(String fileName, http.Response response) async {
+  if (response.statusCode == 200) {
+    final Directory directory = await getApplicationDocumentsDirectory();
+    final File file = File('${directory.path}/$fileName.json');
+    await file.writeAsString(response.body);
+  }
+}
+
+Polyline createRoute(Map<String, dynamic> routeJSON) {
+  ShuttleRoute route = ShuttleRoute.fromJson(routeJSON);
+  return Polyline(
+    points: route.points,
+    strokeWidth: route.width,
+    color: route.color,
+  );
+}
+
+Marker createStop(Map<String, dynamic> routeJSON) {
+  ShuttleStop stop = ShuttleStop.fromJson(routeJSON);
+  return Marker(
+      point: stop.getLatLng,
+      width: 10.0,
+      height: 10.0,
+      builder: (ctx) => Image.asset('assets/img/circle.png'));
+}
+
+Marker createUpdate(Map<String, dynamic> updateJSON, Map<int, Color> colors) {
+  ShuttleVehicle shuttle = ShuttleVehicle.fromJson(updateJSON);
+
+  if (colors[shuttle.routeId] != null) {
+    shuttle.setImage = colors[shuttle.routeId];
+  } else {
+    shuttle.setImage = Colors.white;
+  }
+
+  return Marker(
+      point: shuttle.getLatLng,
+      width: 30.0,
+      height: 30.0,
+      builder: (ctx) => RotationTransition(
+          turns: AlwaysStoppedAnimation((shuttle.heading - 45) / 360),
+          child: shuttle.image.getSVG));
 }

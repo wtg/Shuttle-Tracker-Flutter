@@ -27,6 +27,7 @@ dependencies:
   flutter_map: ^0.8.2
   geolocation: ^1.1.2
   geolocator: ^5.3.0
+  loading: ^1.0.2
   flutter:
     sdk: flutter
 

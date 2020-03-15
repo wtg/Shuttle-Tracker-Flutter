@@ -20,7 +20,7 @@ class ShuttleVehicle extends ShuttlePoint {
 
   set setImage(Color color) {
     this.color = color;
-    image = ShuttleImage(color);
+    image = ShuttleImage(svgColor: color);
   }
 
   ShuttleVehicle.fromJson(Map<String, dynamic> json) : super.fromJson(json) {

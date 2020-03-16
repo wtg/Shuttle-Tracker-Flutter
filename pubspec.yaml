@@ -17,13 +17,17 @@ environment:
   sdk: ">=2.1.0 <3.0.0"
 
 dependencies:
-  flutter_svg: ^0.17.2
+  flutter_svg: ^0.17.3+1
+  flutter_bloc: ^3.2.0
+  equatable: ^1.1.1
+  tuple: ^1.0.3
   path: ^1.6.2
   path_provider: ^1.6.1
   http: ^0.12.0+4
   flutter_map: ^0.8.2
   geolocation: ^1.1.2
   geolocator: ^5.3.0
+  loading: ^1.0.2
   flutter:
     sdk: flutter
 
@@ -51,8 +55,11 @@ flutter:
   assets:
     - assets/img/icon.png
     - assets/img/circle.png
-    - assets/img/shuttle.png
+    - assets/img/shuttle.svg
     - assets/img/user.png
+    - assets/json_test/routes.json
+    - assets/json_test/stops.json
+    - assets/json_test/updates.json
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

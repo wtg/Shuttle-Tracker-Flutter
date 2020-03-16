@@ -90,6 +90,9 @@ class ShuttleApiProvider {
     );
 
     final LocationResult value = await Geolocation.lastKnownLocation();
+    print(permission);
+    print(value);
+
     if (permission.isSuccessful && value.isSuccessful) {
       lat = value.location.latitude;
       lng = value.location.longitude;
@@ -141,7 +144,7 @@ Marker createUpdate(Map<String, dynamic> updateJSON, Map<int, Color> colors) {
   } else {
     shuttle.setImage = Colors.white;
   }
-
+  
   return Marker(
       point: shuttle.getLatLng,
       width: 30.0,

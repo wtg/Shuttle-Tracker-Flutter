@@ -55,7 +55,6 @@ flutter:
   assets:
     - assets/img/icon.png
     - assets/img/circle.png
-    - assets/img/shuttle.png
     - assets/img/shuttle.svg
     - assets/img/user.png
     - assets/json_test/routes.json

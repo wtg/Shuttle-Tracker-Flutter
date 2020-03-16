@@ -140,11 +140,11 @@ Marker createUpdate(Map<String, dynamic> updateJSON, Map<int, Color> colors) {
   ShuttleVehicle shuttle = ShuttleVehicle.fromJson(updateJSON);
 
   if (colors[shuttle.routeId] != null) {
-    shuttle.setImage = colors[shuttle.routeId];
+    shuttle.setColor = colors[shuttle.routeId];
   } else {
-    shuttle.setImage = Colors.white;
+    shuttle.setColor = Colors.white;
   }
-  
+
   return Marker(
       point: shuttle.getLatLng,
       width: 30.0,

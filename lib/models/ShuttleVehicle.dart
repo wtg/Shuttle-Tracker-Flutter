@@ -18,10 +18,7 @@ class ShuttleVehicle extends ShuttlePoint {
       this.speed, this.time, this.created, this.vehicleId, this.routeId)
       : super(0.0, 0.0);
 
-  set setImage(Color color) {
-    this.color = color;
-    image = ShuttleImage(svgColor: color);
-  }
+  set setColor(Color color) => image = ShuttleImage(svgColor: color);
 
   ShuttleVehicle.fromJson(Map<String, dynamic> json) : super.fromJson(json) {
     latitude = json['latitude'];

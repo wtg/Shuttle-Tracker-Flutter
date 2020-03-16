@@ -58,7 +58,6 @@ Widget buildLoadedState(routes, location, stops, updates) {
             MarkerLayerOptions(markers: location),
             MarkerLayerOptions(markers: stops),
             MarkerLayerOptions(markers: updates),
-            //MarkerLayerOptions(markers: [Marker(point: LatLng(42.72, -73.6767),width: 10,height: 10,builder: (context) => new Container(child: IconButton(icon: Icon(Icons.location_on),iconSize: 10,color: Colors.red, onPressed: (){print('hello');},)))])
           ],
         ),
       ),

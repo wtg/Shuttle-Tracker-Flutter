@@ -37,5 +37,16 @@ class ShuttleBloc extends Bloc<ShuttleEvent, ShuttleState> {
         yield ShuttleError(message: e.toString());
       }
     }
+    else if (event is RefreshShuttleMap){
+      try {
+        routes = await repository.fetchRoutes();
+        stops = await repository.fetchStops();
+        location = await repository.fetchLocation();
+        updates = await repository.fetchUpdates();
+        yield ShuttleLoaded(routes, location, updates, stops);
+      } catch (e) {
+        yield ShuttleError(message: e.toString());
+      }
+    }
   }
 }

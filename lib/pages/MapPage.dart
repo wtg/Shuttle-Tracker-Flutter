@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/foundation.dart';
@@ -19,6 +21,7 @@ class _MapPageState extends State<MapPage> {
     print('INIT STATE');
     super.initState();
     BlocProvider.of<ShuttleBloc>(context).add(GetShuttleMap());
+    Timer.periodic(Duration(seconds: 20), (Timer t) => BlocProvider.of<ShuttleBloc>(context).add(RefreshShuttleMap()));
   }
 
   @override

@@ -7,7 +7,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 class ShuttleImage {
   String svgString;
   Color svgColor;
-  DrawableRoot svgRoot;
 
   ShuttleImage({this.svgColor});
 

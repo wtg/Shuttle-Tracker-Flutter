@@ -41,8 +41,7 @@ class ShuttleApiProvider {
     final routesJSON = await fetch('routes');
 
     for (var routeJSON in routesJSON) {
-      if (ShuttleRoute.fromJson(routeJSON).active &&
-          ShuttleRoute.fromJson(routeJSON).enabled) {
+      if (ShuttleRoute.fromJson(routeJSON).active && ShuttleRoute.fromJson(routeJSON).enabled) {
         _ids.addAll(ShuttleRoute.fromJson(routeJSON).stopIds);
         routes.add(createRoute(routeJSON));
         for (var schedule in ShuttleRoute.fromJson(routeJSON).schedules) {
@@ -81,11 +80,8 @@ class ShuttleApiProvider {
     double lng = 0.00;
     List<Marker> location = [];
 
-    final GeolocationResult permission =
-        await Geolocation.requestLocationPermission(
-      permission: const LocationPermission(
-          android: LocationPermissionAndroid.fine,
-          ios: LocationPermissionIOS.always),
+    final GeolocationResult permission = await Geolocation.requestLocationPermission(
+      permission: const LocationPermission(android: LocationPermissionAndroid.fine, ios: LocationPermissionIOS.always),
       openSettingsIfDenied: true,
     );
 
@@ -99,11 +95,7 @@ class ShuttleApiProvider {
     }
 
     location = [
-      Marker(
-          point: LatLng(lat, lng),
-          width: 10.0,
-          height: 10.0,
-          builder: (ctx) => Image.asset('assets/img/user.png'))
+      Marker(point: LatLng(lat, lng), width: 10.0, height: 10.0, builder: (ctx) => Image.asset('assets/img/user.png'))
     ];
 
     return location;
@@ -130,10 +122,7 @@ Polyline createRoute(Map<String, dynamic> routeJSON) {
 Marker createStop(Map<String, dynamic> routeJSON) {
   ShuttleStop stop = ShuttleStop.fromJson(routeJSON);
   return Marker(
-      point: stop.getLatLng,
-      width: 10.0,
-      height: 10.0,
-      builder: (ctx) => Image.asset('assets/img/circle.png'));
+      point: stop.getLatLng, width: 10.0, height: 10.0, builder: (ctx) => Image.asset('assets/img/circle.png'));
 }
 
 Marker createUpdate(Map<String, dynamic> updateJSON, Map<int, Color> colors) {
@@ -149,7 +138,6 @@ Marker createUpdate(Map<String, dynamic> updateJSON, Map<int, Color> colors) {
       point: shuttle.getLatLng,
       width: 30.0,
       height: 30.0,
-      builder: (ctx) => RotationTransition(
-          turns: AlwaysStoppedAnimation((shuttle.heading - 45) / 360),
-          child: shuttle.image.getSVG));
+      builder: (ctx) =>
+          RotationTransition(turns: AlwaysStoppedAnimation((shuttle.heading - 45) / 360), child: shuttle.image.getSVG));
 }

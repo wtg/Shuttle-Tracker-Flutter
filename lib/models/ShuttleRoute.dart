@@ -37,11 +37,9 @@ class ShuttleRoute {
     var tempStopList = json['stop_ids'] as List;
     var tempScheduleList = json['schedule'] as List;
 
-    List<LatLng> pointsList =
-        tempPointsList.map((i) => ShuttlePoint.fromJson(i).getLatLng).toList();
+    List<LatLng> pointsList = tempPointsList.map((i) => ShuttlePoint.fromJson(i).getLatLng).toList();
     List<int> stopIdsList = List<int>.from(tempStopList);
-    List<ShuttleSchedule> schedulesList =
-        tempScheduleList.map((i) => ShuttleSchedule.fromJson(i)).toList();
+    List<ShuttleSchedule> schedulesList = tempScheduleList.map((i) => ShuttleSchedule.fromJson(i)).toList();
 
     id = json['id'];
     name = json['name'].toString();

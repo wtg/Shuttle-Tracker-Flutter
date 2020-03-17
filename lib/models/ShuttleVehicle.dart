@@ -14,8 +14,8 @@ class ShuttleVehicle extends ShuttlePoint {
   Color color;
   ShuttleImage image;
 
-  ShuttleVehicle(latitude, longitude, this.id, this.trackerId, this.heading,
-      this.speed, this.time, this.created, this.vehicleId, this.routeId)
+  ShuttleVehicle(latitude, longitude, this.id, this.trackerId, this.heading, this.speed, this.time, this.created,
+      this.vehicleId, this.routeId)
       : super(0.0, 0.0);
 
   set setColor(Color color) => image = ShuttleImage(svgColor: color);

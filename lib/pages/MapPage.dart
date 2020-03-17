@@ -21,15 +21,14 @@ class _MapPageState extends State<MapPage> {
     print('INIT STATE');
     super.initState();
     BlocProvider.of<ShuttleBloc>(context).add(GetShuttleMap());
-    Timer.periodic(Duration(seconds: 20), (Timer t) => BlocProvider.of<ShuttleBloc>(context).add(RefreshShuttleMap()));
+    Timer.periodic(Duration(seconds: 5), (Timer t) => BlocProvider.of<ShuttleBloc>(context).add(RefreshShuttleMap()));
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child:
-            BlocBuilder<ShuttleBloc, ShuttleState>(builder: (context, state) {
+        child: BlocBuilder<ShuttleBloc, ShuttleState>(builder: (context, state) {
           if (state is ShuttleInitial) {
             print('state is initial');
             return buildInitialState();
@@ -38,8 +37,7 @@ class _MapPageState extends State<MapPage> {
             return buildErrorState(state.message);
           } else if (state is ShuttleLoaded) {
             print('state is loaded');
-            return buildLoadedState(
-                state.routes, state.location, state.stops, state.updates);
+            return buildLoadedState(state.routes, state.location, state.stops, state.updates);
           } else {
             print('state is loading');
             return buildLoadingState();

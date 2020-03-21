@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/foundation.dart';
@@ -17,31 +15,25 @@ class MapPage extends StatefulWidget {
 
 class _MapPageState extends State<MapPage> {
   @override
-  initState() {
-    print('INIT STATE');
-    super.initState();
-    BlocProvider.of<ShuttleBloc>(context).add(GetShuttleMap());
-    Timer.periodic(Duration(seconds: 5), (Timer t) => BlocProvider.of<ShuttleBloc>(context).add(RefreshShuttleMap()));
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: BlocBuilder<ShuttleBloc, ShuttleState>(builder: (context, state) {
+        child:
+            BlocBuilder<ShuttleBloc, ShuttleState>(builder: (context, state) {
           if (state is ShuttleInitial) {
             print('state is initial');
+            BlocProvider.of<ShuttleBloc>(context).add(GetShuttleMap());
             return buildInitialState();
           } else if (state is ShuttleError) {
             print('state has error');
             return buildErrorState(state.message);
           } else if (state is ShuttleLoaded) {
             print('state is loaded');
-            return buildLoadedState(state.routes, state.location, state.stops, state.updates);
-          } else {
-            print('state is loading');
-            return buildLoadingState();
+            return buildLoadedState(
+                state.routes, state.location, state.stops, state.updates);
           }
+          print('state is loading');
+          return buildLoadingState();
         }),
       ),
     );

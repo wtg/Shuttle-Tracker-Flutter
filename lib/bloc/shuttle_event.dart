@@ -9,9 +9,3 @@ class GetShuttleMap extends ShuttleEvent {
   @override
   List<Object> get props => null;
 }
-
-class RefreshShuttleMap extends ShuttleEvent {
-  const RefreshShuttleMap();
-  @override
-  List<Object> get props => null;
-}

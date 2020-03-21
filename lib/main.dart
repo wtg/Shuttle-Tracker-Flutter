@@ -35,7 +35,7 @@ class MyAppState extends State<MyApp> {
 
   final _pageOptions = [
     BlocProvider(
-      create: (context) => ShuttleBloc(ShuttleRepository()),
+      create: (context) => ShuttleBloc(repository: ShuttleRepository()),
       child: MapPage(),
     ),
     SchedulesPage(),

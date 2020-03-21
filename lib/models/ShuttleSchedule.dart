@@ -6,7 +6,8 @@ class ShuttleSchedule {
   int endDay;
   String endTime;
 
-  ShuttleSchedule(this.id, this.routeId, this.startDay, this.startTime, this.endDay, this.endTime);
+  ShuttleSchedule(this.id, this.routeId, this.startDay, this.startTime,
+      this.endDay, this.endTime);
 
   ShuttleSchedule.fromJson(Map<String, dynamic> json) {
     id = json['id'];

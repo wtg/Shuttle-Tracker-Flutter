@@ -50,9 +50,8 @@ class MyAppState extends State<MyApp> {
           primaryTextTheme: TextTheme(
             title: TextStyle(color: Colors.white),
           )),
-      home: SafeArea(
-        child: Scaffold(
-            appBar: AppBar(
+      home: Scaffold(
+        appBar: AppBar(
                 centerTitle: true,
                 backgroundColor: Colors.white,
                 title: Image.asset(
@@ -69,10 +68,12 @@ class MyAppState extends State<MyApp> {
               },
               items: _items,
             ),
-            body: IndexedStack(
-              index: _selectedTab,
-              children: _pageOptions,
-            )),
+            body: SafeArea(
+              child: IndexedStack(
+                index: _selectedTab,
+                children: _pageOptions,
+              ),
+            ),
       ),
     );
   }

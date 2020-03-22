@@ -50,30 +50,33 @@ class MyAppState extends State<MyApp> {
           primaryTextTheme: TextTheme(
             title: TextStyle(color: Colors.white),
           )),
-      home: Scaffold(
-        appBar: AppBar(
-                centerTitle: true,
-                backgroundColor: Colors.white,
-                title: Image.asset(
-                  'assets/img/icon.png',
-                  height: 40,
-                  width: 40,
-                )),
-            bottomNavigationBar: BottomNavigationBar(
-              currentIndex: _selectedTab,
-              onTap: (int index) {
-                setState(() {
-                  _selectedTab = index;
-                });
-              },
-              items: _items,
-            ),
-            body: SafeArea(
-              child: IndexedStack(
-                index: _selectedTab,
-                children: _pageOptions,
-              ),
-            ),
+      home: SafeArea(
+        top: false,
+        bottom: false,
+        child: Scaffold(
+          appBar: AppBar(
+              brightness: Brightness.light,
+              centerTitle: true,
+              backgroundColor: Colors.white,
+              title: Image.asset(
+                'assets/img/icon.png',
+                height: 40,
+                width: 40,
+              )),
+          bottomNavigationBar: BottomNavigationBar(
+            currentIndex: _selectedTab,
+            onTap: (int index) {
+              setState(() {
+                _selectedTab = index;
+              });
+            },
+            items: _items,
+          ),
+          body: IndexedStack(
+            index: _selectedTab,
+            children: _pageOptions,
+          ),
+        ),
       ),
     );
   }

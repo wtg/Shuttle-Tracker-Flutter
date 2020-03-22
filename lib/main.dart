@@ -23,10 +23,12 @@ class MyAppState extends State<MyApp> {
     BottomNavigationBarItem(
       icon: Icon(Icons.near_me),
       title: Text('Map'),
+    
     ),
     BottomNavigationBarItem(
       icon: Icon(Icons.list),
       title: Text('Schedules'),
+      
     ),
     BottomNavigationBarItem(
       icon: Icon(Icons.settings),
@@ -47,24 +49,40 @@ class MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
-          primarySwatch: Colors.red,
-          primaryTextTheme: TextTheme(
+        primaryTextTheme: TextTheme(
+            title: TextStyle(color: Colors.black),
+        ),
+        primarySwatch: Colors.red,
+        appBarTheme: AppBarTheme(
+          color: Colors.white,
+          brightness: Brightness.light
+        ),
+      ),
+      darkTheme: ThemeData(
+        primaryTextTheme: TextTheme(
             title: TextStyle(color: Colors.white),
-          )),
+        ),
+        canvasColor: Colors.black,
+        primarySwatch: Colors.red,
+        appBarTheme: AppBarTheme(
+          color: Colors.black
+        ),
+      ),
       home: SafeArea(
         top: Platform.isAndroid,
         bottom: false,
         child: Scaffold(
           appBar: AppBar(
-              brightness: Brightness.light,
               centerTitle: true,
-              backgroundColor: Colors.white,
               title: Image.asset(
                 'assets/img/icon.png',
                 height: 40,
                 width: 40,
               )),
           bottomNavigationBar: BottomNavigationBar(
+            type: BottomNavigationBarType.fixed,
+            selectedItemColor: Colors.red,
+            unselectedItemColor: Colors.grey,
             currentIndex: _selectedTab,
             onTap: (int index) {
               setState(() {

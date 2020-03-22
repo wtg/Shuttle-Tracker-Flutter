@@ -6,6 +6,7 @@ import './pages/MapPage.dart';
 import './pages/SchedulesPage.dart';
 import './pages/SettingsPage.dart';
 import 'dart:ui';
+import 'dart:io';
 
 void main() => runApp(MyApp());
 
@@ -51,7 +52,7 @@ class MyAppState extends State<MyApp> {
             title: TextStyle(color: Colors.white),
           )),
       home: SafeArea(
-        top: false,
+        top: Platform.isAndroid,
         bottom: false,
         child: Scaffold(
           appBar: AppBar(

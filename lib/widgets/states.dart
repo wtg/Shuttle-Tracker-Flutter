@@ -17,7 +17,7 @@ Widget buildInitialState() {
           layers: [
             TileLayerOptions(
               urlTemplate:
-                  'https://stamen-tiles.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}{r}.png',
+                  'http://tile.stamen.com/toner-lite/{z}/{x}/{y}.png',
               subdomains: ['a', 'b', 'c'],
               tileProvider: CachedNetworkTileProvider(),
             ),

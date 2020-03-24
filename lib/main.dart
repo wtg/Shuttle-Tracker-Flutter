@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_shuttletracker/bloc/shuttle_bloc.dart';
+import 'package:flutter_shuttletracker/data/repository/ShuttleRepository.dart';
 import './pages/MapPage.dart';
 import './pages/SchedulesPage.dart';
 import './pages/SettingsPage.dart';
 import 'dart:ui';
+import 'dart:io';
 
 void main() => runApp(MyApp());
 
@@ -29,8 +33,12 @@ class MyAppState extends State<MyApp> {
       title: Text('Settings'),
     )
   ];
+
   final _pageOptions = [
-    MapPage(),
+    BlocProvider(
+      create: (context) => ShuttleBloc(repository: ShuttleRepository()),
+      child: MapPage(),
+    ),
     SchedulesPage(),
     SettingsPage(),
   ];
@@ -39,33 +47,49 @@ class MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
-          primarySwatch: Colors.red,
-          primaryTextTheme: TextTheme(
-            title: TextStyle(color: Colors.white),
-          )),
+        primaryTextTheme: TextTheme(
+          title: TextStyle(color: Colors.black),
+        ),
+        primarySwatch: Colors.red,
+        appBarTheme:
+            AppBarTheme(color: Colors.white, brightness: Brightness.light),
+      ),
+      darkTheme: ThemeData(
+        primaryTextTheme: TextTheme(
+          title: TextStyle(color: Colors.white),
+        ),
+        canvasColor: Colors.black,
+        primarySwatch: Colors.red,
+        appBarTheme: AppBarTheme(color: Colors.black),
+      ),
       home: SafeArea(
+        top: Platform.isAndroid,
+        bottom: false,
         child: Scaffold(
-            appBar: AppBar(
-                centerTitle: true,
-                backgroundColor: Colors.white,
-                title: Image.asset(
-                  'assets/img/icon.png',
-                  height: 40,
-                  width: 40,
-                )),
-            bottomNavigationBar: BottomNavigationBar(
-              currentIndex: _selectedTab,
-              onTap: (int index) {
-                setState(() {
-                  _selectedTab = index;
-                });
-              },
-              items: _items,
-            ),
-            body: IndexedStack(
-              index: _selectedTab,
-              children: _pageOptions,
-            )),
+          appBar: AppBar(
+              centerTitle: true,
+              title: Image.asset(
+                'assets/img/icon.png',
+                height: 40,
+                width: 40,
+              )),
+          bottomNavigationBar: BottomNavigationBar(
+            type: BottomNavigationBarType.fixed,
+            selectedItemColor: Colors.red,
+            unselectedItemColor: Colors.grey,
+            currentIndex: _selectedTab,
+            onTap: (int index) {
+              setState(() {
+                _selectedTab = index;
+              });
+            },
+            items: _items,
+          ),
+          body: IndexedStack(
+            index: _selectedTab,
+            children: _pageOptions,
+          ),
+        ),
       ),
     );
   }

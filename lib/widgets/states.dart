@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter/widgets.dart';
 import 'package:latlong/latlong.dart';
@@ -16,8 +15,7 @@ Widget buildInitialState() {
           ),
           layers: [
             TileLayerOptions(
-              urlTemplate:
-                  'http://tile.stamen.com/toner-lite/{z}/{x}/{y}.png',
+              urlTemplate: 'http://tile.stamen.com/toner-lite/{z}/{x}/{y}.png',
               subdomains: ['a', 'b', 'c'],
               tileProvider: CachedNetworkTileProvider(),
             ),
@@ -62,17 +60,50 @@ Widget buildLoadedState(routes, location, stops, updates) {
       ],
     ),
     Positioned(
-      height: 50,
+      height: 13,
       width: 400,
       bottom: 10,
-      right: 10,
-      child: Html(data: '''
-      Map tiles by <a href="http://stamen.com">Stamen Design</a>, under 
-      <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by 
-      <a href="http://openstreetmap.org">OpenStreetMap</a>, under 
-      <a href="http://www.openstreetmap.org/copyright">ODbL</a>.
-      '''),
+      left: 10,
+      child: Opacity(
+        opacity: 0.7,
+        child: Container(
+          color: Colors.white,
+          child: Align(
+            child: Text(
+              'Map tiles: Stamen Design (CC BY 3.0) Data: OpenStreetMap (ODbL)',
+              style: TextStyle(fontSize: 12),
+            ),
+            alignment: Alignment.bottomCenter,
+          ),
+        ),
+      ),
     ),
+    Positioned(
+      height: 100,
+      width: 100,
+      bottom: 50,
+      left: 10,
+      child: Opacity(
+        opacity: 0.95,
+        child: Container(
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: Align(
+            child: ListView(
+              children: <Widget>[
+                Text('LINE TEST 1'),
+                Text('LINE TEST 2'),
+                Text('LINE TEST 3'),
+                Text('LINE TEST 4'),
+              ],
+              physics: NeverScrollableScrollPhysics(),
+            ),
+          ),
+        ),
+      ),
+    )
   ]);
 }
 

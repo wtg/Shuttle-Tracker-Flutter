@@ -23,12 +23,10 @@ class MyAppState extends State<MyApp> {
     BottomNavigationBarItem(
       icon: Icon(Icons.near_me),
       title: Text('Map'),
-    
     ),
     BottomNavigationBarItem(
       icon: Icon(Icons.list),
       title: Text('Schedules'),
-      
     ),
     BottomNavigationBarItem(
       icon: Icon(Icons.settings),
@@ -50,23 +48,19 @@ class MyAppState extends State<MyApp> {
     return MaterialApp(
       theme: ThemeData(
         primaryTextTheme: TextTheme(
-            title: TextStyle(color: Colors.black),
+          title: TextStyle(color: Colors.black),
         ),
         primarySwatch: Colors.red,
-        appBarTheme: AppBarTheme(
-          color: Colors.white,
-          brightness: Brightness.light
-        ),
+        appBarTheme:
+            AppBarTheme(color: Colors.white, brightness: Brightness.light),
       ),
       darkTheme: ThemeData(
         primaryTextTheme: TextTheme(
-            title: TextStyle(color: Colors.white),
+          title: TextStyle(color: Colors.white),
         ),
         canvasColor: Colors.black,
         primarySwatch: Colors.red,
-        appBarTheme: AppBarTheme(
-          color: Colors.black
-        ),
+        appBarTheme: AppBarTheme(color: Colors.black),
       ),
       home: SafeArea(
         top: Platform.isAndroid,

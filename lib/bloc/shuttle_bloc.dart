@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:flutter_map/flutter_map.dart';
-
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_shuttletracker/data/repository/ShuttleRepository.dart';
@@ -12,7 +11,7 @@ part 'shuttle_state.dart';
 class ShuttleBloc extends Bloc<ShuttleEvent, ShuttleState> {
   final ShuttleRepository repository;
 
-  ShuttleBloc(this.repository);
+  ShuttleBloc({this.repository});
 
   @override
   ShuttleState get initialState => ShuttleInitial();

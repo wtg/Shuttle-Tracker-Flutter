@@ -141,7 +141,7 @@ class ShuttleApiProvider {
   Future<List<Marker>> get getLocation async {
     var lat = 0.00;
     var lng = 0.00;
-    var location = [];
+    List<Marker> location = [];
 
     final permission = await Geolocation.requestLocationPermission(
       permission: const LocationPermission(

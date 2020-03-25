@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
-import 'package:flutter_shuttletracker/data/provider/ShuttleApiProvider.dart';
+import '../provider/ShuttleApiProvider.dart';
 //import 'package:flutter_shuttletracker/data/provider/ShuttleLocalProvider.dart';
 
+/// Repo class that retrieves data from provider class methods and
+/// distributes the data to BLoC pattern
 class ShuttleRepository {
-  var _shuttleProvider = ShuttleApiProvider();
+  final _shuttleProvider = ShuttleApiProvider();
   //var _shuttleProvider = ShuttleLocalProvider();
 
   Future<List<Polyline>> get getRoutes async => _shuttleProvider.getRoutes;

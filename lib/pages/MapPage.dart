@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_shuttletracker/bloc/shuttle_bloc.dart';
-import 'package:flutter_shuttletracker/widgets/states.dart';
+import '../bloc/shuttle_bloc.dart';
+import '../widgets/states.dart';
 
 class MapPage extends StatefulWidget {
-  MapPage({Key key, this.title}) : super(key: key);
-  final String title;
-
   @override
   _MapPageState createState() => _MapPageState();
 }

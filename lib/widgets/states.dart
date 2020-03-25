@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:latlong/latlong.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 
+/// Function to create the initial state the user will see
 Widget buildInitialState() {
   return Column(
     children: [
@@ -27,13 +28,16 @@ Widget buildInitialState() {
   );
 }
 
+/// Function to create the loading state that the user will see
 Widget buildLoadingState() {
   return Center(
     child: CircularProgressIndicator(),
   );
 }
 
-Widget buildLoadedState(routes, location, stops, updates, mapkey) {
+/// Function to create the loaded state that the user will see
+Widget buildLoadedState(List<Polyline> routes, List<Marker> location,
+    List<Marker> stops, List<Marker> updates, List<Widget> mapkey) {
   return Stack(children: <Widget>[
     Column(
       children: [
@@ -80,7 +84,8 @@ Widget buildLoadedState(routes, location, stops, updates, mapkey) {
     ),
     Positioned(
       height: 100,
-      width: 150, //TODO: MAKE THIS VALUE DYNAMICALLY RELATIVE TO LONGEST TEXT WIDGET
+      //TODO: MAKE THIS VALUE DYNAMICALLY RELATIVE TO LONGEST TEXT WIDGET
+      width: 150,
       bottom: 50,
       left: 10,
       child: Opacity(
@@ -103,6 +108,7 @@ Widget buildLoadedState(routes, location, stops, updates, mapkey) {
   ]);
 }
 
+/// Function to create the error state that the user will see
 Widget buildErrorState(String message) {
   return Center(
     child: Text(message),

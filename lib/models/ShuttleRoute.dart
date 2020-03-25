@@ -1,21 +1,46 @@
-import 'ShuttlePoint.dart';
-import 'ShuttleSchedule.dart';
-import 'package:latlong/latlong.dart';
 import 'dart:core';
 import 'dart:ui';
 
+import 'package:latlong/latlong.dart';
+
+import 'ShuttlePoint.dart';
+import 'ShuttleSchedule.dart';
+
 class ShuttleRoute {
+  /// Id for this route
   int id;
+
+  /// Name of this route
   String name;
+
+  /// Description of this route
   String desc;
+
+  /// Bool to determine if route is enabled for semester
   bool enabled;
+
+  /// Hex color of route
   Color color;
+
+  /// Width of route outline on map
   num width;
+
+  /// All stop ids associated with route
   List<int> stopIds;
+
+  /// Timestamp for when route was created
   String created;
+
+  /// Timestamp for when route was last updated
   String updated;
+
+  /// All points required to create the route with respective lat/lng values
   List<LatLng> points;
+
+  /// Bool to determine if route is active at current period of time
   bool active;
+
+  /// List of shuttles currently associated with this route
   List<ShuttleSchedule> schedules;
 
   ShuttleRoute(
@@ -37,10 +62,10 @@ class ShuttleRoute {
     var tempStopList = json['stop_ids'] as List;
     var tempScheduleList = json['schedule'] as List;
 
-    List<LatLng> pointsList =
+    var pointsList =
         tempPointsList.map((i) => ShuttlePoint.fromJson(i).getLatLng).toList();
-    List<int> stopIdsList = List<int>.from(tempStopList);
-    List<ShuttleSchedule> schedulesList =
+    var stopIdsList = List<int>.from(tempStopList);
+    var schedulesList =
         tempScheduleList.map((i) => ShuttleSchedule.fromJson(i)).toList();
 
     id = json['id'];

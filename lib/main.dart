@@ -1,12 +1,14 @@
+import 'dart:io';
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_shuttletracker/bloc/shuttle_bloc.dart';
-import 'package:flutter_shuttletracker/data/repository/ShuttleRepository.dart';
+
 import './pages/MapPage.dart';
 import './pages/SchedulesPage.dart';
 import './pages/SettingsPage.dart';
-import 'dart:ui';
-import 'dart:io';
+import 'bloc/shuttle_bloc.dart';
+import 'data/repository/ShuttleRepository.dart';
 
 void main() => runApp(MyApp());
 
@@ -78,7 +80,7 @@ class MyAppState extends State<MyApp> {
             selectedItemColor: Colors.red,
             unselectedItemColor: Colors.grey,
             currentIndex: _selectedTab,
-            onTap: (int index) {
+            onTap: (index) {
               setState(() {
                 _selectedTab = index;
               });

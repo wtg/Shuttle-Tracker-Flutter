@@ -4,14 +4,17 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter_shuttletracker/data/repository/ShuttleRepository.dart';
+import '../data/repository/ShuttleRepository.dart';
 
 part 'shuttle_event.dart';
 part 'shuttle_state.dart';
 
+/// ShuttleBloc class
 class ShuttleBloc extends Bloc<ShuttleEvent, ShuttleState> {
+  /// Initialization of repository class
   final ShuttleRepository repository;
 
+  /// ShuttleBloc named constructor
   ShuttleBloc({this.repository});
 
   @override

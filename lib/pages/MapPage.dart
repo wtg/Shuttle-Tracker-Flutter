@@ -29,8 +29,8 @@ class _MapPageState extends State<MapPage> {
             return buildErrorState(state.message);
           } else if (state is ShuttleLoaded) {
             print('state is loaded');
-            return buildLoadedState(
-                state.routes, state.location, state.stops, state.updates);
+            return buildLoadedState(state.routes, state.location, state.stops,
+                state.updates, state.mapkey);
           }
           print('state is loading');
           return buildLoadingState();

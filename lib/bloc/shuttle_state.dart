@@ -21,10 +21,12 @@ class ShuttleLoaded extends ShuttleState {
   final List<Marker> location;
   final List<Marker> updates;
   final List<Marker> stops;
+  final List<Widget> mapkey;
 
-  const ShuttleLoaded(this.routes, this.location, this.updates, this.stops);
+  const ShuttleLoaded(
+      this.routes, this.location, this.updates, this.stops, this.mapkey);
   @override
-  List<Object> get props => [routes, location, updates, stops];
+  List<Object> get props => [routes, location, updates, stops, mapkey];
 }
 
 class ShuttleError extends ShuttleState {

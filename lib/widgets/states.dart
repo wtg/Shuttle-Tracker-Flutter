@@ -33,7 +33,7 @@ Widget buildLoadingState() {
   );
 }
 
-Widget buildLoadedState(routes, location, stops, updates) {
+Widget buildLoadedState(routes, location, stops, updates, mapkey) {
   return Stack(children: <Widget>[
     Column(
       children: [
@@ -66,21 +66,21 @@ Widget buildLoadedState(routes, location, stops, updates) {
       bottom: 1,
       child: Opacity(
         opacity: 0.8,
-            child: Container(
-              color: Colors.white,
-              child: HtmlWidget(
-                  """<h5>Map tiles by <a href="http://stamen.com">Stamen Design</a>, under 
+        child: Container(
+          color: Colors.white,
+          child: HtmlWidget(
+            """<h5>Map tiles by <a href="http://stamen.com">Stamen Design</a>, under 
                   <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by 
                   <a href="http://openstreetmap.org">OpenStreetMap</a>, under 
                   <a href="http://www.openstreetmap.org/copyright">ODbL</a>. </h5>""",
-                  hyperlinkColor: Colors.blue,),
-            ),
-          
+            hyperlinkColor: Colors.blue,
+          ),
+        ),
       ),
     ),
     Positioned(
       height: 100,
-      width: 100,
+      width: 150, //TODO: MAKE THIS VALUE DYNAMICALLY RELATIVE TO LONGEST TEXT WIDGET
       bottom: 50,
       left: 10,
       child: Opacity(
@@ -88,18 +88,12 @@ Widget buildLoadedState(routes, location, stops, updates) {
         child: Container(
           decoration: BoxDecoration(
             color: Colors.white,
-            borderRadius: BorderRadius.circular(10),
+            //borderRadius: BorderRadius.circular(0.5),
+            border: Border(bottom: BorderSide(width: 0.5, color: Colors.black)),
           ),
           child: Align(
             child: ListView(
-              children: <Widget>[
-                Text('LINE TEST 1'),
-                Text('LINE TEST 2'),
-                Text('LINE TEST 3'),
-                Text('LINE TEST 4'),
-                Text('LINE TEST 5'),
-                Text('LINE TEST 6'),
-              ],
+              children: mapkey,
               physics: NeverScrollableScrollPhysics(),
             ),
           ),

@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:ui';
 import 'package:flutter_map/flutter_map.dart';
+import 'package:flutter_shuttletracker/models/ShuttleImage.dart';
 import 'package:flutter_shuttletracker/models/ShuttleVehicle.dart';
 import 'package:geolocation/geolocation.dart';
 import 'package:http/http.dart' as http;
@@ -18,6 +19,7 @@ class ShuttleApiProvider {
   List<Marker> updates = [];
   Map<int, Color> colors = {};
 
+  Map<String, ShuttleImage> _mapkey = {};
   List<int> _ids = [];
 
   Future fetch(String type) async {
@@ -37,12 +39,54 @@ class ShuttleApiProvider {
     return jsonDecoded;
   }
 
-  Future<List<Polyline>> fetchRoutes() async {
+  List<Widget> get getMapkey {
+    List<Widget> widgetList = [
+      Row(
+        children: <Widget>[
+          Container(
+            width: 10,
+            height: 10,
+            child: Image.asset('assets/img/user.png'),
+          ),
+          Text(' You'),
+        ],
+      ),
+    ];
+    _mapkey.forEach((key, value) => widgetList.add(
+          Row(
+            children: <Widget>[
+              Container(
+                width: 10,
+                height: 10,
+                child: value.getSVG,
+              ),
+              Text(" $key"),
+            ],
+          ),
+        ));
+    widgetList.add(
+      Row(
+        children: <Widget>[
+          Container(
+            width: 10,
+            height: 10,
+            child: Image.asset('assets/img/circle.png'),
+          ),
+          Text(' Shuttle Stop'),
+        ],
+      ),
+    );
+    return widgetList;
+  }
+
+  Future<List<Polyline>> get getRoutes async {
     final routesJSON = await fetch('routes');
 
     for (var routeJSON in routesJSON) {
       if (ShuttleRoute.fromJson(routeJSON).active &&
           ShuttleRoute.fromJson(routeJSON).enabled) {
+        _mapkey[ShuttleRoute.fromJson(routeJSON).name] =
+            ShuttleImage(svgColor: ShuttleRoute.fromJson(routeJSON).color);
         _ids.addAll(ShuttleRoute.fromJson(routeJSON).stopIds);
         routes.add(createRoute(routeJSON));
         for (var schedule in ShuttleRoute.fromJson(routeJSON).schedules) {
@@ -54,7 +98,7 @@ class ShuttleApiProvider {
     return routes;
   }
 
-  Future<List<Marker>> fetchStops() async {
+  Future<List<Marker>> get getStops async {
     final stopsJSON = await fetch('stops');
 
     for (var stopJSON in stopsJSON) {
@@ -66,7 +110,7 @@ class ShuttleApiProvider {
     return stops;
   }
 
-  Future<List<Marker>> fetchUpdates() async {
+  Future<List<Marker>> get getUpdates async {
     final updatesJSON = await fetch('updates');
 
     for (var updateJSON in updatesJSON) {
@@ -76,7 +120,7 @@ class ShuttleApiProvider {
     return updates;
   }
 
-  Future<List<Marker>> fetchLocation() async {
+  Future<List<Marker>> get getLocation async {
     double lat = 0.00;
     double lng = 0.00;
     List<Marker> location = [];

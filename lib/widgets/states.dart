@@ -67,7 +67,7 @@ Widget buildLoadedState(routes, location, stops, updates) {
       child: Opacity(
         opacity: 0.8,
             child: Container(
-              color: Colors.black,
+              color: Colors.white,
               child: HtmlWidget(
                   """<h5>Map tiles by <a href="http://stamen.com">Stamen Design</a>, under 
                   <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by 

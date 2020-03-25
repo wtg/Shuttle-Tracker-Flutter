@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter/widgets.dart';
 import 'package:latlong/latlong.dart';
+import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 
 Widget buildInitialState() {
   return Column(
@@ -60,22 +61,21 @@ Widget buildLoadedState(routes, location, stops, updates) {
       ],
     ),
     Positioned(
-      height: 13,
+      height: 50,
       width: 400,
-      bottom: 10,
-      left: 10,
+      bottom: 1,
       child: Opacity(
-        opacity: 0.7,
-        child: Container(
-          color: Colors.white,
-          child: Align(
-            child: Text(
-              'Map tiles: Stamen Design (CC BY 3.0) Data: OpenStreetMap (ODbL)',
-              style: TextStyle(fontSize: 12),
+        opacity: 0.8,
+            child: Container(
+              color: Colors.black,
+              child: HtmlWidget(
+                  """<h5>Map tiles by <a href="http://stamen.com">Stamen Design</a>, under 
+                  <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by 
+                  <a href="http://openstreetmap.org">OpenStreetMap</a>, under 
+                  <a href="http://www.openstreetmap.org/copyright">ODbL</a>. </h5>""",
+                  hyperlinkColor: Colors.blue,),
             ),
-            alignment: Alignment.bottomCenter,
-          ),
-        ),
+          
       ),
     ),
     Positioned(
@@ -97,6 +97,8 @@ Widget buildLoadedState(routes, location, stops, updates) {
                 Text('LINE TEST 2'),
                 Text('LINE TEST 3'),
                 Text('LINE TEST 4'),
+                Text('LINE TEST 5'),
+                Text('LINE TEST 6'),
               ],
               physics: NeverScrollableScrollPhysics(),
             ),

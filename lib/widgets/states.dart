@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter/widgets.dart';
 import 'package:latlong/latlong.dart';
+import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 
 Widget buildInitialState() {
   return Column(
@@ -32,7 +33,7 @@ Widget buildLoadingState() {
   );
 }
 
-Widget buildLoadedState(routes, location, stops, updates) {
+Widget buildLoadedState(routes, location, stops, updates, mapkey) {
   return Stack(children: <Widget>[
     Column(
       children: [
@@ -60,27 +61,26 @@ Widget buildLoadedState(routes, location, stops, updates) {
       ],
     ),
     Positioned(
-      height: 13,
+      height: 50,
       width: 400,
-      bottom: 10,
-      left: 10,
+      bottom: 1,
       child: Opacity(
-        opacity: 0.7,
+        opacity: 0.8,
         child: Container(
           color: Colors.white,
-          child: Align(
-            child: Text(
-              'Map tiles: Stamen Design (CC BY 3.0) Data: OpenStreetMap (ODbL)',
-              style: TextStyle(fontSize: 12),
-            ),
-            alignment: Alignment.bottomCenter,
+          child: HtmlWidget(
+            """<h5>Map tiles by <a href="http://stamen.com">Stamen Design</a>, under 
+                  <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by 
+                  <a href="http://openstreetmap.org">OpenStreetMap</a>, under 
+                  <a href="http://www.openstreetmap.org/copyright">ODbL</a>. </h5>""",
+            hyperlinkColor: Colors.blue,
           ),
         ),
       ),
     ),
     Positioned(
       height: 100,
-      width: 100,
+      width: 150, //TODO: MAKE THIS VALUE DYNAMICALLY RELATIVE TO LONGEST TEXT WIDGET
       bottom: 50,
       left: 10,
       child: Opacity(
@@ -88,16 +88,12 @@ Widget buildLoadedState(routes, location, stops, updates) {
         child: Container(
           decoration: BoxDecoration(
             color: Colors.white,
-            borderRadius: BorderRadius.circular(10),
+            //borderRadius: BorderRadius.circular(0.5),
+            border: Border(bottom: BorderSide(width: 0.5, color: Colors.black)),
           ),
           child: Align(
             child: ListView(
-              children: <Widget>[
-                Text('LINE TEST 1'),
-                Text('LINE TEST 2'),
-                Text('LINE TEST 3'),
-                Text('LINE TEST 4'),
-              ],
+              children: mapkey,
               physics: NeverScrollableScrollPhysics(),
             ),
           ),

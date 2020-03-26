@@ -38,6 +38,10 @@ Widget buildLoadingState() {
 /// Function to create the loaded state that the user will see
 Widget buildLoadedState(List<Polyline> routes, List<Marker> location,
     List<Marker> stops, List<Marker> updates, List<Widget> mapkey) {
+  print("Number of routes on map: ${routes.length}");
+  print("Number of stops on map: ${stops.length}");
+  print("Number of shuttles on map: ${updates.length}");
+  print("Number of rows in mapkey: ${mapkey.length}");
   return Stack(children: <Widget>[
     Column(
       children: [
@@ -65,11 +69,11 @@ Widget buildLoadedState(List<Polyline> routes, List<Marker> location,
       ],
     ),
     Positioned(
-      height: 50,
+      height: 60,
       width: 400,
       bottom: 1,
       child: Opacity(
-        opacity: 0.8,
+        opacity: 0.95,
         child: Container(
           color: Colors.white,
           child: HtmlWidget(
@@ -86,7 +90,7 @@ Widget buildLoadedState(List<Polyline> routes, List<Marker> location,
       height: 100,
       //TODO: MAKE THIS VALUE DYNAMICALLY RELATIVE TO LONGEST TEXT WIDGET
       width: 150,
-      bottom: 50,
+      bottom: 60,
       left: 10,
       child: Opacity(
         opacity: 0.95,

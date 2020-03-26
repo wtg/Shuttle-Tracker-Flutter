@@ -13,6 +13,11 @@ part 'shuttle_state.dart';
 class ShuttleBloc extends Bloc<ShuttleEvent, ShuttleState> {
   /// Initialization of repository class
   final ShuttleRepository repository;
+  var routes = <Polyline>[];
+  var location = <Marker>[];
+  var updates = <Marker>[];
+  var stops = <Marker>[];
+  var mapkey = <Widget>[];
 
   /// ShuttleBloc named constructor
   ShuttleBloc({this.repository});
@@ -24,11 +29,6 @@ class ShuttleBloc extends Bloc<ShuttleEvent, ShuttleState> {
   Stream<ShuttleState> mapEventToState(
     ShuttleEvent event,
   ) async* {
-    var routes = <Polyline>[];
-    var location = <Marker>[];
-    var updates = <Marker>[];
-    var stops = <Marker>[];
-    var mapkey = <Widget>[];
     if (event is GetShuttleMap) {
       yield ShuttleLoading();
       try {
@@ -43,7 +43,12 @@ class ShuttleBloc extends Bloc<ShuttleEvent, ShuttleState> {
       }
     } else if (event is RefreshShuttleMap) {
       await new Future.delayed(const Duration(seconds: 5));
-      try {
+      try { // TODO: CLEAR UP THIS CODE LATER TO HAVE LESS LINES
+        routes.clear();
+        stops.clear();
+        location.clear();
+        updates.clear();
+        mapkey.clear();
         routes = await repository.getRoutes;
         stops = await repository.getStops;
         location = await repository.getLocation;
@@ -55,5 +60,4 @@ class ShuttleBloc extends Bloc<ShuttleEvent, ShuttleState> {
       }
     }
   }
-
 }

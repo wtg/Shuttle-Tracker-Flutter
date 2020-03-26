@@ -30,7 +30,7 @@ class ShuttleApiProvider {
   /// Map of with the route number as key and color of that route as the value
   Map<int, Color> colors = {};
 
-  final Map<String, ShuttleImage> _mapkey = {};
+  Map<String, ShuttleImage> _mapkey = {};
   final List<int> _ids = [];
 
   /// This function will fetch the data from the JSON API and return a decoded

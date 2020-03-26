@@ -4,7 +4,6 @@ import 'package:flutter/widgets.dart';
 import '../bloc/shuttle_bloc.dart';
 import '../widgets/states.dart';
 
-
 class MapPage extends StatefulWidget {
   @override
   _MapPageState createState() => _MapPageState();
@@ -14,19 +13,14 @@ class _MapPageState extends State<MapPage> {
   ShuttleBloc shuttleBloc;
 
   @override
-  void initState() {
-    super.initState();
-    shuttleBloc = BlocProvider.of<ShuttleBloc>(context);
-    shuttleBloc.add(GetShuttleMap());
-  }
-  
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
         child:
             BlocBuilder<ShuttleBloc, ShuttleState>(builder: (context, state) {
+          shuttleBloc = BlocProvider.of<ShuttleBloc>(context);
           if (state is ShuttleInitial) {
+            shuttleBloc.add(GetShuttleMap());
             print('state is initial');
             return buildInitialState();
           } else if (state is ShuttleError) {

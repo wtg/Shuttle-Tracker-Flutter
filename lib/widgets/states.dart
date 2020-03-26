@@ -41,7 +41,7 @@ Widget buildLoadedState(List<Polyline> routes, List<Marker> location,
   print("Number of routes on map: ${routes.length}");
   print("Number of stops on map: ${stops.length}");
   print("Number of shuttles on map: ${updates.length}");
-  print("Number of rows in mapkey: ${mapkey.length}");
+  print("Number of rows in mapkey: ${mapkey.length}\n\n");
   return Stack(children: <Widget>[
     Column(
       children: [
@@ -115,7 +115,11 @@ Widget buildLoadedState(List<Polyline> routes, List<Marker> location,
 
 /// Function to create the error state that the user will see
 Widget buildErrorState(String message) {
-  return Center(
-    child: Text(message),
+  return Column(
+    children: <Widget>[
+      Center(
+        child: Text(message),
+      ),
+    ],
   );
 }

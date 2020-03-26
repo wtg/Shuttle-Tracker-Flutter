@@ -15,4 +15,5 @@ class ShuttleRepository {
   Future<List<Marker>> get getUpdates async => _shuttleProvider.getUpdates;
   Future<List<Marker>> get getLocation async => _shuttleProvider.getLocation;
   List<Widget> get getMapkey => _shuttleProvider.getMapkey;
+  bool get getIsConnected => _shuttleProvider.getIsConnected;
 }

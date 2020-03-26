@@ -24,7 +24,8 @@ class _MapPageState extends State<MapPage> {
             print('state is initial');
             return buildInitialState();
           } else if (state is ShuttleError) {
-            print('state has error');
+            shuttleBloc.add(GetShuttleMap());
+            print('state has error\n\n');
             return buildErrorState(state.message);
           } else if (state is ShuttleLoaded) {
             print('state is loaded');

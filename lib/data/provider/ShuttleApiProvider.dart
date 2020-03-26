@@ -18,6 +18,9 @@ import '../../models/ShuttleVehicle.dart';
 
 /// This class contains methods for providing data to Repository
 class ShuttleApiProvider {
+  /// Boolean to determine if the app is connected to network
+  bool isConnected;
+
   /// List of all stops that will be displayed on MapPage
   List<Marker> stops = [];
 
@@ -45,15 +48,18 @@ class ShuttleApiProvider {
       createJSONFile('$type', response);
 
       if (response.statusCode == 200) {
+        isConnected = true;
         jsonDecoded = json.decode(response.body);
       }
     } // TODO: MODIFY LOGIC HERE
     catch (error) {
-      print(error);
+      isConnected = false;
     }
-
+    print("App is connected to $type API: $isConnected");
     return jsonDecoded;
   }
+
+  bool get getIsConnected => isConnected;
 
   // Getter method for list of widgets used in mapkey Container
   List<Widget> get getMapkey {

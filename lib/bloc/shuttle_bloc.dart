@@ -30,34 +30,40 @@ class ShuttleBloc extends Bloc<ShuttleEvent, ShuttleState> {
     ShuttleEvent event,
   ) async* {
     if (event is GetShuttleMap) {
+      /*TODO: Figure out way to maintain ShuttleError without having to reload the state
+       (i.e. have a ciruclar indicator during period of error)
+      */
       yield ShuttleLoading();
-      try {
-        routes = await repository.getRoutes;
-        stops = await repository.getStops;
-        location = await repository.getLocation;
-        updates = await repository.getUpdates;
-        mapkey = repository.getMapkey;
+      location = await repository.getLocation;
+      routes = await repository.getRoutes;
+      stops = await repository.getStops;
+      updates = await repository.getUpdates;
+      mapkey = repository.getMapkey;
+      if (repository.getIsConnected) {
         yield ShuttleLoaded(routes, location, updates, stops, mapkey);
-      } catch (e) {
-        yield ShuttleError(message: e.toString());
+      } else {
+        yield ShuttleError(message: "NETWORK ISSUE");
       }
+      await new Future.delayed(const Duration(seconds: 5));
     } else if (event is RefreshShuttleMap) {
       await new Future.delayed(const Duration(seconds: 5));
-      try {
-        // TODO: CLEAR UP THIS CODE LATER TO HAVE LESS LINES
-        routes.clear();
-        stops.clear();
-        location.clear();
-        updates.clear();
-        mapkey.clear();
-        routes = await repository.getRoutes;
-        stops = await repository.getStops;
-        location = await repository.getLocation;
-        updates = await repository.getUpdates;
-        mapkey = repository.getMapkey;
+
+      // TODO: CLEAR UP THIS CODE LATER TO HAVE LESS LINES
+      routes.clear();
+      stops.clear();
+      location.clear();
+      updates.clear();
+      mapkey.clear();
+      location = await repository.getLocation;
+      routes = await repository.getRoutes;
+      stops = await repository.getStops;
+      updates = await repository.getUpdates;
+      mapkey = repository.getMapkey;
+
+      if (repository.getIsConnected) {
         yield ShuttleLoaded(routes, location, updates, stops, mapkey);
-      } catch (e) {
-        yield ShuttleError(message: e.toString());
+      } else {
+        yield ShuttleError(message: "NETWORK ISSUE");
       }
     }
   }

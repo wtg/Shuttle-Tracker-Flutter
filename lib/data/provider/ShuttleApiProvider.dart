@@ -28,9 +28,12 @@ class ShuttleApiProvider {
   List<Marker> updates = [];
 
   /// Map of with the route number as key and color of that route as the value
-  Map<int, Color> colors = {};
+  Map<int, Color> _colors = {};
 
+  /// Map of with name of route as key and ShuttleImage as the value
   Map<String, ShuttleImage> _mapkey = {};
+
+  /// List of all ids
   final List<int> _ids = [];
 
   /// This function will fetch the data from the JSON API and return a decoded
@@ -90,6 +93,7 @@ class ShuttleApiProvider {
         ],
       ),
     );
+    _mapkey.clear();
     return widgetList;
   }
 
@@ -105,11 +109,10 @@ class ShuttleApiProvider {
         _ids.addAll(ShuttleRoute.fromJson(routeJSON).stopIds);
         routes.add(createRoute(routeJSON));
         for (var schedule in ShuttleRoute.fromJson(routeJSON).schedules) {
-          colors[schedule.routeId] = ShuttleRoute.fromJson(routeJSON).color;
+          _colors[schedule.routeId] = ShuttleRoute.fromJson(routeJSON).color;
         }
       }
     }
-
     return routes;
   }
 
@@ -122,7 +125,7 @@ class ShuttleApiProvider {
         stops.add(createStop(stopJSON));
       }
     }
-
+    _ids.clear();
     return stops;
   }
 
@@ -131,9 +134,9 @@ class ShuttleApiProvider {
     final updatesJSON = await fetch('updates');
 
     for (var updateJSON in updatesJSON) {
-      updates.add(createUpdate(updateJSON, colors));
+      updates.add(createUpdate(updateJSON, _colors));
     }
-
+    _colors.clear();
     return updates;
   }
 

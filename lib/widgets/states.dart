@@ -87,8 +87,9 @@ Widget buildLoadedState(List<Polyline> routes, List<Marker> location,
       ),
     ),
     Positioned(
+      // TODO: MAKE THIS VALUE DYNAMICALLY RELATIVE TO AMOUNT OF ROWS
       height: 100,
-      //TODO: MAKE THIS VALUE DYNAMICALLY RELATIVE TO LONGEST TEXT WIDGET
+      // TODO: MAKE THIS VALUE DYNAMICALLY RELATIVE TO LONGEST TEXT WIDGET
       width: 150,
       bottom: 60,
       left: 10,

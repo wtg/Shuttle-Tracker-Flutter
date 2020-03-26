@@ -41,6 +41,19 @@ class ShuttleBloc extends Bloc<ShuttleEvent, ShuttleState> {
       } catch (e) {
         yield ShuttleError(message: e.toString());
       }
+    } else if (event is RefreshShuttleMap) {
+      await new Future.delayed(const Duration(seconds: 5));
+      try {
+        routes = await repository.getRoutes;
+        stops = await repository.getStops;
+        location = await repository.getLocation;
+        updates = await repository.getUpdates;
+        mapkey = repository.getMapkey;
+        yield ShuttleLoaded(routes, location, updates, stops, mapkey);
+      } catch (e) {
+        yield ShuttleError(message: e.toString());
+      }
     }
   }
+
 }

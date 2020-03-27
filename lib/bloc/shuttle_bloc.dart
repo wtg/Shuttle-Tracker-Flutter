@@ -13,11 +13,11 @@ part 'shuttle_state.dart';
 class ShuttleBloc extends Bloc<ShuttleEvent, ShuttleState> {
   /// Initialization of repository class
   final ShuttleRepository repository;
-  var routes = <Polyline>[];
-  var location = <Marker>[];
-  var updates = <Marker>[];
-  var stops = <Marker>[];
-  var mapkey = <Widget>[];
+  List<Polyline> routes = [];
+  List<Marker> location = [];
+  List<Marker> updates = [];
+  List<Marker> stops = [];
+  List<Widget> mapkey = [];
 
   /// ShuttleBloc named constructor
   ShuttleBloc({this.repository});
@@ -44,9 +44,9 @@ class ShuttleBloc extends Bloc<ShuttleEvent, ShuttleState> {
       } else {
         yield ShuttleError(message: "NETWORK ISSUE");
       }
-      await new Future.delayed(const Duration(seconds: 5));
+      await Future.delayed(const Duration(seconds: 5));
     } else if (event is RefreshShuttleMap) {
-      await new Future.delayed(const Duration(seconds: 5));
+      await Future.delayed(const Duration(seconds: 5));
 
       // TODO: CLEAR UP THIS CODE LATER TO HAVE LESS LINES
       routes.clear();

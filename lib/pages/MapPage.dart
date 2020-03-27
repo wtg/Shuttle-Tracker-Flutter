@@ -28,10 +28,11 @@ class _MapPageState extends State<MapPage> {
             print('state has error\n\n');
             return buildErrorState(state.message);
           } else if (state is ShuttleLoaded) {
+            var brightness = MediaQuery.of(context).platformBrightness;
             print('state is loaded');
             shuttleBloc.add(RefreshShuttleMap());
             return buildLoadedState(state.routes, state.location, state.stops,
-                state.updates, state.mapkey);
+                state.updates, state.mapkey, brightness);
           }
           print('state is loading');
           return buildLoadingState();

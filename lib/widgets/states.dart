@@ -36,12 +36,27 @@ Widget buildLoadingState() {
 }
 
 /// Function to create the loaded state that the user will see
-Widget buildLoadedState(List<Polyline> routes, List<Marker> location,
-    List<Marker> stops, List<Marker> updates, List<Widget> mapkey) {
+Widget buildLoadedState(
+    List<Polyline> routes,
+    List<Marker> location,
+    List<Marker> stops,
+    List<Marker> updates,
+    List<Widget> mapkey,
+    Brightness brightness) {
   print("Number of routes on map: ${routes.length}");
   print("Number of stops on map: ${stops.length}");
   print("Number of shuttles on map: ${updates.length}");
   print("Number of rows in mapkey: ${mapkey.length}\n\n");
+
+  var isDarkMode = false;
+  const darkLink =
+      'https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png';
+  const lightLink = 'http://tile.stamen.com/toner-lite/{z}/{x}/{y}.png';
+
+  if (brightness == Brightness.dark) {
+    isDarkMode = true;
+  }
+
   return Stack(children: <Widget>[
     Column(
       children: [
@@ -54,8 +69,8 @@ Widget buildLoadedState(List<Polyline> routes, List<Marker> location,
             ),
             layers: [
               TileLayerOptions(
-                urlTemplate:
-                    'http://tile.stamen.com/toner-lite/{z}/{x}/{y}.png',
+                backgroundColor: isDarkMode ? Colors.black : Colors.white,
+                urlTemplate: isDarkMode ? darkLink : lightLink,
                 subdomains: ['a', 'b', 'c'],
                 tileProvider: CachedNetworkTileProvider(),
               ),
@@ -75,7 +90,7 @@ Widget buildLoadedState(List<Polyline> routes, List<Marker> location,
       child: Opacity(
         opacity: 0.95,
         child: Container(
-          color: Colors.white,
+          color: isDarkMode ? Colors.black : Colors.white,
           child: HtmlWidget(
             """<h5>Map tiles by <a href="http://stamen.com">Stamen Design</a>, under 
                   <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by 
@@ -97,7 +112,7 @@ Widget buildLoadedState(List<Polyline> routes, List<Marker> location,
         opacity: 0.95,
         child: Container(
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: isDarkMode ? Colors.black : Colors.white,
             //borderRadius: BorderRadius.circular(0.5),
             border: Border(bottom: BorderSide(width: 0.5, color: Colors.black)),
           ),

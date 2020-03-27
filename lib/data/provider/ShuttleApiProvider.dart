@@ -31,10 +31,10 @@ class ShuttleApiProvider {
   List<Marker> updates = [];
 
   /// Map of with the route number as key and color of that route as the value
-  Map<int, Color> _colors = {};
+  final Map<int, Color> _colors = {};
 
   /// Map of with name of route as key and ShuttleImage as the value
-  Map<String, ShuttleImage> _mapkey = {};
+  final Map<String, ShuttleImage> _mapkey = {};
 
   /// List of all ids
   final List<int> _ids = [];
@@ -60,8 +60,8 @@ class ShuttleApiProvider {
   }
 
   bool get getIsConnected => isConnected;
-
-  // Getter method for list of widgets used in mapkey Container
+  
+  /// Getter method for list of widgets used in mapkey Container
   List<Widget> get getMapkey {
     var widgetList = [
       Row(

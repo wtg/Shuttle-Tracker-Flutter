@@ -5,7 +5,6 @@ import 'package:latlong/latlong.dart';
 
 import '../models/ShuttleImage.dart';
 
-
 /// Function to create the initial state the user will see
 Widget buildInitialState() {
   return Column(
@@ -170,11 +169,19 @@ Widget buildLoadedState(
 }
 
 /// Function to create the error state that the user will see
-Widget buildErrorState(String message) {
+Widget buildErrorState(String message, Brightness brightness) {
+  var isDarkMode = false;
+  if (brightness == Brightness.dark) {
+    isDarkMode = true;
+  }
+
   return Column(
     children: <Widget>[
       Center(
-        child: Text(message),
+        child: Text(
+          message,
+          style: TextStyle(color: isDarkMode ? Colors.white : Colors.black),
+        ),
       ),
     ],
   );

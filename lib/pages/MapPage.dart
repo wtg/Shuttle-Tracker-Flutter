@@ -19,6 +19,7 @@ class _MapPageState extends State<MapPage> {
         child:
             BlocBuilder<ShuttleBloc, ShuttleState>(builder: (context, state) {
           shuttleBloc = BlocProvider.of<ShuttleBloc>(context);
+          var brightness = MediaQuery.of(context).platformBrightness;
           if (state is ShuttleInitial) {
             shuttleBloc.add(GetShuttleMap());
             print('state is initial');
@@ -26,9 +27,8 @@ class _MapPageState extends State<MapPage> {
           } else if (state is ShuttleError) {
             shuttleBloc.add(GetShuttleMap());
             print('state has error\n\n');
-            return buildErrorState(state.message);
+            return buildErrorState(state.message, brightness);
           } else if (state is ShuttleLoaded) {
-            var brightness = MediaQuery.of(context).platformBrightness;
             print('state is loaded');
             shuttleBloc.add(RefreshShuttleMap());
             return buildLoadedState(state.routes, state.location, state.stops,

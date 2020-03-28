@@ -7,7 +7,6 @@ import 'package:equatable/equatable.dart';
 import '../data/repository/ShuttleRepository.dart';
 import '../models/ShuttleImage.dart';
 
-
 part 'shuttle_event.dart';
 part 'shuttle_state.dart';
 
@@ -32,9 +31,6 @@ class ShuttleBloc extends Bloc<ShuttleEvent, ShuttleState> {
     ShuttleEvent event,
   ) async* {
     if (event is GetShuttleMap) {
-      /*TODO: Figure out way to maintain ShuttleError without having to reload the state
-       (i.e. have a ciruclar indicator during period of error)
-      */
       yield ShuttleLoading();
       location = await repository.getLocation;
       routes = await repository.getRoutes;

@@ -4,7 +4,6 @@ import '../../models/ShuttleImage.dart';
 import '../provider/ShuttleApiProvider.dart';
 //import '../provider/ShuttleLocalProvider.dart';
 
-
 /// Repo class that retrieves data from provider class methods and
 /// distributes the data to BLoC pattern
 class ShuttleRepository {

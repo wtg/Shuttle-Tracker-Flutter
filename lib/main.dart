@@ -53,7 +53,7 @@ class MyAppState extends State<MyApp> {
       builder: (context, widget) => ResponsiveWrapper.builder(
         BouncingScrollWrapper.builder(context, widget),
         maxWidth: 1200,
-        minWidth: 450,
+        minWidth: 430,
         defaultScale: true,
         breakpoints: [
           ResponsiveBreakpoint(breakpoint: 450, name: MOBILE),

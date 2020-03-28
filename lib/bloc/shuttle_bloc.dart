@@ -3,14 +3,24 @@ import 'dart:async';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter_shuttletracker/data/repository/ShuttleRepository.dart';
+
+import '../data/repository/ShuttleRepository.dart';
+import '../models/ShuttleImage.dart';
 
 part 'shuttle_event.dart';
 part 'shuttle_state.dart';
 
+/// ShuttleBloc class
 class ShuttleBloc extends Bloc<ShuttleEvent, ShuttleState> {
+  /// Initialization of repository class
   final ShuttleRepository repository;
+  List<Polyline> routes = [];
+  List<Marker> location = [];
+  List<Marker> updates = [];
+  List<Marker> stops = [];
+  Map<String, ShuttleImage> mapkey = {};
 
+  /// ShuttleBloc named constructor
   ShuttleBloc({this.repository});
 
   @override
@@ -20,20 +30,39 @@ class ShuttleBloc extends Bloc<ShuttleEvent, ShuttleState> {
   Stream<ShuttleState> mapEventToState(
     ShuttleEvent event,
   ) async* {
-    var routes = <Polyline>[];
-    var location = <Marker>[];
-    var updates = <Marker>[];
-    var stops = <Marker>[];
     if (event is GetShuttleMap) {
       yield ShuttleLoading();
-      try {
-        routes = await repository.fetchRoutes();
-        stops = await repository.fetchStops();
-        location = await repository.fetchLocation();
-        updates = await repository.fetchUpdates();
-        yield ShuttleLoaded(routes, location, updates, stops);
-      } catch (e) {
-        yield ShuttleError(message: e.toString());
+      location = await repository.getLocation;
+      routes = await repository.getRoutes;
+      stops = await repository.getStops;
+      updates = await repository.getUpdates;
+      mapkey = repository.getMapkey;
+
+      if (repository.getIsConnected) {
+        yield ShuttleLoaded(routes, location, updates, stops, mapkey);
+      } else {
+        yield ShuttleError(message: "NETWORK ISSUE");
+      }
+      await Future.delayed(const Duration(seconds: 5));
+    } else if (event is RefreshShuttleMap) {
+      await Future.delayed(const Duration(seconds: 5));
+
+      // TODO: CLEAR UP THIS CODE LATER TO HAVE LESS LINES
+      routes.clear();
+      stops.clear();
+      location.clear();
+      updates.clear();
+      mapkey.clear();
+      location = await repository.getLocation;
+      routes = await repository.getRoutes;
+      stops = await repository.getStops;
+      updates = await repository.getUpdates;
+      mapkey = repository.getMapkey;
+
+      if (repository.getIsConnected) {
+        yield ShuttleLoaded(routes, location, updates, stops, mapkey);
+      } else {
+        yield ShuttleError(message: "NETWORK ISSUE");
       }
     }
   }

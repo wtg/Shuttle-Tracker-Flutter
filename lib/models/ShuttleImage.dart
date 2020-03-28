@@ -5,15 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class ShuttleImage {
-  String svgString;
+  String _svgString;
   Color svgColor;
 
-  ShuttleImage({this.svgColor});
-
-  Widget get getSVG {
-    String svgInput =
+  ShuttleImage({this.svgColor}) {
+    var svgInput =
         svgColor.value.toRadixString(16).toString().replaceAll('0xff', '');
-    svgString =
+    _svgString =
         """<svg width="60px" height="60px" viewBox="0 0 60 60" version="1.1" 
         xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
         <title>shuttle</title>
@@ -36,7 +34,9 @@ class ShuttleImage {
             </g>
         </g>
         </svg>""";
-
-    return SvgPicture.string(svgString);
   }
+
+  Color get getSVGColor => svgColor;
+
+  Widget get getSVG => SvgPicture.string(_svgString);
 }

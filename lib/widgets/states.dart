@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter/widgets.dart';
 import 'package:latlong/latlong.dart';
-import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
+
+import '../models/ShuttleImage.dart';
+
 
 /// Function to create the initial state the user will see
 Widget buildInitialState() {
@@ -41,13 +43,8 @@ Widget buildLoadedState(
     List<Marker> location,
     List<Marker> stops,
     List<Marker> updates,
-    List<Widget> mapkey,
+    Map<String, ShuttleImage> mapkey,
     Brightness brightness) {
-  print("Number of routes on map: ${routes.length}");
-  print("Number of stops on map: ${stops.length}");
-  print("Number of shuttles on map: ${updates.length}");
-  print("Number of rows in mapkey: ${mapkey.length}\n\n");
-
   var isDarkMode = false;
   const darkLink =
       'https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png';
@@ -56,6 +53,59 @@ Widget buildLoadedState(
   if (brightness == Brightness.dark) {
     isDarkMode = true;
   }
+
+  List<Widget> mapkeyRows = [
+    Row(
+      children: <Widget>[
+        Container(
+          width: 10,
+          height: 10,
+          child: Image.asset('assets/img/user.png'),
+        ),
+        Text(
+          ' You',
+          style: TextStyle(color: isDarkMode ? Colors.white : Colors.black),
+        ),
+      ],
+    ),
+  ];
+  mapkey.forEach((key, value) {
+    mapkeyRows.add(
+      Row(
+        children: <Widget>[
+          Container(
+            width: 10,
+            height: 10,
+            child: value.getSVG,
+          ),
+          Text(
+            " $key",
+            style: TextStyle(color: isDarkMode ? Colors.white : Colors.black),
+          ),
+        ],
+      ),
+    );
+  });
+  mapkeyRows.add(
+    Row(
+      children: <Widget>[
+        Container(
+          width: 10,
+          height: 10,
+          child: Image.asset('assets/img/circle.png'),
+        ),
+        Text(
+          ' Shuttle Stop',
+          style: TextStyle(color: isDarkMode ? Colors.white : Colors.black),
+        ),
+      ],
+    ),
+  );
+
+  print("Number of routes on map: ${routes.length}");
+  print("Number of stops on map: ${stops.length}");
+  print("Number of shuttles on map: ${updates.length}");
+  print("Number of rows in mapkey: ${mapkeyRows.length}\n\n");
 
   return Stack(children: <Widget>[
     Column(
@@ -83,44 +133,35 @@ Widget buildLoadedState(
         ),
       ],
     ),
-    Positioned(
-      height: 60,
-      width: 400,
-      bottom: 1,
+    Align(
+      alignment: Alignment.bottomRight,
       child: Opacity(
-        opacity: 0.95,
+        opacity: 0.75,
         child: Container(
-          color: isDarkMode ? Colors.black : Colors.white,
-          child: HtmlWidget(
-            """<h5>Map tiles by <a href="http://stamen.com">Stamen Design</a>, under 
-                  <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by 
-                  <a href="http://openstreetmap.org">OpenStreetMap</a>, under 
-                  <a href="http://www.openstreetmap.org/copyright">ODbL</a>. </h5>""",
-            hyperlinkColor: Colors.blue,
-          ),
-        ),
+            color: isDarkMode ? Colors.grey[900] : Colors.white,
+            child: Text(
+              'Map tiles: Stamen Design (CC BY 3.0) Data: OpenStreetMap (ODbL)',
+              style: TextStyle(color: isDarkMode ? Colors.white : Colors.black),
+            )),
       ),
     ),
     Positioned(
-      // TODO: MAKE THIS VALUE DYNAMICALLY RELATIVE TO AMOUNT OF ROWS
-      height: 100,
-      // TODO: MAKE THIS VALUE DYNAMICALLY RELATIVE TO LONGEST TEXT WIDGET
+      height: mapkeyRows.length * 18.0,
       width: 150,
-      bottom: 60,
+      bottom: 30,
       left: 10,
       child: Opacity(
         opacity: 0.95,
         child: Container(
           decoration: BoxDecoration(
-            color: isDarkMode ? Colors.black : Colors.white,
-            //borderRadius: BorderRadius.circular(0.5),
-            border: Border(bottom: BorderSide(width: 0.5, color: Colors.black)),
-          ),
-          child: Align(
-            child: ListView(
-              children: mapkey,
-              physics: NeverScrollableScrollPhysics(),
-            ),
+              color: isDarkMode ? Colors.grey[900] : Colors.white,
+              borderRadius: BorderRadius.circular(5),
+              boxShadow: [
+                BoxShadow(color: Colors.black, offset: Offset(0.0, 1.0))
+              ]),
+          child: ListView(
+            children: mapkeyRows,
+            physics: NeverScrollableScrollPhysics(),
           ),
         ),
       ),

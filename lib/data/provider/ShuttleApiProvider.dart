@@ -60,47 +60,13 @@ class ShuttleApiProvider {
   }
 
   bool get getIsConnected => isConnected;
-  
+
   /// Getter method for list of widgets used in mapkey Container
-  List<Widget> get getMapkey {
-    var widgetList = [
-      Row(
-        children: <Widget>[
-          Container(
-            width: 10,
-            height: 10,
-            child: Image.asset('assets/img/user.png'),
-          ),
-          Text(' You'),
-        ],
-      ),
-    ];
-    _mapkey.forEach((key, value) => widgetList.add(
-          Row(
-            children: <Widget>[
-              Container(
-                width: 10,
-                height: 10,
-                child: value.getSVG,
-              ),
-              Text(" $key"),
-            ],
-          ),
-        ));
-    widgetList.add(
-      Row(
-        children: <Widget>[
-          Container(
-            width: 10,
-            height: 10,
-            child: Image.asset('assets/img/circle.png'),
-          ),
-          Text(' Shuttle Stop'),
-        ],
-      ),
-    );
+  Map<String, ShuttleImage> get getMapkey {
+    Map<String, ShuttleImage> mapkey = {};
+    _mapkey.forEach((key, value) => mapkey[key] = value);
     _mapkey.clear();
-    return widgetList;
+    return mapkey;
   }
 
   /// Getter method to retrieve the list of routes

@@ -24,7 +24,7 @@ class ShuttleLoaded extends ShuttleState {
   final List<Marker> location;
   final List<Marker> updates;
   final List<Marker> stops;
-  final List<Widget> mapkey;
+  final Map<String, ShuttleImage> mapkey;
 
   const ShuttleLoaded(
       this.routes, this.location, this.updates, this.stops, this.mapkey);

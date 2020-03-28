@@ -1,10 +1,12 @@
 import 'dart:async';
 
-import 'package:flutter/widgets.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+
 import '../data/repository/ShuttleRepository.dart';
+import '../models/ShuttleImage.dart';
+
 
 part 'shuttle_event.dart';
 part 'shuttle_state.dart';
@@ -17,7 +19,7 @@ class ShuttleBloc extends Bloc<ShuttleEvent, ShuttleState> {
   List<Marker> location = [];
   List<Marker> updates = [];
   List<Marker> stops = [];
-  List<Widget> mapkey = [];
+  Map<String, ShuttleImage> mapkey = {};
 
   /// ShuttleBloc named constructor
   ShuttleBloc({this.repository});
@@ -39,6 +41,7 @@ class ShuttleBloc extends Bloc<ShuttleEvent, ShuttleState> {
       stops = await repository.getStops;
       updates = await repository.getUpdates;
       mapkey = repository.getMapkey;
+
       if (repository.getIsConnected) {
         yield ShuttleLoaded(routes, location, updates, stops, mapkey);
       } else {

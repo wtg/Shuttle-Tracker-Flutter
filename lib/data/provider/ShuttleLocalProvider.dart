@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'dart:convert';
+
 import 'package:flutter/services.dart' show rootBundle;
+
 import 'ShuttleApiProvider.dart';
 
 /// Provider class for testing via local JSON data

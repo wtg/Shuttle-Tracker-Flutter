@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/widgets.dart';
 
@@ -20,6 +21,16 @@ class _MapPageState extends State<MapPage> {
     if (brightness == Brightness.dark) {
       isDarkMode = true;
     }
+
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      systemNavigationBarColor: isDarkMode ? Colors.black : Colors.white,
+      systemNavigationBarIconBrightness: isDarkMode
+          ? Brightness.light
+          : Brightness.dark, // navigation bar color
+      statusBarColor:
+          isDarkMode ? Colors.black : Colors.white, // status bar color
+      statusBarIconBrightness: isDarkMode ? Brightness.light : Brightness.dark,
+    ));
     return Scaffold(
       body: Center(
         child:

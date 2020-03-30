@@ -115,9 +115,9 @@ Widget buildLoadedState(
       ),
     ),
     Positioned(
-      height: mapkeyRows.length * 20.0,
+      height: mapkeyRows.length * 19.0,
       width: 175,
-      bottom: 60,
+      bottom: 30,
       left: 10,
       child: Opacity(
         opacity: 0.95,

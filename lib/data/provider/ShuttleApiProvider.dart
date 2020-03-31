@@ -11,10 +11,10 @@ import 'package:latlong/latlong.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-import '../../models/shuttle_image.dart';
-import '../../models/shuttle_route.dart';
-import '../../models/shuttle_stop.dart';
-import '../../models/shuttle_vehicle.dart';
+import '../../models/ShuttleImage.dart';
+import '../../models/ShuttleRoute.dart';
+import '../../models/ShuttleStop.dart';
+import '../../models/ShuttleVehicle.dart';
 
 /// This class contains methods for providing data to Repository
 class ShuttleApiProvider {

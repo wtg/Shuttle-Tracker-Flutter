@@ -1,7 +1,7 @@
 import 'package:flutter/rendering.dart';
 
-import 'shuttle_image.dart';
-import 'shuttle_point.dart';
+import 'ShuttleImage.dart';
+import 'ShuttlePoint.dart';
 
 class ShuttleVehicle extends ShuttlePoint {
   // ID of the update

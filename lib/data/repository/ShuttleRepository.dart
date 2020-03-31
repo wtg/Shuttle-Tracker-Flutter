@@ -1,7 +1,7 @@
 import 'package:flutter_map/flutter_map.dart';
 
-import '../../models/shuttle_image.dart';
-import '../provider/shuttle_api_provider.dart';
+import '../../models/ShuttleImage.dart';
+import '../provider/ShuttleApiProvider.dart';
 //import '../provider/ShuttleLocalProvider.dart';
 
 /// Repo class that retrieves data from provider class methods and

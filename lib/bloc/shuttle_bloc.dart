@@ -4,8 +4,8 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
-import '../data/repository/shuttle_repository.dart';
-import '../models/shuttle_image.dart';
+import '../data/repository/ShuttleRepository.dart';
+import '../models/ShuttleImage.dart';
 
 part 'shuttle_event.dart';
 part 'shuttle_state.dart';

@@ -1,4 +1,4 @@
-import 'shuttle_point.dart';
+import 'ShuttlePoint.dart';
 
 class ShuttleStop extends ShuttlePoint {
   /// ID associated with stop

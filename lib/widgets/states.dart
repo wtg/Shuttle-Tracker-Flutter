@@ -4,7 +4,7 @@ import 'package:flutter/widgets.dart';
 
 import 'package:latlong/latlong.dart';
 
-import '../models/ShuttleImage.dart';
+import '../models/shuttle_image.dart';
 import 'dark_mode_text.dart';
 import 'hyperlink.dart';
 import 'mapkey_row.dart';

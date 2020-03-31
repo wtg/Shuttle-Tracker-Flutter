@@ -74,7 +74,8 @@ Widget buildLoadedState(
             options: MapOptions(
               center: LatLng(42.73, -73.6767),
               zoom: 14,
-              maxZoom: 20,
+              maxZoom: 16, // max you can zoom in
+              minZoom: 14, // min you can zoom out
             ),
             layers: [
               TileLayerOptions(
@@ -99,6 +100,8 @@ Widget buildLoadedState(
         child: Container(
             color: isDarkMode ? Colors.grey[900] : Colors.white,
             child: Row(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.end,
               children: <Widget>[
                 IsDarkModeText('Map tiles: ', isDarkMode),
                 Hyperlink('https://stamen.com/', 'Stamen Design '),

@@ -87,7 +87,7 @@ class MyAppState extends State<MyApp> {
           appBar: AppBar(
               centerTitle: true,
               title: Image.asset(
-                'assets/img/icon.png',
+                'assets/img/logo.png',
                 height: 40,
                 width: 40,
               )),

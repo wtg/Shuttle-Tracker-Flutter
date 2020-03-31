@@ -10,7 +10,8 @@ class IsDarkModeText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       _text,
-      style: TextStyle(color: _isDarkMode ? Colors.white : Colors.black),
+      style: TextStyle(
+          color: _isDarkMode ? Colors.white : Colors.black, fontSize: 11.0),
     );
   }
 }

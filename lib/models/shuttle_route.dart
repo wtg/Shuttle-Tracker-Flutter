@@ -3,8 +3,8 @@ import 'dart:ui';
 
 import 'package:latlong/latlong.dart';
 
-import 'ShuttlePoint.dart';
-import 'ShuttleSchedule.dart';
+import 'shuttle_point.dart';
+import 'shuttle_schedule.dart';
 
 class ShuttleRoute {
   /// Id for this route

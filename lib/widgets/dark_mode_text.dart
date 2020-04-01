@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 
 class IsDarkModeText extends StatelessWidget {
-  final String _text;
-  final bool _isDarkMode;
+  final String text;
+  final bool isDarkMode;
 
-  IsDarkModeText(this._text, this._isDarkMode);
+  IsDarkModeText({this.text, this.isDarkMode});
 
   @override
   Widget build(BuildContext context) {
     return Text(
-      _text,
+      text,
       style: TextStyle(
-          color: _isDarkMode ? Colors.white : Colors.black, fontSize: 11.0),
+          color: isDarkMode ? Colors.white : Colors.black, fontSize: 11.0),
     );
   }
 }

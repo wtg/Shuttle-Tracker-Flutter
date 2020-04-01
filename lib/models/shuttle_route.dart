@@ -43,7 +43,7 @@ class ShuttleRoute {
   /// List of shuttles currently associated with this route
   List<ShuttleSchedule> schedules;
 
-  ShuttleRoute(
+  ShuttleRoute({
     this.id,
     this.name,
     this.desc,
@@ -55,7 +55,7 @@ class ShuttleRoute {
     this.updated,
     this.points,
     this.active,
-  );
+  });
 
   ShuttleRoute.fromJson(Map<String, dynamic> json) {
     var tempPointsList = json['points'] as List;
@@ -73,8 +73,7 @@ class ShuttleRoute {
     desc = json['description'].toString();
     enabled = json['enabled'];
     color = Color(int.parse(json['color'].toString().replaceAll('#', '0xff')));
-    width = json['width'];
-    width = width.toDouble();
+    width = (json['width'] as num).toDouble();
     stopIds = stopIdsList;
     created = json['created'];
     updated = json['updated'];

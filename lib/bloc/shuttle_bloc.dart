@@ -39,7 +39,12 @@ class ShuttleBloc extends Bloc<ShuttleEvent, ShuttleState> {
       mapkey = repository.getMapkey;
 
       if (repository.getIsConnected) {
-        yield ShuttleLoaded(routes, location, updates, stops, mapkey);
+        yield ShuttleLoaded(
+            routes: routes,
+            location: location,
+            updates: updates,
+            stops: stops,
+            mapkey: mapkey);
       } else {
         yield ShuttleError(message: "NETWORK ISSUE");
       }
@@ -60,7 +65,12 @@ class ShuttleBloc extends Bloc<ShuttleEvent, ShuttleState> {
       mapkey = repository.getMapkey;
 
       if (repository.getIsConnected) {
-        yield ShuttleLoaded(routes, location, updates, stops, mapkey);
+        yield ShuttleLoaded(
+            routes: routes,
+            location: location,
+            updates: updates,
+            stops: stops,
+            mapkey: mapkey);
       } else {
         yield ShuttleError(message: "NETWORK ISSUE");
       }

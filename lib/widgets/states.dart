@@ -42,24 +42,30 @@ Widget buildLoadingState() {
 
 /// Function to create the loaded state that the user will see
 Widget buildLoadedState(
-    List<Polyline> routes,
+    {List<Polyline> routes,
     List<Marker> location,
     List<Marker> stops,
     List<Marker> updates,
     Map<String, ShuttleImage> mapkey,
-    bool isDarkMode) {
+    bool isDarkMode}) {
   const darkLink =
       'https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png';
   const lightLink = 'http://tile.stamen.com/toner-lite/{z}/{x}/{y}.png';
 
   List<Widget> mapkeyRows = [
-    MapkeyRow(Image.asset('assets/img/user.png'), ' You', isDarkMode),
+    MapkeyRow(
+        widget: Image.asset('assets/img/user.png'),
+        text: ' You',
+        isDarkMode: isDarkMode),
   ];
   mapkey.forEach((key, value) {
-    mapkeyRows.add(MapkeyRow(value.getSVG, " $key", isDarkMode));
+    mapkeyRows.add(
+        MapkeyRow(widget: value.getSVG, text: " $key", isDarkMode: isDarkMode));
   });
   mapkeyRows.add(MapkeyRow(
-      Image.asset('assets/img/circle.png'), ' Shuttle Stop', isDarkMode));
+      widget: Image.asset('assets/img/circle.png'),
+      text: ' Shuttle Stop',
+      isDarkMode: isDarkMode));
 
   print("Number of routes on map: ${routes.length}");
   print("Number of stops on map: ${stops.length}");
@@ -103,16 +109,16 @@ Widget buildLoadedState(
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.end,
               children: <Widget>[
-                IsDarkModeText('Map tiles: ', isDarkMode),
+                IsDarkModeText(text: 'Map tiles: ', isDarkMode: isDarkMode),
                 Hyperlink('https://stamen.com/', 'Stamen Design '),
-                IsDarkModeText('(', isDarkMode),
+                IsDarkModeText(text: '(', isDarkMode: isDarkMode),
                 Hyperlink('https://creativecommons.org/licenses/by/3.0/',
                     'CC BY 3.0'),
-                IsDarkModeText(') Data: ', isDarkMode),
+                IsDarkModeText(text: ') Data: ', isDarkMode: isDarkMode),
                 Hyperlink('https://www.openstreetmap.org/', 'OpenStreetMap '),
-                IsDarkModeText('(', isDarkMode),
+                IsDarkModeText(text: '(', isDarkMode: isDarkMode),
                 Hyperlink('https://www.openstreetmap.org/copyright', 'ODbL'),
-                IsDarkModeText(')', isDarkMode),
+                IsDarkModeText(text: ')', isDarkMode: isDarkMode),
               ],
             )),
       ),
@@ -144,7 +150,7 @@ Widget buildLoadedState(
 }
 
 /// Function to create the error state that the user will see
-Widget buildErrorState(String message, bool isDarkMode) {
+Widget buildErrorState({String message, bool isDarkMode}) {
   return Column(
     children: <Widget>[
       Center(

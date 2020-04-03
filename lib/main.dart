@@ -7,9 +7,9 @@ import 'package:flutter/services.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:responsive_framework/utils/bouncing_scroll_behavior.dart';
 
-import './pages/map_page.dart';
-import './pages/schedules_page.dart';
-import './pages/settings_page.dart';
+import 'pages/map_page.dart';
+import 'pages/schedules_page.dart';
+import 'pages/settings_page.dart';
 import 'bloc/shuttle_bloc.dart';
 import 'data/repository/shuttle_repository.dart';
 

@@ -58,27 +58,21 @@ class ShuttleRoute {
   });
 
   ShuttleRoute.fromJson(Map<String, dynamic> json) {
-    var tempPointsList = json['points'] as List;
-    var tempStopList = json['stop_ids'] as List;
-    var tempScheduleList = json['schedule'] as List;
-
-    var pointsList =
-        tempPointsList.map((i) => ShuttlePoint.fromJson(i).getLatLng).toList();
-    var stopIdsList = List<int>.from(tempStopList);
-    var schedulesList =
-        tempScheduleList.map((i) => ShuttleSchedule.fromJson(i)).toList();
-
     id = json['id'];
     name = json['name'].toString();
     desc = json['description'].toString();
     enabled = json['enabled'];
     color = Color(int.parse(json['color'].toString().replaceAll('#', '0xff')));
     width = (json['width'] as num).toDouble();
-    stopIds = stopIdsList;
+    stopIds = List<int>.from(json['stop_ids'] as List);
     created = json['created'];
     updated = json['updated'];
-    points = pointsList;
+    points = (json['points'] as List)
+        .map((i) => ShuttlePoint.fromJson(i).getLatLng)
+        .toList();
     active = json['active'];
-    schedules = schedulesList;
+    schedules = (json['schedule'] as List)
+        .map((i) => ShuttleSchedule.fromJson(i))
+        .toList();
   }
 }

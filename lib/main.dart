@@ -3,14 +3,15 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter/services.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:responsive_framework/utils/bouncing_scroll_behavior.dart';
 
-import './pages/MapPage.dart';
-import './pages/SchedulesPage.dart';
-import './pages/SettingsPage.dart';
+import 'pages/map_page.dart';
+import 'pages/schedules_page.dart';
+import 'pages/settings_page.dart';
 import 'bloc/shuttle_bloc.dart';
-import 'data/repository/ShuttleRepository.dart';
+import 'data/repository/shuttle_repository.dart';
 
 void main() => runApp(MyApp());
 
@@ -86,7 +87,7 @@ class MyAppState extends State<MyApp> {
           appBar: AppBar(
               centerTitle: true,
               title: Image.asset(
-                'assets/img/icon.png',
+                'assets/img/logo.png',
                 height: 40,
                 width: 40,
               )),

@@ -1,4 +1,4 @@
-import 'ShuttlePoint.dart';
+import 'shuttle_point.dart';
 
 class ShuttleStop extends ShuttlePoint {
   /// ID associated with stop
@@ -17,9 +17,14 @@ class ShuttleStop extends ShuttlePoint {
   String description;
 
   /// Uses a super constructor to define lat/lng attributes
-  ShuttleStop(latitude, longitude, this.name, this.created, this.updated,
-      this.description)
-      : super(0.0, 0.0);
+  ShuttleStop(
+      {latitude,
+      longitude,
+      this.name,
+      this.created,
+      this.updated,
+      this.description})
+      : super(latitude: 0.0, longitude: 0.0);
 
   ShuttleStop.fromJson(Map<String, dynamic> json) : super.fromJson(json) {
     latitude = json['latitude'];

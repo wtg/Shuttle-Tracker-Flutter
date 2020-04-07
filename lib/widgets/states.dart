@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter/widgets.dart';
+
 import 'package:latlong/latlong.dart';
 
-import '../models/ShuttleImage.dart';
+import '../models/shuttle_image.dart';
+import 'dark_mode_text.dart';
+import 'hyperlink.dart';
+import 'mapkey_row.dart';
 
 /// Function to create the initial state the user will see
 Widget buildInitialState() {
@@ -38,68 +42,30 @@ Widget buildLoadingState() {
 
 /// Function to create the loaded state that the user will see
 Widget buildLoadedState(
-    List<Polyline> routes,
+    {List<Polyline> routes,
     List<Marker> location,
     List<Marker> stops,
     List<Marker> updates,
     Map<String, ShuttleImage> mapkey,
-    Brightness brightness) {
-  var isDarkMode = false;
+    bool isDarkMode}) {
   const darkLink =
       'https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png';
   const lightLink = 'http://tile.stamen.com/toner-lite/{z}/{x}/{y}.png';
 
-  if (brightness == Brightness.dark) {
-    isDarkMode = true;
-  }
-
   List<Widget> mapkeyRows = [
-    Row(
-      children: <Widget>[
-        Container(
-          width: 10,
-          height: 10,
-          child: Image.asset('assets/img/user.png'),
-        ),
-        Text(
-          ' You',
-          style: TextStyle(color: isDarkMode ? Colors.white : Colors.black),
-        ),
-      ],
-    ),
+    MapkeyRow(
+        widget: Image.asset('assets/img/user.png'),
+        text: ' You',
+        isDarkMode: isDarkMode),
   ];
   mapkey.forEach((key, value) {
     mapkeyRows.add(
-      Row(
-        children: <Widget>[
-          Container(
-            width: 10,
-            height: 10,
-            child: value.getSVG,
-          ),
-          Text(
-            " $key",
-            style: TextStyle(color: isDarkMode ? Colors.white : Colors.black),
-          ),
-        ],
-      ),
-    );
+        MapkeyRow(widget: value.getSVG, text: " $key", isDarkMode: isDarkMode));
   });
-  mapkeyRows.add(
-    Row(
-      children: <Widget>[
-        Container(
-          width: 10,
-          height: 10,
-          child: Image.asset('assets/img/circle.png'),
-        ),
-        Text(
-          ' Shuttle Stop',
-          style: TextStyle(color: isDarkMode ? Colors.white : Colors.black),
-        ),
-      ],
-    ),
-  );
+  mapkeyRows.add(MapkeyRow(
+      widget: Image.asset('assets/img/circle.png'),
+      text: ' Shuttle Stop',
+      isDarkMode: isDarkMode));
 
   print("Number of routes on map: ${routes.length}");
   print("Number of stops on map: ${stops.length}");
@@ -114,7 +80,8 @@ Widget buildLoadedState(
             options: MapOptions(
               center: LatLng(42.73, -73.6767),
               zoom: 14,
-              maxZoom: 20,
+              maxZoom: 16, // max you can zoom in
+              minZoom: 14, // min you can zoom out
             ),
             layers: [
               TileLayerOptions(
@@ -138,16 +105,28 @@ Widget buildLoadedState(
         opacity: 0.75,
         child: Container(
             color: isDarkMode ? Colors.grey[900] : Colors.white,
-            child: Text(
-              'Map tiles: Stamen Design (CC BY 3.0) Data: OpenStreetMap (ODbL)',
-              style: TextStyle(color: isDarkMode ? Colors.white : Colors.black),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: <Widget>[
+                IsDarkModeText(text: 'Map tiles: ', isDarkMode: isDarkMode),
+                Hyperlink('https://stamen.com/', 'Stamen Design '),
+                IsDarkModeText(text: '(', isDarkMode: isDarkMode),
+                Hyperlink('https://creativecommons.org/licenses/by/3.0/',
+                    'CC BY 3.0'),
+                IsDarkModeText(text: ') Data: ', isDarkMode: isDarkMode),
+                Hyperlink('https://www.openstreetmap.org/', 'OpenStreetMap '),
+                IsDarkModeText(text: '(', isDarkMode: isDarkMode),
+                Hyperlink('https://www.openstreetmap.org/copyright', 'ODbL'),
+                IsDarkModeText(text: ')', isDarkMode: isDarkMode),
+              ],
             )),
       ),
     ),
     Positioned(
-      height: mapkeyRows.length * 20.0,
+      height: mapkeyRows.length * 19.0,
       width: 175,
-      bottom: 60,
+      bottom: 30,
       left: 10,
       child: Opacity(
         opacity: 0.95,
@@ -156,7 +135,9 @@ Widget buildLoadedState(
               color: isDarkMode ? Colors.grey[900] : Colors.white,
               borderRadius: BorderRadius.circular(5),
               boxShadow: [
-                BoxShadow(color: Colors.black, offset: Offset(0.0, 1.0))
+                BoxShadow(
+                    color: isDarkMode ? Colors.white : Colors.black,
+                    offset: Offset(0.0, 0.5))
               ]),
           child: ListView(
             children: mapkeyRows,
@@ -169,12 +150,7 @@ Widget buildLoadedState(
 }
 
 /// Function to create the error state that the user will see
-Widget buildErrorState(String message, Brightness brightness) {
-  var isDarkMode = false;
-  if (brightness == Brightness.dark) {
-    isDarkMode = true;
-  }
-
+Widget buildErrorState({String message, bool isDarkMode}) {
   return Column(
     children: <Widget>[
       Center(

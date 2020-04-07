@@ -4,8 +4,8 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
-import '../data/repository/ShuttleRepository.dart';
-import '../models/ShuttleImage.dart';
+import '../data/repository/shuttle_repository.dart';
+import '../models/shuttle_image.dart';
 
 part 'shuttle_event.dart';
 part 'shuttle_state.dart';
@@ -39,7 +39,12 @@ class ShuttleBloc extends Bloc<ShuttleEvent, ShuttleState> {
       mapkey = repository.getMapkey;
 
       if (repository.getIsConnected) {
-        yield ShuttleLoaded(routes, location, updates, stops, mapkey);
+        yield ShuttleLoaded(
+            routes: routes,
+            location: location,
+            updates: updates,
+            stops: stops,
+            mapkey: mapkey);
       } else {
         yield ShuttleError(message: "NETWORK ISSUE");
       }
@@ -60,7 +65,12 @@ class ShuttleBloc extends Bloc<ShuttleEvent, ShuttleState> {
       mapkey = repository.getMapkey;
 
       if (repository.getIsConnected) {
-        yield ShuttleLoaded(routes, location, updates, stops, mapkey);
+        yield ShuttleLoaded(
+            routes: routes,
+            location: location,
+            updates: updates,
+            stops: stops,
+            mapkey: mapkey);
       } else {
         yield ShuttleError(message: "NETWORK ISSUE");
       }

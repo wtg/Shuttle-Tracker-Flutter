@@ -8,10 +8,8 @@ class ShuttleImage {
   String svgString;
   Color svgColor;
 
-  ShuttleImage({this.svgColor});
-
-  Widget get getSVG {
-    String svgInput =
+  ShuttleImage({this.svgColor}) {
+    var svgInput =
         svgColor.value.toRadixString(16).toString().replaceAll('0xff', '');
     svgString =
         """<svg width="60px" height="60px" viewBox="0 0 60 60" version="1.1" 
@@ -36,7 +34,9 @@ class ShuttleImage {
             </g>
         </g>
         </svg>""";
-
-    return SvgPicture.string(svgString);
   }
+
+  Color get getSVGColor => svgColor;
+
+  Widget get getSVG => SvgPicture.string(svgString);
 }

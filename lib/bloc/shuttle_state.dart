@@ -27,7 +27,7 @@ class ShuttleLoaded extends ShuttleState {
   final Map<String, ShuttleImage> mapkey;
 
   const ShuttleLoaded(
-      this.routes, this.location, this.updates, this.stops, this.mapkey);
+      {this.routes, this.location, this.updates, this.stops, this.mapkey});
   @override
   List<Object> get props => [routes, location, updates, stops, mapkey];
 }

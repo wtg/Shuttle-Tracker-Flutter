@@ -44,12 +44,18 @@ class _MapPageState extends State<MapPage> {
           } else if (state is ShuttleError) {
             shuttleBloc.add(GetShuttleMap());
             print('state has error\n\n');
-            return buildErrorState(state.message, isDarkMode);
+            return buildErrorState(
+                message: state.message, isDarkMode: isDarkMode);
           } else if (state is ShuttleLoaded) {
             print('state is loaded');
             shuttleBloc.add(RefreshShuttleMap());
-            return buildLoadedState(state.routes, state.location, state.stops,
-                state.updates, state.mapkey, isDarkMode);
+            return buildLoadedState(
+                routes: state.routes,
+                location: state.location,
+                stops: state.stops,
+                updates: state.updates,
+                mapkey: state.mapkey,
+                isDarkMode: isDarkMode);
           }
           print('state is loading');
           return buildLoadingState();

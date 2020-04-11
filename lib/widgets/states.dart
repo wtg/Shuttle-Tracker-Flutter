@@ -67,6 +67,19 @@ Widget buildLoadedState(
       text: ' Shuttle Stop',
       isDarkMode: isDarkMode));
 
+  List<Widget> attribution = [
+    IsDarkModeText(text: 'Map tiles: ', isDarkMode: isDarkMode),
+    Hyperlink(url: 'https://stamen.com/', text: 'Stamen Design '),
+    IsDarkModeText(text: '(', isDarkMode: isDarkMode),
+    Hyperlink(
+        url: 'https://creativecommons.org/licenses/by/3.0/', text: 'CC BY 3.0'),
+    IsDarkModeText(text: ') Data: ', isDarkMode: isDarkMode),
+    Hyperlink(url: 'https://www.openstreetmap.org/', text: 'OpenStreetMap '),
+    IsDarkModeText(text: '(', isDarkMode: isDarkMode),
+    Hyperlink(url: 'https://www.openstreetmap.org/copyright', text: 'ODbL'),
+    IsDarkModeText(text: ')', isDarkMode: isDarkMode),
+  ];
+
   print("Number of routes on map: ${routes.length}");
   print("Number of stops on map: ${stops.length}");
   print("Number of shuttles on map: ${updates.length}");
@@ -106,30 +119,16 @@ Widget buildLoadedState(
         child: Container(
             color: isDarkMode ? Colors.grey[900] : Colors.white,
             child: Row(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: <Widget>[
-                IsDarkModeText(text: 'Map tiles: ', isDarkMode: isDarkMode),
-                Hyperlink('https://stamen.com/', 'Stamen Design '),
-                IsDarkModeText(text: '(', isDarkMode: isDarkMode),
-                Hyperlink('https://creativecommons.org/licenses/by/3.0/',
-                    'CC BY 3.0'),
-                IsDarkModeText(text: ') Data: ', isDarkMode: isDarkMode),
-                Hyperlink('https://www.openstreetmap.org/', 'OpenStreetMap '),
-                IsDarkModeText(text: '(', isDarkMode: isDarkMode),
-                Hyperlink('https://www.openstreetmap.org/copyright', 'ODbL'),
-                IsDarkModeText(text: ')', isDarkMode: isDarkMode),
-              ],
-            )),
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: attribution)),
       ),
     ),
     Positioned(
-      height: mapkeyRows.length * 19.0,
-      width: 175,
-      bottom: 30,
+      bottom: 50,
       left: 10,
       child: Opacity(
-        opacity: 0.95,
+        opacity: 0.90,
         child: Container(
           decoration: BoxDecoration(
               color: isDarkMode ? Colors.grey[900] : Colors.white,
@@ -139,13 +138,13 @@ Widget buildLoadedState(
                     color: isDarkMode ? Colors.white : Colors.black,
                     offset: Offset(0.0, 0.5))
               ]),
-          child: ListView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: mapkeyRows,
-            physics: NeverScrollableScrollPhysics(),
           ),
         ),
       ),
-    )
+    ),
   ]);
 }
 

@@ -11,8 +11,8 @@
     
     <application
         android:name="io.flutter.app.FlutterApplication"
-        android:label="flutter_shuttletracker"
-        android:icon="@mipmap/ic_launcher">
+        android:label="ShuttleTracker"
+        android:icon="@mipmap/launcher_icon">
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"

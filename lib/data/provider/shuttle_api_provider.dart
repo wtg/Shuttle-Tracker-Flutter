@@ -40,12 +40,12 @@ class ShuttleApiProvider {
   final List<int> _ids = [];
 
   /// This function will fetch the data from the JSON API and return a decoded
-  Future fetch(String type) async {
+  Future _fetch(String type) async {
     var jsonDecoded = [];
     var client = http.Client();
     try {
       final response = await client.get('https://shuttles.rpi.edu/$type');
-      createJSONFile('$type', response);
+      _createJSONFile('$type', response);
 
       if (response.statusCode == 200) {
         isConnected = true;
@@ -71,7 +71,7 @@ class ShuttleApiProvider {
 
   /// Getter method to retrieve the list of routes
   Future<List<Polyline>> get getRoutes async {
-    final routesJSON = await fetch('routes');
+    final routesJSON = await _fetch('routes');
 
     for (var routeJSON in routesJSON) {
       if (ShuttleRoute.fromJson(routeJSON).active &&
@@ -79,7 +79,7 @@ class ShuttleApiProvider {
         _mapkey[ShuttleRoute.fromJson(routeJSON).name] =
             ShuttleImage(svgColor: ShuttleRoute.fromJson(routeJSON).color);
         _ids.addAll(ShuttleRoute.fromJson(routeJSON).stopIds);
-        routes.add(createRoute(routeJSON));
+        routes.add(_createRoute(routeJSON));
         for (var schedule in ShuttleRoute.fromJson(routeJSON).schedules) {
           _colors[schedule.routeId] = ShuttleRoute.fromJson(routeJSON).color;
         }
@@ -90,11 +90,11 @@ class ShuttleApiProvider {
 
   /// Getter function to retrieve the list of stops
   Future<List<Marker>> get getStops async {
-    final stopsJSON = await fetch('stops');
+    final stopsJSON = await _fetch('stops');
 
     for (var stopJSON in stopsJSON) {
       if (_ids.contains(ShuttleStop.fromJson(stopJSON).id)) {
-        stops.add(createStop(stopJSON));
+        stops.add(_createStop(stopJSON));
       }
     }
     _ids.clear();
@@ -103,10 +103,10 @@ class ShuttleApiProvider {
 
   /// Getter function to retrieve the list of updated shuttles
   Future<List<Marker>> get getUpdates async {
-    final updatesJSON = await fetch('updates');
+    final updatesJSON = await _fetch('updates');
 
     for (var updateJSON in updatesJSON) {
-      updates.add(createUpdate(updateJSON, _colors));
+      updates.add(_createUpdate(updateJSON, _colors));
     }
     _colors.clear();
     return updates;
@@ -147,7 +147,7 @@ class ShuttleApiProvider {
 }
 
 /// Helper function to create local JSON file
-Future createJSONFile(String fileName, http.Response response) async {
+Future _createJSONFile(String fileName, http.Response response) async {
   if (response.statusCode == 200) {
     final directory = await getApplicationDocumentsDirectory();
     final file = File('${directory.path}/$fileName.json');
@@ -156,7 +156,7 @@ Future createJSONFile(String fileName, http.Response response) async {
 }
 
 /// Helper function to create Polyline type object for getRoutes
-Polyline createRoute(Map<String, dynamic> routeJSON) {
+Polyline _createRoute(Map<String, dynamic> routeJSON) {
   var route = ShuttleRoute.fromJson(routeJSON);
   return Polyline(
     points: route.points,
@@ -166,7 +166,7 @@ Polyline createRoute(Map<String, dynamic> routeJSON) {
 }
 
 /// Helper function to create Marker type object for getStops
-Marker createStop(Map<String, dynamic> routeJSON) {
+Marker _createStop(Map<String, dynamic> routeJSON) {
   var stop = ShuttleStop.fromJson(routeJSON);
   return Marker(
       point: stop.getLatLng,
@@ -176,7 +176,7 @@ Marker createStop(Map<String, dynamic> routeJSON) {
 }
 
 /// Helper function to create Marker type object for getUpdates
-Marker createUpdate(Map<String, dynamic> updateJSON, Map<int, Color> colors) {
+Marker _createUpdate(Map<String, dynamic> updateJSON, Map<int, Color> colors) {
   var shuttle = ShuttleVehicle.fromJson(updateJSON);
 
   if (colors[shuttle.routeId] != null) {

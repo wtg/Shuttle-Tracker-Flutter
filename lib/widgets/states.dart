@@ -125,13 +125,14 @@ Widget buildLoadedState(
       ),
     ),
     Positioned(
-      bottom: 50,
+      bottom: 40,
       left: 10,
       child: Opacity(
         opacity: 0.90,
         child: Container(
           decoration: BoxDecoration(
               color: isDarkMode ? Colors.grey[900] : Colors.white,
+              border: Border.all(width: 5, color: Colors.white),
               borderRadius: BorderRadius.circular(5),
               boxShadow: [
                 BoxShadow(

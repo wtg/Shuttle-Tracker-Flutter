@@ -9,8 +9,15 @@ import 'shuttle_api_provider.dart';
 class ShuttleLocalProvider extends ShuttleApiProvider {
   @override
   Future fetch(String fileName) async {
-    List<dynamic> jsonDecoded = json
-        .decode(await rootBundle.loadString('assets/json_test/$fileName.json'));
+    List<dynamic> jsonDecoded;
+    try {
+      jsonDecoded = json.decode(
+          await rootBundle.loadString('assets/json_test/$fileName.json'));
+      isConnected = true;
+    } catch (e) {
+      print(e);
+      isConnected = false;
+    }
     return jsonDecoded;
   }
 }

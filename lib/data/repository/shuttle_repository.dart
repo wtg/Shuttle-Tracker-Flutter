@@ -2,7 +2,7 @@ import 'package:flutter_map/flutter_map.dart';
 
 import '../../models/shuttle_image.dart';
 import '../provider/shuttle_api_provider.dart';
-//import '../provider/ShuttleLocalProvider.dart';
+//import '../provider/shuttle_local_provider.dart';
 
 /// Repo class that retrieves data from provider class methods and
 /// distributes the data to BLoC pattern

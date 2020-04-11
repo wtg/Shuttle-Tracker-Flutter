@@ -91,7 +91,7 @@ Widget buildLoadedState(
         Flexible(
           child: FlutterMap(
             options: MapOptions(
-              center: LatLng(42.73, -73.6767),
+              center: LatLng(42.731, -73.6767),
               zoom: 14,
               maxZoom: 16, // max you can zoom in
               minZoom: 14, // min you can zoom out
@@ -115,7 +115,7 @@ Widget buildLoadedState(
     Align(
       alignment: Alignment.bottomRight,
       child: Opacity(
-        opacity: 0.75,
+        opacity: 0.90,
         child: Container(
             color: isDarkMode ? Colors.grey[900] : Colors.white,
             child: Row(
@@ -125,13 +125,14 @@ Widget buildLoadedState(
       ),
     ),
     Positioned(
-      bottom: 50,
+      bottom: 40,
       left: 10,
       child: Opacity(
         opacity: 0.90,
         child: Container(
           decoration: BoxDecoration(
               color: isDarkMode ? Colors.grey[900] : Colors.white,
+              border: Border.all(width: 5, color: Colors.white),
               borderRadius: BorderRadius.circular(5),
               boxShadow: [
                 BoxShadow(

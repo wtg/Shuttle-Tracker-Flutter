@@ -88,6 +88,7 @@ Widget buildLoadedState(
   return Stack(children: <Widget>[
     Column(
       children: [
+        /// Map
         Flexible(
           child: FlutterMap(
             options: MapOptions(
@@ -112,6 +113,8 @@ Widget buildLoadedState(
         ),
       ],
     ),
+
+    /// Attribution
     Align(
       alignment: Alignment.bottomRight,
       child: Opacity(
@@ -124,6 +127,8 @@ Widget buildLoadedState(
                 children: attribution)),
       ),
     ),
+
+    /// Mapkey
     Positioned(
       bottom: 40,
       left: 10,
@@ -132,7 +137,12 @@ Widget buildLoadedState(
         child: Container(
           decoration: BoxDecoration(
               color: isDarkMode ? Colors.grey[900] : Colors.white,
-              border: Border.all(width: 5, color: Colors.white),
+              border: Border.all(
+                width: 5,
+                color: isDarkMode
+                    ? Colors.black.withOpacity(0.1)
+                    : Colors.white.withOpacity(0.1),
+              ),
               borderRadius: BorderRadius.circular(5),
               boxShadow: [
                 BoxShadow(

@@ -12,8 +12,8 @@ class MapkeyRow extends StatelessWidget {
     return Row(
       children: <Widget>[
         Container(
-          width: 10,
-          height: 10,
+          width: 13,
+          height: 13,
           child: widget,
         ),
         Text(

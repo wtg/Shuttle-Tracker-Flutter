@@ -5,9 +5,9 @@ import 'package:flutter/widgets.dart';
 import 'package:latlong/latlong.dart';
 
 import '../models/shuttle_image.dart';
-import 'dark_mode_text.dart';
-import 'hyperlink.dart';
-import 'mapkey_row.dart';
+import '../widgets/dark_mode_text.dart';
+import '../widgets/hyperlink.dart';
+import '../widgets/mapkey_row.dart';
 
 /// Function to create the initial state the user will see
 Widget buildInitialState() {

@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/widgets.dart';
 
 import '../bloc/shuttle_bloc.dart';
-import '../widgets/states.dart';
+import '../ui/states.dart';
 
 class MapPage extends StatefulWidget {
   @override

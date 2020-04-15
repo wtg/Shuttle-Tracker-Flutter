@@ -16,17 +16,14 @@ class _MapPageState extends State<MapPage> {
 
   @override
   Widget build(BuildContext context) {
-    var brightness = MediaQuery.of(context).platformBrightness;
-    var isDarkMode = false;
-    if (brightness == Brightness.dark) {
-      isDarkMode = true;
-    }
+    var isDarkMode =
+        MediaQuery.of(context).platformBrightness == Brightness.dark;
 
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       systemNavigationBarColor: isDarkMode ? Colors.black : Colors.white,
       systemNavigationBarIconBrightness: isDarkMode
           ? Brightness.light
-          : Brightness.dark, // navigation bar color
+          : Brightness.dark, //android navigation bar color
       statusBarColor:
           isDarkMode ? Colors.black : Colors.white, // status bar color
       statusBarIconBrightness: isDarkMode ? Brightness.light : Brightness.dark,

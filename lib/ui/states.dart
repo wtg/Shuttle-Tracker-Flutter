@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter/widgets.dart';
-
 import 'package:latlong/latlong.dart';
 
 import '../models/shuttle_image.dart';
@@ -68,16 +67,16 @@ Widget buildLoadedState(
       isDarkMode: isDarkMode));
 
   List<Widget> attribution = [
-    IsDarkModeText(text: 'Map tiles: ', isDarkMode: isDarkMode),
+    DarkModeText(text: 'Map tiles: ', isDarkMode: isDarkMode),
     Hyperlink(url: 'https://stamen.com/', text: 'Stamen Design '),
-    IsDarkModeText(text: '(', isDarkMode: isDarkMode),
+    DarkModeText(text: '(', isDarkMode: isDarkMode),
     Hyperlink(
         url: 'https://creativecommons.org/licenses/by/3.0/', text: 'CC BY 3.0'),
-    IsDarkModeText(text: ') Data: ', isDarkMode: isDarkMode),
+    DarkModeText(text: ') Data: ', isDarkMode: isDarkMode),
     Hyperlink(url: 'https://www.openstreetmap.org/', text: 'OpenStreetMap '),
-    IsDarkModeText(text: '(', isDarkMode: isDarkMode),
+    DarkModeText(text: '(', isDarkMode: isDarkMode),
     Hyperlink(url: 'https://www.openstreetmap.org/copyright', text: 'ODbL'),
-    IsDarkModeText(text: ')', isDarkMode: isDarkMode),
+    DarkModeText(text: ')', isDarkMode: isDarkMode),
   ];
 
   print("Number of routes on map: ${routes.length}");

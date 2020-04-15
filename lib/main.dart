@@ -8,11 +8,12 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:responsive_framework/utils/bouncing_scroll_behavior.dart';
 
+import 'bloc/shuttle_bloc.dart';
+import 'data/repository/shuttle_repository.dart';
 import 'pages/map_page.dart';
 import 'pages/schedules_page.dart';
 import 'pages/settings_page.dart';
-import 'bloc/shuttle_bloc.dart';
-import 'data/repository/shuttle_repository.dart';
+
 
 void main() => runApp(MyApp());
 
@@ -36,19 +37,19 @@ class MyAppState extends State<MyApp> {
   ];
 
   final _items = [
-      BottomNavigationBarItem(
-        icon: Icon(Icons.near_me),
-        title: Text('Map'),
-      ),
-      BottomNavigationBarItem(
-        icon: Icon(Icons.list),
-        title: Text('Schedules'),
-      ),
-      BottomNavigationBarItem(
-        icon: Icon(Icons.settings),
-        title: Text('Settings'),
-      )
-    ];
+    BottomNavigationBarItem(
+      icon: Icon(Icons.near_me),
+      title: Text('Map'),
+    ),
+    BottomNavigationBarItem(
+      icon: Icon(Icons.list),
+      title: Text('Schedules'),
+    ),
+    BottomNavigationBarItem(
+      icon: Icon(Icons.settings),
+      title: Text('Settings'),
+    )
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -92,8 +93,8 @@ class MyAppState extends State<MyApp> {
         child: PlatformScaffold(
           appBar: PlatformAppBar(
               android: (_) => MaterialAppBarData(
-                centerTitle: true,
-              ),
+                    centerTitle: true,
+                  ),
               // TODO: ADD IOS PARAMETER
               title: Image.asset(
                 'assets/img/logo.png',

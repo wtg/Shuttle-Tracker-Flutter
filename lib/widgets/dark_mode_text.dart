@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-class IsDarkModeText extends StatelessWidget {
+class DarkModeText extends StatelessWidget {
   final String text;
   final bool isDarkMode;
 
-  IsDarkModeText({this.text, this.isDarkMode});
+  DarkModeText({this.text, this.isDarkMode});
 
   @override
   Widget build(BuildContext context) {

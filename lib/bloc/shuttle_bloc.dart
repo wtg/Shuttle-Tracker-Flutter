@@ -52,7 +52,7 @@ class ShuttleBloc extends Bloc<ShuttleEvent, ShuttleState> {
     } else if (event is RefreshShuttleMap) {
       await Future.delayed(const Duration(seconds: 5));
 
-      // TODO: CLEAR UP THIS CODE LATER TO HAVE LESS LINES
+      // TODO: CLEAR UP THIS CODE LATER TO BE MORE EFFICIENT
       routes.clear();
       stops.clear();
       location.clear();

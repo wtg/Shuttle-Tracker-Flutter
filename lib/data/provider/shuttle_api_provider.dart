@@ -1,11 +1,10 @@
 import 'dart:convert';
 import 'dart:io';
 import 'dart:ui';
-import 'package:flutter_map/flutter_map.dart';
 
+import 'package:flutter_map/flutter_map.dart';
 import 'package:geolocation/geolocation.dart';
 import 'package:http/http.dart' as http;
-
 import 'package:path_provider/path_provider.dart';
 import 'package:latlong/latlong.dart';
 import 'package:flutter/material.dart';

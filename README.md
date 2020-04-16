@@ -2,7 +2,7 @@
 
 Flutter ShuttleTracker is a port for RPI ShuttleTracker that utilizes the Flutter framework for development. Flutter is an open-source UI software development kit created by Google that can be used to create apps for iOS and Android. 
 
-## Installing
+## Setting Up
 
 1. [Install Flutter](https://flutter.dev/docs/get-started/install).
 2. Clone the repository to your computer.

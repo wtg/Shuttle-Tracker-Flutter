@@ -6,7 +6,10 @@ Flutter ShuttleTracker is a port for RPI ShuttleTracker that utilizes the Flutte
 
 1. [Install Flutter](https://flutter.dev/docs/get-started/install).
 2. Clone the repository to your computer.
-3. Run ```flutter pub get```
+3. Check the status of flutter by running ```flutter doctor```
+4. Retrieve all the required dependencies with ```flutter pub get```
+5. Check that a device or emulator is ready ```flutter devices```
+6. Run the app with ```flutter run```
 
 ## Contributing
 

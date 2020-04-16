@@ -19,6 +19,7 @@ class ShuttleBloc extends Bloc<ShuttleEvent, ShuttleState> {
   List<Marker> updates = [];
   List<Marker> stops = [];
   Map<String, ShuttleImage> mapkey = {};
+  bool isLoading = true;
 
   /// ShuttleBloc named constructor
   ShuttleBloc({this.repository});
@@ -31,33 +32,19 @@ class ShuttleBloc extends Bloc<ShuttleEvent, ShuttleState> {
     ShuttleEvent event,
   ) async* {
     if (event is GetShuttleMap) {
-      yield ShuttleLoading();
-      location = await repository.getLocation;
-      routes = await repository.getRoutes;
-      stops = await repository.getStops;
-      updates = await repository.getUpdates;
-      mapkey = repository.getMapkey;
-
-      if (repository.getIsConnected) {
-        yield ShuttleLoaded(
-            routes: routes,
-            location: location,
-            updates: updates,
-            stops: stops,
-            mapkey: mapkey);
+      if (isLoading) {
+        yield ShuttleLoading();
+        isLoading = false;
       } else {
-        yield ShuttleError(message: "NETWORK ISSUE");
+        await Future.delayed(const Duration(seconds: 5));
       }
-      await Future.delayed(const Duration(seconds: 5));
-    } else if (event is RefreshShuttleMap) {
-      await Future.delayed(const Duration(seconds: 5));
 
-      // TODO: CLEAR UP THIS CODE LATER TO BE MORE EFFICIENT
       routes.clear();
       stops.clear();
       location.clear();
       updates.clear();
       mapkey.clear();
+
       location = await repository.getLocation;
       routes = await repository.getRoutes;
       stops = await repository.getStops;
@@ -72,8 +59,10 @@ class ShuttleBloc extends Bloc<ShuttleEvent, ShuttleState> {
             stops: stops,
             mapkey: mapkey);
       } else {
+        isLoading = true;
         yield ShuttleError(message: "NETWORK ISSUE");
       }
+      await Future.delayed(const Duration(seconds: 5));
     }
   }
 }

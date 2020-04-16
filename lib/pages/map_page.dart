@@ -13,6 +13,7 @@ class MapPage extends StatefulWidget {
 
 class _MapPageState extends State<MapPage> {
   ShuttleBloc shuttleBloc;
+  int i = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +46,9 @@ class _MapPageState extends State<MapPage> {
                 message: state.message, isDarkMode: isDarkMode);
           } else if (state is ShuttleLoaded) {
             print('state is loaded');
-            shuttleBloc.add(RefreshShuttleMap());
+            i++;
+            print('API poll $i');
+            shuttleBloc.add(GetShuttleMap());
             return buildLoadedState(
                 routes: state.routes,
                 location: state.location,

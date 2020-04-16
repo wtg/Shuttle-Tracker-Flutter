@@ -14,7 +14,6 @@ import 'pages/map_page.dart';
 import 'pages/schedules_page.dart';
 import 'pages/settings_page.dart';
 
-
 void main() => runApp(MyApp());
 
 class MyApp extends StatefulWidget {
@@ -53,7 +52,6 @@ class MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    
     return PlatformApp(
       builder: (context, widget) => ResponsiveWrapper.builder(
         BouncingScrollWrapper.builder(context, widget),

@@ -4,7 +4,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/widgets.dart';
 
 import '../bloc/shuttle_bloc.dart';
-import '../ui/states.dart';
+import '../ui/states/error_state.dart';
+import '../ui/states/initial_map.dart';
+import '../ui/states/loaded_map.dart';
+import '../ui/states/loading_map.dart';
 
 class MapPage extends StatefulWidget {
   @override
@@ -38,18 +41,17 @@ class _MapPageState extends State<MapPage> {
           if (state is ShuttleInitial) {
             shuttleBloc.add(GetShuttleMap());
             print('state is initial');
-            return buildInitialState();
+            return InitialMap();
           } else if (state is ShuttleError) {
             shuttleBloc.add(GetShuttleMap());
             print('state has error\n\n');
-            return buildErrorState(
-                message: state.message, isDarkMode: isDarkMode);
+            return ErrorMap(message: state.message, isDarkMode: isDarkMode);
           } else if (state is ShuttleLoaded) {
             print('state is loaded');
             i++;
             print('API poll $i');
             shuttleBloc.add(GetShuttleMap());
-            return buildLoadedState(
+            return LoadedMap(
                 routes: state.routes,
                 location: state.location,
                 stops: state.stops,
@@ -58,7 +60,7 @@ class _MapPageState extends State<MapPage> {
                 isDarkMode: isDarkMode);
           }
           print('state is loading');
-          return buildLoadingState();
+          return LoadingMap();
         }),
       ),
     );

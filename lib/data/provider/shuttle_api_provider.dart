@@ -54,7 +54,7 @@ class ShuttleApiProvider {
     catch (error) {
       isConnected = false;
     }
-    print("App is connected to $type API: $isConnected");
+    print("App has polled $type API: $isConnected");
     return jsonDecoded;
   }
 
@@ -169,9 +169,14 @@ Marker createStop(Map<String, dynamic> routeJSON) {
   var stop = ShuttleStop.fromJson(routeJSON);
   return Marker(
       point: stop.getLatLng,
-      width: 10.0,
-      height: 10.0,
-      builder: (ctx) => Image.asset('assets/img/circle.png'));
+      width: 12.0,
+      height: 12.0,
+      builder: (ctx) => Container(
+          child: GestureDetector(
+              onTap: () {
+                print('Stop ${stop.name} clicked on');
+              },
+              child: Image.asset('assets/img/circle.png'))));
 }
 
 /// Helper function to create Marker type object for getUpdates

@@ -36,7 +36,7 @@ class ShuttleBloc extends Bloc<ShuttleEvent, ShuttleState> {
         yield ShuttleLoading();
         isLoading = false;
       } else {
-        await Future.delayed(const Duration(seconds: 5));
+        await Future.delayed(const Duration(seconds: 3));
       }
 
       routes.clear();
@@ -62,7 +62,7 @@ class ShuttleBloc extends Bloc<ShuttleEvent, ShuttleState> {
         isLoading = true;
         yield ShuttleError(message: "NETWORK ISSUE");
       }
-      await Future.delayed(const Duration(seconds: 5));
+      await Future.delayed(const Duration(seconds: 3));
     }
   }
 }

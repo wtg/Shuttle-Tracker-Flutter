@@ -1,11 +1,11 @@
 import 'dart:async';
 
-import 'package:flutter_map/flutter_map.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
 import '../data/repository/shuttle_repository.dart';
-import '../models/shuttle_image.dart';
+
+import 'package:latlong/latlong.dart';
 
 part 'shuttle_event.dart';
 part 'shuttle_state.dart';
@@ -14,11 +14,11 @@ part 'shuttle_state.dart';
 class ShuttleBloc extends Bloc<ShuttleEvent, ShuttleState> {
   /// Initialization of repository class
   final ShuttleRepository repository;
-  List<Polyline> routes = [];
-  List<Marker> location = [];
-  List<Marker> updates = [];
-  List<Marker> stops = [];
-  Map<String, ShuttleImage> mapkey = {};
+  List<dynamic> routes = [];
+  List<dynamic> stops = [];
+  List<dynamic> updates = [];
+  LatLng location = LatLng(0, 0);
+
   bool isLoading = true;
 
   /// ShuttleBloc named constructor
@@ -41,23 +41,16 @@ class ShuttleBloc extends Bloc<ShuttleEvent, ShuttleState> {
 
       routes.clear();
       stops.clear();
-      location.clear();
       updates.clear();
-      mapkey.clear();
 
       location = await repository.getLocation;
       routes = await repository.getRoutes;
       stops = await repository.getStops;
       updates = await repository.getUpdates;
-      mapkey = repository.getMapkey;
 
       if (repository.getIsConnected) {
         yield ShuttleLoaded(
-            routes: routes,
-            location: location,
-            updates: updates,
-            stops: stops,
-            mapkey: mapkey);
+            routes: routes, location: location, updates: updates, stops: stops);
       } else {
         isLoading = true;
         yield ShuttleError(message: "NETWORK ISSUE");

@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/widgets.dart';
 
 import '../bloc/shuttle_bloc.dart';
-import '../ui/states/error_state.dart';
+import '../ui/states/error_map.dart';
 import '../ui/states/initial_map.dart';
 import '../ui/states/loaded_map.dart';
 import '../ui/states/loading_map.dart';
@@ -56,7 +56,6 @@ class _MapPageState extends State<MapPage> {
                 location: state.location,
                 stops: state.stops,
                 updates: state.updates,
-                mapkey: state.mapkey,
                 isDarkMode: isDarkMode);
           }
           print('state is loading');

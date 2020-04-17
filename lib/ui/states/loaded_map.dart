@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_shuttletracker/models/shuttle_route.dart';
-import 'package:flutter_shuttletracker/models/shuttle_stop.dart';
-import 'package:flutter_shuttletracker/models/shuttle_vehicle.dart';
-import 'package:flutter_shuttletracker/ui/widgets/attribution.dart';
-import 'package:flutter_shuttletracker/ui/widgets/mapkey.dart';
 import 'package:latlong/latlong.dart';
 
 import '../../models/shuttle_image.dart';
+import '../../models/shuttle_route.dart';
+import '../../models/shuttle_stop.dart';
+import '../../models/shuttle_vehicle.dart';
+import '../widgets/attribution.dart';
+import '../widgets/mapkey.dart';
 
 class LoadedMap extends StatefulWidget {
   final List<dynamic> routes;
@@ -38,9 +38,11 @@ class LoadedMap extends StatefulWidget {
 }
 
 class _LoadedMapState extends State<LoadedMap> {
+  MapController mapController = MapController();
+
   List<Polyline> _createRoutes(List<dynamic> routesJSON, List<int> _ids,
       Map<String, ShuttleImage> _mapkey, Map<int, Color> _colors) {
-    List<Polyline> polylines = [];
+    var polylines = <Polyline>[];
 
     for (var routeJSON in routesJSON) {
       var route = ShuttleRoute.fromJson(routeJSON);
@@ -62,7 +64,7 @@ class _LoadedMapState extends State<LoadedMap> {
   }
 
   List<Marker> _createStops(List<dynamic> stopsJSON) {
-    List<Marker> markers = [];
+    var markers = <Marker>[];
 
     for (var stopJSON in stopsJSON) {
       var stop = ShuttleStop.fromJson(stopJSON);
@@ -74,6 +76,9 @@ class _LoadedMapState extends State<LoadedMap> {
             builder: (ctx) => Container(
                 child: GestureDetector(
                     onTap: () {
+                      mapController.onReady.then((result) {
+                        mapController.move(stop.getLatLng, 14);
+                      });
                       print('Stop ${stop.name} clicked on');
                     },
                     child: Image.asset('assets/img/circle.png')))));
@@ -85,7 +90,7 @@ class _LoadedMapState extends State<LoadedMap> {
 
   List<Marker> _createUpdates(
       List<dynamic> updatesJSON, Map<int, Color> colors) {
-    List<Marker> markers = [];
+    var markers = <Marker>[];
 
     for (var updateJSON in updatesJSON) {
       var update = ShuttleVehicle.fromJson(updateJSON);
@@ -108,7 +113,7 @@ class _LoadedMapState extends State<LoadedMap> {
   }
 
   List<Marker> _createLocation(LatLng coordinates) {
-    List<Marker> location = [
+    var location = <Marker>[
       Marker(
           point: coordinates,
           width: 10.0,

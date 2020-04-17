@@ -2,10 +2,9 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:latlong/latlong.dart';
 
 import '../data/repository/shuttle_repository.dart';
-
-import 'package:latlong/latlong.dart';
 
 part 'shuttle_event.dart';
 part 'shuttle_state.dart';

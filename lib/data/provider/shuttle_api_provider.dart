@@ -34,22 +34,13 @@ class ShuttleApiProvider {
   bool get getIsConnected => isConnected;
 
   /// Getter method to retrieve the list of routes
-  Future<List<dynamic>> get getRoutes async {
-    var routesJSON = await fetch('routes');
-    return routesJSON;
-  }
+  Future<List<dynamic>> get getRoutes async => await fetch('routes');
 
   /// Getter method to retrieve the list of stops
-  Future<List<dynamic>> get getStops async {
-    var stopsJSON = await fetch('stops');
-    return stopsJSON;
-  }
+  Future<List<dynamic>> get getStops async => await fetch('stops');
 
   /// Getter method to retrieve the list of updated shuttles
-  Future<List<dynamic>> get getUpdates async {
-    var updatesJSON = await fetch('updates');
-    return updatesJSON;
-  }
+  Future<List<dynamic>> get getUpdates async => await fetch('updates');
 
   /// Getter method to retrived location of user
   Future<LatLng> getLocation() async {
@@ -72,7 +63,7 @@ class ShuttleApiProvider {
       lng = value.location.longitude;
     }
 
-    LatLng location = LatLng(lat, lng);
+    var location = LatLng(lat, lng);
 
     return location;
   }

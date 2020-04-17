@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_shuttletracker/models/shuttle_image.dart';
+import '../../models/shuttle_image.dart';
 
 import 'mapkey_row.dart';
 
@@ -16,7 +16,7 @@ class Mapkey extends StatefulWidget {
 class _MapkeyState extends State<Mapkey> {
   @override
   Widget build(BuildContext context) {
-    List<Widget> mapkeyRows = [
+    var mapkeyRows = <Widget>[
       MapkeyRow(
           widget: Image.asset('assets/img/user.png'),
           text: ' You',

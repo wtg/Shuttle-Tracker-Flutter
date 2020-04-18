@@ -3,9 +3,8 @@ import 'package:flutter/material.dart';
 class MapkeyRow extends StatelessWidget {
   final Widget widget;
   final String text;
-  final bool isDarkMode;
 
-  MapkeyRow({this.widget, this.text, this.isDarkMode});
+  MapkeyRow({this.widget, this.text});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +17,6 @@ class MapkeyRow extends StatelessWidget {
         ),
         Text(
           text,
-          style: TextStyle(color: isDarkMode ? Colors.white : Colors.black),
         ),
       ],
     );

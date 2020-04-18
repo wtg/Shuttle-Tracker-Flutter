@@ -15,7 +15,6 @@ class LoadedMap extends StatefulWidget {
   final List<dynamic> stops;
   final List<dynamic> updates;
   final LatLng location;
-  final bool isDarkMode;
 
   /// Map of with the route number as key and color of that route as the value
   final Map<int, Color> _colors = {};
@@ -30,8 +29,7 @@ class LoadedMap extends StatefulWidget {
       'https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png';
   static const lightLink = 'http://tile.stamen.com/toner-lite/{z}/{x}/{y}.png';
 
-  LoadedMap(
-      {this.routes, this.location, this.stops, this.updates, this.isDarkMode});
+  LoadedMap({this.routes, this.location, this.stops, this.updates});
 
   @override
   _LoadedMapState createState() => _LoadedMapState();
@@ -126,6 +124,8 @@ class _LoadedMapState extends State<LoadedMap> {
 
   @override
   Widget build(BuildContext context) {
+    var isDarkMode =
+        MediaQuery.of(context).platformBrightness == Brightness.dark;
     return Stack(children: <Widget>[
       Column(
         children: [
@@ -140,11 +140,9 @@ class _LoadedMapState extends State<LoadedMap> {
               ),
               layers: [
                 TileLayerOptions(
-                  backgroundColor:
-                      widget.isDarkMode ? Colors.black : Colors.white,
-                  urlTemplate: widget.isDarkMode
-                      ? LoadedMap.darkLink
-                      : LoadedMap.lightLink,
+                  backgroundColor: Theme.of(context).backgroundColor,
+                  urlTemplate:
+                      isDarkMode ? LoadedMap.darkLink : LoadedMap.lightLink,
                   subdomains: ['a', 'b', 'c'],
                   tileProvider: CachedNetworkTileProvider(),
                 ),
@@ -160,9 +158,8 @@ class _LoadedMapState extends State<LoadedMap> {
           ),
         ],
       ),
-      Attribution(isDarkMode: widget.isDarkMode),
+      Attribution(),
       Mapkey(
-        isDarkMode: widget.isDarkMode,
         mapkey: widget._mapkey,
       ),
     ]);

@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 
-import 'dark_mode_text.dart';
 import 'hyperlink.dart';
 
 class Attribution extends StatefulWidget {
-  final bool isDarkMode;
-
-  Attribution({this.isDarkMode});
+  Attribution();
 
   @override
   _AttributionState createState() => _AttributionState();
@@ -16,31 +13,31 @@ class _AttributionState extends State<Attribution> {
   @override
   Widget build(BuildContext context) {
     var attribution = <Widget>[
-      DarkModeText(
-        text: 'Map tiles: ',
-        isDarkMode: widget.isDarkMode,
+      Text(
+        'Map tiles: ',
+        style: TextStyle(fontSize: 11.0),
       ),
       Hyperlink(url: 'https://stamen.com/', text: 'Stamen Design '),
-      DarkModeText(
-        text: '(',
-        isDarkMode: widget.isDarkMode,
+      Text(
+        '(',
+        style: TextStyle(fontSize: 11.0),
       ),
       Hyperlink(
           url: 'https://creativecommons.org/licenses/by/3.0/',
           text: 'CC BY 3.0'),
-      DarkModeText(
-        text: ') Data:',
-        isDarkMode: widget.isDarkMode,
+      Text(
+        ') Data:',
+        style: TextStyle(fontSize: 11.0),
       ),
       Hyperlink(url: 'https://www.openstreetmap.org/', text: 'OpenStreetMap '),
-      DarkModeText(
-        text: '(',
-        isDarkMode: widget.isDarkMode,
+      Text(
+        '(',
+        style: TextStyle(fontSize: 11.0),
       ),
       Hyperlink(url: 'https://www.openstreetmap.org/copyright', text: 'ODbL'),
-      DarkModeText(
-        text: ')',
-        isDarkMode: widget.isDarkMode,
+      Text(
+        ')',
+        style: TextStyle(fontSize: 11.0),
       ),
     ];
     return Align(
@@ -48,7 +45,7 @@ class _AttributionState extends State<Attribution> {
       child: Opacity(
           opacity: 0.90,
           child: Container(
-            color: widget.isDarkMode ? Colors.grey[900] : Colors.white,
+            color: Theme.of(context).accentColor,
             child: Row(
                 mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.end,

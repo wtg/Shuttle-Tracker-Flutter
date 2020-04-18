@@ -8,7 +8,7 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:responsive_framework/utils/bouncing_scroll_behavior.dart';
 
-import 'bloc/shuttle_bloc.dart';
+import 'blocs/shuttle/shuttle_bloc.dart';
 import 'data/repository/shuttle_repository.dart';
 import 'pages/map_page.dart';
 import 'pages/schedules_page.dart';
@@ -52,6 +52,14 @@ class MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      systemNavigationBarColor: Theme.of(context).backgroundColor,
+      systemNavigationBarIconBrightness: Theme.of(context)
+          .accentColorBrightness, //android navigation bar color
+      statusBarColor: Theme.of(context).backgroundColor, // status bar color
+      statusBarIconBrightness: Theme.of(context).accentColorBrightness,
+    ));
+
     return PlatformApp(
       builder: (context, widget) => ResponsiveWrapper.builder(
         BouncingScrollWrapper.builder(context, widget),
@@ -68,6 +76,14 @@ class MyAppState extends State<MyApp> {
       ),
       android: (_) => MaterialAppData(
         theme: ThemeData(
+          accentColor: Colors.white,
+          //cardColor: Colors.black.withOpacity(0.1),
+          hoverColor: Colors.black,
+          accentColorBrightness: Brightness.dark,
+          backgroundColor: Colors.white,
+          textTheme: TextTheme(
+            body1: TextStyle(color: Colors.black),
+          ),
           primaryTextTheme: TextTheme(
             title: TextStyle(color: Colors.black),
           ),
@@ -76,6 +92,14 @@ class MyAppState extends State<MyApp> {
               AppBarTheme(color: Colors.white, brightness: Brightness.light),
         ),
         darkTheme: ThemeData(
+          accentColor: Colors.grey[900],
+          //cardColor: Colors.white.withOpacity(0.1),
+          accentColorBrightness: Brightness.light,
+          //hoverColor: Colors.white,
+          backgroundColor: Colors.black,
+          textTheme: TextTheme(
+            body1: TextStyle(color: Colors.white),
+          ),
           primaryTextTheme: TextTheme(
             title: TextStyle(color: Colors.white),
           ),

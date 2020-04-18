@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/widgets.dart';
 
-import '../bloc/shuttle_bloc.dart';
+import '../blocs/shuttle/shuttle_bloc.dart';
 import '../ui/states/error_map.dart';
 import '../ui/states/initial_map.dart';
 import '../ui/states/loaded_map.dart';
@@ -20,18 +20,6 @@ class _MapPageState extends State<MapPage> {
 
   @override
   Widget build(BuildContext context) {
-    var isDarkMode =
-        MediaQuery.of(context).platformBrightness == Brightness.dark;
-
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-      systemNavigationBarColor: isDarkMode ? Colors.black : Colors.white,
-      systemNavigationBarIconBrightness: isDarkMode
-          ? Brightness.light
-          : Brightness.dark, //android navigation bar color
-      statusBarColor:
-          isDarkMode ? Colors.black : Colors.white, // status bar color
-      statusBarIconBrightness: isDarkMode ? Brightness.light : Brightness.dark,
-    ));
     return Scaffold(
       body: Center(
         child:
@@ -45,18 +33,20 @@ class _MapPageState extends State<MapPage> {
           } else if (state is ShuttleError) {
             shuttleBloc.add(GetShuttleMap());
             print('state has error\n\n');
-            return ErrorMap(message: state.message, isDarkMode: isDarkMode);
+            return ErrorMap(
+              message: state.message,
+            );
           } else if (state is ShuttleLoaded) {
             print('state is loaded');
             i++;
             print('API poll $i');
             shuttleBloc.add(GetShuttleMap());
             return LoadedMap(
-                routes: state.routes,
-                location: state.location,
-                stops: state.stops,
-                updates: state.updates,
-                isDarkMode: isDarkMode);
+              routes: state.routes,
+              location: state.location,
+              stops: state.stops,
+              updates: state.updates,
+            );
           }
           print('state is loading');
           return LoadingMap();

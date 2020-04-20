@@ -6,12 +6,6 @@ PODS:
   - geolocation (0.0.1):
     - Flutter
     - streams_channel
-  - geolocator (5.3.0):
-    - Flutter
-  - google_api_availability (2.0.2):
-    - Flutter
-  - "location_permissions (2.0.4+1)":
-    - Flutter
   - path_provider (0.0.1):
     - Flutter
   - sqflite (0.0.1):
@@ -37,9 +31,6 @@ PODS:
 DEPENDENCIES:
   - Flutter (from `Flutter`)
   - geolocation (from `.symlinks/plugins/geolocation/ios`)
-  - geolocator (from `.symlinks/plugins/geolocator/ios`)
-  - google_api_availability (from `.symlinks/plugins/google_api_availability/ios`)
-  - location_permissions (from `.symlinks/plugins/location_permissions/ios`)
   - path_provider (from `.symlinks/plugins/path_provider/ios`)
   - sqflite (from `.symlinks/plugins/sqflite/ios`)
   - streams_channel (from `.symlinks/plugins/streams_channel/ios`)
@@ -60,12 +51,6 @@ EXTERNAL SOURCES:
     :path: Flutter
   geolocation:
     :path: ".symlinks/plugins/geolocation/ios"
-  geolocator:
-    :path: ".symlinks/plugins/geolocator/ios"
-  google_api_availability:
-    :path: ".symlinks/plugins/google_api_availability/ios"
-  location_permissions:
-    :path: ".symlinks/plugins/location_permissions/ios"
   path_provider:
     :path: ".symlinks/plugins/path_provider/ios"
   sqflite:
@@ -91,9 +76,6 @@ SPEC CHECKSUMS:
   Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   geolocation: c194aabfd0f48cd7d6041afa8ba6542aa5714dc2
-  geolocator: 7cdcf71180b80913b3cd84ab715d3b5365b378af
-  google_api_availability: 6f1017d3a61be12be3bd9f929cc5b2606f24ae7f
-  location_permissions: 360d12ecd1c94a4cab68585f508be1d5ad944c8b
   path_provider: fb74bd0465e96b594bb3b5088ee4a4e7bb1f2a9d
   sqflite: 4001a31ff81d210346b500c55b17f4d6c7589dd0
   streams_channel: 16855ffd0568eded9563b2fec6a1bfa94420b353

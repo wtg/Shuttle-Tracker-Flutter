@@ -1,10 +1,9 @@
 import 'dart:io';
-import 'dart:ui';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:responsive_framework/utils/bouncing_scroll_behavior.dart';
 
@@ -54,73 +53,64 @@ class MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => ThemeBloc(),
-      child: BlocBuilder<ThemeBloc, ThemeData>(builder: (_, theme) {
-        SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-          systemNavigationBarColor: theme.bottomAppBarColor,
-          systemNavigationBarIconBrightness:
-              theme.accentColorBrightness, //android navigation bar color
-          statusBarColor: theme.bottomAppBarColor, // status bar color
-          statusBarIconBrightness: theme.accentColorBrightness,
-        ));
-        return PlatformApp(
-          builder: (context, widget) => ResponsiveWrapper.builder(
-            BouncingScrollWrapper.builder(context, widget),
-            maxWidth: 1200,
-            minWidth: 430,
-            defaultScale: true,
-            breakpoints: [
-              ResponsiveBreakpoint(breakpoint: 450, name: MOBILE),
-              ResponsiveBreakpoint(
-                  breakpoint: 800, name: TABLET, autoScale: true),
-              ResponsiveBreakpoint(
-                  breakpoint: 1000, name: TABLET, autoScale: true),
-              ResponsiveBreakpoint(breakpoint: 1200, name: DESKTOP),
-              ResponsiveBreakpoint(
-                  breakpoint: 2460, name: "4K", autoScale: true),
-            ],
-          ),
-          android: (_) => MaterialAppData(
+        create: (_) => ThemeBloc(),
+        child: BlocBuilder<ThemeBloc, ThemeData>(builder: (_, theme) {
+          SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+            systemNavigationBarColor: theme.bottomAppBarColor,
+            systemNavigationBarIconBrightness:
+                theme.accentColorBrightness, //android navigation bar color
+            statusBarColor: theme.bottomAppBarColor, // status bar color
+            statusBarIconBrightness: theme.accentColorBrightness,
+          ));
+          return MaterialApp(
+            builder: (context, widget) => ResponsiveWrapper.builder(
+              BouncingScrollWrapper.builder(context, widget),
+              maxWidth: 1200,
+              minWidth: 430,
+              defaultScale: true,
+              breakpoints: [
+                ResponsiveBreakpoint(breakpoint: 450, name: MOBILE),
+                ResponsiveBreakpoint(
+                    breakpoint: 800, name: TABLET, autoScale: true),
+                ResponsiveBreakpoint(
+                    breakpoint: 1000, name: TABLET, autoScale: true),
+                ResponsiveBreakpoint(breakpoint: 1200, name: DESKTOP),
+                ResponsiveBreakpoint(
+                    breakpoint: 2460, name: "4K", autoScale: true),
+              ],
+            ),
             theme: theme,
-          ),
-          // TODO: ADD IOS PARAMETER
-          home: SafeArea(
-            top: Platform.isAndroid,
-            bottom: false,
-            child: PlatformScaffold(
-              appBar: PlatformAppBar(
-                  android: (_) => MaterialAppBarData(
-                        centerTitle: true,
-                      ),
-                  // TODO: ADD IOS PARAMETER
+            home: SafeArea(
+              top: Platform.isAndroid,
+              bottom: false,
+              child: Scaffold(
+                appBar: AppBar(
+                  centerTitle: true,
                   title: Image.asset(
                     'assets/img/logo.png',
                     height: 40,
                     width: 40,
-                  )),
-              bottomNavBar: PlatformNavBar(
-                android: (_) => MaterialNavBarData(
+                  ),
+                ),
+                bottomNavigationBar: BottomNavigationBar(
                   type: BottomNavigationBarType.fixed,
                   selectedItemColor: Colors.red,
                   unselectedItemColor: Colors.grey,
                   currentIndex: _selectedTab,
-                  itemChanged: (index) {
+                  onTap: (index) {
                     setState(() {
                       _selectedTab = index;
                     });
                   },
+                  items: _items,
                 ),
-                items: _items,
-                // TODO: ADD IOS PARAMETER
-              ),
-              body: IndexedStack(
-                index: _selectedTab,
-                children: _pageOptions,
+                body: IndexedStack(
+                  index: _selectedTab,
+                  children: _pageOptions,
+                ),
               ),
             ),
-          ),
-        );
-      }),
-    );
+          );
+        }));
   }
 }

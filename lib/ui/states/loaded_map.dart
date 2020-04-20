@@ -125,7 +125,7 @@ class _LoadedMapState extends State<LoadedMap> {
   @override
   Widget build(BuildContext context) {
     var isDarkMode =
-        MediaQuery.of(context).platformBrightness == Brightness.dark;
+        Theme.of(context).bottomAppBarColor == Colors.black;
     return Stack(children: <Widget>[
       Column(
         children: [
@@ -140,7 +140,7 @@ class _LoadedMapState extends State<LoadedMap> {
               ),
               layers: [
                 TileLayerOptions(
-                  backgroundColor: Theme.of(context).backgroundColor,
+                  backgroundColor: Theme.of(context).bottomAppBarColor,
                   urlTemplate:
                       isDarkMode ? LoadedMap.darkLink : LoadedMap.lightLink,
                   subdomains: ['a', 'b', 'c'],

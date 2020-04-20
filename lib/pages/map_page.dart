@@ -38,7 +38,7 @@ class _MapPageState extends State<MapPage> {
           } else if (state is ShuttleLoaded) {
             print('state is loaded');
             i++;
-            print('API poll $i');
+            print('API poll $i\n\n');
             shuttleBloc.add(GetShuttleMap());
             return LoadedMap(
               routes: state.routes,

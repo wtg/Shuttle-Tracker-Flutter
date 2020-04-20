@@ -17,6 +17,7 @@ environment:
   sdk: ">=2.1.0 <3.0.0"
 
 dependencies:
+  flutter_platform_widgets: ^0.32.5
   flutter_widget_from_html: ^0.3.2+2
   observable: ^0.22.2
   flutter_svg: ^0.17.3+1

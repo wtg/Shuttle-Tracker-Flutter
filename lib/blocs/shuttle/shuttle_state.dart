@@ -20,16 +20,14 @@ class ShuttleLoading extends ShuttleState {
 
 /// This class represents what user will see when data is fetched
 class ShuttleLoaded extends ShuttleState {
-  final List<Polyline> routes;
-  final List<Marker> location;
-  final List<Marker> updates;
-  final List<Marker> stops;
-  final Map<String, ShuttleImage> mapkey;
+  final List<dynamic> routes;
+  final LatLng location;
+  final List<dynamic> updates;
+  final List<dynamic> stops;
 
-  const ShuttleLoaded(
-      {this.routes, this.location, this.updates, this.stops, this.mapkey});
+  const ShuttleLoaded({this.routes, this.location, this.updates, this.stops});
   @override
-  List<Object> get props => [routes, location, updates, stops, mapkey];
+  List<Object> get props => [routes, location, updates, stops];
 }
 
 // This class represents what user will see when there is an error

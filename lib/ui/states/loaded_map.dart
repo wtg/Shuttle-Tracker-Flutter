@@ -57,7 +57,7 @@ class _LoadedMapState extends State<LoadedMap> {
         }
       }
     }
-    print("Number of routes on map: ${polylines.length}");
+    //print("Number of routes on map: ${polylines.length}");
     return polylines;
   }
 
@@ -82,7 +82,7 @@ class _LoadedMapState extends State<LoadedMap> {
                     child: Image.asset('assets/img/circle.png')))));
       }
     }
-    print("Number of stops on map: ${markers.length}");
+    //print("Number of stops on map: ${markers.length}");
     return markers;
   }
 
@@ -106,7 +106,7 @@ class _LoadedMapState extends State<LoadedMap> {
               turns: AlwaysStoppedAnimation((update.heading - 45) / 360),
               child: update.image.getSVG)));
     }
-    print("Number of shuttles on map: ${markers.length}");
+    //print("Number of shuttles on map: ${markers.length}");
     return markers;
   }
 

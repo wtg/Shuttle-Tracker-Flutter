@@ -31,7 +31,7 @@ class _MapkeyState extends State<Mapkey> {
       widget: Image.asset('assets/img/circle.png'),
       text: ' Shuttle Stop',
     ));
-    print("Number of rows in mapkey: ${mapkeyRows.length}\n\n");
+    //print("Number of rows in mapkey: ${mapkeyRows.length}\n\n");
     return Positioned(
       bottom: 40,
       left: 10,
@@ -39,10 +39,10 @@ class _MapkeyState extends State<Mapkey> {
         opacity: 0.90,
         child: Container(
           decoration: BoxDecoration(
-              color: Theme.of(context).accentColor,
+              color: Theme.of(context).backgroundColor,
               border: Border.all(
                 width: 5,
-                color: Theme.of(context).cardColor,
+                color: Theme.of(context).backgroundColor,
               ),
               borderRadius: BorderRadius.circular(5),
               boxShadow: [

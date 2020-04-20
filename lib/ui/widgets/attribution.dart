@@ -45,7 +45,7 @@ class _AttributionState extends State<Attribution> {
       child: Opacity(
           opacity: 0.90,
           child: Container(
-            color: Theme.of(context).accentColor,
+            color: Theme.of(context).backgroundColor,
             child: Row(
                 mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.end,

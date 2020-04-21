@@ -18,6 +18,7 @@ class ThemeBloc extends Bloc<ThemeEvent, ThemeData> {
     primaryTextTheme: TextTheme(
       title: TextStyle(color: Colors.black),
     ),
+    primaryIconTheme: IconThemeData(color: Colors.red),
     primarySwatch: Colors.red,
     appBarTheme: AppBarTheme(color: Colors.white, brightness: Brightness.light),
   );

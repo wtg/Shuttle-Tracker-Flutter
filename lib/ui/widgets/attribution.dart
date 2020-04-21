@@ -15,29 +15,29 @@ class _AttributionState extends State<Attribution> {
     var attribution = <Widget>[
       Text(
         'Map tiles: ',
-        style: TextStyle(fontSize: 11.0),
+        style: TextStyle(fontSize: 12.0),
       ),
       Hyperlink(url: 'https://stamen.com/', text: 'Stamen Design '),
       Text(
         '(',
-        style: TextStyle(fontSize: 11.0),
+        style: TextStyle(fontSize: 12.0),
       ),
       Hyperlink(
           url: 'https://creativecommons.org/licenses/by/3.0/',
           text: 'CC BY 3.0'),
       Text(
-        ') Data:',
-        style: TextStyle(fontSize: 11.0),
+        ') Data: ',
+        style: TextStyle(fontSize: 12.0),
       ),
       Hyperlink(url: 'https://www.openstreetmap.org/', text: 'OpenStreetMap '),
       Text(
         '(',
-        style: TextStyle(fontSize: 11.0),
+        style: TextStyle(fontSize: 12.0),
       ),
       Hyperlink(url: 'https://www.openstreetmap.org/copyright', text: 'ODbL'),
       Text(
         ')',
-        style: TextStyle(fontSize: 11.0),
+        style: TextStyle(fontSize: 12.0),
       ),
     ];
     return Align(

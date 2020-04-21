@@ -14,26 +14,22 @@ class _SettingsPageState extends State<SettingsPage> {
   bool isSwitched = false;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: Text('SettingsPage'),
-        ),
-        body: BlocBuilder<ThemeBloc, ThemeData>(
-          builder: (context, theme) {
-            return Center(
-                child: Padding(
-              padding: EdgeInsets.symmetric(vertical: 5.0),
-              child: Switch(
-                value: isSwitched,
-                onChanged: (value) {
-                  isSwitched = value;
-                  context.bloc<ThemeBloc>().add(ThemeEvent.toggle);
-                },
-                activeTrackColor: Colors.grey,
-                activeColor: Colors.red,
-              ),
-            ));
-          },
+    return Scaffold(body: BlocBuilder<ThemeBloc, ThemeData>(
+      builder: (context, theme) {
+        return Center(
+            child: Padding(
+          padding: EdgeInsets.symmetric(vertical: 5.0),
+          child: Switch(
+            value: isSwitched,
+            onChanged: (value) {
+              isSwitched = value;
+              context.bloc<ThemeBloc>().add(ThemeEvent.toggle);
+            },
+            activeTrackColor: Colors.grey,
+            activeColor: Colors.red,
+          ),
         ));
+      },
+    ));
   }
 }

@@ -7,8 +7,8 @@ import '../../models/shuttle_image.dart';
 import '../../models/shuttle_route.dart';
 import '../../models/shuttle_stop.dart';
 import '../../models/shuttle_vehicle.dart';
-import '../widgets/attribution.dart';
-import '../widgets/mapkey.dart';
+import '../../widgets/attribution.dart';
+import '../../widgets/mapkey.dart';
 
 class LoadedMap extends StatefulWidget {
   final List<dynamic> routes;

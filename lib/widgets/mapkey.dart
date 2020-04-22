@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../models/shuttle_image.dart';
+import './../models/shuttle_image.dart';
 
 import 'mapkey_row.dart';
 

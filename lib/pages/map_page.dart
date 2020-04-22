@@ -3,10 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/widgets.dart';
 
 import '../blocs/shuttle/shuttle_bloc.dart';
-import '../ui/states/error_map.dart';
-import '../ui/states/initial_map.dart';
-import '../ui/states/loaded_map.dart';
-import '../ui/states/loading_map.dart';
+import '../widgets/states/error_map.dart';
+import '../widgets/states/initial_map.dart';
+import '../widgets/states/loaded_map.dart';
+import '../widgets/states/loading_map.dart';
 
 class MapPage extends StatefulWidget {
   @override

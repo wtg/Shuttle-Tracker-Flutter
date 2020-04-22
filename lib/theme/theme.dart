@@ -28,7 +28,7 @@ ThemeData darkMode = ThemeData(
   primaryTextTheme: TextTheme(
     title: TextStyle(color: Colors.white),
   ),
-  canvasColor: Colors.black,
+  canvasColor: Colors.grey[900],
   primarySwatch: Colors.red,
   appBarTheme: AppBarTheme(color: Colors.black),
 );

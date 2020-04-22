@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_shuttletracker/blocs/theme/theme_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -19,32 +22,32 @@ class _SettingsPageState extends State<SettingsPage> {
         return Center(
             child: ListView(
           children: <Widget>[
-            Card(
-              color: Theme.of(context).backgroundColor,
-              child: Visibility(
-                maintainSize: true,
-                maintainAnimation: true,
-                maintainState: true,
-                visible: true,
-                child: ListTile(
-                  leading: Icon(
-                    Icons.settings_brightness,
-                    color: Theme.of(context).hoverColor,
-                  ),
-                  title: Text('Dark Mode',
-                      style: TextStyle(
-                          color: Theme.of(context).hoverColor, fontSize: 18)),
-                  trailing: Switch(
-                    value: isSwitched,
-                    onChanged: (value) {
-                      isSwitched = value;
-                      context.bloc<ThemeBloc>().add(ThemeEvent.toggle);
-                    },
-                    activeTrackColor: Colors.grey,
-                    activeColor: Colors.red,
-                  ),
-                ),
+            ListTile(
+              leading: Icon(
+                Icons.settings_brightness,
+                color: Theme.of(context).hoverColor,
               ),
+              title: Text('Dark Mode',
+                  style: TextStyle(
+                      color: Theme.of(context).hoverColor, fontSize: 18)),
+              trailing: Platform.isAndroid
+                  ? Switch(
+                      value: isSwitched,
+                      onChanged: (value) {
+                        isSwitched = value;
+                        context.bloc<ThemeBloc>().add(ThemeEvent.toggle);
+                      },
+                      activeTrackColor: Colors.grey,
+                      activeColor: Colors.red,
+                    )
+                  : CupertinoSwitch(
+                      value: isSwitched,
+                      onChanged: (value) {
+                        isSwitched = value;
+                        context.bloc<ThemeBloc>().add(ThemeEvent.toggle);
+                      },
+                      activeColor: Colors.red,
+                    ),
             ),
           ],
         ));

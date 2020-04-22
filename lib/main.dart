@@ -45,7 +45,7 @@ class MyAppState extends State<MyApp> {
             statusBarColor: theme.bottomAppBarColor, // status bar color
             statusBarIconBrightness: theme.accentColorBrightness,
           ));
-          return Platform.isAndroid
+          return Platform.isIOS
               ? IOSCupertinoApp(theme: theme, pageOptions: _pageOptions)
               : AndroidMaterialApp(theme: theme, pageOptions: _pageOptions);
         }));

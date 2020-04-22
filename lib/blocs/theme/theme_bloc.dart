@@ -8,8 +8,6 @@ import '../../theme/theme.dart' as theme;
 enum ThemeEvent { toggle }
 
 class ThemeBloc extends Bloc<ThemeEvent, ThemeData> {
-
-
   @override
   ThemeData get initialState => theme.lightMode;
 

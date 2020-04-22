@@ -124,8 +124,7 @@ class _LoadedMapState extends State<LoadedMap> {
 
   @override
   Widget build(BuildContext context) {
-    var isDarkMode =
-        Theme.of(context).bottomAppBarColor == Colors.black;
+    var isDarkMode = Theme.of(context).bottomAppBarColor == Colors.black;
     return Stack(children: <Widget>[
       Column(
         children: [

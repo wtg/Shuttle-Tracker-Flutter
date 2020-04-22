@@ -19,7 +19,6 @@ class _SettingsPageState extends State<SettingsPage> {
         return Center(
             child: ListView(
           children: <Widget>[
-            
             Card(
               color: Theme.of(context).backgroundColor,
               child: Visibility(
@@ -47,7 +46,6 @@ class _SettingsPageState extends State<SettingsPage> {
                 ),
               ),
             ),
-            
           ],
         ));
       },

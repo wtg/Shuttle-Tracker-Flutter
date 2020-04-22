@@ -43,7 +43,7 @@ class _IOSCupertinoAppState extends State<IOSCupertinoApp> {
   Widget build(BuildContext context) {
     return Theme(
       data: widget.theme,
-          child: CupertinoApp(
+      child: CupertinoApp(
         builder: (context, widget) => ResponsiveWrapper.builder(
           BouncingScrollWrapper.builder(context, widget),
           maxWidth: 1200,
@@ -51,16 +51,20 @@ class _IOSCupertinoAppState extends State<IOSCupertinoApp> {
           defaultScale: true,
           breakpoints: [
             ResponsiveBreakpoint(breakpoint: 450, name: MOBILE),
-            ResponsiveBreakpoint(breakpoint: 800, name: TABLET, autoScale: true),
-            ResponsiveBreakpoint(breakpoint: 1000, name: TABLET, autoScale: true),
+            ResponsiveBreakpoint(
+                breakpoint: 800, name: TABLET, autoScale: true),
+            ResponsiveBreakpoint(
+                breakpoint: 1000, name: TABLET, autoScale: true),
             ResponsiveBreakpoint(breakpoint: 1200, name: DESKTOP),
             ResponsiveBreakpoint(breakpoint: 2460, name: "4K", autoScale: true),
           ],
         ),
         home: SafeArea(
-          top: false,
+          //top: false, //TODO: THIS COULD CAUSE UI ISSUES ON IOS
           child: CupertinoTabScaffold(
             tabBar: CupertinoTabBar(
+              activeColor: Colors.red,
+              backgroundColor: widget.theme.appBarTheme.color,
               items: _items,
               currentIndex: _selectedTab,
               onTap: (index) {
@@ -74,6 +78,7 @@ class _IOSCupertinoAppState extends State<IOSCupertinoApp> {
                 builder: (context) {
                   return CupertinoPageScaffold(
                       navigationBar: CupertinoNavigationBar(
+                        backgroundColor: widget.theme.appBarTheme.color,
                         middle: Image.asset(
                           'assets/img/logo.png',
                           height: 40,

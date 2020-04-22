@@ -11,20 +11,18 @@ part 'shuttle_state.dart';
 
 /// ShuttleBloc class
 class ShuttleBloc extends Bloc<ShuttleEvent, ShuttleState> {
+  bool isLoading = true;
+  LatLng location = LatLng(0, 0);
+
   /// Initialization of repository class
   final ShuttleRepository repository;
+
   List<dynamic> routes = [];
   List<dynamic> stops = [];
   List<dynamic> updates = [];
-  LatLng location = LatLng(0, 0);
-
-  bool isLoading = true;
 
   /// ShuttleBloc named constructor
   ShuttleBloc({this.repository});
-
-  @override
-  ShuttleState get initialState => ShuttleInitial();
 
   @override
   Stream<ShuttleState> mapEventToState(
@@ -57,4 +55,7 @@ class ShuttleBloc extends Bloc<ShuttleEvent, ShuttleState> {
       await Future.delayed(const Duration(seconds: 3));
     }
   }
+
+  @override
+  ShuttleState get initialState => ShuttleInitial();
 }

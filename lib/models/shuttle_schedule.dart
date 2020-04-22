@@ -1,10 +1,10 @@
 class ShuttleSchedule {
+  int endDay;
+  String endTime;
   int id;
   int routeId;
   int startDay;
   String startTime;
-  int endDay;
-  String endTime;
 
   ShuttleSchedule(
       {this.id,

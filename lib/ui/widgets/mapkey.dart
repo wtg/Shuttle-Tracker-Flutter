@@ -48,7 +48,7 @@ class _MapkeyState extends State<Mapkey> {
               boxShadow: [
                 BoxShadow(
                     color: Theme.of(context).hoverColor,
-                    offset: Offset(0.0, 0.5))
+                    offset: Offset(0.0, 1.0))
               ]),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

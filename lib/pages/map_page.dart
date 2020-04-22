@@ -14,8 +14,8 @@ class MapPage extends StatefulWidget {
 }
 
 class _MapPageState extends State<MapPage> {
-  ShuttleBloc shuttleBloc;
   int i = 0;
+  ShuttleBloc shuttleBloc;
 
   @override
   Widget build(BuildContext context) {

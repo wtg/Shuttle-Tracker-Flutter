@@ -4,7 +4,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_shuttletracker/ui/widgets/shuttle_drawer.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:responsive_framework/utils/bouncing_scroll_behavior.dart';
 
@@ -34,6 +33,21 @@ class MyAppState extends State<MyApp> {
     ),
     SchedulesPage(),
     SettingsPage(),
+  ];
+
+  final _items = [
+    BottomNavigationBarItem(
+      icon: Icon(Icons.near_me),
+      title: Text('Map'),
+    ),
+    BottomNavigationBarItem(
+      icon: Icon(Icons.list),
+      title: Text('Schedules'),
+    ),
+    BottomNavigationBarItem(
+      icon: Icon(Icons.settings),
+      title: Text('Settings'),
+    )
   ];
 
   @override
@@ -78,13 +92,17 @@ class MyAppState extends State<MyApp> {
                     width: 40,
                   ),
                 ),
-                drawer: ShuttleDrawer(
-                  onTap: (context, i) {
+                bottomNavigationBar: BottomNavigationBar(
+                  type: BottomNavigationBarType.fixed,
+                  selectedItemColor: Colors.red,
+                  unselectedItemColor: Colors.grey,
+                  currentIndex: _selectedTab,
+                  onTap: (index) {
                     setState(() {
-                      _selectedTab = i;
-                      Navigator.pop(context);
+                      _selectedTab = index;
                     });
                   },
+                  items: _items,
                 ),
                 body: IndexedStack(
                   index: _selectedTab,

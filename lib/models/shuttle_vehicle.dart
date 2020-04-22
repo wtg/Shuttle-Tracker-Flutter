@@ -4,14 +4,23 @@ import 'shuttle_image.dart';
 import 'shuttle_point.dart';
 
 class ShuttleVehicle extends ShuttlePoint {
-  // ID of the update
-  int id;
+  /// The color of the shuttle on the map
+  Color color;
 
-  /// Not super sure what this is used for
-  String trackerId;
+  /// Timestamp of when shuttle was recieved
+  String created;
 
   /// Heading in degrees for the shuttle
   num heading;
+
+  /// ID of the update
+  int id;
+
+  /// The SVG image displayed on the map
+  ShuttleImage image;
+
+  /// The route ID that the shuttle runs on
+  int routeId;
 
   /// Speed of the shuttle
   num speed;
@@ -19,20 +28,11 @@ class ShuttleVehicle extends ShuttlePoint {
   /// Timestamp of when this updated was sent
   String time;
 
-  /// Timestamp of when shuttle was recieved
-  String created;
+  /// Not super sure what this is used for
+  String trackerId;
 
   /// ID associated with the shuttle
   int vehicleId;
-
-  /// The route ID that the shuttle runs on
-  int routeId;
-
-  /// The color of the shuttle on the map
-  Color color;
-
-  /// The SVG image displayed on the map
-  ShuttleImage image;
 
   /// Uses a super constructor to define lat/lng attributes
   ShuttleVehicle(
@@ -48,13 +48,6 @@ class ShuttleVehicle extends ShuttlePoint {
       this.routeId})
       : super(latitude: 0.0, longitude: 0.0);
 
-  Color get getColor => color;
-
-  set setColor(Color color) {
-    this.color = color;
-    image = ShuttleImage(svgColor: color);
-  }
-
   ShuttleVehicle.fromJson(Map<String, dynamic> json) : super.fromJson(json) {
     latitude = json['latitude'];
     longitude = json['longitude'];
@@ -66,5 +59,12 @@ class ShuttleVehicle extends ShuttlePoint {
     created = json['created'];
     vehicleId = json['vehicle_id'];
     routeId = json['route_id'];
+  }
+
+  Color get getColor => color;
+
+  set setColor(Color color) {
+    this.color = color;
+    image = ShuttleImage(svgColor: color);
   }
 }

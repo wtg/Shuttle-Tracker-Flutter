@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class ShuttleImage {
-  String svgString;
   Color svgColor;
+  String svgString;
 
   ShuttleImage({this.svgColor}) {
     var svgInput =

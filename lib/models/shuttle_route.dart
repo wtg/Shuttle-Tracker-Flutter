@@ -7,11 +7,14 @@ import 'shuttle_point.dart';
 import 'shuttle_schedule.dart';
 
 class ShuttleRoute {
-  /// Id for this route
-  int id;
+  /// Bool to determine if route is active at current period of time
+  bool active;
 
-  /// Name of this route
-  String name;
+  /// Hex color of route
+  Color color;
+
+  /// Timestamp for when route was created
+  String created;
 
   /// Description of this route
   String desc;
@@ -19,29 +22,26 @@ class ShuttleRoute {
   /// Bool to determine if route is enabled for semester
   bool enabled;
 
-  /// Hex color of route
-  Color color;
+  /// Id for this route
+  int id;
 
-  /// Width of route outline on map
-  num width;
-
-  /// All stop ids associated with route
-  List<int> stopIds;
-
-  /// Timestamp for when route was created
-  String created;
-
-  /// Timestamp for when route was last updated
-  String updated;
+  /// Name of this route
+  String name;
 
   /// All points required to create the route with respective lat/lng values
   List<LatLng> points;
 
-  /// Bool to determine if route is active at current period of time
-  bool active;
-
   /// List of shuttles currently associated with this route
   List<ShuttleSchedule> schedules;
+
+  /// All stop ids associated with route
+  List<int> stopIds;
+
+  /// Timestamp for when route was last updated
+  String updated;
+
+  /// Width of route outline on map
+  num width;
 
   ShuttleRoute({
     this.id,

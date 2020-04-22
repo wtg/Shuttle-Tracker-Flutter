@@ -17,17 +17,36 @@ class _SettingsPageState extends State<SettingsPage> {
     return Scaffold(body: BlocBuilder<ThemeBloc, ThemeData>(
       builder: (context, theme) {
         return Center(
-            child: Padding(
-          padding: EdgeInsets.symmetric(vertical: 5.0),
-          child: Switch(
-            value: isSwitched,
-            onChanged: (value) {
-              isSwitched = value;
-              context.bloc<ThemeBloc>().add(ThemeEvent.toggle);
-            },
-            activeTrackColor: Colors.grey,
-            activeColor: Colors.red,
-          ),
+            child: ListView(
+          children: <Widget>[
+            Card(
+              color: Theme.of(context).backgroundColor,
+              child: Visibility(
+                maintainSize: true,
+                maintainAnimation: true,
+                maintainState: true,
+                visible: true,
+                child: ListTile(
+                  leading: Icon(
+                    Icons.settings_brightness,
+                    color: Theme.of(context).hoverColor,
+                  ),
+                  title: Text('Dark Mode',
+                      style: TextStyle(
+                          color: Theme.of(context).hoverColor, fontSize: 18)),
+                  trailing: Switch(
+                    value: isSwitched,
+                    onChanged: (value) {
+                      isSwitched = value;
+                      context.bloc<ThemeBloc>().add(ThemeEvent.toggle);
+                    },
+                    activeTrackColor: Colors.grey,
+                    activeColor: Colors.red,
+                  ),
+                ),
+              ),
+            ),
+          ],
         ));
       },
     ));

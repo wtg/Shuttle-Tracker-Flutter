@@ -1,20 +1,20 @@
 import 'shuttle_point.dart';
 
 class ShuttleStop extends ShuttlePoint {
+  /// Timestamp of when stop was created
+  String created;
+
+  /// Brief description of the stop
+  String description;
+
   /// ID associated with stop
   int id;
 
   /// Name of the stop
   String name;
 
-  /// Timestamp of when stop was created
-  String created;
-
   /// Timestamp ofr when stop was updated
   String updated;
-
-  /// Brief description of the stop
-  String description;
 
   /// Uses a super constructor to define lat/lng attributes
   ShuttleStop(

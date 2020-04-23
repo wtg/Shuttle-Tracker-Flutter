@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_shuttletracker/blocs/theme/theme_bloc.dart';
+import '../blocs/theme/theme_bloc.dart';
 import './../models/shuttle_image.dart';
 
 import 'mapkey_row.dart';

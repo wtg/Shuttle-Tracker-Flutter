@@ -6,7 +6,7 @@ import 'package:responsive_framework/utils/bouncing_scroll_behavior.dart';
 class IOSCupertinoApp extends StatefulWidget {
   final ThemeData theme;
 
-  final pageOptions;
+  final List<Widget> pageOptions;
 
   IOSCupertinoApp({this.theme, this.pageOptions});
 

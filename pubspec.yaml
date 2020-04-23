@@ -17,6 +17,7 @@ environment:
   sdk: ">=2.1.0 <3.0.0"
 
 dependencies:
+  flutter_native_splash: ^0.1.9
   flutter_platform_widgets: ^0.32.5
   flutter_widget_from_html: ^0.3.2+2
   observable: ^0.22.2
@@ -46,6 +47,10 @@ flutter_icons:
   android: "launcher_icon" 
   ios: true
   image_path: "assets/img/app_icon.png"
+
+flutter_native_splash:
+  image: "assets/img/app_icon.png"
+  color: "ffffff"
 
 
 # For information on the generic Dart part of this file, see the

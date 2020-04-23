@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+
 import 'blocs/shuttle/shuttle_bloc.dart';
 import 'blocs/theme/theme_bloc.dart';
 import 'data/repository/shuttle_repository.dart';
@@ -18,9 +19,8 @@ void main() => runApp(MyApp());
 
 class MyApp extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() {
-    return MyAppState();
-  }
+  State<StatefulWidget> createState() => MyAppState();
+  
 }
 
 class MyAppState extends State<MyApp> {

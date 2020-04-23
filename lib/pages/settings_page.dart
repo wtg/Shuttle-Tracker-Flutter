@@ -25,11 +25,10 @@ class _SettingsPageState extends State<SettingsPage> {
             ListTile(
               leading: Icon(
                 Icons.settings_brightness,
-                color: Theme.of(context).hoverColor,
+                color: theme.hoverColor,
               ),
               title: Text('Dark Mode',
-                  style: TextStyle(
-                      color: Theme.of(context).hoverColor, fontSize: 18)),
+                  style: TextStyle(color: theme.hoverColor, fontSize: 18)),
               trailing: Platform.isAndroid
                   ? Switch(
                       value: isSwitched,

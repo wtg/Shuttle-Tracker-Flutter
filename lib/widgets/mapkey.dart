@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_shuttletracker/blocs/theme/theme_bloc.dart';
 import './../models/shuttle_image.dart';
 
 import 'mapkey_row.dart';
@@ -32,30 +34,30 @@ class _MapkeyState extends State<Mapkey> {
       text: ' Shuttle Stop',
     ));
     //print("Number of rows in mapkey: ${mapkeyRows.length}\n\n");
-    return Positioned(
-      bottom: 40,
-      left: 10,
-      child: Opacity(
-        opacity: 0.90,
-        child: Container(
-          decoration: BoxDecoration(
-              color: Theme.of(context).backgroundColor,
-              border: Border.all(
-                width: 5,
-                color: Theme.of(context).backgroundColor,
-              ),
-              borderRadius: BorderRadius.circular(5),
-              boxShadow: [
-                BoxShadow(
-                    color: Theme.of(context).hoverColor,
-                    offset: Offset(0.0, 0.5))
-              ]),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: mapkeyRows,
+    return BlocBuilder<ThemeBloc, ThemeData>(builder: (context, theme) {
+      return Positioned(
+        bottom: 40,
+        left: 10,
+        child: Opacity(
+          opacity: 0.90,
+          child: Container(
+            decoration: BoxDecoration(
+                color: theme.backgroundColor,
+                border: Border.all(
+                  width: 5,
+                  color: theme.backgroundColor,
+                ),
+                borderRadius: BorderRadius.circular(5),
+                boxShadow: [
+                  BoxShadow(color: theme.hoverColor, offset: Offset(0.0, 0.5))
+                ]),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: mapkeyRows,
+            ),
           ),
         ),
-      ),
-    );
+      );
+    });
   }
 }

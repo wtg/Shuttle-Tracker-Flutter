@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_shuttletracker/blocs/theme/theme_bloc.dart';
 import 'package:latlong/latlong.dart';
 
 import '../../models/shuttle_image.dart';
@@ -38,7 +40,7 @@ class LoadedMap extends StatefulWidget {
 class _LoadedMapState extends State<LoadedMap> with TickerProviderStateMixin {
   MapController mapController = MapController();
 
-    void _animatedMapMove(LatLng destLocation, double destZoom) {
+  void _animatedMapMove(LatLng destLocation, double destZoom) {
     // Create some tweens. These serve to split up the transition from one location to another.
     // In our case, we want to split the transition be<tween> our current map center and the destination.
     final _latTween = Tween<double>(
@@ -108,7 +110,7 @@ class _LoadedMapState extends State<LoadedMap> with TickerProviderStateMixin {
             builder: (ctx) => Container(
                 child: GestureDetector(
                     onTap: () {
-                      _animatedMapMove(stop.getLatLng, 18.0);
+                      _animatedMapMove(stop.getLatLng, 15.0);
                       print('Stop ${stop.name} clicked on');
                     },
                     child: Image.asset('assets/img/circle.png')))));
@@ -156,44 +158,50 @@ class _LoadedMapState extends State<LoadedMap> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    var isDarkMode = Theme.of(context).bottomAppBarColor == Colors.black;
-    return Stack(children: <Widget>[
-      Column(
-        children: [
-          /// Map
-          Flexible(
-            child: FlutterMap(
-              mapController: mapController,
-              options: MapOptions(
-                center: LatLng(42.731, -73.6767),
-                zoom: 14,
-                maxZoom: 16, // max you can zoom in
-                minZoom: 14, // min you can zoom out
-              ),
-              layers: [
-                TileLayerOptions(
-                  backgroundColor: Theme.of(context).bottomAppBarColor,
-                  urlTemplate:
-                      isDarkMode ? LoadedMap.darkLink : LoadedMap.lightLink,
-                  subdomains: ['a', 'b', 'c'],
-                  tileProvider: CachedNetworkTileProvider(),
+    return BlocBuilder<ThemeBloc, ThemeData>(
+      builder: (context, theme) {
+        var isDarkMode = theme.bottomAppBarColor == Colors.black;
+        return Stack(children: <Widget>[
+          Column(
+            children: [
+              /// Map
+              Flexible(
+                child: FlutterMap(
+                  mapController: mapController,
+                  options: MapOptions(
+                    center: LatLng(42.731, -73.6767),
+                    zoom: 14,
+                    maxZoom: 16, // max you can zoom in
+                    minZoom: 14, // min you can zoom out
+                  ),
+                  layers: [
+                    TileLayerOptions(
+                      backgroundColor: theme.bottomAppBarColor,
+                      urlTemplate:
+                          isDarkMode ? LoadedMap.darkLink : LoadedMap.lightLink,
+                      subdomains: ['a', 'b', 'c'],
+                      tileProvider: CachedNetworkTileProvider(),
+                    ),
+                    PolylineLayerOptions(
+                        polylines: _createRoutes(widget.routes, widget._ids,
+                            widget._mapkey, widget._colors)),
+                    MarkerLayerOptions(markers: _createStops(widget.stops)),
+                    MarkerLayerOptions(
+                        markers:
+                            _createUpdates(widget.updates, widget._colors)),
+                    MarkerLayerOptions(
+                        markers: _createLocation(widget.location)),
+                  ],
                 ),
-                PolylineLayerOptions(
-                    polylines: _createRoutes(widget.routes, widget._ids,
-                        widget._mapkey, widget._colors)),
-                MarkerLayerOptions(markers: _createStops(widget.stops)),
-                MarkerLayerOptions(
-                    markers: _createUpdates(widget.updates, widget._colors)),
-                MarkerLayerOptions(markers: _createLocation(widget.location)),
-              ],
-            ),
+              ),
+            ],
           ),
-        ],
-      ),
-      Attribution(),
-      Mapkey(
-        mapkey: widget._mapkey,
-      ),
-    ]);
+          Attribution(),
+          Mapkey(
+            mapkey: widget._mapkey,
+          ),
+        ]);
+      },
+    );
   }
 }

@@ -43,6 +43,7 @@ class _AndroidMaterialAppState extends State<AndroidMaterialApp> {
             ),
           ),
           bottomNavigationBar: BottomNavigationBar(
+            backgroundColor: widget.theme.appBarTheme.color,
             type: BottomNavigationBarType.fixed,
             selectedItemColor: Colors.red,
             unselectedItemColor: Colors.grey,

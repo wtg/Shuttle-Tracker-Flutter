@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_shuttletracker/blocs/theme/theme_bloc.dart';
 import 'package:latlong/latlong.dart';
 
+import '../../blocs/theme/theme_bloc.dart';
 import '../../models/shuttle_image.dart';
 import '../../models/shuttle_route.dart';
 import '../../models/shuttle_stop.dart';
@@ -101,16 +101,26 @@ class _LoadedMapState extends State<LoadedMap> with TickerProviderStateMixin {
       var stop = ShuttleStop.fromJson(stopJSON);
       if (widget._ids.contains(stop.id)) {
         markers.add(Marker(
+            width: 35.0,
+            height: 35.0,
             point: stop.getLatLng,
-            width: 12.0,
-            height: 12.0,
             builder: (ctx) => Container(
                 child: GestureDetector(
                     onTap: () {
                       _animatedMapMove(stop.getLatLng, 15.0);
                       print('Stop ${stop.name} clicked on');
                     },
-                    child: Image.asset('assets/img/circle.png')))));
+                    child: Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            width: 12,
+                            style: BorderStyle.none
+                          ),
+                          shape: BoxShape.circle
+                        ),
+                        child: Image.asset(
+                          'assets/img/circle.png',
+                        ))))));
       }
     }
     //print("Number of stops on map: ${markers.length}");
@@ -166,6 +176,8 @@ class _LoadedMapState extends State<LoadedMap> with TickerProviderStateMixin {
                 child: FlutterMap(
                   mapController: mapController,
                   options: MapOptions(
+                    nePanBoundary: LatLng(42.78, -73.63),
+                    swPanBoundary: LatLng(42.68, -73.71),
                     center: LatLng(42.731, -73.6767),
                     zoom: 14,
                     maxZoom: 16, // max you can zoom in
@@ -182,10 +194,10 @@ class _LoadedMapState extends State<LoadedMap> with TickerProviderStateMixin {
                     PolylineLayerOptions(
                         polylines: _createRoutes(widget.routes, widget._ids,
                             widget._mapkey, widget._colors)),
-                    MarkerLayerOptions(markers: _createStops(widget.stops)),
                     MarkerLayerOptions(
                         markers:
                             _createUpdates(widget.updates, widget._colors)),
+                    MarkerLayerOptions(markers: _createStops(widget.stops)),
                     MarkerLayerOptions(
                         markers: _createLocation(widget.location)),
                   ],

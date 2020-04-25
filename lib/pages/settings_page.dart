@@ -1,9 +1,9 @@
-import 'dart:io';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_shuttletracker/blocs/theme/theme_bloc.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../blocs/theme/theme_bloc.dart';
 
 class SettingsPage extends StatefulWidget {
   SettingsPage({Key key, this.title}) : super(key: key);
@@ -23,31 +23,22 @@ class _SettingsPageState extends State<SettingsPage> {
             child: ListView(
           children: <Widget>[
             ListTile(
-              leading: Icon(
-                Icons.settings_brightness,
-                color: theme.hoverColor,
-              ),
-              title: Text('Dark Mode',
-                  style: TextStyle(color: theme.hoverColor, fontSize: 18)),
-              trailing: Platform.isAndroid
-                  ? Switch(
-                      value: isSwitched,
-                      onChanged: (value) {
-                        isSwitched = value;
-                        context.bloc<ThemeBloc>().add(ThemeEvent.toggle);
-                      },
-                      activeTrackColor: Colors.grey,
-                      activeColor: Colors.red,
-                    )
-                  : CupertinoSwitch(
-                      value: isSwitched,
-                      onChanged: (value) {
-                        isSwitched = value;
-                        context.bloc<ThemeBloc>().add(ThemeEvent.toggle);
-                      },
-                      activeColor: Colors.red,
-                    ),
-            ),
+                leading: Icon(
+                  Icons.settings_brightness,
+                  color: theme.hoverColor,
+                ),
+                title: Text('Dark Mode',
+                    style: TextStyle(color: theme.hoverColor, fontSize: 18)),
+                trailing: PlatformSwitch(
+                  value: isSwitched,
+                  onChanged: (value) {
+                    isSwitched = value;
+                    context.bloc<ThemeBloc>().add(ThemeEvent.toggle);
+                  },
+                  activeColor: Colors.red,
+                  android: (_) =>
+                      MaterialSwitchData(activeTrackColor: Colors.grey),
+                )),
           ],
         ));
       },

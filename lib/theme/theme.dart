@@ -2,33 +2,33 @@ import 'package:flutter/material.dart';
 
 ThemeData lightMode = ThemeData(
   accentColor: Colors.red,
-  hoverColor: Colors.black,
   accentColorBrightness: Brightness.dark,
-  bottomAppBarColor: Colors.white,
+  appBarTheme: AppBarTheme(color: Colors.white, brightness: Brightness.light),
   backgroundColor: Colors.white,
-  textTheme: TextTheme(
-    body1: TextStyle(color: Colors.black),
-  ),
+  bottomAppBarColor: Colors.white,
+  hoverColor: Colors.black,
   primaryTextTheme: TextTheme(
     title: TextStyle(color: Colors.black),
   ),
   primarySwatch: Colors.red,
-  appBarTheme: AppBarTheme(color: Colors.white, brightness: Brightness.light),
+  textTheme: TextTheme(
+    body1: TextStyle(color: Colors.black),
+  ),
 );
 
 ThemeData darkMode = ThemeData(
   accentColor: Colors.red,
   accentColorBrightness: Brightness.light,
-  hoverColor: Colors.white,
+  appBarTheme: AppBarTheme(color: Colors.black),
   backgroundColor: Colors.grey[900],
   bottomAppBarColor: Colors.black,
-  textTheme: TextTheme(
-    body1: TextStyle(color: Colors.white),
-  ),
+  canvasColor: Colors.grey[900],
+  hoverColor: Colors.white,
   primaryTextTheme: TextTheme(
     title: TextStyle(color: Colors.white),
   ),
-  canvasColor: Colors.grey[900],
   primarySwatch: Colors.red,
-  appBarTheme: AppBarTheme(color: Colors.black),
+  textTheme: TextTheme(
+    body1: TextStyle(color: Colors.white),
+  ),
 );

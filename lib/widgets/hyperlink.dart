@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_shuttletracker/blocs/theme/theme_bloc.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Hyperlink extends StatelessWidget {
@@ -17,12 +19,14 @@ class Hyperlink extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      child: Text(
-        text,
-        style: TextStyle(color: Colors.blue, fontSize: 12.0),
-      ),
-      onTap: _launchURL,
-    );
+    return BlocBuilder<ThemeBloc, ThemeData>(builder: (context, theme) {
+      return InkWell(
+        child: Text(
+          text,
+          style: TextStyle(color: Colors.blue, fontSize: 12.0),
+        ),
+        onTap: _launchURL,
+      );
+    });
   }
 }

@@ -60,7 +60,8 @@ class _IOSCupertinoAppState extends State<IOSCupertinoApp> {
           ],
         ),
         home: SafeArea(
-          //top: false, //TODO: THIS COULD CAUSE UI ISSUES ON IOS
+          top: false,
+          bottom: false,
           child: CupertinoTabScaffold(
             tabBar: CupertinoTabBar(
               activeColor: Colors.red,

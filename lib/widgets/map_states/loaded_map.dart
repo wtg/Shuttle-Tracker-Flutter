@@ -41,7 +41,6 @@ class _LoadedMapState extends State<LoadedMap> with TickerProviderStateMixin {
   MapController mapController = MapController();
 
   void _animatedMapMove(LatLng destLocation, double destZoom) {
-
     final _latTween = Tween<double>(
         begin: mapController.center.latitude, end: destLocation.latitude);
     final _lngTween = Tween<double>(

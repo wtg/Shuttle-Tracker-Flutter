@@ -14,35 +14,36 @@ class Attribution extends StatefulWidget {
 class _AttributionState extends State<Attribution> {
   @override
   Widget build(BuildContext context) {
-    var attribution = <Widget>[
-      Text(
-        'Map tiles: ',
-        style: TextStyle(fontSize: 12.0),
-      ),
-      Hyperlink(url: 'https://stamen.com/', text: 'Stamen Design '),
-      Text(
-        '(',
-        style: TextStyle(fontSize: 12.0),
-      ),
-      Hyperlink(
-          url: 'https://creativecommons.org/licenses/by/3.0/',
-          text: 'CC BY 3.0'),
-      Text(
-        ') Data: ',
-        style: TextStyle(fontSize: 12.0),
-      ),
-      Hyperlink(url: 'https://www.openstreetmap.org/', text: 'OpenStreetMap '),
-      Text(
-        '(',
-        style: TextStyle(fontSize: 12.0),
-      ),
-      Hyperlink(url: 'https://www.openstreetmap.org/copyright', text: 'ODbL'),
-      Text(
-        ') ',
-        style: TextStyle(fontSize: 12.0),
-      ),
-    ];
     return BlocBuilder<ThemeBloc, ThemeData>(builder: (context, theme) {
+      var attribution = <Widget>[
+        Text(
+          'Map tiles: ',
+          style: theme.textTheme.caption,
+        ),
+        Hyperlink(url: 'https://stamen.com/', text: 'Stamen Design '),
+        Text(
+          '(',
+          style: theme.textTheme.caption,
+        ),
+        Hyperlink(
+            url: 'https://creativecommons.org/licenses/by/3.0/',
+            text: 'CC BY 3.0'),
+        Text(
+          ') Data: ',
+          style: theme.textTheme.caption,
+        ),
+        Hyperlink(
+            url: 'https://www.openstreetmap.org/', text: 'OpenStreetMap '),
+        Text(
+          '(',
+          style: theme.textTheme.caption,
+        ),
+        Hyperlink(url: 'https://www.openstreetmap.org/copyright', text: 'ODbL'),
+        Text(
+          ') ',
+          style: theme.textTheme.caption,
+        ),
+      ];
       return Align(
         alignment: Alignment.bottomRight,
         child: Opacity(

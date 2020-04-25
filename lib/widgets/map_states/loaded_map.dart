@@ -169,7 +169,7 @@ class _LoadedMapState extends State<LoadedMap> with TickerProviderStateMixin {
                     center: LatLng(42.731, -73.6767),
                     zoom: 14,
                     maxZoom: 16, // max you can zoom in
-                    minZoom: 14, // min you can zoom out
+                    minZoom: 13, // min you can zoom out
                   ),
                   layers: [
                     TileLayerOptions(

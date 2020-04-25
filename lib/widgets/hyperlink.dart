@@ -23,7 +23,8 @@ class Hyperlink extends StatelessWidget {
       return InkWell(
         child: Text(
           text,
-          style: TextStyle(color: Colors.blue, fontSize: 12.0),
+          style: TextStyle(
+              color: Colors.blue, fontSize: theme.textTheme.caption.fontSize),
         ),
         onTap: _launchURL,
       );

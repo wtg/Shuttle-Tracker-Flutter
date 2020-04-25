@@ -47,7 +47,7 @@ class _IOSCupertinoAppState extends State<IOSCupertinoApp> {
         builder: (context, widget) => ResponsiveWrapper.builder(
           BouncingScrollWrapper.builder(context, widget),
           maxWidth: 1200,
-          minWidth: 430,
+          minWidth: 370,
           defaultScale: true,
           breakpoints: [
             ResponsiveBreakpoint(breakpoint: 450, name: MOBILE),
@@ -79,11 +79,12 @@ class _IOSCupertinoAppState extends State<IOSCupertinoApp> {
                 builder: (context) {
                   return CupertinoPageScaffold(
                       navigationBar: CupertinoNavigationBar(
+                        padding: EdgeInsetsDirectional.only(bottom: 10),
                         backgroundColor: widget.theme.appBarTheme.color,
                         middle: Image.asset(
                           'assets/img/logo.png',
-                          height: 40,
-                          width: 40,
+                          height: 50,
+                          width: 50,
                         ),
                       ),
                       child: widget.pageOptions[i]);

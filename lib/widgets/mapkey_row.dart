@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_shuttletracker/blocs/theme/theme_bloc.dart';
 
 class MapkeyRow extends StatelessWidget {
   final Widget widget;
@@ -8,17 +10,20 @@ class MapkeyRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: <Widget>[
-        Container(
-          width: 13,
-          height: 13,
-          child: widget,
-        ),
-        Text(
-          text,
-        ),
-      ],
-    );
+    return BlocBuilder<ThemeBloc, ThemeData>(builder: (context, theme) {
+      return Row(
+        children: <Widget>[
+          Container(
+            width: 13,
+            height: 13,
+            child: widget,
+          ),
+          Text(
+            text,
+            style: theme.textTheme.body1,
+          ),
+        ],
+      );
+    });
   }
 }

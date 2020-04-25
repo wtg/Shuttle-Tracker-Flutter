@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class AndroidMaterialApp extends StatefulWidget {
   final ThemeData theme;
@@ -29,6 +30,13 @@ class _AndroidMaterialAppState extends State<AndroidMaterialApp> {
   ];
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      systemNavigationBarColor: widget.theme.bottomAppBarColor,
+      systemNavigationBarIconBrightness:
+          widget.theme.accentColorBrightness, //android navigation bar color
+      statusBarColor: widget.theme.bottomAppBarColor, // status bar color
+      statusBarIconBrightness: widget.theme.accentColorBrightness,
+    ));
     return MaterialApp(
       theme: widget.theme,
       home: SafeArea(

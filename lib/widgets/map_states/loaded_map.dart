@@ -28,9 +28,11 @@ class LoadedMap extends StatefulWidget {
   final List<int> _ids = [];
 
   static const darkLink =
-      'https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png';
-  static const lightLink = 'http://tile.stamen.com/toner-lite/{z}/{x}/{y}.png';
+      'https://api.mapbox.com/styles/v1/samuelobe/ck9hc8kcy2xqx1ipcwzold0rt/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1Ijoic2FtdWVsb2JlIiwiYSI6ImNrOWMxOHRybDAwZHUzb283Nm9taGJ5eDcifQ.gc8I0E7VfGaLx6yTZh1xDA';
+  static const lightLink = 'https://api.mapbox.com/styles/v1/samuelobe/ck9c1bltr04gp1ipofh3bdpos/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1Ijoic2FtdWVsb2JlIiwiYSI6ImNrOWMxOHRybDAwZHUzb283Nm9taGJ5eDcifQ.gc8I0E7VfGaLx6yTZh1xDA';
 
+  static const darkKey = 'pk.eyJ1Ijoic2FtdWVsb2JlIiwiYSI6ImNrOWMxOHRybDAwZHUzb283Nm9taGJ5eDcifQ.gc8I0E7VfGaLx6yTZh1xDA';
+  static const lightKey = 'pk.eyJ1Ijoic2FtdWVsb2JlIiwiYSI6ImNrOWMxOHRybDAwZHUzb283Nm9taGJ5eDcifQ.gc8I0E7VfGaLx6yTZh1xDA';
   LoadedMap({this.routes, this.location, this.stops, this.updates});
 
   @override
@@ -185,7 +187,11 @@ class _LoadedMapState extends State<LoadedMap> with TickerProviderStateMixin {
                       backgroundColor: theme.bottomAppBarColor,
                       urlTemplate:
                           isDarkMode ? LoadedMap.darkLink : LoadedMap.lightLink,
-                      subdomains: ['a', 'b', 'c'],
+                      additionalOptions: {
+                        'accessToken': isDarkMode ? LoadedMap.darkKey : LoadedMap.lightKey,
+                        'id': 'mapbox.streets',
+                      },
+                      //subdomains: ['a', 'b', 'c'],
                       tileProvider: CachedNetworkTileProvider(),
                     ),
                     PolylineLayerOptions(

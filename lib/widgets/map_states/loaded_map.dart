@@ -112,12 +112,9 @@ class _LoadedMapState extends State<LoadedMap> with TickerProviderStateMixin {
                     },
                     child: Container(
                         decoration: BoxDecoration(
-                          border: Border.all(
-                            width: 12,
-                            style: BorderStyle.none
-                          ),
-                          shape: BoxShape.circle
-                        ),
+                            border:
+                                Border.all(width: 12, style: BorderStyle.none),
+                            shape: BoxShape.circle),
                         child: Image.asset(
                           'assets/img/circle.png',
                         ))))));

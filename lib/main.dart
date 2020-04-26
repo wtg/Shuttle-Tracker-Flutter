@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'blocs/shuttle/shuttle_bloc.dart';
@@ -26,7 +27,10 @@ class MyAppState extends State<MyApp> {
       create: (context) => ShuttleBloc(repository: ShuttleRepository()),
       child: MapPage(),
     ),
-    SchedulesPage(),
+    BlocProvider(
+      create: (context) => ShuttleBloc(repository: ShuttleRepository()),
+      child: SchedulesPage(),
+    ),
     SettingsPage(),
   ];
 
@@ -35,6 +39,13 @@ class MyAppState extends State<MyApp> {
     return BlocProvider(
         create: (_) => ThemeBloc(),
         child: BlocBuilder<ThemeBloc, ThemeData>(builder: (_, theme) {
+          SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+            systemNavigationBarColor: theme.bottomAppBarColor,
+            systemNavigationBarIconBrightness:
+                theme.accentColorBrightness, 
+            statusBarColor: theme.bottomAppBarColor, 
+            statusBarIconBrightness: theme.accentColorBrightness,
+          ));
           return Platform.isIOS
               ? IOSCupertinoApp(theme: theme, pageOptions: _pageOptions)
               : AndroidMaterialApp(theme: theme, pageOptions: _pageOptions);

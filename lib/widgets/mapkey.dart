@@ -49,7 +49,7 @@ class _MapkeyState extends State<Mapkey> {
                 ),
                 borderRadius: BorderRadius.circular(5),
                 boxShadow: [
-                  BoxShadow(color: theme.hoverColor, offset: Offset(0.0, 0.5))
+                  BoxShadow(color: theme.hoverColor, offset: Offset(0.0, 1.0))
                 ]),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,

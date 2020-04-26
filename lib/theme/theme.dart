@@ -12,9 +12,9 @@ ThemeData lightMode = ThemeData(
   primarySwatch: Colors.red,
   textTheme: TextTheme(
     body1:
-        TextStyle(color: Colors.black, fontSize: Platform.isIOS ? 11.0 : 12.0),
+        TextStyle(color: Colors.black, fontSize: Platform.isIOS ? 11.0 : 13.0),
     subtitle:
-        TextStyle(color: Colors.black, fontSize: Platform.isIOS ? 9.0 : 12.0),
+        TextStyle(color: Colors.black, fontSize: Platform.isIOS ? 9.0 : 11.0),
   ),
 );
 
@@ -31,8 +31,8 @@ ThemeData darkMode = ThemeData(
   primarySwatch: Colors.red,
   textTheme: TextTheme(
     body1:
-        TextStyle(color: Colors.white, fontSize: Platform.isIOS ? 11.0 : 12.0),
+        TextStyle(color: Colors.white, fontSize: Platform.isIOS ? 11.0 : 13.0),
     subtitle:
-        TextStyle(color: Colors.white, fontSize: Platform.isIOS ? 9.0 : 12.0),
+        TextStyle(color: Colors.white, fontSize: Platform.isIOS ? 9.0 : 11.0),
   ),
 );

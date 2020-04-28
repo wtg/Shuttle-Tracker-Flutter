@@ -24,9 +24,9 @@ class ShuttleStop extends ShuttlePoint {
       this.created,
       this.updated,
       this.description})
-      : super(latitude: 0.0, longitude: 0.0);
+      : super(latitude: latitude, longitude: longitude);
 
-  ShuttleStop.fromJson(Map<String, dynamic> json) : super.fromJson(json) {
+  ShuttleStop.fromJson(Map<String, dynamic> json) {
     latitude = json['latitude'];
     longitude = json['longitude'];
     id = json['id'];

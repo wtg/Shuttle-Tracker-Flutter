@@ -35,6 +35,7 @@ class ShuttleBloc extends Bloc<ShuttleEvent, ShuttleState> {
         yield ShuttleLoading();
         isLoading = false;
       } else {
+        /// Poll every 3ish seconds
         await Future.delayed(const Duration(seconds: 3));
       }
 

@@ -4,7 +4,7 @@ import 'shuttle_image.dart';
 import 'shuttle_point.dart';
 
 class ShuttleVehicle extends ShuttlePoint {
-  // ID of the update
+  /// ID of the update
   int id;
 
   /// Not super sure what this is used for
@@ -55,7 +55,7 @@ class ShuttleVehicle extends ShuttlePoint {
     image = ShuttleImage(svgColor: color);
   }
 
-  ShuttleVehicle.fromJson(Map<String, dynamic> json) : super.fromJson(json) {
+  ShuttleVehicle.fromJson(Map<String, dynamic> json) {
     latitude = json['latitude'];
     longitude = json['longitude'];
     id = json['id'];

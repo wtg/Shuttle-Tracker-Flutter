@@ -41,9 +41,8 @@ class MyAppState extends State<MyApp> {
         child: BlocBuilder<ThemeBloc, ThemeData>(builder: (_, theme) {
           SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
             systemNavigationBarColor: theme.bottomAppBarColor,
-            systemNavigationBarIconBrightness:
-                theme.accentColorBrightness, 
-            statusBarColor: theme.bottomAppBarColor, 
+            systemNavigationBarIconBrightness: theme.accentColorBrightness,
+            statusBarColor: theme.bottomAppBarColor,
             statusBarIconBrightness: theme.accentColorBrightness,
           ));
           return Platform.isIOS

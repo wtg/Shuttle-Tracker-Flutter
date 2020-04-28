@@ -1,9 +1,20 @@
 class ShuttleSchedule {
+  /// Not sure what this is for
   int id;
+
+  /// ID for the route
   int routeId;
+
+  /// Day of the week route when is enabled (0-6)
   int startDay;
+
+  /// Timestamp when route is enabled on startDay
   String startTime;
+
+  /// Day of the week route when is disabled (0-6)
   int endDay;
+
+  /// Timestamp when route is disabled on endDay
   String endTime;
 
   ShuttleSchedule(

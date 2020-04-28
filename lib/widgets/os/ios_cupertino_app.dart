@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_framework/responsive_framework.dart';
-import 'package:responsive_framework/utils/bouncing_scroll_behavior.dart';
 
 class IOSCupertinoApp extends StatefulWidget {
   final ThemeData theme;

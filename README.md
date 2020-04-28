@@ -1,6 +1,18 @@
 # Flutter ShuttleTracker
 
-Flutter ShuttleTracker is a port for RPI ShuttleTracker that utilizes the Flutter framework for development. Flutter is an open-source UI software development kit created by Google that can be used to create apps for iOS and Android. 
+Flutter ShuttleTracker is a port for RPI ShuttleTracker that utilizes the Flutter framework for development. Flutter is an open-source UI software development kit created by Google that can be used to create native apps for iOS and Android. 
+
+## Features
+
+- Live updates displayed on map for shuttles, routes, and stops
+
+- Basic Dark Mode functionality
+
+- Automatic route toggling
+
+- Clicking on a shuttle stop will zoom to its coordinates
+
+- Splash screen that displays ShuttleTracker logo
 
 ## Setting up
 
@@ -8,8 +20,22 @@ Flutter ShuttleTracker is a port for RPI ShuttleTracker that utilizes the Flutte
 2. Clone the repository to your computer.
 3. Check the status of flutter by running ```flutter doctor```
 4. Retrieve all the required dependencies with ```flutter pub get```
-5. Check that a device or emulator is ready with ```flutter devices```
-6. Run the app with ```flutter run```
+5. Run the app with ```flutter run```
+
+## Dependencies
+
+  - [flutter_bloc](https://pub.dev/packages/flutter_bloc)
+  - [flutter_map](https://pub.dev/packages/flutter_map)
+  - [geolocation](https://pub.dev/packages/geolocation)
+  - [cupertino_icons](https://pub.dev/packages/cupertino_icons)
+  - [responsive_framework](https://pub.dev/packages/responsive_framework)
+  - [loading](https://pub.dev/packages/loading)
+  - [flutter_widget_from_html](https://pub.dev/packages/flutter_widget_from_html)
+  - [observable](https://pub.dev/packages/observable)
+  - [flutter_svg](https://pub.dev/packages/flutter_svg)
+  - [equatable](https://pub.dev/packages/equatable)
+  - [flutter_platform_widgets](https://pub.dev/packages/flutter_platform_widgets)
+  - [http](https://pub.dev/packages/http)
 
 ## Contributing
 

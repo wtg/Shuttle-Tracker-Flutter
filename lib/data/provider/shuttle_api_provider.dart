@@ -27,7 +27,7 @@ class ShuttleApiProvider {
     catch (error) {
       isConnected = false;
     }
-    print("App has polled $type API: $isConnected");
+    //print("App has polled $type API: $isConnected");
     return jsonDecoded;
   }
 

@@ -27,9 +27,9 @@ class LoadedMap extends StatefulWidget {
   /// List of all ids
   final List<int> _ids = [];
 
-  static const darkLink =
+  static const _darkLink =
       'https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png';
-  static const lightLink = 'http://tile.stamen.com/toner-lite/{z}/{x}/{y}.png';
+  static const _lightLink = 'http://tile.stamen.com/toner-lite/{z}/{x}/{y}.png';
 
   LoadedMap({this.routes, this.location, this.stops, this.updates});
 
@@ -183,8 +183,9 @@ class _LoadedMapState extends State<LoadedMap> with TickerProviderStateMixin {
                   layers: [
                     TileLayerOptions(
                       backgroundColor: theme.bottomAppBarColor,
-                      urlTemplate:
-                          isDarkMode ? LoadedMap.darkLink : LoadedMap.lightLink,
+                      urlTemplate: isDarkMode
+                          ? LoadedMap._darkLink
+                          : LoadedMap._lightLink,
                       subdomains: ['a', 'b', 'c'],
                       tileProvider: CachedNetworkTileProvider(),
                     ),

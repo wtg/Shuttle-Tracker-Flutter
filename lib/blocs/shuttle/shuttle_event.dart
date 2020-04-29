@@ -10,3 +10,9 @@ class GetShuttleMap extends ShuttleEvent {
   @override
   List<Object> get props => null;
 }
+
+class GetSettingsList extends ShuttleEvent {
+  const GetSettingsList();
+  @override
+  List<Object> get props => null;
+}

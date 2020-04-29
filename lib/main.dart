@@ -27,11 +27,11 @@ class MyAppState extends State<MyApp> {
       create: (context) => ShuttleBloc(repository: ShuttleRepository()),
       child: MapPage(),
     ),
+    SchedulesPage(),
     BlocProvider(
       create: (context) => ShuttleBloc(repository: ShuttleRepository()),
-      child: SchedulesPage(),
+      child: SettingsPage(),
     ),
-    SettingsPage(),
   ];
 
   @override
@@ -45,6 +45,9 @@ class MyAppState extends State<MyApp> {
             statusBarColor: theme.bottomAppBarColor,
             statusBarIconBrightness: theme.accentColorBrightness,
           ));
+          SystemChrome.setPreferredOrientations([
+            DeviceOrientation.portraitUp,
+          ]);
           return Platform.isIOS
               ? IOSCupertinoApp(theme: theme, pageOptions: _pageOptions)
               : AndroidMaterialApp(theme: theme, pageOptions: _pageOptions);

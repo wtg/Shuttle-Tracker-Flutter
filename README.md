@@ -10,14 +10,9 @@ Flutter ShuttleTracker is a port for RPI ShuttleTracker that utilizes the Flutte
 
 ## Showcase
 
-<div style="text-align: center"><table><tr>
-  <td style="text-align: center">
-    <img src="https://github.com/wtg/Flutter_ShuttleTracker/blob/dev/assets/img/screenshot_android.png" width="350" />
-  </td>
-  <td style="text-align: center">
-    <img src="https://github.com/wtg/Flutter_ShuttleTracker/blob/dev/assets/img/screenshot_android.png" width="350" />
-  </td>
-</tr></table></div>
+<div align="center">
+  <img src="https://github.com/wtg/Flutter_ShuttleTracker/blob/dev/assets/img/screenshot_android.png" width=100> 
+</div>
 
 ## Features
 

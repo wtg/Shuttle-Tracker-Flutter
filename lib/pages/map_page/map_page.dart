@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/widgets.dart';
 
-import '../../blocs/shuttle/shuttle_bloc.dart';
+import 'package:flutter_shuttletracker/blocs/shuttle/shuttle_bloc.dart';
 import 'map_states/error_map.dart';
 import 'map_states/initial_map.dart';
 import 'map_states/loaded_map.dart';

@@ -30,6 +30,7 @@ class _AndroidMaterialAppState extends State<AndroidMaterialApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       theme: widget.theme,
       home: SafeArea(
         bottom: false,

@@ -8,8 +8,6 @@ import 'package:flutter_shuttletracker/blocs/theme/theme_bloc.dart';
 import 'package:flutter_shuttletracker/models/shuttle_image.dart';
 import 'package:flutter_shuttletracker/models/shuttle_route.dart';
 
-
-
 class SettingsPage extends StatefulWidget {
   @override
   _SettingsPageState createState() => _SettingsPageState();
@@ -46,7 +44,7 @@ class _SettingsPageState extends State<SettingsPage> {
             BlocBuilder<ShuttleBloc, ShuttleState>(builder: (context, state) {
           shuttleBloc = BlocProvider.of<ShuttleBloc>(context);
           if (state is ShuttleInitial || state is ShuttleError) {
-            shuttleBloc.add(GetSettingsList());
+            shuttleBloc.add(ShuttleEvent.getSettingsList);
           } else if (state is ShuttleLoaded) {
             var routesJSON = state.routes;
 

@@ -6,8 +6,9 @@ import 'package:latlong/latlong.dart';
 
 import 'package:flutter_shuttletracker/data/repository/shuttle_repository.dart';
 
-part 'shuttle_event.dart';
 part 'shuttle_state.dart';
+
+enum ShuttleEvent { getShuttleMap, getSettingsList }
 
 /// ShuttleBloc class
 class ShuttleBloc extends Bloc<ShuttleEvent, ShuttleState> {
@@ -30,40 +31,46 @@ class ShuttleBloc extends Bloc<ShuttleEvent, ShuttleState> {
   Stream<ShuttleState> mapEventToState(
     ShuttleEvent event,
   ) async* {
-    if (event is GetShuttleMap) {
-      if (isLoading) {
-        yield ShuttleLoading();
-        isLoading = false;
-      } else {
-        /// Poll every 3ish seconds
+    switch (event) {
+      case ShuttleEvent.getShuttleMap:
+        if (isLoading) {
+          yield ShuttleLoading();
+          isLoading = false;
+        } else {
+          /// Poll every 3ish seconds
+          await Future.delayed(const Duration(seconds: 3));
+        }
+
+        routes.clear();
+        stops.clear();
+        updates.clear();
+
+        location = await repository.getLocation;
+        routes = await repository.getRoutes;
+        stops = await repository.getStops;
+        updates = await repository.getUpdates;
+
+        if (repository.getIsConnected) {
+          yield ShuttleLoaded(
+              routes: routes,
+              location: location,
+              updates: updates,
+              stops: stops);
+        } else {
+          isLoading = true;
+          yield ShuttleError(message: "NETWORK ISSUE");
+        }
         await Future.delayed(const Duration(seconds: 3));
-      }
+        break;
+      case ShuttleEvent.getSettingsList:
+        location = await repository.getLocation;
+        routes = await repository.getRoutes;
+        stops = await repository.getStops;
+        updates = await repository.getUpdates;
 
-      routes.clear();
-      stops.clear();
-      updates.clear();
-
-      location = await repository.getLocation;
-      routes = await repository.getRoutes;
-      stops = await repository.getStops;
-      updates = await repository.getUpdates;
-
-      if (repository.getIsConnected) {
         yield ShuttleLoaded(
             routes: routes, location: location, updates: updates, stops: stops);
-      } else {
-        isLoading = true;
-        yield ShuttleError(message: "NETWORK ISSUE");
-      }
-      await Future.delayed(const Duration(seconds: 3));
-    } else if (event is GetSettingsList) {
-      location = await repository.getLocation;
-      routes = await repository.getRoutes;
-      stops = await repository.getStops;
-      updates = await repository.getUpdates;
-
-      yield ShuttleLoaded(
-          routes: routes, location: location, updates: updates, stops: stops);
+        break;
       /*
       if (repository.getIsConnected) {
         yield ShuttleLoaded(

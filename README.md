@@ -8,6 +8,14 @@
 Flutter ShuttleTracker is a port for RPI ShuttleTracker that utilizes the Flutter framework for development.
 </h4>
 
+## Showcase
+
+<div style="text-align: center"><table><tr>
+  <td style="text-align: center">
+    <img src="https://github.com/wtg/Flutter_ShuttleTracker/blob/dev/assets/img/screenshot_android.png" width="223" />
+  </td>
+</tr></table></div>
+
 ## Features
 
 - Live updates displayed on map for shuttles, routes, and stops

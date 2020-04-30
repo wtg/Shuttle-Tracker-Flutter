@@ -8,11 +8,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'blocs/shuttle/shuttle_bloc.dart';
 import 'blocs/theme/theme_bloc.dart';
 import 'data/repository/shuttle_repository.dart';
-import 'pages/map_page.dart';
+import 'pages/map_page/map_page.dart';
 import 'pages/schedules_page.dart';
 import 'pages/settings_page.dart';
-import 'widgets/os/android_material_app.dart';
-import 'widgets/os/ios_cupertino_app.dart';
+import 'android_material_app.dart';
+import 'ios_cupertino_app.dart';
 
 void main() => runApp(MyApp());
 

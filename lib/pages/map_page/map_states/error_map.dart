@@ -5,9 +5,9 @@ import 'package:flutter_map/flutter_map.dart';
 
 import 'package:latlong/latlong.dart';
 
-import '../../blocs/theme/theme_bloc.dart';
-import '../../widgets/attribution.dart';
-import '../../widgets/mapkey.dart';
+import '../../../blocs/theme/theme_bloc.dart';
+import '../map_widgets/attribution.dart';
+import '../map_widgets//mapkey.dart';
 
 class ErrorMap extends StatefulWidget {
   final String message;

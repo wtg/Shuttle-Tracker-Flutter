@@ -4,13 +4,13 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter/widgets.dart';
 import 'package:latlong/latlong.dart';
 
-import '../../blocs/theme/theme_bloc.dart';
-import '../../models/shuttle_image.dart';
-import '../../models/shuttle_route.dart';
-import '../../models/shuttle_stop.dart';
-import '../../models/shuttle_vehicle.dart';
-import '../../widgets/attribution.dart';
-import '../../widgets/mapkey.dart';
+import '../../../blocs/theme/theme_bloc.dart';
+import '../../../models/shuttle_image.dart';
+import '../../../models/shuttle_route.dart';
+import '../../../models/shuttle_stop.dart';
+import '../../../models/shuttle_vehicle.dart';
+import '../map_widgets/attribution.dart';
+import '../map_widgets/mapkey.dart';
 
 class LoadedMap extends StatefulWidget {
   final List<dynamic> routes;

@@ -1,7 +1,7 @@
 <h1 align="center">Flutter ShuttleTracker</h1>
 
 <div align="center">
-  <img src="https://github.com/wtg/Flutter_ShuttleTracker/blob/master/assets/img/logo.png" width=200> 
+  <img src="https://github.com/wtg/Flutter_ShuttleTracker/blob/master/assets/img/logo.png" width=100> 
 </div>
 
 <h4 align="center">

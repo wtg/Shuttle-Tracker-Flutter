@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_map/flutter_map.dart';
 
 import 'shuttle_image.dart';
 import 'shuttle_point.dart';
@@ -67,4 +69,12 @@ class ShuttleVehicle extends ShuttlePoint {
     vehicleId = json['vehicle_id'];
     routeId = json['route_id'];
   }
+
+  Marker get getMarker => Marker(
+      point: getLatLng,
+      width: 30.0,
+      height: 30.0,
+      builder: (ctx) => RotationTransition(
+          turns: AlwaysStoppedAnimation((heading - 45) / 360),
+          child: image.getSVG));
 }

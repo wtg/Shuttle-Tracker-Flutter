@@ -40,7 +40,7 @@ class LoadedMap extends StatefulWidget {
 class _LoadedMapState extends State<LoadedMap> with TickerProviderStateMixin {
   MapController mapController = MapController();
 
-  void _animatedMapMove(LatLng destLocation, double destZoom) {
+  void animatedMapMove(LatLng destLocation, double destZoom) {
     final _latTween = Tween<double>(
         begin: mapController.center.latitude, end: destLocation.latitude);
     final _lngTween = Tween<double>(
@@ -80,11 +80,7 @@ class _LoadedMapState extends State<LoadedMap> with TickerProviderStateMixin {
       if (route.active && route.enabled) {
         _mapkey[route.name] = ShuttleImage(svgColor: route.color);
         _ids.addAll(route.stopIds);
-        polylines.add(Polyline(
-          points: route.points,
-          strokeWidth: route.width,
-          color: route.color,
-        ));
+        polylines.add(route.getPolyline);
         for (var schedule in route.schedules) {
           _colors[schedule.routeId] = route.color;
         }
@@ -100,24 +96,7 @@ class _LoadedMapState extends State<LoadedMap> with TickerProviderStateMixin {
     for (var stopJSON in stopsJSON) {
       var stop = ShuttleStop.fromJson(stopJSON);
       if (widget._ids.contains(stop.id)) {
-        markers.add(Marker(
-            width: 35.0,
-            height: 35.0,
-            point: stop.getLatLng,
-            builder: (ctx) => Container(
-                child: GestureDetector(
-                    onTap: () {
-                      _animatedMapMove(stop.getLatLng, 15.0);
-                      print('Stop ${stop.name} clicked on');
-                    },
-                    child: Container(
-                        decoration: BoxDecoration(
-                            border:
-                                Border.all(width: 12, style: BorderStyle.none),
-                            shape: BoxShape.circle),
-                        child: Image.asset(
-                          'assets/img/circle.png',
-                        ))))));
+        markers.add(stop.getMarker(animatedMapMove));
       }
     }
     //print("Number of stops on map: ${markers.length}");
@@ -136,13 +115,7 @@ class _LoadedMapState extends State<LoadedMap> with TickerProviderStateMixin {
         update.setColor = Colors.white;
       }
 
-      markers.add(Marker(
-          point: update.getLatLng,
-          width: 30.0,
-          height: 30.0,
-          builder: (ctx) => RotationTransition(
-              turns: AlwaysStoppedAnimation((update.heading - 45) / 360),
-              child: update.image.getSVG)));
+      markers.add(update.getMarker);
     }
     //print("Number of shuttles on map: ${markers.length}");
     return markers;

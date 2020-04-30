@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class AndroidMaterialApp extends StatefulWidget {
   final ThemeData theme;
 
-  final pageOptions;
+  final List<Widget> pageOptions;
 
   AndroidMaterialApp({this.theme, this.pageOptions});
 

@@ -57,10 +57,6 @@ class ShuttleBloc extends Bloc<ShuttleEvent, ShuttleState> {
       }
       await Future.delayed(const Duration(seconds: 3));
     } else if (event is GetSettingsList) {
-      routes.clear();
-      stops.clear();
-      updates.clear();
-
       location = await repository.getLocation;
       routes = await repository.getRoutes;
       stops = await repository.getStops;
@@ -68,6 +64,15 @@ class ShuttleBloc extends Bloc<ShuttleEvent, ShuttleState> {
 
       yield ShuttleLoaded(
           routes: routes, location: location, updates: updates, stops: stops);
+      /*
+      if (repository.getIsConnected) {
+        yield ShuttleLoaded(
+            routes: routes, location: location, updates: updates, stops: stops);
+      } else {
+        await Future.delayed(const Duration(seconds: 5));
+        yield ShuttleError(message: "NETWORK ISSUE");
+      }
+      */
     }
   }
 }

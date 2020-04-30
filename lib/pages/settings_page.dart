@@ -2,11 +2,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_shuttletracker/models/shuttle_image.dart';
-import 'package:flutter_shuttletracker/models/shuttle_route.dart';
 
-import '../blocs/theme/theme_bloc.dart';
 import '../blocs/shuttle/shuttle_bloc.dart';
+import '../blocs/theme/theme_bloc.dart';
+import '../models/shuttle_image.dart';
+import '../models/shuttle_route.dart';
+
+
 
 class SettingsPage extends StatefulWidget {
   @override
@@ -21,7 +23,7 @@ class _SettingsPageState extends State<SettingsPage> {
   Widget build(BuildContext context) {
     return Scaffold(body: BlocBuilder<ThemeBloc, ThemeData>(
       builder: (context, theme) {
-        List<Widget> tile_list = [
+        var tileList = [
           ListTile(
               leading: Icon(
                 Icons.settings_brightness,
@@ -43,17 +45,17 @@ class _SettingsPageState extends State<SettingsPage> {
         return Center(child:
             BlocBuilder<ShuttleBloc, ShuttleState>(builder: (context, state) {
           shuttleBloc = BlocProvider.of<ShuttleBloc>(context);
-          if (state is ShuttleInitial) {
+          if (state is ShuttleInitial || state is ShuttleError) {
             shuttleBloc.add(GetSettingsList());
           } else if (state is ShuttleLoaded) {
             var routesJSON = state.routes;
 
             for (var routeJSON in routesJSON) {
               var route = ShuttleRoute.fromJson(routeJSON);
-              var shuttleArrow = ShuttleImage(svgColor: route.color);
-              tile_list.add(ListTile(
-                  leading: Container(
-                      width: 30, height: 25, child: shuttleArrow.getSVG),
+              var shuttleArrow = ShuttleImage(svgColor: route.color).getSVG;
+              tileList.add(ListTile(
+                  leading:
+                      Container(width: 30, height: 25, child: shuttleArrow),
                   title: Text(route.name,
                       style: TextStyle(color: theme.hoverColor, fontSize: 15)),
                   trailing: PlatformSwitch(
@@ -68,16 +70,13 @@ class _SettingsPageState extends State<SettingsPage> {
                   )));
             }
             ListView.builder(
-                itemCount: tile_list.length,
-                itemBuilder: (context, index) {
-                  return tile_list[index];
-                });
+                itemCount: tileList.length,
+                itemBuilder: (context, index) => tileList[index]);
+            print(tileList.length);
           }
           return ListView.builder(
-              itemCount: tile_list.length,
-              itemBuilder: (context, index) {
-                return tile_list[index];
-              });
+              itemCount: tileList.length,
+              itemBuilder: (context, index) => tileList[index]);
         }));
       },
     ));

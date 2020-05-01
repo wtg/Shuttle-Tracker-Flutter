@@ -4,9 +4,9 @@
   <img src="https://github.com/wtg/Flutter_ShuttleTracker/blob/master/assets/img/logo.png" width=100> 
 </div>
 
-<h4 align="center">
+<h5 align="center">
 Flutter ShuttleTracker is a native cross-platform port of ShuttleTracker that utilizes the Flutter framework for development.
-</h4>
+</h5>
 
 ## Showcase
 

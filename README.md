@@ -5,7 +5,7 @@
 </div>
 
 <h4 align="center">
-Flutter ShuttleTracker is a native cross-platform port of RPI ShuttleTracker that utilizes the Flutter framework for development.
+Flutter ShuttleTracker is a native cross-platform port of ShuttleTracker that utilizes the Flutter framework for development.
 </h4>
 
 ## Showcase

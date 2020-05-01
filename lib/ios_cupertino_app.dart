@@ -43,6 +43,7 @@ class _IOSCupertinoAppState extends State<IOSCupertinoApp> {
     return Theme(
       data: widget.theme,
       child: CupertinoApp(
+        debugShowCheckedModeBanner: false,
         builder: (context, widget) => ResponsiveWrapper.builder(
           BouncingScrollWrapper.builder(context, widget),
           maxWidth: 1200,

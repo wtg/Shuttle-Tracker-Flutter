@@ -8,6 +8,12 @@ PODS:
     - streams_channel
   - path_provider (0.0.1):
     - Flutter
+  - shared_preferences (0.0.1):
+    - Flutter
+  - shared_preferences_macos (0.0.1):
+    - Flutter
+  - shared_preferences_web (0.0.1):
+    - Flutter
   - sqflite (0.0.1):
     - Flutter
     - FMDB (~> 2.7.2)
@@ -32,6 +38,9 @@ DEPENDENCIES:
   - Flutter (from `Flutter`)
   - geolocation (from `.symlinks/plugins/geolocation/ios`)
   - path_provider (from `.symlinks/plugins/path_provider/ios`)
+  - shared_preferences (from `.symlinks/plugins/shared_preferences/ios`)
+  - shared_preferences_macos (from `.symlinks/plugins/shared_preferences_macos/ios`)
+  - shared_preferences_web (from `.symlinks/plugins/shared_preferences_web/ios`)
   - sqflite (from `.symlinks/plugins/sqflite/ios`)
   - streams_channel (from `.symlinks/plugins/streams_channel/ios`)
   - url_launcher (from `.symlinks/plugins/url_launcher/ios`)
@@ -53,6 +62,12 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/geolocation/ios"
   path_provider:
     :path: ".symlinks/plugins/path_provider/ios"
+  shared_preferences:
+    :path: ".symlinks/plugins/shared_preferences/ios"
+  shared_preferences_macos:
+    :path: ".symlinks/plugins/shared_preferences_macos/ios"
+  shared_preferences_web:
+    :path: ".symlinks/plugins/shared_preferences_web/ios"
   sqflite:
     :path: ".symlinks/plugins/sqflite/ios"
   streams_channel:
@@ -77,6 +92,9 @@ SPEC CHECKSUMS:
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   geolocation: c194aabfd0f48cd7d6041afa8ba6542aa5714dc2
   path_provider: fb74bd0465e96b594bb3b5088ee4a4e7bb1f2a9d
+  shared_preferences: af6bfa751691cdc24be3045c43ec037377ada40d
+  shared_preferences_macos: f3f29b71ccbb56bf40c9dd6396c9acf15e214087
+  shared_preferences_web: 141cce0c3ed1a1c5bf2a0e44f52d31eeb66e5ea9
   sqflite: 4001a31ff81d210346b500c55b17f4d6c7589dd0
   streams_channel: 16855ffd0568eded9563b2fec6a1bfa94420b353
   url_launcher: a1c0cc845906122c4784c542523d8cacbded5626

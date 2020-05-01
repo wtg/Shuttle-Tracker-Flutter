@@ -10,9 +10,11 @@ Flutter ShuttleTracker is a native cross-platform port of ShuttleTracker that ut
 
 ## Showcase
 
-<div align="center">
-  <img src="https://github.com/wtg/Flutter_ShuttleTracker/blob/dev/assets/img/screenshot_android.png" width=300> 
-</div>
+Android         |  iOS
+:-------------------------:|:-------------------------:
+![](https://github.com/wtg/Flutter_ShuttleTracker/blob/dev/assets/img/screenshot_android.png)  |  ![](https://github.com/wtg/Flutter_ShuttleTracker/blob/dev/assets/img/screenshot_ios.png)
+
+
 
 ## Features
 

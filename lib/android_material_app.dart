@@ -19,6 +19,10 @@ class _AndroidMaterialAppState extends State<AndroidMaterialApp> {
       title: Text('Map'),
     ),
     BottomNavigationBarItem(
+      icon: Icon(Icons.directions),
+      title: Text('Routes'),
+    ),
+    BottomNavigationBarItem(
       icon: Icon(Icons.list),
       title: Text('Schedules'),
     ),

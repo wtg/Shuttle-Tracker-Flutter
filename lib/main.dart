@@ -9,6 +9,7 @@ import 'blocs/shuttle/shuttle_bloc.dart';
 import 'blocs/theme/theme_bloc.dart';
 import 'data/repository/shuttle_repository.dart';
 import 'pages/map_page/map_page.dart';
+import 'pages/routes_page/routes_page.dart';
 import 'pages/schedules_page/schedules_page.dart';
 import 'pages/settings_page/settings_page.dart';
 import 'android_material_app.dart';
@@ -27,6 +28,9 @@ class MyAppState extends State<MyApp> {
       create: (context) => ShuttleBloc(repository: ShuttleRepository()),
       child: MapPage(),
     ),
+    BlocProvider(
+        create: (context) => ShuttleBloc(repository: ShuttleRepository()),
+        child: RoutesPage()),
     SchedulesPage(),
     BlocProvider(
       create: (context) => ShuttleBloc(repository: ShuttleRepository()),

@@ -24,7 +24,14 @@ class _IOSCupertinoAppState extends State<IOSCupertinoApp> {
       title: Text('Map'),
     ),
     BottomNavigationBarItem(
-      icon: Icon(IconData(0xf394,
+      icon: Icon(IconData(0xf393,
+          fontFamily: 'CupertinoIcons',
+          fontPackage: 'cupertino_icons',
+          matchTextDirection: true)),
+      title: Text('Routes'),
+    ),
+    BottomNavigationBarItem(
+      icon: Icon(IconData(0xf453,
           fontFamily: 'CupertinoIcons',
           fontPackage: 'cupertino_icons',
           matchTextDirection: true)),

@@ -27,17 +27,34 @@ class _CustomListTileState extends State<CustomListTile> {
     var shuttleArrow = image.getSVG;
     var color = image.getSVGColor;
     return Card(
+      elevation: 5.0,
       color: widget.theme.backgroundColor,
       child: ListTile(
         leading: Container(width: 30, height: 25, child: shuttleArrow),
         title: Text(widget.route.name,
             style: TextStyle(color: widget.theme.hoverColor, fontSize: 16)),
         subtitle: Text(
-            'This route is ${widget.route.active ? "ACTIVE" : "INACTIVE"} this semester',
+            '${widget.route.enabled && widget.route.active ? "ACTIVE" : "INACTIVE"}',
             style: TextStyle(color: widget.theme.hoverColor)),
-        trailing: Icon(
-          Icons.keyboard_arrow_right,
-          color: widget.theme.hoverColor,
+        trailing: Row(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: <Widget>[
+            Container(
+                child: widget.route.enabled && widget.route.active
+                    ? Icon(
+                        Icons.check_circle,
+                        color: Colors.green,
+                      )
+                    : Icon(
+                        Icons.error,
+                        color: Colors.yellow[700],
+                      )),
+            Icon(
+              Icons.keyboard_arrow_right,
+              color: widget.theme.hoverColor,
+            ),
+          ],
         ),
         onTap: () {
           Navigator.push(

@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
-class LoadingMap extends StatefulWidget {
+class LoadingState extends StatefulWidget {
   @override
-  _LoadingMapState createState() => _LoadingMapState();
+  _LoadingState createState() => _LoadingState();
 }
 
-class _LoadingMapState extends State<LoadingMap> {
+class _LoadingState extends State<LoadingState> {
   @override
   Widget build(BuildContext context) {
     return Center(

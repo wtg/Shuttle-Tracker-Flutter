@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
-import 'package:flutter_shuttletracker/blocs/theme/theme_bloc.dart';
-import 'package:flutter_shuttletracker/models/shuttle_stop.dart';
-import 'package:flutter_shuttletracker/pages/map_page/map_states/loaded_map.dart';
-import 'package:flutter_shuttletracker/pages/map_page/map_widgets/attribution.dart';
 import 'package:latlong/latlong.dart';
+
+import '../../blocs/theme/theme_bloc.dart';
+import '../../models/shuttle_stop.dart';
+import '../map_page/map_states/loaded_map.dart';
 
 class DetailPage extends StatefulWidget {
   final String title;
@@ -78,7 +78,10 @@ class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
                 widget.title,
                 style: TextStyle(color: Colors.white),
               ),
-              backgroundColor: widget.color),
+              backgroundColor: widget.color,
+              ios: (_) => CupertinoNavigationBarData(
+                  actionsForegroundColor: Colors.white)),
+          bottomNavBar: null,
           body: Stack(children: <Widget>[
             Column(
               children: [
@@ -110,7 +113,7 @@ class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
                 ),
               ],
             ),
-            Attribution(),
+            //Attribution(),
           ]));
     });
   }

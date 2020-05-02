@@ -4,11 +4,11 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:latlong/latlong.dart';
 
-import 'package:flutter_shuttletracker/data/repository/shuttle_repository.dart';
+import '../../data/repository/shuttle_repository.dart';
 
 part 'shuttle_state.dart';
 
-enum ShuttleEvent { getShuttleMap, getSettingsList }
+enum ShuttleEvent { getShuttleMap, getRoutes }
 
 /// ShuttleBloc class
 class ShuttleBloc extends Bloc<ShuttleEvent, ShuttleState> {
@@ -62,7 +62,9 @@ class ShuttleBloc extends Bloc<ShuttleEvent, ShuttleState> {
         }
         await Future.delayed(const Duration(seconds: 3));
         break;
-      case ShuttleEvent.getSettingsList:
+      case ShuttleEvent.getRoutes:
+        yield ShuttleLoading();
+
         location = await repository.getLocation;
         routes = await repository.getRoutes;
         stops = await repository.getStops;

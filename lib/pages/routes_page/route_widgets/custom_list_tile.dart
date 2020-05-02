@@ -13,6 +13,8 @@ class CustomListTile extends StatefulWidget {
   final ThemeData theme;
 
   CustomListTile({this.route, this.stopsJSON, this.theme});
+
+  bool get isEnabled => route.enabled && route.active;
   @override
   _CustomListTileState createState() => _CustomListTileState();
 }
@@ -33,8 +35,7 @@ class _CustomListTileState extends State<CustomListTile> {
         leading: Container(width: 30, height: 25, child: shuttleArrow),
         title: Text(widget.route.name,
             style: TextStyle(color: widget.theme.hoverColor, fontSize: 16)),
-        subtitle: Text(
-            '${widget.route.enabled && widget.route.active ? "ACTIVE" : "INACTIVE"}',
+        subtitle: Text('${widget.route.enabled ? "ACTIVE" : "INACTIVE"}',
             style: TextStyle(color: widget.theme.hoverColor)),
         trailing: Row(
           mainAxisSize: MainAxisSize.min,
@@ -46,10 +47,15 @@ class _CustomListTileState extends State<CustomListTile> {
                         Icons.check_circle,
                         color: Colors.green,
                       )
-                    : Icon(
-                        Icons.error,
-                        color: Colors.yellow[700],
-                      )),
+                    : widget.route.enabled && !widget.route.active
+                        ? Icon(
+                            Icons.error,
+                            color: Colors.yellow[700],
+                          )
+                        : Icon(
+                            Icons.error,
+                            color: Colors.red,
+                          )),
             Icon(
               Icons.keyboard_arrow_right,
               color: widget.theme.hoverColor,

@@ -15,13 +15,17 @@ class LoadedState extends StatefulWidget {
 
 class _LoadedState extends State<LoadedState> {
   List<Widget> _getTileList() {
-    var tileList = <Widget>[];
+    var tileList = <CustomListTile>[];
     for (var routeJSON in widget.routesJSON) {
       var route = ShuttleRoute.fromJson(routeJSON);
       tileList.add(CustomListTile(
           route: route, stopsJSON: widget.stopsJSON, theme: widget.theme));
     }
-
+    tileList.sort((a, b) {
+      return (a.isEnabled == b.isEnabled)
+          ? 0
+          : (a == true && b == false) ? -1 : 1;
+    });
     return tileList;
   }
 

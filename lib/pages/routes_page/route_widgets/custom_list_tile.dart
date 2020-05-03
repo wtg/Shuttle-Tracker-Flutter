@@ -14,7 +14,9 @@ class CustomListTile extends StatefulWidget {
 
   CustomListTile({this.route, this.stopsJSON, this.theme});
 
-  bool get isEnabled => route.enabled && route.active;
+  bool get isEnabled => route.enabled;
+  bool get isActive => route.active;
+
   @override
   _CustomListTileState createState() => _CustomListTileState();
 }

@@ -22,9 +22,9 @@ class _LoadedState extends State<LoadedState> {
           route: route, stopsJSON: widget.stopsJSON, theme: widget.theme));
     }
     tileList.sort((a, b) {
-      return (a.isEnabled == b.isEnabled)
-          ? 0
-          : (a == true && b == false) ? -1 : 1;
+      return (a.isEnabled == true && b.isEnabled == false)
+          ? -1
+          : (a.isEnabled == b.isEnabled) ? 0 : 1;
     });
     return tileList;
   }

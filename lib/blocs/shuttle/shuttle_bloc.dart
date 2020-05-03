@@ -38,7 +38,7 @@ class ShuttleBloc extends Bloc<ShuttleEvent, ShuttleState> {
           isLoading = false;
         } else {
           /// Poll every 3ish seconds
-          await Future.delayed(const Duration(seconds: 3));
+          await Future.delayed(const Duration(seconds: 2));
         }
 
         routes.clear();
@@ -60,7 +60,7 @@ class ShuttleBloc extends Bloc<ShuttleEvent, ShuttleState> {
           isLoading = true;
           yield ShuttleError(message: "NETWORK ISSUE");
         }
-        await Future.delayed(const Duration(seconds: 3));
+        await Future.delayed(const Duration(seconds: 2));
         break;
       case ShuttleEvent.getRoutes:
         yield ShuttleLoading();

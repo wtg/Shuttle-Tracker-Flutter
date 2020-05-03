@@ -81,7 +81,6 @@ class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
               backgroundColor: widget.color,
               ios: (_) => CupertinoNavigationBarData(
                   actionsForegroundColor: Colors.white)),
-          bottomNavBar: null,
           body: Stack(children: <Widget>[
             Column(
               children: [

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class AndroidMaterialApp extends StatefulWidget {
   final ThemeData theme;
 
-  final pageOptions;
+  final List<Widget> pageOptions;
 
   AndroidMaterialApp({this.theme, this.pageOptions});
 
@@ -19,6 +19,10 @@ class _AndroidMaterialAppState extends State<AndroidMaterialApp> {
       title: Text('Map'),
     ),
     BottomNavigationBarItem(
+      icon: Icon(Icons.directions),
+      title: Text('Routes'),
+    ),
+    BottomNavigationBarItem(
       icon: Icon(Icons.list),
       title: Text('Schedules'),
     ),
@@ -30,6 +34,7 @@ class _AndroidMaterialAppState extends State<AndroidMaterialApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       theme: widget.theme,
       home: SafeArea(
         bottom: false,
@@ -43,6 +48,7 @@ class _AndroidMaterialAppState extends State<AndroidMaterialApp> {
             ),
           ),
           bottomNavigationBar: BottomNavigationBar(
+            backgroundColor: widget.theme.appBarTheme.color,
             type: BottomNavigationBarType.fixed,
             selectedItemColor: Colors.red,
             unselectedItemColor: Colors.grey,

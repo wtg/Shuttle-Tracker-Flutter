@@ -1,34 +1,39 @@
-  import 'package:flutter/material.dart';
+import 'dart:io';
 
-ThemeData lightMode = ThemeData(
-    accentColor: Colors.red,
-    hoverColor: Colors.black,
-    accentColorBrightness: Brightness.dark,
-    bottomAppBarColor: Colors.white,
-    backgroundColor: Colors.white,
-    textTheme: TextTheme(
-      body1: TextStyle(color: Colors.black),
-    ),
-    primaryTextTheme: TextTheme(
-      title: TextStyle(color: Colors.black),
-    ),
-    primarySwatch: Colors.red,
-    appBarTheme: AppBarTheme(color: Colors.white, brightness: Brightness.light),
-  );
+import 'package:flutter/material.dart';
 
-  ThemeData darkMode = ThemeData(
-    accentColor: Colors.red,
-    accentColorBrightness: Brightness.light,
-    hoverColor: Colors.white,
-    backgroundColor: Colors.grey[900],
-    bottomAppBarColor: Colors.black,
-    textTheme: TextTheme(
-      body1: TextStyle(color: Colors.white),
-    ),
-    primaryTextTheme: TextTheme(
-      title: TextStyle(color: Colors.white),
-    ),
-    canvasColor: Colors.black,
-    primarySwatch: Colors.red,
-    appBarTheme: AppBarTheme(color: Colors.black),
-  );
+final ThemeData lightMode = ThemeData(
+  accentColor: Colors.red,
+  accentColorBrightness: Brightness.dark,
+  appBarTheme: AppBarTheme(color: Colors.white, brightness: Brightness.light),
+  backgroundColor: Colors.white,
+  bottomAppBarColor: Colors.white,
+  hoverColor: Colors.black,
+  primarySwatch: Colors.red,
+  textTheme: TextTheme(
+    body1:
+        TextStyle(color: Colors.black, fontSize: Platform.isIOS ? 11.0 : 13.0),
+    subtitle:
+        TextStyle(color: Colors.black, fontSize: Platform.isIOS ? 9.0 : 11.0),
+  ),
+);
+
+final ThemeData darkMode = ThemeData(
+  accentColor: Colors.red,
+  accentColorBrightness: Brightness.light,
+  appBarTheme: AppBarTheme(
+    color: Colors.black,
+    brightness: Brightness.dark,
+  ),
+  backgroundColor: Colors.grey[900],
+  bottomAppBarColor: Colors.black,
+  canvasColor: Colors.grey[900],
+  hoverColor: Colors.white,
+  primarySwatch: Colors.red,
+  textTheme: TextTheme(
+    body1:
+        TextStyle(color: Colors.white, fontSize: Platform.isIOS ? 11.0 : 13.0),
+    subtitle:
+        TextStyle(color: Colors.white, fontSize: Platform.isIOS ? 9.0 : 11.0),
+  ),
+);

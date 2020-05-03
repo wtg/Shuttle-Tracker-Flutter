@@ -1,3 +1,6 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_map/flutter_map.dart';
+
 import 'shuttle_point.dart';
 
 class ShuttleStop extends ShuttlePoint {
@@ -24,9 +27,9 @@ class ShuttleStop extends ShuttlePoint {
       this.created,
       this.updated,
       this.description})
-      : super(latitude: 0.0, longitude: 0.0);
+      : super(latitude: latitude, longitude: longitude);
 
-  ShuttleStop.fromJson(Map<String, dynamic> json) : super.fromJson(json) {
+  ShuttleStop.fromJson(Map<String, dynamic> json) {
     latitude = json['latitude'];
     longitude = json['longitude'];
     id = json['id'];
@@ -35,4 +38,22 @@ class ShuttleStop extends ShuttlePoint {
     updated = json['updated'];
     description = json['description'];
   }
+
+  Marker getMarker(dynamic animatedMapMove) => Marker(
+      width: 35.0,
+      height: 35.0,
+      point: getLatLng,
+      builder: (ctx) => Container(
+          child: GestureDetector(
+              onTap: () {
+                animatedMapMove(getLatLng, 15.0);
+                print('Stop $name clicked on');
+              },
+              child: Container(
+                  decoration: BoxDecoration(
+                      border: Border.all(width: 12, style: BorderStyle.none),
+                      shape: BoxShape.circle),
+                  child: Image.asset(
+                    'assets/img/circle.png',
+                  )))));
 }

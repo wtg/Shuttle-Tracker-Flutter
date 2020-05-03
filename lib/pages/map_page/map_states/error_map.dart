@@ -13,14 +13,8 @@ class ErrorMap extends StatefulWidget {
 class _ErrorMapState extends State<ErrorMap> {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        Center(
-          child: Text(
-            widget.message,
-          ),
-        ),
-      ],
+    return Center(
+      child: CircularProgressIndicator(),
     );
   }
 }

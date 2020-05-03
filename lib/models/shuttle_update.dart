@@ -1,10 +1,12 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_map/flutter_map.dart';
 
 import 'shuttle_image.dart';
 import 'shuttle_point.dart';
 
-class ShuttleVehicle extends ShuttlePoint {
-  // ID of the update
+class ShuttleUpdate extends ShuttlePoint {
+  /// ID of the update
   int id;
 
   /// Not super sure what this is used for
@@ -35,7 +37,7 @@ class ShuttleVehicle extends ShuttlePoint {
   ShuttleImage image;
 
   /// Uses a super constructor to define lat/lng attributes
-  ShuttleVehicle(
+  ShuttleUpdate(
       {latitude,
       longitude,
       this.id,
@@ -55,7 +57,7 @@ class ShuttleVehicle extends ShuttlePoint {
     image = ShuttleImage(svgColor: color);
   }
 
-  ShuttleVehicle.fromJson(Map<String, dynamic> json) : super.fromJson(json) {
+  ShuttleUpdate.fromJson(Map<String, dynamic> json) {
     latitude = json['latitude'];
     longitude = json['longitude'];
     id = json['id'];
@@ -67,4 +69,12 @@ class ShuttleVehicle extends ShuttlePoint {
     vehicleId = json['vehicle_id'];
     routeId = json['route_id'];
   }
+
+  Marker get getMarker => Marker(
+      point: getLatLng,
+      width: 30.0,
+      height: 30.0,
+      builder: (ctx) => RotationTransition(
+          turns: AlwaysStoppedAnimation((heading - 45) / 360),
+          child: image.getSVG));
 }

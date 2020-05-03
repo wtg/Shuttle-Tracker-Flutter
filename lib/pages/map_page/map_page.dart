@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/widgets.dart';
 
-import '../blocs/shuttle/shuttle_bloc.dart';
-import '../widgets/map_states/error_map.dart';
-import '../widgets/map_states/initial_map.dart';
-import '../widgets/map_states/loaded_map.dart';
-import '../widgets/map_states/loading_map.dart';
+import '../../blocs/shuttle/shuttle_bloc.dart';
+import 'map_states/error_map.dart';
+import 'map_states/initial_map.dart';
+import 'map_states/loaded_map.dart';
+import 'map_states/loading_map.dart';
 
 class MapPage extends StatefulWidget {
   @override
@@ -26,11 +26,11 @@ class _MapPageState extends State<MapPage> {
           shuttleBloc = BlocProvider.of<ShuttleBloc>(context);
 
           if (state is ShuttleInitial) {
-            shuttleBloc.add(GetShuttleMap());
+            shuttleBloc.add(ShuttleEvent.getShuttleMap);
             print('state is initial');
             return InitialMap();
           } else if (state is ShuttleError) {
-            shuttleBloc.add(GetShuttleMap());
+            shuttleBloc.add(ShuttleEvent.getShuttleMap);
             print('state has error\n\n');
             return ErrorMap(
               message: state.message,
@@ -39,7 +39,7 @@ class _MapPageState extends State<MapPage> {
             print('state is loaded');
             i++;
             print('API poll $i\n\n');
-            shuttleBloc.add(GetShuttleMap());
+            shuttleBloc.add(ShuttleEvent.getShuttleMap);
             return LoadedMap(
               routes: state.routes,
               location: state.location,

@@ -1,6 +1,7 @@
 import 'dart:core';
 import 'dart:ui';
 
+import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong/latlong.dart';
 
 import 'shuttle_point.dart';
@@ -75,4 +76,10 @@ class ShuttleRoute {
         .map((i) => ShuttleSchedule.fromJson(i))
         .toList();
   }
+
+  Polyline get getPolyline => Polyline(
+        points: points,
+        strokeWidth: width,
+        color: color,
+      );
 }

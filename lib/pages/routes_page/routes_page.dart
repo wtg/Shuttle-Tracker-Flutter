@@ -38,8 +38,8 @@ class _RoutesPageState extends State<RoutesPage> {
                 return _refreshCompleter.future;
               },
               child: LoadedState(
-                routesJSON: state.routes,
-                stopsJSON: state.stops,
+                routes: state.routes,
+                stops: state.stops,
                 theme: theme,
               ),
             );

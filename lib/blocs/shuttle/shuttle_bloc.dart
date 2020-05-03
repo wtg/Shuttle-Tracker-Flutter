@@ -2,6 +2,9 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter_shuttletracker/models/shuttle_route.dart';
+import 'package:flutter_shuttletracker/models/shuttle_stop.dart';
+import 'package:flutter_shuttletracker/models/shuttle_update.dart';
 import 'package:latlong/latlong.dart';
 
 import '../../data/repository/shuttle_repository.dart';
@@ -14,9 +17,9 @@ enum ShuttleEvent { getShuttleMap, getRoutes }
 class ShuttleBloc extends Bloc<ShuttleEvent, ShuttleState> {
   /// Initialization of repository class
   final ShuttleRepository repository;
-  List<dynamic> routes = [];
-  List<dynamic> stops = [];
-  List<dynamic> updates = [];
+  List<ShuttleRoute> routes = [];
+  List<ShuttleStop> stops = [];
+  List<ShuttleUpdate> updates = [];
   LatLng location = LatLng(0, 0);
 
   bool isLoading = true;

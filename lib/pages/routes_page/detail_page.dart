@@ -11,7 +11,7 @@ import '../map_page/map_states/loaded_map.dart';
 class DetailPage extends StatefulWidget {
   final String title;
   final List<Polyline> polyline;
-  final List<dynamic> stops;
+  final List<ShuttleStop> stops;
   final List<int> ids;
   final Color color;
 
@@ -55,11 +55,10 @@ class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
     controller.forward();
   }
 
-  List<Marker> _createStops(List<dynamic> stopsJSON) {
+  List<Marker> _createStops(List<ShuttleStop> stops) {
     var markers = <Marker>[];
 
-    for (var stopJSON in stopsJSON) {
-      var stop = ShuttleStop.fromJson(stopJSON);
+    for (var stop in stops) {
       if (widget.ids.contains(stop.id)) {
         markers.add(stop.getMarker(animatedMapMove));
       }

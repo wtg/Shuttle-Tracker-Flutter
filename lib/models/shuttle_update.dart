@@ -5,7 +5,7 @@ import 'package:flutter_map/flutter_map.dart';
 import 'shuttle_image.dart';
 import 'shuttle_point.dart';
 
-class ShuttleVehicle extends ShuttlePoint {
+class ShuttleUpdate extends ShuttlePoint {
   /// ID of the update
   int id;
 
@@ -37,7 +37,7 @@ class ShuttleVehicle extends ShuttlePoint {
   ShuttleImage image;
 
   /// Uses a super constructor to define lat/lng attributes
-  ShuttleVehicle(
+  ShuttleUpdate(
       {latitude,
       longitude,
       this.id,
@@ -57,7 +57,7 @@ class ShuttleVehicle extends ShuttlePoint {
     image = ShuttleImage(svgColor: color);
   }
 
-  ShuttleVehicle.fromJson(Map<String, dynamic> json) {
+  ShuttleUpdate.fromJson(Map<String, dynamic> json) {
     latitude = json['latitude'];
     longitude = json['longitude'];
     id = json['id'];

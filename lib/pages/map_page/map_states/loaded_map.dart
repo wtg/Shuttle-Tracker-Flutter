@@ -8,14 +8,14 @@ import '../../../blocs/theme/theme_bloc.dart';
 import '../../../models/shuttle_image.dart';
 import '../../../models/shuttle_route.dart';
 import '../../../models/shuttle_stop.dart';
-import '../../../models/shuttle_vehicle.dart';
+import '../../../models/shuttle_update.dart';
 import '../map_widgets/attribution.dart';
 import '../map_widgets/mapkey.dart';
 
 class LoadedMap extends StatefulWidget {
-  final List<dynamic> routes;
-  final List<dynamic> stops;
-  final List<dynamic> updates;
+  final List<ShuttleRoute> routes;
+  final List<ShuttleStop> stops;
+  final List<ShuttleUpdate> updates;
   final LatLng location;
 
   /// Map of with the route number as key and color of that route as the value
@@ -71,12 +71,11 @@ class _LoadedMapState extends State<LoadedMap> with TickerProviderStateMixin {
     controller.forward();
   }
 
-  List<Polyline> _createRoutes(List<dynamic> routesJSON, List<int> _ids,
+  List<Polyline> _createRoutes(List<ShuttleRoute> routes, List<int> _ids,
       Map<String, ShuttleImage> _mapkey, Map<int, Color> _colors) {
     var polylines = <Polyline>[];
 
-    for (var routeJSON in routesJSON) {
-      var route = ShuttleRoute.fromJson(routeJSON);
+    for (var route in routes) {
       if (route.active && route.enabled) {
         _mapkey[route.name] = ShuttleImage(svgColor: route.color);
         _ids.addAll(route.stopIds);
@@ -90,11 +89,10 @@ class _LoadedMapState extends State<LoadedMap> with TickerProviderStateMixin {
     return polylines;
   }
 
-  List<Marker> _createStops(List<dynamic> stopsJSON) {
+  List<Marker> _createStops(List<ShuttleStop> stops) {
     var markers = <Marker>[];
 
-    for (var stopJSON in stopsJSON) {
-      var stop = ShuttleStop.fromJson(stopJSON);
+    for (var stop in stops) {
       if (widget._ids.contains(stop.id)) {
         markers.add(stop.getMarker(animatedMapMove));
       }
@@ -104,11 +102,10 @@ class _LoadedMapState extends State<LoadedMap> with TickerProviderStateMixin {
   }
 
   List<Marker> _createUpdates(
-      List<dynamic> updatesJSON, Map<int, Color> colors) {
+      List<ShuttleUpdate> updates, Map<int, Color> colors) {
     var markers = <Marker>[];
 
-    for (var updateJSON in updatesJSON) {
-      var update = ShuttleVehicle.fromJson(updateJSON);
+    for (var update in updates) {
       if (colors[update.routeId] != null) {
         update.setColor = colors[update.routeId];
       } else {

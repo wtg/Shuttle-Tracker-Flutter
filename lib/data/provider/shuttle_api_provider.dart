@@ -1,6 +1,9 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:flutter_shuttletracker/models/shuttle_route.dart';
+import 'package:flutter_shuttletracker/models/shuttle_stop.dart';
+import 'package:flutter_shuttletracker/models/shuttle_update.dart';
 import 'package:geolocation/geolocation.dart';
 import 'package:http/http.dart' as http;
 import 'package:path_provider/path_provider.dart';
@@ -12,35 +15,49 @@ class ShuttleApiProvider {
   bool isConnected;
 
   /// This function will fetch the data from the JSON API and return a decoded
-  Future fetch(String type) async {
-    var jsonDecoded = [];
+  Future<http.Response> fetch(String type) async {
     var client = http.Client();
+    final response = await client.get('https://shuttles.rpi.edu/$type');
     try {
-      final response = await client.get('https://shuttles.rpi.edu/$type');
+
       createJSONFile('$type', response);
 
       if (response.statusCode == 200) {
         isConnected = true;
-        jsonDecoded = json.decode(response.body);
       }
     } // TODO: MODIFY LOGIC HERE
     catch (error) {
       isConnected = false;
     }
     //print("App has polled $type API: $isConnected");
-    return jsonDecoded;
+    return response;
   }
 
   bool get getIsConnected => isConnected;
 
   /// Getter method to retrieve the list of routes
-  Future<List<dynamic>> get getRoutes async => await fetch('routes');
+  Future<List<ShuttleRoute>> getRoutes() async {
+    var response = await fetch('routes', );
+    var jsonDecoded = json.decode(response.body);
+    List<ShuttleRoute> routeList = jsonDecoded.map<ShuttleRoute>((json) => ShuttleRoute.fromJson(json)).toList();
+    return routeList;
+  }
 
   /// Getter method to retrieve the list of stops
-  Future<List<dynamic>> get getStops async => await fetch('stops');
+  Future<List<ShuttleStop>> getStops() async {
+    var response = await fetch('stops',);
+    var jsonDecoded = json.decode(response.body);
+    List<ShuttleStop> stopsList = jsonDecoded.map<ShuttleStop>((json) => ShuttleStop.fromJson(json)).toList();
+    return stopsList;
+  }
 
   /// Getter method to retrieve the list of updated shuttles
-  Future<List<dynamic>> get getUpdates async => await fetch('updates');
+  Future<List<ShuttleUpdate>> getUpdates() async {
+    var response = await fetch('updates', );
+    var jsonDecoded = json.decode(response.body);
+    List<ShuttleUpdate> updatesList = jsonDecoded.map<ShuttleUpdate>((json) => ShuttleUpdate.fromJson(json)).toList();
+    return updatesList;
+  }
 
   /// Getter method to retrived location of user
   Future<LatLng> getLocation() async {

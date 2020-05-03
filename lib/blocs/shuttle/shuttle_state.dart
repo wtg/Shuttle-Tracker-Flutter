@@ -20,10 +20,10 @@ class ShuttleLoading extends ShuttleState {
 
 /// This class represents what user will see when data is fetched
 class ShuttleLoaded extends ShuttleState {
-  final List<dynamic> routes;
+  final List<ShuttleRoute> routes;
   final LatLng location;
-  final List<dynamic> updates;
-  final List<dynamic> stops;
+  final List<ShuttleUpdate> updates;
+  final List<ShuttleStop> stops;
 
   const ShuttleLoaded({this.routes, this.location, this.updates, this.stops});
   @override

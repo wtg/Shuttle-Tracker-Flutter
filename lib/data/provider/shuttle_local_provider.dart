@@ -1,3 +1,5 @@
+
+/*
 import 'dart:async';
 import 'dart:convert';
 
@@ -8,7 +10,7 @@ import 'shuttle_api_provider.dart';
 /// Provider class for testing via local JSON data
 class ShuttleLocalProvider extends ShuttleApiProvider {
   @override
-  Future fetch(String fileName) async {
+  Future<List<dynamic>> fetch(String fileName) async {
     List<dynamic> jsonDecoded;
     try {
       jsonDecoded = json.decode(
@@ -21,3 +23,4 @@ class ShuttleLocalProvider extends ShuttleApiProvider {
     return jsonDecoded;
   }
 }
+*/

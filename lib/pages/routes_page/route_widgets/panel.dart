@@ -16,11 +16,9 @@ class Panel extends StatefulWidget {
 
 class _PanelState extends State<Panel> {
   List<Widget> _getStopTileList() {
-    var tileList = <ListTile>[];
+    var tileList = <Card>[];
     for (var shuttleStop in widget.shuttleStops) {
-      if (widget.ids.contains(shuttleStop.id)) {
-        tileList.add(ListTile(leading: Text(shuttleStop.name)));
-      }
+      tileList.add(Card(child: ListTile(leading: Text(shuttleStop.name))));
     }
     return tileList;
   }

@@ -62,23 +62,56 @@ class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
     controller.forward();
   }
 
-  List<Marker> _createStops(List<ShuttleStop> stops) {
+  List<Marker> _createStops(List<ShuttleStop> shuttleStops) {
     var markers = <Marker>[];
 
-    for (var stop in stops) {
-      if (widget.ids.contains(stop.id)) {
-        markers.add(stop.getMarker(animatedMapMove));
-      }
+    for (var shuttleStop in shuttleStops) {
+      markers.add(shuttleStop.getMarker(animatedMapMove));
     }
     //print("Number of stops on map: ${markers.length}");
     return markers;
   }
 
+  LatLng _getCentroid(List<ShuttleStop> routeStops) {
+    LatLng centroid = LatLng(0, 0);
+    double signedArea = 0.0;
+    double x0 = 0.0; // Current vertex X
+    double y0 = 0.0; // Current vertex Y
+    double x1 = 0.0; // Next vertex X
+    double y1 = 0.0; // Next vertex Y
+    double a = 0.0;
+
+    int i = 0;
+    for (i = 0; i < routeStops.length; ++i) {
+      x0 = routeStops[i].getLatLng.latitude;
+      y0 = routeStops[i].getLatLng.longitude;
+      x1 = routeStops[(i + 1) % routeStops.length].getLatLng.latitude;
+      ;
+      y1 = routeStops[(i + 1) % routeStops.length].getLatLng.longitude;
+      a = x0 * y1 - x1 * y0;
+      signedArea += a;
+      centroid.latitude += (x0 + x1) * a;
+      centroid.longitude += (y0 + y1) * a;
+    }
+
+    signedArea *= 0.5;
+    centroid.latitude /= (6.0 * signedArea);
+    centroid.longitude /= (6.0 * signedArea);
+
+    return centroid;
+  }
+
   @override
   Widget build(BuildContext context) {
+    List<ShuttleStop> routeStops = [];
+    for (var shuttleStop in widget.shuttleStops) {
+      if (widget.ids.contains(shuttleStop.id)) {
+        routeStops.add(shuttleStop);
+      }
+    }
     return BlocBuilder<ThemeBloc, ThemeData>(builder: (context, theme) {
       var isDarkMode = theme.bottomAppBarColor == Colors.black;
-      var _panelHeightOpen = MediaQuery.of(context).size.height * .80;
+      var _panelHeightOpen = MediaQuery.of(context).size.height * .45;
       return PlatformScaffold(
           appBar: PlatformAppBar(
               title: Text(
@@ -100,7 +133,7 @@ class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
                 topLeft: Radius.circular(18.0),
                 topRight: Radius.circular(18.0)),
             parallaxEnabled: true,
-            parallaxOffset: .5,
+            parallaxOffset: 0.55,
             body: Column(
               children: [
                 /// Map
@@ -110,8 +143,9 @@ class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
                     options: MapOptions(
                       nePanBoundary: LatLng(42.78, -73.63),
                       swPanBoundary: LatLng(42.68, -73.71),
-                      center: LatLng(42.731, -73.6767),
-                      zoom: 14,
+                      center: LatLng(42.722,
+                          -73.6767), //_getCentroid(routeStops).latitude.isNaN ? LatLng(42.731, -73.6767) : _getCentroid(routeStops),
+                      zoom: 13.9,
                       maxZoom: 16, // max you can zoom in
                       minZoom: 13, // min you can zoom out
                     ),
@@ -125,8 +159,7 @@ class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
                         tileProvider: CachedNetworkTileProvider(),
                       ),
                       PolylineLayerOptions(polylines: widget.polyline),
-                      MarkerLayerOptions(
-                          markers: _createStops(widget.shuttleStops)),
+                      MarkerLayerOptions(markers: _createStops(routeStops)),
                     ],
                   ),
                 ),

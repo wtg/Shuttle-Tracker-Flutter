@@ -11,7 +11,7 @@ Flutter ShuttleTracker is a native cross-platform port of ShuttleTracker that ut
 ## Showcase
 
 <p float="center">
-  <img src="https://github.com/wtg/Flutter_ShuttleTracker/blob/dev/assets/img/merged.png" />
+  <img src="https://github.com/wtg/Flutter_ShuttleTracker/blob/master/assets/img/merged.png" />
 
 </p>
 

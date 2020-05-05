@@ -6,7 +6,7 @@ class Panel extends StatefulWidget {
   final ScrollController scrollController;
   final Color routeColor;
   final List<ShuttleStop> shuttleStops;
-    final List<int> ids;
+  final List<int> ids;
 
   Panel({this.scrollController, this.routeColor, this.shuttleStops, this.ids});
 
@@ -15,13 +15,11 @@ class Panel extends StatefulWidget {
 }
 
 class _PanelState extends State<Panel> {
-  List<Widget> _getStopTileList(){
+  List<Widget> _getStopTileList() {
     var tileList = <ListTile>[];
     for (var shuttleStop in widget.shuttleStops) {
       if (widget.ids.contains(shuttleStop.id)) {
-      tileList.add(ListTile(
-        leading: Text(shuttleStop.name)
-      ));
+        tileList.add(ListTile(leading: Text(shuttleStop.name)));
       }
     }
     return tileList;
@@ -89,8 +87,9 @@ class _PanelState extends State<Panel> {
               ),
               Expanded(
                 child: ListView.builder(
-          itemCount: _getStopTileList().length,
-          itemBuilder: (context, index) => _getStopTileList()[index]),
+                    controller: widget.scrollController,
+                    itemCount: _getStopTileList().length,
+                    itemBuilder: (context, index) => _getStopTileList()[index]),
               ),
             ],
           ),

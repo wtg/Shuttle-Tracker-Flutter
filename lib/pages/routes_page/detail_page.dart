@@ -18,7 +18,11 @@ class DetailPage extends StatefulWidget {
   final Color routeColor;
 
   DetailPage(
-      {this.title, this.polyline, this.shuttleStops, this.ids, this.routeColor});
+      {this.title,
+      this.polyline,
+      this.shuttleStops,
+      this.ids,
+      this.routeColor});
 
   @override
   _DetailPageState createState() => _DetailPageState();
@@ -86,8 +90,11 @@ class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
               ios: (_) => CupertinoNavigationBarData(
                   actionsForegroundColor: Colors.white)),
           body: SlidingUpPanel(
-            panelBuilder: (sc) =>
-                Panel(scrollController: sc, routeColor: widget.routeColor, shuttleStops: widget.shuttleStops, ids: widget.ids),
+            panelBuilder: (sc) => Panel(
+                scrollController: sc,
+                routeColor: widget.routeColor,
+                shuttleStops: widget.shuttleStops,
+                ids: widget.ids),
             maxHeight: _panelHeightOpen,
             borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(18.0),
@@ -118,7 +125,8 @@ class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
                         tileProvider: CachedNetworkTileProvider(),
                       ),
                       PolylineLayerOptions(polylines: widget.polyline),
-                      MarkerLayerOptions(markers: _createStops(widget.shuttleStops)),
+                      MarkerLayerOptions(
+                          markers: _createStops(widget.shuttleStops)),
                     ],
                   ),
                 ),

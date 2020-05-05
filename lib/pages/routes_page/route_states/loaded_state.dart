@@ -31,8 +31,15 @@ class _LoadedState extends State<LoadedState> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-        itemCount: _getTileList().length,
-        itemBuilder: (context, index) => _getTileList()[index]);
+    //notification listender used to remove scroll glow
+    return NotificationListener<OverscrollIndicatorNotification>(
+      onNotification: (overscroll) {
+        overscroll.disallowGlow();
+        return null;
+      },
+      child: ListView.builder(
+          itemCount: _getTileList().length,
+          itemBuilder: (context, index) => _getTileList()[index]),
+    );
   }
 }

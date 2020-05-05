@@ -17,6 +17,7 @@ environment:
   sdk: ">=2.1.0 <3.0.0"
 
 dependencies:
+  sliding_up_panel: ^1.0.2
   shared_preferences: ^0.5.7
   flutter_native_splash: ^0.1.9
   flutter_platform_widgets: ^0.32.5

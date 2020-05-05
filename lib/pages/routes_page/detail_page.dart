@@ -13,11 +13,12 @@ import 'route_widgets/panel.dart';
 class DetailPage extends StatefulWidget {
   final String title;
   final List<Polyline> polyline;
-  final List<ShuttleStop> stops;
+  final List<ShuttleStop> shuttleStops;
   final List<int> ids;
-  final Color color;
+  final Color routeColor;
 
-  DetailPage({this.title, this.polyline, this.stops, this.ids, this.color});
+  DetailPage(
+      {this.title, this.polyline, this.shuttleStops, this.ids, this.routeColor});
 
   @override
   _DetailPageState createState() => _DetailPageState();
@@ -81,12 +82,12 @@ class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
                 style: TextStyle(
                     color: Colors.white, fontWeight: FontWeight.normal),
               ),
-              backgroundColor: widget.color,
+              backgroundColor: widget.routeColor,
               ios: (_) => CupertinoNavigationBarData(
                   actionsForegroundColor: Colors.white)),
           body: SlidingUpPanel(
-            color: widget.color,
-            panelBuilder: (sc) => Panel(scrollController: sc),
+            panelBuilder: (sc) =>
+                Panel(scrollController: sc, routeColor: widget.routeColor, shuttleStops: widget.shuttleStops, ids: widget.ids),
             maxHeight: _panelHeightOpen,
             borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(18.0),
@@ -117,7 +118,7 @@ class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
                         tileProvider: CachedNetworkTileProvider(),
                       ),
                       PolylineLayerOptions(polylines: widget.polyline),
-                      MarkerLayerOptions(markers: _createStops(widget.stops)),
+                      MarkerLayerOptions(markers: _createStops(widget.shuttleStops)),
                     ],
                   ),
                 ),

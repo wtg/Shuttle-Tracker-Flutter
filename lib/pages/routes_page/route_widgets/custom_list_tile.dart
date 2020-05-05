@@ -73,9 +73,9 @@ class _CustomListTileState extends State<CustomListTile> {
               builder: (_) => DetailPage(
                 title: widget.route.name,
                 polyline: polyline,
-                stops: widget.stops,
+                shuttleStops: widget.stops,
                 ids: ids,
-                color: color,
+                routeColor: color,
               ),
             ),
           );

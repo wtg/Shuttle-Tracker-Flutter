@@ -17,11 +17,11 @@ class _RoutesPageState extends State<RoutesPage> {
   ShuttleBloc shuttleBloc;
   bool isSwitched = false;
   Map<String, ShuttleImage> mapkey = {};
-  Completer<void> _refreshCompleter;
+  //Completer<void> _refreshCompleter;
 
   @override
   Widget build(BuildContext context) {
-    _refreshCompleter = Completer<void>();
+    //_refreshCompleter = Completer<void>();
     return Scaffold(body: BlocBuilder<ThemeBloc, ThemeData>(
       builder: (context, theme) {
         return Center(child:
@@ -32,6 +32,12 @@ class _RoutesPageState extends State<RoutesPage> {
             // TODO: MODIFY BLOC ERROR FOR ROUTE EVENT
             shuttleBloc.add(ShuttleEvent.getRoutes);
           } else if (state is ShuttleLoaded) {
+            return LoadedState(
+              routes: state.routes,
+              stops: state.stops,
+              theme: theme,
+            );
+            /*
             return RefreshIndicator(
               onRefresh: () {
                 shuttleBloc.add(ShuttleEvent.getRoutes);
@@ -43,6 +49,8 @@ class _RoutesPageState extends State<RoutesPage> {
                 theme: theme,
               ),
             );
+            */
+
           }
           return LoadingState();
         }));

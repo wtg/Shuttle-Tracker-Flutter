@@ -166,7 +166,7 @@ packages:
       name: flutter_launcher_icons
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.7.4"
+    version: "0.7.5"
   flutter_map:
     dependency: "direct main"
     description:
@@ -174,6 +174,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.8.2"
+  flutter_map_marker_popup:
+    dependency: "direct main"
+    description:
+      name: flutter_map_marker_popup
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.1.4"
   flutter_native_splash:
     dependency: "direct main"
     description:
@@ -400,7 +407,7 @@ packages:
       name: responsive_framework
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.0.5"
+    version: "0.0.6"
   shared_preferences:
     dependency: "direct main"
     description:

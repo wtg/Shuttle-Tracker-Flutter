@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_map_marker_popup/flutter_map_marker_popup.dart';
+import 'package:flutter_shuttletracker/pages/map_page/map_widgets/popup.dart';
 import 'package:latlong/latlong.dart';
 
 import '../../../blocs/theme/theme_bloc.dart';
@@ -18,18 +20,10 @@ class LoadedMap extends StatefulWidget {
   final List<ShuttleUpdate> updates;
   final LatLng location;
 
-  /// Map of with the route number as key and color of that route as the value
-  final Map<int, Color> _colors = {};
-
-  /// Map of with name of route as key and ShuttleImage as the value
-  final Map<String, ShuttleImage> _mapkey = {};
-
-  /// List of all ids
-  final List<int> _ids = [];
-
   static const darkLink =
       'https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}@2x.png';
-  static const lightLink = 'http://tile.stamen.com/toner-lite/{z}/{x}/{y}@2x.png';
+  static const lightLink =
+      'http://tile.stamen.com/toner-lite/{z}/{x}/{y}@2x.png';
 
   LoadedMap({this.routes, this.location, this.stops, this.updates});
 
@@ -38,14 +32,24 @@ class LoadedMap extends StatefulWidget {
 }
 
 class _LoadedMapState extends State<LoadedMap> with TickerProviderStateMixin {
-  MapController mapController = MapController();
+  MapController _mapController = MapController();
+  PopupController _popupLayerController = PopupController();
+
+  /// Map of with the route number as key and color of that route as the value
+  Map<int, Color> _colors = {};
+
+  /// Map of with name of route as key and ShuttleImage as the value
+  Map<String, ShuttleImage> _mapkey = {};
+
+  /// List of all ids
+  List<int> _ids = [];
 
   void animatedMapMove(LatLng destLocation, double destZoom) {
     final _latTween = Tween<double>(
-        begin: mapController.center.latitude, end: destLocation.latitude);
+        begin: _mapController.center.latitude, end: destLocation.latitude);
     final _lngTween = Tween<double>(
-        begin: mapController.center.longitude, end: destLocation.longitude);
-    final _zoomTween = Tween<double>(begin: mapController.zoom, end: destZoom);
+        begin: _mapController.center.longitude, end: destLocation.longitude);
+    final _zoomTween = Tween<double>(begin: _mapController.zoom, end: destZoom);
 
     // Create a animation controller that has a duration and a TickerProvider.
     var controller = AnimationController(
@@ -55,7 +59,7 @@ class _LoadedMapState extends State<LoadedMap> with TickerProviderStateMixin {
         CurvedAnimation(parent: controller, curve: Curves.fastOutSlowIn);
 
     controller.addListener(() {
-      mapController.move(
+      _mapController.move(
           LatLng(_latTween.evaluate(animation), _lngTween.evaluate(animation)),
           _zoomTween.evaluate(animation));
     });
@@ -93,7 +97,7 @@ class _LoadedMapState extends State<LoadedMap> with TickerProviderStateMixin {
     var markers = <Marker>[];
 
     for (var stop in stops) {
-      if (widget._ids.contains(stop.id)) {
+      if (_ids.contains(stop.id)) {
         markers.add(stop.getMarker(animatedMapMove));
       }
     }
@@ -132,6 +136,11 @@ class _LoadedMapState extends State<LoadedMap> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    var routes = _createRoutes(widget.routes, _ids, _mapkey, _colors);
+    var updates = _createUpdates(widget.updates, _colors);
+    var stops = _createStops(widget.stops);
+    var location = _createLocation(widget.location);
+
     return BlocBuilder<ThemeBloc, ThemeData>(
       builder: (context, theme) {
         var isDarkMode = theme.bottomAppBarColor == Colors.black;
@@ -141,7 +150,7 @@ class _LoadedMapState extends State<LoadedMap> with TickerProviderStateMixin {
               /// Map
               Flexible(
                 child: FlutterMap(
-                  mapController: mapController,
+                  mapController: _mapController,
                   options: MapOptions(
                     nePanBoundary: LatLng(42.78, -73.63),
                     swPanBoundary: LatLng(42.68, -73.71),
@@ -149,6 +158,8 @@ class _LoadedMapState extends State<LoadedMap> with TickerProviderStateMixin {
                     zoom: 14,
                     maxZoom: 16, // max you can zoom in
                     minZoom: 13, // min you can zoom out
+                    plugins: [PopupMarkerPlugin()],
+                    onTap: (_) => _popupLayerController.hidePopup(),
                   ),
                   layers: [
                     TileLayerOptions(
@@ -158,15 +169,19 @@ class _LoadedMapState extends State<LoadedMap> with TickerProviderStateMixin {
                       subdomains: ['a', 'b', 'c'],
                       tileProvider: CachedNetworkTileProvider(),
                     ),
-                    PolylineLayerOptions(
-                        polylines: _createRoutes(widget.routes, widget._ids,
-                            widget._mapkey, widget._colors)),
-                    MarkerLayerOptions(
-                        markers:
-                            _createUpdates(widget.updates, widget._colors)),
-                    MarkerLayerOptions(markers: _createStops(widget.stops)),
-                    MarkerLayerOptions(
-                        markers: _createLocation(widget.location)),
+                    PolylineLayerOptions(polylines: routes),
+                    MarkerLayerOptions(markers: updates),
+                    MarkerLayerOptions(markers: stops),
+                    MarkerLayerOptions(markers: location),
+                    PopupMarkerLayerOptions(
+                        markers: stops,
+                        popupSnap: PopupSnap.top,
+                        popupController: _popupLayerController,
+                        popupBuilder: (BuildContext _, Marker marker) {
+                          //animatedMapMove(marker.point, 15.0);
+                          //sleep(const Duration(seconds: 1));
+                          return ExamplePopup(marker);
+                        }),
                   ],
                 ),
               ),
@@ -174,7 +189,7 @@ class _LoadedMapState extends State<LoadedMap> with TickerProviderStateMixin {
           ),
           Attribution(),
           Mapkey(
-            mapkey: widget._mapkey,
+            mapkey: _mapkey,
           ),
         ]);
       },

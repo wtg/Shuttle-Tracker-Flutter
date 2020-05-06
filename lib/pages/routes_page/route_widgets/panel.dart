@@ -20,7 +20,13 @@ class _PanelState extends State<Panel> {
   List<Widget> _getStopTileList(ThemeData theme) {
     var tileList = <Card>[];
     for (var shuttleStop in widget.routeStops) {
-      tileList.add(Card(color: theme.backgroundColor, child: ListTile(leading: Text(shuttleStop.name, style: theme.textTheme.body1,))));
+      tileList.add(Card(
+          color: theme.backgroundColor,
+          child: ListTile(
+              leading: Text(
+            shuttleStop.name,
+            style: theme.textTheme.body1,
+          ))));
     }
     return tileList;
   }
@@ -93,8 +99,7 @@ class _PanelState extends State<Panel> {
                     child: ListView.builder(
                         controller: widget.scrollController,
                         itemCount: _stopTileList.length,
-                        itemBuilder: (context, index) =>
-                            _stopTileList[index]),
+                        itemBuilder: (context, index) => _stopTileList[index]),
                   ),
                 ),
               ],

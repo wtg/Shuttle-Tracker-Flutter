@@ -28,8 +28,8 @@ class LoadedMap extends StatefulWidget {
   final List<int> _ids = [];
 
   static const darkLink =
-      'https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png';
-  static const lightLink = 'http://tile.stamen.com/toner-lite/{z}/{x}/{y}.png';
+      'https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}@2x.png';
+  static const lightLink = 'http://tile.stamen.com/toner-lite/{z}/{x}/{y}@2x.png';
 
   LoadedMap({this.routes, this.location, this.stops, this.updates});
 

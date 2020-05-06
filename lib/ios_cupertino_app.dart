@@ -57,39 +57,35 @@ class _IOSCupertinoAppState extends State<IOSCupertinoApp> {
           minWidth: 370,
           defaultScale: true,
         ),
-        home: SafeArea(
-          top: false,
-          bottom: false,
-          child: CupertinoTabScaffold(
-            tabBar: CupertinoTabBar(
-              activeColor: Colors.red,
-              backgroundColor: widget.theme.appBarTheme.color,
-              items: _items,
-              currentIndex: _selectedTab,
-              onTap: (index) {
-                setState(() {
-                  _selectedTab = index;
-                });
-              },
-            ),
-            tabBuilder: (context, i) {
-              return CupertinoTabView(
-                builder: (context) {
-                  return CupertinoPageScaffold(
-                      navigationBar: CupertinoNavigationBar(
-                        padding: EdgeInsetsDirectional.only(bottom: 10),
-                        backgroundColor: widget.theme.appBarTheme.color,
-                        middle: Image.asset(
-                          'assets/img/logo.png',
-                          height: 50,
-                          width: 50,
-                        ),
-                      ),
-                      child: widget.pageOptions[i]);
-                },
-              );
+        home: CupertinoTabScaffold(
+          tabBar: CupertinoTabBar(
+            activeColor: Colors.red,
+            backgroundColor: widget.theme.appBarTheme.color,
+            items: _items,
+            currentIndex: _selectedTab,
+            onTap: (index) {
+              setState(() {
+                _selectedTab = index;
+              });
             },
           ),
+          tabBuilder: (context, i) {
+            return CupertinoTabView(
+              builder: (context) {
+                return CupertinoPageScaffold(
+                    navigationBar: CupertinoNavigationBar(
+                      padding: EdgeInsetsDirectional.only(bottom: 10),
+                      backgroundColor: widget.theme.appBarTheme.color,
+                      middle: Image.asset(
+                        'assets/img/logo.png',
+                        height: 50,
+                        width: 50,
+                      ),
+                    ),
+                    child: widget.pageOptions[i]);
+              },
+            );
+          },
         ),
       ),
     );

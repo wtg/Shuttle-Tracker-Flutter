@@ -71,6 +71,7 @@ class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
     //print("Number of stops on map: ${markers.length}");
     return markers;
   }
+
   /*
   LatLng _getCentroid(List<ShuttleStop> routeStops) {
     LatLng centroid = LatLng(0, 0);

@@ -155,7 +155,7 @@ class _LoadedMapState extends State<LoadedMap> with TickerProviderStateMixin {
                     nePanBoundary: LatLng(42.78, -73.63),
                     swPanBoundary: LatLng(42.68, -73.71),
                     center: LatLng(42.731, -73.6758),
-                    zoom: 14.25,
+                    zoom: 14,
                     maxZoom: 16, // max you can zoom in
                     minZoom: 13, // min you can zoom out
                     plugins: [PopupMarkerPlugin()],
@@ -180,7 +180,7 @@ class _LoadedMapState extends State<LoadedMap> with TickerProviderStateMixin {
                         popupBuilder: (BuildContext _, Marker marker) {
                           //animatedMapMove(marker.point, 15.0);
                           //sleep(const Duration(seconds: 1));
-                          return ExamplePopup(marker);
+                          return Popup(marker);
                         }),
                   ],
                 ),

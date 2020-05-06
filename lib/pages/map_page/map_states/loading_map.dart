@@ -12,7 +12,7 @@ class _LoadingMapState extends State<LoadingMap> {
   Widget build(BuildContext context) {
     return Center(
       child: PlatformCircularProgressIndicator(
-        ios: (_) => CupertinoProgressIndicatorData(radius: 20),
+        ios: (_) => CupertinoProgressIndicatorData(radius: 15),
       ),
     );
   }

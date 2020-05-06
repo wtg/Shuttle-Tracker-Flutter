@@ -12,7 +12,7 @@ class _LoadingState extends State<LoadingState> {
   Widget build(BuildContext context) {
     return Center(
       child: PlatformCircularProgressIndicator(
-        ios: (_) => CupertinoProgressIndicatorData(radius: 10),
+        ios: (_) => CupertinoProgressIndicatorData(radius: 15),
       ),
     );
   }

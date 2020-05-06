@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_map/flutter_map.dart';
@@ -70,13 +72,16 @@ class _CustomListTileState extends State<CustomListTile> {
             context,
             platformPageRoute(
               context: context,
-              builder: (_) => DetailPage(
-                title: widget.route.name,
-                polyline: polyline,
-                shuttleStops: widget.stops,
-                ids: ids,
-                routeColor: color,
-              ),
+              builder: (_) {
+                //sleep(const Duration(milliseconds: 300));
+                return DetailPage(
+                  title: widget.route.name,
+                  polyline: polyline,
+                  shuttleStops: widget.stops,
+                  ids: ids,
+                  routeColor: color,
+                );
+              },
             ),
           );
         },

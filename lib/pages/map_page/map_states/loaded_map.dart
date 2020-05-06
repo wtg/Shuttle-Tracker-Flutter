@@ -154,8 +154,8 @@ class _LoadedMapState extends State<LoadedMap> with TickerProviderStateMixin {
                   options: MapOptions(
                     nePanBoundary: LatLng(42.78, -73.63),
                     swPanBoundary: LatLng(42.68, -73.71),
-                    center: LatLng(42.731, -73.6767),
-                    zoom: 14,
+                    center: LatLng(42.731, -73.6758),
+                    zoom: 14.25,
                     maxZoom: 16, // max you can zoom in
                     minZoom: 13, // min you can zoom out
                     plugins: [PopupMarkerPlugin()],

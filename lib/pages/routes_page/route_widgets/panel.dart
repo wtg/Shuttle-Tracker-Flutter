@@ -5,10 +5,10 @@ import 'package:flutter_shuttletracker/models/shuttle_stop.dart';
 class Panel extends StatefulWidget {
   final ScrollController scrollController;
   final Color routeColor;
-  final List<ShuttleStop> shuttleStops;
+  final List<ShuttleStop> routeStops;
   final List<int> ids;
 
-  Panel({this.scrollController, this.routeColor, this.shuttleStops, this.ids});
+  Panel({this.scrollController, this.routeColor, this.routeStops, this.ids});
 
   @override
   _PanelState createState() => _PanelState();
@@ -17,7 +17,7 @@ class Panel extends StatefulWidget {
 class _PanelState extends State<Panel> {
   List<Widget> _getStopTileList() {
     var tileList = <Card>[];
-    for (var shuttleStop in widget.shuttleStops) {
+    for (var shuttleStop in widget.routeStops) {
       tileList.add(Card(child: ListTile(leading: Text(shuttleStop.name))));
     }
     return tileList;

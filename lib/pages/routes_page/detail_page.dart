@@ -126,7 +126,7 @@ class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
             panelBuilder: (sc) => Panel(
                 scrollController: sc,
                 routeColor: widget.routeColor,
-                shuttleStops: widget.shuttleStops,
+                routeStops: routeStops,
                 ids: widget.ids),
             maxHeight: _panelHeightOpen,
             borderRadius: BorderRadius.only(

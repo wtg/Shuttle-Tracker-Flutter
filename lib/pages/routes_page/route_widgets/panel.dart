@@ -25,7 +25,7 @@ class _PanelState extends State<Panel> {
           child: ListTile(
               leading: Text(
             shuttleStop.name,
-            style: theme.textTheme.body1,
+            style: theme.textTheme.bodyText1,
           ))));
     }
     return tileList;

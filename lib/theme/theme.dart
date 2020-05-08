@@ -11,11 +11,11 @@ final ThemeData lightMode = ThemeData(
   hoverColor: Colors.black,
   primarySwatch: Colors.red,
   textTheme: TextTheme(
-    body1: TextStyle(
+    bodyText1: TextStyle(
         color: Colors.black,
         fontSize: Platform.isIOS ? 11.0 : 13.0,
         fontStyle: FontStyle.normal),
-    subtitle: TextStyle(
+    subtitle1: TextStyle(
         color: Colors.black,
         fontSize: Platform.isIOS ? 9.0 : 11.0,
         fontStyle: FontStyle.normal),
@@ -35,11 +35,11 @@ final ThemeData darkMode = ThemeData(
   hoverColor: Colors.white,
   primarySwatch: Colors.red,
   textTheme: TextTheme(
-    body1: TextStyle(
+    bodyText1: TextStyle(
         color: Colors.white,
         fontSize: Platform.isIOS ? 11.0 : 13.0,
         fontStyle: FontStyle.normal),
-    subtitle: TextStyle(
+    subtitle1: TextStyle(
         color: Colors.white,
         fontSize: Platform.isIOS ? 9.0 : 11.0,
         fontStyle: FontStyle.normal),

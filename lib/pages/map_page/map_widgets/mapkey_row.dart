@@ -21,7 +21,7 @@ class MapkeyRow extends StatelessWidget {
           ),
           Text(
             text,
-            style: theme.textTheme.body1,
+            style: theme.textTheme.bodyText1,
           ),
         ],
       );

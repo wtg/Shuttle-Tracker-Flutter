@@ -25,7 +25,7 @@ class Hyperlink extends StatelessWidget {
         child: Text(
           text,
           style: TextStyle(
-              color: Colors.blue, fontSize: theme.textTheme.subtitle.fontSize),
+              color: Colors.blue, fontSize: theme.textTheme.subtitle1.fontSize),
         ),
         onTap: _launchURL,
       );

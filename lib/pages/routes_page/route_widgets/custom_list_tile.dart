@@ -45,12 +45,12 @@ class _CustomListTileState extends State<CustomListTile> {
           mainAxisAlignment: MainAxisAlignment.end,
           children: <Widget>[
             Container(
-                child: widget.route.enabled && widget.route.active
+                child: widget.isEnabled && widget.isActive
                     ? Icon(
                         Icons.check_circle,
                         color: Colors.green,
                       )
-                    : widget.route.enabled && !widget.route.active
+                    : widget.isEnabled && !widget.isActive
                         ? Icon(
                             Icons.error,
                             color: Colors.yellow[700],
@@ -69,6 +69,7 @@ class _CustomListTileState extends State<CustomListTile> {
           Navigator.push(
             context,
             platformPageRoute(
+              fullscreenDialog: true,
               context: context,
               builder: (_) {
                 //sleep(const Duration(milliseconds: 300));

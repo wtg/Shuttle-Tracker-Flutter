@@ -1,3 +1,4 @@
+[![Codemagic build status](https://api.codemagic.io/apps/5eb728e7a6d15e6c958d597a/5eb728e7a6d15e6c958d5979/status_badge.svg)](https://codemagic.io/apps/5eb728e7a6d15e6c958d597a/5eb728e7a6d15e6c958d5979/latest_build)
 <h1 align="center">Flutter ShuttleTracker</h1>
 
 <div align="center">
@@ -11,7 +12,7 @@ Flutter ShuttleTracker is a native cross-platform port of ShuttleTracker that ut
 ## Showcase
 
 <p float="center">
-  <img src="https://github.com/wtg/Flutter_ShuttleTracker/blob/dev/assets/img/merged.png" />
+  <img src="https://github.com/wtg/Flutter_ShuttleTracker/blob/master/assets/img/merged.png" />
 
 </p>
 

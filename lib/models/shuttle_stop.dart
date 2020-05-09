@@ -43,17 +43,29 @@ class ShuttleStop extends ShuttlePoint {
       width: 35.0,
       height: 35.0,
       point: getLatLng,
-      builder: (ctx) => Container(
-          child: GestureDetector(
-              onTap: () {
-                animatedMapMove(getLatLng, 15.0);
-                print('Stop $name clicked on');
-              },
-              child: Container(
-                  decoration: BoxDecoration(
-                      border: Border.all(width: 12, style: BorderStyle.none),
-                      shape: BoxShape.circle),
-                  child: Image.asset(
-                    'assets/img/circle.png',
-                  )))));
+      builder: (ctx) => GestureDetector(
+          onTap: () {
+            animatedMapMove(getLatLng, 15.0);
+            print('Stop $name clicked on');
+          },
+          child: Container(
+              decoration: BoxDecoration(
+                  border: Border.all(width: 12, style: BorderStyle.none),
+                  shape: BoxShape.circle),
+              child: Image.asset(
+                'assets/img/circle.png',
+              ))
+
+          /*
+      Container(
+          child: Container(
+              decoration: BoxDecoration(
+                  border: Border.all(width: 12, style: BorderStyle.none),
+                  shape: BoxShape.circle),
+              child: Image.asset(
+                'assets/img/circle.png',
+              ))
+
+*/
+          ));
 }

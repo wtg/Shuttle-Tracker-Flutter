@@ -12,9 +12,11 @@ class ShuttleRepository {
   final _shuttleProvider = ShuttleApiProvider();
   //final _shuttleProvider = ShuttleLocalProvider();
 
-  Future<List<ShuttleRoute>> get getRoutes async => _shuttleProvider.getRoutes();
+  Future<List<ShuttleRoute>> get getRoutes async =>
+      _shuttleProvider.getRoutes();
   Future<List<ShuttleStop>> get getStops async => _shuttleProvider.getStops();
-  Future<List<ShuttleUpdate>> get getUpdates async => _shuttleProvider.getUpdates();
+  Future<List<ShuttleUpdate>> get getUpdates async =>
+      _shuttleProvider.getUpdates();
   Future<LatLng> get getLocation async => _shuttleProvider.getLocation();
   bool get getIsConnected => _shuttleProvider.getIsConnected;
 }

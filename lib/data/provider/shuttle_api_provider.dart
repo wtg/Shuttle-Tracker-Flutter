@@ -17,9 +17,9 @@ class ShuttleApiProvider {
   /// This function will fetch the data from the JSON API and return a decoded
   Future<http.Response> fetch(String type) async {
     var client = http.Client();
-    final response = await client.get('https://shuttles.rpi.edu/$type');
+    http.Response response;
     try {
-
+      response = await client.get('https://shuttles.rpi.edu/$type');
       createJSONFile('$type', response);
 
       if (response.statusCode == 200) {
@@ -37,25 +37,39 @@ class ShuttleApiProvider {
 
   /// Getter method to retrieve the list of routes
   Future<List<ShuttleRoute>> getRoutes() async {
-    var response = await fetch('routes', );
-    var jsonDecoded = json.decode(response.body);
-    List<ShuttleRoute> routeList = jsonDecoded.map<ShuttleRoute>((json) => ShuttleRoute.fromJson(json)).toList();
+    var response = await fetch('routes');
+    List<ShuttleRoute> routeList = response != null
+        ? json
+            .decode(response.body)
+            .map<ShuttleRoute>((json) => ShuttleRoute.fromJson(json))
+            .toList()
+        : [];
     return routeList;
   }
 
   /// Getter method to retrieve the list of stops
   Future<List<ShuttleStop>> getStops() async {
-    var response = await fetch('stops',);
-    var jsonDecoded = json.decode(response.body);
-    List<ShuttleStop> stopsList = jsonDecoded.map<ShuttleStop>((json) => ShuttleStop.fromJson(json)).toList();
+    var response = await fetch('stops');
+
+    List<ShuttleStop> stopsList = response != null
+        ? json
+            .decode(response.body)
+            .map<ShuttleStop>((json) => ShuttleStop.fromJson(json))
+            .toList()
+        : [];
     return stopsList;
   }
 
   /// Getter method to retrieve the list of updated shuttles
   Future<List<ShuttleUpdate>> getUpdates() async {
-    var response = await fetch('updates', );
-    var jsonDecoded = json.decode(response.body);
-    List<ShuttleUpdate> updatesList = jsonDecoded.map<ShuttleUpdate>((json) => ShuttleUpdate.fromJson(json)).toList();
+    var response = await fetch('updates');
+
+    List<ShuttleUpdate> updatesList = response != null
+        ? json
+            .decode(response.body)
+            .map<ShuttleUpdate>((json) => ShuttleUpdate.fromJson(json))
+            .toList()
+        : [];
     return updatesList;
   }
 

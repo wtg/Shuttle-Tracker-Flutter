@@ -21,7 +21,7 @@ dependencies:
   sliding_up_panel: ^1.0.2
   shared_preferences: ^0.5.7
   flutter_native_splash: ^0.1.9
-  flutter_platform_widgets: ^0.32.5
+  flutter_platform_widgets: ^0.40.0
   flutter_widget_from_html: ^0.3.3
   observable: ^0.22.2
   flutter_svg: ^0.17.4
@@ -75,6 +75,14 @@ flutter:
     - assets/json_test/routes.json
     - assets/json_test/stops.json
     - assets/json_test/updates.json
+  
+  fonts:
+    - family: Helvetica
+      fonts:
+        - asset: fonts/helvetica.ttf
+
+
+
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

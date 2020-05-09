@@ -17,24 +17,15 @@ class _IOSCupertinoAppState extends State<IOSCupertinoApp> {
   int _selectedTab = 0;
   final _items = [
     BottomNavigationBarItem(
-      icon: Icon(IconData(0xf398,
-          fontFamily: 'CupertinoIcons',
-          fontPackage: 'cupertino_icons',
-          matchTextDirection: true)),
+      icon: Icon(Icons.navigation),
       title: Text('Map'),
     ),
     BottomNavigationBarItem(
-      icon: Icon(IconData(0xf393,
-          fontFamily: 'CupertinoIcons',
-          fontPackage: 'cupertino_icons',
-          matchTextDirection: true)),
+      icon: Icon(Icons.map),
       title: Text('Routes'),
     ),
     BottomNavigationBarItem(
-      icon: Icon(IconData(0xf453,
-          fontFamily: 'CupertinoIcons',
-          fontPackage: 'cupertino_icons',
-          matchTextDirection: true)),
+      icon: Icon(Icons.list),
       title: Text('Schedules'),
     ),
     BottomNavigationBarItem(

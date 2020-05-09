@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 import '../../blocs/shuttle/shuttle_bloc.dart';
 import '../../blocs/theme/theme_bloc.dart';
@@ -21,7 +22,7 @@ class _RoutesPageState extends State<RoutesPage> {
   @override
   Widget build(BuildContext context) {
     //_refreshCompleter = Completer<void>();
-    return Scaffold(body: BlocBuilder<ThemeBloc, ThemeData>(
+    return PlatformScaffold(body: BlocBuilder<ThemeBloc, ThemeData>(
       builder: (context, theme) {
         return Center(child:
             BlocBuilder<ShuttleBloc, ShuttleState>(builder: (context, state) {

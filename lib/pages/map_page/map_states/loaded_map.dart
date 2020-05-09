@@ -146,40 +146,36 @@ class _LoadedMapState extends State<LoadedMap> with TickerProviderStateMixin {
     return BlocBuilder<ThemeBloc, ThemeData>(
       builder: (context, theme) {
         var isDarkMode = theme.bottomAppBarColor == Colors.black;
-        return SlidingUpPanel(
-          controller: _panelController,
-          panel: Container(),
-          body: Stack(children: <Widget>[
-            Column(
-              children: [
-                /// Map
-                Flexible(
-                  child: FlutterMap(
-                    mapController: _mapController,
-                    options: MapOptions(
-                      nePanBoundary: LatLng(42.78, -73.63),
-                      swPanBoundary: LatLng(42.68, -73.71),
-                      center: LatLng(42.731, -73.6758),
-                      zoom: 14,
-                      maxZoom: 16, // max you can zoom in
-                      minZoom: 13, // min you can zoom out
-                      //plugins: [PopupMarkerPlugin()],
-                      //onTap: (_) => _popupLayerController.hidePopup(),
+        return Stack(children: <Widget>[
+          Column(
+            children: [
+              /// Map
+              Flexible(
+                child: FlutterMap(
+                  mapController: _mapController,
+                  options: MapOptions(
+                    nePanBoundary: LatLng(42.78, -73.63),
+                    swPanBoundary: LatLng(42.68, -73.71),
+                    center: LatLng(42.729, -73.6758),
+                    zoom: 14,
+                    maxZoom: 16, // max you can zoom in
+                    minZoom: 13, // min you can zoom out
+                    //plugins: [PopupMarkerPlugin()],
+                    //onTap: (_) => _popupLayerController.hidePopup(),
+                  ),
+                  layers: [
+                    TileLayerOptions(
+                      backgroundColor: theme.bottomAppBarColor,
+                      urlTemplate:
+                          isDarkMode ? LoadedMap.darkLink : LoadedMap.lightLink,
+                      subdomains: ['a', 'b', 'c'],
+                      tileProvider: CachedNetworkTileProvider(),
                     ),
-                    layers: [
-                      TileLayerOptions(
-                        backgroundColor: theme.bottomAppBarColor,
-                        urlTemplate: isDarkMode
-                            ? LoadedMap.darkLink
-                            : LoadedMap.lightLink,
-                        subdomains: ['a', 'b', 'c'],
-                        tileProvider: CachedNetworkTileProvider(),
-                      ),
-                      PolylineLayerOptions(polylines: routes),
-                      MarkerLayerOptions(markers: updates),
-                      MarkerLayerOptions(markers: stops),
-                      MarkerLayerOptions(markers: location),
-                      /*
+                    PolylineLayerOptions(polylines: routes),
+                    MarkerLayerOptions(markers: updates),
+                    MarkerLayerOptions(markers: stops),
+                    MarkerLayerOptions(markers: location),
+                    /*
                       PopupMarkerLayerOptions(
                           markers: stops,
                           popupSnap: PopupSnap.top,
@@ -189,19 +185,16 @@ class _LoadedMapState extends State<LoadedMap> with TickerProviderStateMixin {
                             return Popup(marker);
                           }),
                       */
-                    ],
-                  ),
+                  ],
                 ),
-              ],
-            ),
-            //Attribution(),
-            /*
-            Mapkey(
-              mapkey: _mapkey,
-            ),
-            */
-          ]),
-        );
+              ),
+            ],
+          ),
+          Attribution(),
+          Mapkey(
+            mapkey: _mapkey,
+          ),
+        ]);
       },
     );
   }

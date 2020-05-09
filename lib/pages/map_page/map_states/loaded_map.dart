@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_map_marker_popup/flutter_map_marker_popup.dart';
-import 'package:flutter_shuttletracker/pages/map_page/map_widgets/popup.dart';
+//import 'package:flutter_map_marker_popup/flutter_map_marker_popup.dart';
+//import 'package:flutter_shuttletracker/pages/map_page/map_widgets/popup.dart';
 import 'package:latlong/latlong.dart';
+import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 import '../../../blocs/theme/theme_bloc.dart';
 import '../../../models/shuttle_image.dart';
@@ -33,7 +34,8 @@ class LoadedMap extends StatefulWidget {
 
 class _LoadedMapState extends State<LoadedMap> with TickerProviderStateMixin {
   MapController _mapController = MapController();
-  PopupController _popupLayerController = PopupController();
+  PanelController _panelController = PanelController();
+  //PopupController _popupLayerController = PopupController();
 
   /// Map of with the route number as key and color of that route as the value
   Map<int, Color> _colors = {};
@@ -144,54 +146,62 @@ class _LoadedMapState extends State<LoadedMap> with TickerProviderStateMixin {
     return BlocBuilder<ThemeBloc, ThemeData>(
       builder: (context, theme) {
         var isDarkMode = theme.bottomAppBarColor == Colors.black;
-        return Stack(children: <Widget>[
-          Column(
-            children: [
-              /// Map
-              Flexible(
-                child: FlutterMap(
-                  mapController: _mapController,
-                  options: MapOptions(
-                    nePanBoundary: LatLng(42.78, -73.63),
-                    swPanBoundary: LatLng(42.68, -73.71),
-                    center: LatLng(42.731, -73.6758),
-                    zoom: 14,
-                    maxZoom: 16, // max you can zoom in
-                    minZoom: 13, // min you can zoom out
-                    plugins: [PopupMarkerPlugin()],
-                    onTap: (_) => _popupLayerController.hidePopup(),
-                  ),
-                  layers: [
-                    TileLayerOptions(
-                      backgroundColor: theme.bottomAppBarColor,
-                      urlTemplate:
-                          isDarkMode ? LoadedMap.darkLink : LoadedMap.lightLink,
-                      subdomains: ['a', 'b', 'c'],
-                      tileProvider: CachedNetworkTileProvider(),
+        return SlidingUpPanel(
+          controller: _panelController,
+          panel: Container(),
+          body: Stack(children: <Widget>[
+            Column(
+              children: [
+                /// Map
+                Flexible(
+                  child: FlutterMap(
+                    mapController: _mapController,
+                    options: MapOptions(
+                      nePanBoundary: LatLng(42.78, -73.63),
+                      swPanBoundary: LatLng(42.68, -73.71),
+                      center: LatLng(42.731, -73.6758),
+                      zoom: 14,
+                      maxZoom: 16, // max you can zoom in
+                      minZoom: 13, // min you can zoom out
+                      //plugins: [PopupMarkerPlugin()],
+                      //onTap: (_) => _popupLayerController.hidePopup(),
                     ),
-                    PolylineLayerOptions(polylines: routes),
-                    MarkerLayerOptions(markers: updates),
-                    MarkerLayerOptions(markers: stops),
-                    MarkerLayerOptions(markers: location),
-                    PopupMarkerLayerOptions(
-                        markers: stops,
-                        popupSnap: PopupSnap.top,
-                        popupController: _popupLayerController,
-                        popupBuilder: (BuildContext _, Marker marker) {
-                          //animatedMapMove(marker.point, 15.0);
-                          //sleep(const Duration(seconds: 1));
-                          return Popup(marker);
-                        }),
-                  ],
+                    layers: [
+                      TileLayerOptions(
+                        backgroundColor: theme.bottomAppBarColor,
+                        urlTemplate: isDarkMode
+                            ? LoadedMap.darkLink
+                            : LoadedMap.lightLink,
+                        subdomains: ['a', 'b', 'c'],
+                        tileProvider: CachedNetworkTileProvider(),
+                      ),
+                      PolylineLayerOptions(polylines: routes),
+                      MarkerLayerOptions(markers: updates),
+                      MarkerLayerOptions(markers: stops),
+                      MarkerLayerOptions(markers: location),
+                      /*
+                      PopupMarkerLayerOptions(
+                          markers: stops,
+                          popupSnap: PopupSnap.top,
+                          popupController: _popupLayerController,
+                          popupBuilder: (BuildContext _, Marker marker) {
+                    
+                            return Popup(marker);
+                          }),
+                      */
+                    ],
+                  ),
                 ),
-              ),
-            ],
-          ),
-          Attribution(),
-          Mapkey(
-            mapkey: _mapkey,
-          ),
-        ]);
+              ],
+            ),
+            //Attribution(),
+            /*
+            Mapkey(
+              mapkey: _mapkey,
+            ),
+            */
+          ]),
+        );
       },
     );
   }

@@ -124,6 +124,7 @@ class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
               ios: (_) => CupertinoNavigationBarData(
                   actionsForegroundColor: Colors.white)),
           body: SlidingUpPanel(
+            //minHeight: 0,
             panelBuilder: (sc) => Panel(
                 scrollController: sc,
                 routeColor: widget.routeColor,
@@ -134,7 +135,7 @@ class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
                 topLeft: Radius.circular(18.0),
                 topRight: Radius.circular(18.0)),
             parallaxEnabled: true,
-            parallaxOffset: 0.55,
+            parallaxOffset: 0.25,
             body: Column(
               children: [
                 /// Map
@@ -144,7 +145,7 @@ class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
                     options: MapOptions(
                       nePanBoundary: LatLng(42.78, -73.63),
                       swPanBoundary: LatLng(42.68, -73.71),
-                      center: LatLng(42.722,
+                      center: LatLng(42.719,
                           -73.6767), //_getCentroid(routeStops).latitude.isNaN ? LatLng(42.731, -73.6767) : _getCentroid(routeStops),
                       zoom: 13.9,
                       maxZoom: 16, // max you can zoom in

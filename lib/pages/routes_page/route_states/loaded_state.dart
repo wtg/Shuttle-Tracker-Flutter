@@ -34,14 +34,14 @@ class _LoadedState extends State<LoadedState> {
   @override
   Widget build(BuildContext context) {
     //notification listender used to remove scroll glow
-    return BlocBuilder<ThemeBloc, ThemeData>(builder: (context, theme) {
+    return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, theme) {
       return NotificationListener<OverscrollIndicatorNotification>(
         onNotification: (overscroll) {
           overscroll.disallowGlow();
           return null;
         },
         child: Container(
-          color: theme.bottomAppBarColor,
+          color: theme.getTheme.bottomAppBarColor,
           child: ListView.builder(
               itemCount: _getTileList().length,
               itemBuilder: (context, index) => _getTileList()[index]),

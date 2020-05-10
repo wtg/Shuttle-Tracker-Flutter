@@ -14,21 +14,22 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
-  bool isSwitched = false;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: BlocBuilder<ThemeBloc, ThemeData>(
+    return Scaffold(body: BlocBuilder<ThemeBloc, ThemeState>(
       builder: (context, theme) {
+        bool isSwitched = theme.isDarkMode;
         return Center(
             child: ListView(
           children: <Widget>[
             ListTile(
                 leading: Icon(
                   Icons.settings_brightness,
-                  color: theme.hoverColor,
+                  color: theme.getTheme.hoverColor,
                 ),
                 title: Text('Dark Mode',
-                    style: TextStyle(color: theme.hoverColor, fontSize: 18)),
+                    style: TextStyle(
+                        color: theme.getTheme.hoverColor, fontSize: 18)),
                 trailing: PlatformSwitch(
                     value: isSwitched,
                     onChanged: (value) {

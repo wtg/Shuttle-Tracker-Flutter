@@ -22,7 +22,7 @@ class _RoutesPageState extends State<RoutesPage> {
   @override
   Widget build(BuildContext context) {
     //_refreshCompleter = Completer<void>();
-    return PlatformScaffold(body: BlocBuilder<ThemeBloc, ThemeData>(
+    return PlatformScaffold(body: BlocBuilder<ThemeBloc, ThemeState>(
       builder: (context, theme) {
         return Center(child:
             BlocBuilder<ShuttleBloc, ShuttleState>(builder: (context, state) {
@@ -34,7 +34,7 @@ class _RoutesPageState extends State<RoutesPage> {
             return LoadedState(
               routes: state.routes,
               stops: state.stops,
-              theme: theme,
+              theme: theme.getTheme,
             );
             /*
             return RefreshIndicator(

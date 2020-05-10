@@ -1,22 +1,50 @@
 import 'dart:async';
 
-import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
 
 import '../../theme/theme.dart' as theme;
 
 enum ThemeEvent { toggle }
 
-class ThemeBloc extends Bloc<ThemeEvent, ThemeData> {
+class ThemeBloc extends HydratedBloc<ThemeEvent, ThemeState> {
   @override
-  ThemeData get initialState => theme.lightMode;
+  ThemeState get initialState {
+    return super.initialState ?? ThemeState(false);
+  }
 
   @override
-  Stream<ThemeData> mapEventToState(ThemeEvent event) async* {
+  ThemeState fromJson(Map<String, dynamic> source) {
+    try {
+      return ThemeState(source['isDarkMode'] as bool);
+    } catch (_) {
+      return null;
+    }
+  }
+
+  @override
+  Map<String, bool> toJson(ThemeState state) {
+    try {
+      return {'isDarkMode': state.isDarkMode};
+    } catch (_) {
+      return null;
+    }
+  }
+
+  @override
+  Stream<ThemeState> mapEventToState(ThemeEvent event) async* {
     switch (event) {
       case ThemeEvent.toggle:
-        yield state == theme.darkMode ? theme.lightMode : theme.darkMode;
+        yield state.isDarkMode == true ? ThemeState(false) : ThemeState(true);
         break;
     }
   }
+}
+
+class ThemeState {
+  bool isDarkMode;
+
+  ThemeState(this.isDarkMode);
+
+  ThemeData get getTheme => isDarkMode ? theme.darkMode : theme.lightMode;
 }

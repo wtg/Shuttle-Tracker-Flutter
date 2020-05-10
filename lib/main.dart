@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
 
 import 'android_material_app.dart';
 import 'blocs/shuttle/shuttle_bloc.dart';
@@ -15,7 +16,11 @@ import 'pages/routes_page/routes_page.dart';
 import 'pages/schedules_page/schedules_page.dart';
 import 'pages/settings_page/settings_page.dart';
 
-void main() => runApp(MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  BlocSupervisor.delegate = await HydratedBlocDelegate.build();
+  return runApp(MyApp());
+}
 
 class MyApp extends StatefulWidget {
   @override
@@ -42,19 +47,22 @@ class MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return BlocProvider(
         create: (_) => ThemeBloc(),
-        child: BlocBuilder<ThemeBloc, ThemeData>(builder: (_, theme) {
+        child: BlocBuilder<ThemeBloc, ThemeState>(builder: (_, theme) {
           SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-            systemNavigationBarColor: theme.bottomAppBarColor,
-            systemNavigationBarIconBrightness: theme.accentColorBrightness,
-            statusBarColor: theme.bottomAppBarColor,
-            statusBarIconBrightness: theme.accentColorBrightness,
+            systemNavigationBarColor: theme.getTheme.bottomAppBarColor,
+            systemNavigationBarIconBrightness:
+                theme.getTheme.accentColorBrightness,
+            statusBarColor: theme.getTheme.bottomAppBarColor,
+            statusBarIconBrightness: theme.getTheme.accentColorBrightness,
           ));
           SystemChrome.setPreferredOrientations([
             DeviceOrientation.portraitUp,
           ]);
           return Platform.isIOS
-              ? IOSCupertinoApp(theme: theme, pageOptions: _pageOptions)
-              : AndroidMaterialApp(theme: theme, pageOptions: _pageOptions);
+              ? IOSCupertinoApp(
+                  theme: theme.getTheme, pageOptions: _pageOptions)
+              : AndroidMaterialApp(
+                  theme: theme.getTheme, pageOptions: _pageOptions);
         }));
   }
 }

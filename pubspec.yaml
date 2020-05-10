@@ -17,6 +17,7 @@ environment:
   sdk: ">=2.1.0 <3.0.0"
 
 dependencies:
+  hydrated_bloc: ^4.0.0
   flutter_map_marker_popup: ^0.1.4
   sliding_up_panel: ^1.0.2
   shared_preferences: ^0.5.7
@@ -27,7 +28,7 @@ dependencies:
   flutter_svg: ^0.17.4
   flutter_bloc: ^4.0.0
   equatable: ^1.1.1
-  responsive_framework: ^0.0.6
+  responsive_framework: ^0.0.7
   http: ^0.12.1
   flutter_map: ^0.8.2 #DO NOT UPDATE PAST 0.8.2, LATER VERSIONS AFFECT DARK MODE FUNCTIONALITY!!
   geolocation: ^1.1.2

@@ -143,9 +143,9 @@ class _LoadedMapState extends State<LoadedMap> with TickerProviderStateMixin {
     var stops = _createStops(widget.stops);
     var location = _createLocation(widget.location);
 
-    return BlocBuilder<ThemeBloc, ThemeData>(
+    return BlocBuilder<ThemeBloc, ThemeState>(
       builder: (context, theme) {
-        var isDarkMode = theme.bottomAppBarColor == Colors.black;
+        var isDarkMode = theme.getTheme.bottomAppBarColor == Colors.black;
         return Stack(children: <Widget>[
           Column(
             children: [
@@ -165,7 +165,7 @@ class _LoadedMapState extends State<LoadedMap> with TickerProviderStateMixin {
                   ),
                   layers: [
                     TileLayerOptions(
-                      backgroundColor: theme.bottomAppBarColor,
+                      backgroundColor: theme.getTheme.bottomAppBarColor,
                       urlTemplate:
                           isDarkMode ? LoadedMap.darkLink : LoadedMap.lightLink,
                       subdomains: ['a', 'b', 'c'],

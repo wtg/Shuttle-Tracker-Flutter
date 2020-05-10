@@ -110,8 +110,8 @@ class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
         routeStops.add(shuttleStop);
       }
     }
-    return BlocBuilder<ThemeBloc, ThemeData>(builder: (context, theme) {
-      var isDarkMode = theme.bottomAppBarColor == Colors.black;
+    return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, theme) {
+      var isDarkMode = theme.getTheme.bottomAppBarColor == Colors.black;
       var _panelHeightOpen = MediaQuery.of(context).size.height * .45;
       return PlatformScaffold(
           appBar: PlatformAppBar(
@@ -153,7 +153,7 @@ class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
                     ),
                     layers: [
                       TileLayerOptions(
-                        backgroundColor: theme.bottomAppBarColor,
+                        backgroundColor: theme.getTheme.bottomAppBarColor,
                         urlTemplate: isDarkMode
                             ? LoadedMap.darkLink
                             : LoadedMap.lightLink,

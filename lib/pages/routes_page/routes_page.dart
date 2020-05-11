@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import '../../blocs/shuttle/shuttle_bloc.dart';
 import '../../blocs/theme/theme_bloc.dart';
@@ -43,7 +42,7 @@ class _RoutesPageState extends State<RoutesPage> {
                 shuttleBloc.add(ShuttleEvent.getRoutes);
               } else if (state is ShuttleLoaded) {
                 return RefreshIndicator(
-                  //displacement: 100,
+                  backgroundColor: theme.getTheme.appBarTheme.color,
                   onRefresh: () {
                     shuttleBloc.add(ShuttleEvent.getRoutes);
                     return _refreshCompleter.future;

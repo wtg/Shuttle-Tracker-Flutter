@@ -43,10 +43,17 @@ class _LoadedState extends State<LoadedState> {
         return null;
       },
       child: Container(
-        color: widget.theme.bottomAppBarColor,
-        child: ListView.builder(
-            itemCount: tileList.length,
-            itemBuilder: (context, index) => tileList[index]),
+        color: widget.theme.backgroundColor,
+        child: ListView.separated(
+          itemCount: tileList.length,
+          itemBuilder: (context, index) => tileList[index],
+          separatorBuilder: (context, index) {
+            return Divider(
+              color: Colors.grey,
+              height: 2,
+            );
+          },
+        ),
       ),
     );
   }

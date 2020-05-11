@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../../blocs/shuttle/shuttle_bloc.dart';
 import '../../blocs/theme/theme_bloc.dart';
@@ -33,28 +34,30 @@ class _RoutesPageState extends State<RoutesPage> {
             ),
             backgroundColor: theme.getTheme.appBarTheme.color,
           ),
-          body: Center(child:
-              BlocBuilder<ShuttleBloc, ShuttleState>(builder: (context, state) {
-            shuttleBloc = BlocProvider.of<ShuttleBloc>(context);
-            if (state is ShuttleInitial || state is ShuttleError) {
-              // TODO: MODIFY BLOC ERROR FOR ROUTE EVENT
-              shuttleBloc.add(ShuttleEvent.getRoutes);
-            } else if (state is ShuttleLoaded) {
-              return RefreshIndicator(
-                //displacement: 100,
-                onRefresh: () {
-                  shuttleBloc.add(ShuttleEvent.getRoutes);
-                  return _refreshCompleter.future;
-                },
-                child: LoadedState(
-                  routes: state.routes,
-                  stops: state.stops,
-                  theme: theme.getTheme,
-                ),
-              );
-            }
-            return LoadingState(theme: theme.getTheme);
-          })));
+          body: Material(
+            child: Center(child: BlocBuilder<ShuttleBloc, ShuttleState>(
+                builder: (context, state) {
+              shuttleBloc = BlocProvider.of<ShuttleBloc>(context);
+              if (state is ShuttleInitial || state is ShuttleError) {
+                // TODO: MODIFY BLOC ERROR FOR ROUTE EVENT
+                shuttleBloc.add(ShuttleEvent.getRoutes);
+              } else if (state is ShuttleLoaded) {
+                return RefreshIndicator(
+                  //displacement: 100,
+                  onRefresh: () {
+                    shuttleBloc.add(ShuttleEvent.getRoutes);
+                    return _refreshCompleter.future;
+                  },
+                  child: LoadedState(
+                    routes: state.routes,
+                    stops: state.stops,
+                    theme: theme.getTheme,
+                  ),
+                );
+              }
+              return LoadingState(theme: theme.getTheme);
+            })),
+          ));
     });
   }
 }

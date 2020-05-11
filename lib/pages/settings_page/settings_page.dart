@@ -27,27 +27,30 @@ class _SettingsPageState extends State<SettingsPage> {
           ),
           backgroundColor: theme.getTheme.appBarTheme.color,
         ),
-        body: SettingsList(
-          sections: [
-            SettingsSection(
-              title: 'Section',
-              tiles: [
-                SettingsTile.switchTile(
-                  title: 'Dark Mode',
-                  leading: Icon(
-                    Icons.settings_brightness,
-                    color: theme.getTheme.hoverColor,
-                  ),
-                  switchValue: isSwitched,
-                  onToggle: (bool value) {
-                    isSwitched = value;
-                    context.bloc<ThemeBloc>().add(ThemeEvent.toggle);
-                  },
+        body: Center(
+            child: ListView(
+          children: <Widget>[
+            ListTile(
+                leading: Icon(
+                  Icons.settings_brightness,
+                  color: theme.getTheme.hoverColor,
                 ),
-              ],
-            ),
+                title: Text('Dark Mode',
+                    style: TextStyle(
+                        color: theme.getTheme.hoverColor, fontSize: 18)),
+                trailing: PlatformSwitch(
+                    value: isSwitched,
+                    onChanged: (value) {
+                      isSwitched = value;
+                      context.bloc<ThemeBloc>().add(ThemeEvent.toggle);
+                    },
+                    activeColor: Colors.white,
+                    android: (_) =>
+                        MaterialSwitchData(activeTrackColor: Colors.green),
+                    ios: (_) =>
+                        CupertinoSwitchData(activeColor: Colors.green))),
           ],
-        ),
+        )),
       );
     });
   }

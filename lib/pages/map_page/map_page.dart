@@ -33,6 +33,7 @@ class _MapPageState extends State<MapPage> {
           ios: (_) => CupertinoNavigationBarData(
             padding: EdgeInsetsDirectional.only(bottom: 10),
           ),
+          android: (_) => MaterialAppBarData(centerTitle: true),
         ),
         body: Material(
           child: Center(

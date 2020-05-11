@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
@@ -17,11 +19,11 @@ class _RoutesPageState extends State<RoutesPage> {
   ShuttleBloc shuttleBloc;
   bool isSwitched = false;
   Map<String, ShuttleImage> mapkey = {};
-  //Completer<void> _refreshCompleter;
+  Completer<void> _refreshCompleter;
 
   @override
   Widget build(BuildContext context) {
-    //_refreshCompleter = Completer<void>();
+    _refreshCompleter = Completer<void>();
     return PlatformScaffold(body: BlocBuilder<ThemeBloc, ThemeState>(
       builder: (context, theme) {
         return Center(child:
@@ -31,12 +33,6 @@ class _RoutesPageState extends State<RoutesPage> {
             // TODO: MODIFY BLOC ERROR FOR ROUTE EVENT
             shuttleBloc.add(ShuttleEvent.getRoutes);
           } else if (state is ShuttleLoaded) {
-            return LoadedState(
-              routes: state.routes,
-              stops: state.stops,
-              theme: theme.getTheme,
-            );
-            /*
             return RefreshIndicator(
               onRefresh: () {
                 shuttleBloc.add(ShuttleEvent.getRoutes);
@@ -45,11 +41,9 @@ class _RoutesPageState extends State<RoutesPage> {
               child: LoadedState(
                 routes: state.routes,
                 stops: state.stops,
-                theme: theme,
+                theme: theme.getTheme,
               ),
             );
-            */
-
           }
           return LoadingState();
         }));

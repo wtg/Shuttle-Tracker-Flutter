@@ -24,15 +24,19 @@ class _LoadedState extends State<LoadedState> {
           route: route, stops: widget.stops, theme: widget.theme));
     }
     tileList.sort((a, b) {
-      return (a.isEnabled == true && b.isEnabled == false)
+      return ((a.isEnabled == true && a.isActive == true) &&
+              ((b.isEnabled == true ?? b.isActive == false) ||
+                  (b.isEnabled == false ?? b.isActive == true) ||
+                  (b.isEnabled == false ?? b.isActive == false)))
           ? -1
-          : (a.isEnabled == b.isEnabled) ? 0 : 1;
+          : (a.isEnabled == b.isEnabled && a.isActive == b.isActive) ? 0 : 1;
     });
     return tileList;
   }
 
   @override
   Widget build(BuildContext context) {
+    var tileList = _getTileList();
     //notification listender used to remove scroll glow
     return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, theme) {
       return NotificationListener<OverscrollIndicatorNotification>(
@@ -43,8 +47,8 @@ class _LoadedState extends State<LoadedState> {
         child: Container(
           color: theme.getTheme.bottomAppBarColor,
           child: ListView.builder(
-              itemCount: _getTileList().length,
-              itemBuilder: (context, index) => _getTileList()[index]),
+              itemCount: tileList.length,
+              itemBuilder: (context, index) => tileList[index]),
         ),
       );
     });

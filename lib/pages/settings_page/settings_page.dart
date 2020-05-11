@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:settings_ui/settings_ui.dart';
 
@@ -21,29 +20,26 @@ class _SettingsPageState extends State<SettingsPage> {
       builder: (context, theme) {
         bool isSwitched = theme.isDarkMode;
         return SettingsList(
-        sections: [
-          SettingsSection(
-            title: 'Section',
-            tiles: [
-              SettingsTile(
-                title: 'Language',
-                subtitle: 'English',
-                leading: Icon(Icons.language),
-                onTap: () {},
-              ),
-              SettingsTile.switchTile(
-                title: 'Use fingerprint',
-                leading: Icon(Icons.fingerprint),
-                switchValue: isSwitched,
-                onToggle: (bool value) {
-                  isSwitched = value;
-                  context.bloc<ThemeBloc>().add(ThemeEvent.toggle);
-                },
-              ),
-            ],
-          ),
-        ],
-      );
+          sections: [
+            SettingsSection(
+              title: 'Section',
+              tiles: [
+                SettingsTile.switchTile(
+                  title: 'Dark Mode',
+                  leading: Icon(
+                    Icons.settings_brightness,
+                    color: theme.getTheme.hoverColor,
+                  ),
+                  switchValue: isSwitched,
+                  onToggle: (bool value) {
+                    isSwitched = value;
+                    context.bloc<ThemeBloc>().add(ThemeEvent.toggle);
+                  },
+                ),
+              ],
+            ),
+          ],
+        );
         /*
         return Center(
             child: ListView(

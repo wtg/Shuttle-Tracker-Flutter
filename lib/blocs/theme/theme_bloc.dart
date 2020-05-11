@@ -35,7 +35,9 @@ class ThemeBloc extends HydratedBloc<ThemeEvent, ThemeState> {
   Stream<ThemeState> mapEventToState(ThemeEvent event) async* {
     switch (event) {
       case ThemeEvent.toggle:
-        yield state.isDarkMode == true ? ThemeState(isDarkMode: false) : ThemeState(isDarkMode: true);
+        yield state.isDarkMode == true
+            ? ThemeState(isDarkMode: false)
+            : ThemeState(isDarkMode: true);
         break;
     }
   }

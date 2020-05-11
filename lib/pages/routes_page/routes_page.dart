@@ -24,30 +24,37 @@ class _RoutesPageState extends State<RoutesPage> {
   @override
   Widget build(BuildContext context) {
     _refreshCompleter = Completer<void>();
-    return PlatformScaffold(body: BlocBuilder<ThemeBloc, ThemeState>(
-      builder: (context, theme) {
-        return Center(child:
-            BlocBuilder<ShuttleBloc, ShuttleState>(builder: (context, state) {
-          shuttleBloc = BlocProvider.of<ShuttleBloc>(context);
-          if (state is ShuttleInitial || state is ShuttleError) {
-            // TODO: MODIFY BLOC ERROR FOR ROUTE EVENT
-            shuttleBloc.add(ShuttleEvent.getRoutes);
-          } else if (state is ShuttleLoaded) {
-            return RefreshIndicator(
-              onRefresh: () {
-                shuttleBloc.add(ShuttleEvent.getRoutes);
-                return _refreshCompleter.future;
-              },
-              child: LoadedState(
-                routes: state.routes,
-                stops: state.stops,
-                theme: theme.getTheme,
-              ),
-            );
-          }
-          return LoadingState();
-        }));
-      },
-    ));
+    return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, theme) {
+      return PlatformScaffold(
+          appBar: PlatformAppBar(
+            title: Text(
+              "Routes",
+              style: TextStyle(color: theme.getTheme.hoverColor),
+            ),
+            backgroundColor: theme.getTheme.appBarTheme.color,
+          ),
+          body: Center(child:
+              BlocBuilder<ShuttleBloc, ShuttleState>(builder: (context, state) {
+            shuttleBloc = BlocProvider.of<ShuttleBloc>(context);
+            if (state is ShuttleInitial || state is ShuttleError) {
+              // TODO: MODIFY BLOC ERROR FOR ROUTE EVENT
+              shuttleBloc.add(ShuttleEvent.getRoutes);
+            } else if (state is ShuttleLoaded) {
+              return RefreshIndicator(
+                //displacement: 100,
+                onRefresh: () {
+                  shuttleBloc.add(ShuttleEvent.getRoutes);
+                  return _refreshCompleter.future;
+                },
+                child: LoadedState(
+                  routes: state.routes,
+                  stops: state.stops,
+                  theme: theme.getTheme,
+                ),
+              );
+            }
+            return LoadingState(theme: theme.getTheme);
+          })));
+    });
   }
 }

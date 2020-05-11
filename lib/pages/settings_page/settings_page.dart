@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:settings_ui/settings_ui.dart';
 
 import '../../blocs/theme/theme_bloc.dart';
@@ -16,10 +17,17 @@ class SettingsPage extends StatefulWidget {
 class _SettingsPageState extends State<SettingsPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: BlocBuilder<ThemeBloc, ThemeState>(
-      builder: (context, theme) {
-        bool isSwitched = theme.isDarkMode;
-        return SettingsList(
+    return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, theme) {
+      bool isSwitched = theme.isDarkMode;
+      return PlatformScaffold(
+        appBar: PlatformAppBar(
+          title: Text(
+            "Settings",
+            style: TextStyle(color: theme.getTheme.hoverColor),
+          ),
+          backgroundColor: theme.getTheme.appBarTheme.color,
+        ),
+        body: SettingsList(
           sections: [
             SettingsSection(
               title: 'Section',
@@ -39,34 +47,8 @@ class _SettingsPageState extends State<SettingsPage> {
               ],
             ),
           ],
-        );
-        /*
-        return Center(
-            child: ListView(
-          children: <Widget>[
-            ListTile(
-                leading: Icon(
-                  Icons.settings_brightness,
-                  color: theme.getTheme.hoverColor,
-                ),
-                title: Text('Dark Mode',
-                    style: TextStyle(
-                        color: theme.getTheme.hoverColor, fontSize: 18)),
-                trailing: PlatformSwitch(
-                    value: isSwitched,
-                    onChanged: (value) {
-                      isSwitched = value;
-                      context.bloc<ThemeBloc>().add(ThemeEvent.toggle);
-                    },
-                    activeColor: Colors.white,
-                    android: (_) =>
-                        MaterialSwitchData(activeTrackColor: Colors.green),
-                    ios: (_) =>
-                        CupertinoSwitchData(activeColor: Colors.green))),
-          ],
-        ));
-        */
-      },
-    ));
+        ),
+      );
+    });
   }
 }

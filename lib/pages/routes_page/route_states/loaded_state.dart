@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_shuttletracker/blocs/theme/theme_bloc.dart';
 import 'package:flutter_shuttletracker/models/shuttle_stop.dart';
 import '../../../models/shuttle_route.dart';
 import '../route_widgets/custom_list_tile.dart';
@@ -38,19 +36,18 @@ class _LoadedState extends State<LoadedState> {
   Widget build(BuildContext context) {
     var tileList = _getTileList();
     //notification listender used to remove scroll glow
-    return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, theme) {
-      return NotificationListener<OverscrollIndicatorNotification>(
-        onNotification: (overscroll) {
-          overscroll.disallowGlow();
-          return null;
-        },
-        child: Container(
-          color: theme.getTheme.bottomAppBarColor,
-          child: ListView.builder(
-              itemCount: tileList.length,
-              itemBuilder: (context, index) => tileList[index]),
-        ),
-      );
-    });
+
+    return NotificationListener<OverscrollIndicatorNotification>(
+      onNotification: (overscroll) {
+        overscroll.disallowGlow();
+        return null;
+      },
+      child: Container(
+        color: widget.theme.bottomAppBarColor,
+        child: ListView.builder(
+            itemCount: tileList.length,
+            itemBuilder: (context, index) => tileList[index]),
+      ),
+    );
   }
 }

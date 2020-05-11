@@ -115,6 +115,17 @@ class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
       var _panelHeightOpen = MediaQuery.of(context).size.height * .45;
       return PlatformScaffold(
           appBar: PlatformAppBar(
+              leading: GestureDetector(
+                  onTap: () => Navigator.pop(context),
+                  child: Container(
+                      decoration: BoxDecoration(
+                          border:
+                              Border.all(width: 10, style: BorderStyle.none),
+                          shape: BoxShape.rectangle),
+                      child: Icon(
+                        Icons.arrow_back_ios,
+                        size: 20,
+                      ))),
               title: Text(
                 widget.title,
                 style: TextStyle(

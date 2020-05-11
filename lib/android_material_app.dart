@@ -39,14 +39,6 @@ class _AndroidMaterialAppState extends State<AndroidMaterialApp> {
       home: SafeArea(
         bottom: false,
         child: Scaffold(
-          appBar: AppBar(
-            centerTitle: true,
-            title: Image.asset(
-              'assets/img/logo.png',
-              height: 40,
-              width: 40,
-            ),
-          ),
           bottomNavigationBar: BottomNavigationBar(
             backgroundColor: widget.theme.appBarTheme.color,
             type: BottomNavigationBarType.fixed,

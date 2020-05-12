@@ -10,6 +10,7 @@ enum ThemeEvent { toggle }
 class ThemeBloc extends HydratedBloc<ThemeEvent, ThemeState> {
   @override
   ThemeState get initialState {
+    // If there is no saved json data, choose light mode
     return super.initialState ?? ThemeState(isDarkMode: false);
   }
 

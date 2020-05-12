@@ -20,6 +20,7 @@ class _SettingsPageState extends State<SettingsPage> {
       bool isSwitched = theme.isDarkMode;
       return PlatformScaffold(
         appBar: PlatformAppBar(
+          automaticallyImplyLeading: false,
           title: Text(
             "Settings",
             style: TextStyle(color: theme.getTheme.hoverColor),

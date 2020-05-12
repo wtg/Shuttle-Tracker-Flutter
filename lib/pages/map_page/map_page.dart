@@ -24,6 +24,7 @@ class _MapPageState extends State<MapPage> {
     return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, theme) {
       return PlatformScaffold(
         appBar: PlatformAppBar(
+          automaticallyImplyLeading: false,
           title: Image.asset(
             'assets/img/logo.png',
             height: 40,

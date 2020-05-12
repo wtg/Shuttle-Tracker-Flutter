@@ -21,11 +21,11 @@ class _IOSCupertinoAppState extends State<IOSCupertinoApp> {
       title: Text('Map'),
     ),
     BottomNavigationBarItem(
-      icon: Icon(Icons.map),
+      icon: Icon(Icons.directions_bus),
       title: Text('Routes'),
     ),
     BottomNavigationBarItem(
-      icon: Icon(Icons.list),
+      icon: Icon(Icons.access_time),
       title: Text('Schedules'),
     ),
     BottomNavigationBarItem(
@@ -41,6 +41,11 @@ class _IOSCupertinoAppState extends State<IOSCupertinoApp> {
     return Theme(
       data: widget.theme,
       child: CupertinoApp(
+        localizationsDelegates: [
+          DefaultMaterialLocalizations.delegate,
+          DefaultCupertinoLocalizations.delegate,
+          DefaultWidgetsLocalizations.delegate,
+        ],
         debugShowCheckedModeBanner: false,
         builder: (context, widget) => ResponsiveWrapper.builder(
           BouncingScrollWrapper.builder(context, widget),
@@ -63,17 +68,7 @@ class _IOSCupertinoAppState extends State<IOSCupertinoApp> {
           tabBuilder: (context, i) {
             return CupertinoTabView(
               builder: (context) {
-                return CupertinoPageScaffold(
-                    navigationBar: CupertinoNavigationBar(
-                      padding: EdgeInsetsDirectional.only(bottom: 10),
-                      backgroundColor: widget.theme.appBarTheme.color,
-                      middle: Image.asset(
-                        'assets/img/logo.png',
-                        height: 50,
-                        width: 50,
-                      ),
-                    ),
-                    child: widget.pageOptions[i]);
+                return CupertinoPageScaffold(child: widget.pageOptions[i]);
               },
             );
           },

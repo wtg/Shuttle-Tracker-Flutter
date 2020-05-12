@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_shuttletracker/blocs/theme/theme_bloc.dart';
 import 'package:flutter_shuttletracker/models/shuttle_stop.dart';
 import '../../../models/shuttle_route.dart';
 import '../route_widgets/custom_list_tile.dart';
@@ -24,29 +22,39 @@ class _LoadedState extends State<LoadedState> {
           route: route, stops: widget.stops, theme: widget.theme));
     }
     tileList.sort((a, b) {
-      return (a.isEnabled == true && b.isEnabled == false)
+      return ((a.isEnabled == true && a.isActive == true) &&
+              ((b.isEnabled == true ?? b.isActive == false) ||
+                  (b.isEnabled == false ?? b.isActive == true) ||
+                  (b.isEnabled == false ?? b.isActive == false)))
           ? -1
-          : (a.isEnabled == b.isEnabled) ? 0 : 1;
+          : (a.isEnabled == b.isEnabled && a.isActive == b.isActive) ? 0 : 1;
     });
     return tileList;
   }
 
   @override
   Widget build(BuildContext context) {
+    var tileList = _getTileList();
     //notification listender used to remove scroll glow
-    return BlocBuilder<ThemeBloc, ThemeData>(builder: (context, theme) {
-      return NotificationListener<OverscrollIndicatorNotification>(
-        onNotification: (overscroll) {
-          overscroll.disallowGlow();
-          return null;
-        },
-        child: Container(
-          color: theme.bottomAppBarColor,
-          child: ListView.builder(
-              itemCount: _getTileList().length,
-              itemBuilder: (context, index) => _getTileList()[index]),
+
+    return NotificationListener<OverscrollIndicatorNotification>(
+      onNotification: (overscroll) {
+        overscroll.disallowGlow();
+        return null;
+      },
+      child: Container(
+        color: widget.theme.backgroundColor,
+        child: ListView.separated(
+          itemCount: tileList.length,
+          itemBuilder: (context, index) => tileList[index],
+          separatorBuilder: (context, index) {
+            return Divider(
+              color: Colors.grey,
+              height: 2,
+            );
+          },
         ),
-      );
-    });
+      ),
+    );
   }
 }

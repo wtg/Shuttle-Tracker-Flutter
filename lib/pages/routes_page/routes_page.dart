@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
@@ -17,43 +19,45 @@ class _RoutesPageState extends State<RoutesPage> {
   ShuttleBloc shuttleBloc;
   bool isSwitched = false;
   Map<String, ShuttleImage> mapkey = {};
-  //Completer<void> _refreshCompleter;
+  Completer<void> _refreshCompleter;
 
   @override
   Widget build(BuildContext context) {
-    //_refreshCompleter = Completer<void>();
-    return PlatformScaffold(body: BlocBuilder<ThemeBloc, ThemeData>(
-      builder: (context, theme) {
-        return Center(child:
-            BlocBuilder<ShuttleBloc, ShuttleState>(builder: (context, state) {
-          shuttleBloc = BlocProvider.of<ShuttleBloc>(context);
-          if (state is ShuttleInitial || state is ShuttleError) {
-            // TODO: MODIFY BLOC ERROR FOR ROUTE EVENT
-            shuttleBloc.add(ShuttleEvent.getRoutes);
-          } else if (state is ShuttleLoaded) {
-            return LoadedState(
-              routes: state.routes,
-              stops: state.stops,
-              theme: theme,
-            );
-            /*
-            return RefreshIndicator(
-              onRefresh: () {
+    _refreshCompleter = Completer<void>();
+    return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, theme) {
+      return PlatformScaffold(
+          appBar: PlatformAppBar(
+            automaticallyImplyLeading: false,
+            title: Text(
+              "Routes",
+              style: TextStyle(color: theme.getTheme.hoverColor),
+            ),
+            backgroundColor: theme.getTheme.appBarTheme.color,
+          ),
+          body: Material(
+            child: Center(child: BlocBuilder<ShuttleBloc, ShuttleState>(
+                builder: (context, state) {
+              shuttleBloc = BlocProvider.of<ShuttleBloc>(context);
+              if (state is ShuttleInitial || state is ShuttleError) {
+                // TODO: MODIFY BLOC ERROR FOR ROUTE EVENT
                 shuttleBloc.add(ShuttleEvent.getRoutes);
-                return _refreshCompleter.future;
-              },
-              child: LoadedState(
-                routes: state.routes,
-                stops: state.stops,
-                theme: theme,
-              ),
-            );
-            */
-
-          }
-          return LoadingState();
-        }));
-      },
-    ));
+              } else if (state is ShuttleLoaded) {
+                return RefreshIndicator(
+                  backgroundColor: theme.getTheme.appBarTheme.color,
+                  onRefresh: () {
+                    shuttleBloc.add(ShuttleEvent.getRoutes);
+                    return _refreshCompleter.future;
+                  },
+                  child: LoadedState(
+                    routes: state.routes,
+                    stops: state.stops,
+                    theme: theme.getTheme,
+                  ),
+                );
+              }
+              return LoadingState(theme: theme.getTheme);
+            })),
+          ));
+    });
   }
 }

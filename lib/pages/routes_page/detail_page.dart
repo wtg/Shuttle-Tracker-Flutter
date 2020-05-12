@@ -110,64 +110,72 @@ class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
         routeStops.add(shuttleStop);
       }
     }
-    return BlocBuilder<ThemeBloc, ThemeData>(builder: (context, theme) {
-      var isDarkMode = theme.bottomAppBarColor == Colors.black;
+    return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, theme) {
+      var isDarkMode = theme.getTheme.bottomAppBarColor == Colors.black;
       var _panelHeightOpen = MediaQuery.of(context).size.height * .45;
-      return PlatformScaffold(
-          appBar: PlatformAppBar(
-              title: Text(
-                widget.title,
-                style: TextStyle(
-                    color: Colors.white, fontWeight: FontWeight.normal),
-              ),
-              backgroundColor: widget.routeColor,
-              ios: (_) => CupertinoNavigationBarData(
-                  actionsForegroundColor: Colors.white)),
-          body: SlidingUpPanel(
-            //minHeight: 0,
-            panelBuilder: (sc) => Panel(
-                scrollController: sc,
-                routeColor: widget.routeColor,
-                routeStops: routeStops,
-                ids: widget.ids),
-            maxHeight: _panelHeightOpen,
-            borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(18.0),
-                topRight: Radius.circular(18.0)),
-            parallaxEnabled: true,
-            parallaxOffset: 0.25,
-            body: Column(
-              children: [
-                /// Map
-                Flexible(
-                  child: FlutterMap(
-                    mapController: mapController,
-                    options: MapOptions(
-                      nePanBoundary: LatLng(42.78, -73.63),
-                      swPanBoundary: LatLng(42.68, -73.71),
-                      center: LatLng(42.719,
-                          -73.6767), //_getCentroid(routeStops).latitude.isNaN ? LatLng(42.731, -73.6767) : _getCentroid(routeStops),
-                      zoom: 13.9,
-                      maxZoom: 16, // max you can zoom in
-                      minZoom: 13, // min you can zoom out
-                    ),
-                    layers: [
-                      TileLayerOptions(
-                        backgroundColor: theme.bottomAppBarColor,
-                        urlTemplate: isDarkMode
-                            ? LoadedMap.darkLink
-                            : LoadedMap.lightLink,
-                        subdomains: ['a', 'b', 'c'],
-                        tileProvider: CachedNetworkTileProvider(),
-                      ),
-                      PolylineLayerOptions(polylines: widget.polyline),
-                      MarkerLayerOptions(markers: _createStops(routeStops)),
-                    ],
-                  ),
+      return Material(
+        child: PlatformScaffold(
+            appBar: PlatformAppBar(
+                leading: IconButton(
+                  alignment: Alignment.centerLeft,
+                  icon: Icon(Icons.arrow_back_ios),
+                  iconSize: 20,
+                  onPressed: () => Navigator.pop(context),
                 ),
-              ],
-            ),
-          ));
+                title: Text(
+                  widget.title,
+                  style: TextStyle(
+                      color: Colors.white, fontWeight: FontWeight.normal),
+                ),
+                backgroundColor: widget.routeColor,
+                ios: (_) => CupertinoNavigationBarData(
+                    actionsForegroundColor: Colors.white)),
+            body: SlidingUpPanel(
+              //minHeight: 0,
+              panelBuilder: (sc) => Panel(
+                  scrollController: sc,
+                  routeColor: widget.routeColor,
+                  routeStops: routeStops,
+                  ids: widget.ids),
+              maxHeight: _panelHeightOpen,
+              borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(18.0),
+                  topRight: Radius.circular(18.0)),
+              parallaxEnabled: true,
+              parallaxOffset: 0.25,
+              body: Column(
+                children: [
+                  /// Map
+                  Flexible(
+                    child: FlutterMap(
+                      mapController: mapController,
+                      options: MapOptions(
+                        nePanBoundary: LatLng(42.78, -73.63),
+                        swPanBoundary: LatLng(42.68, -73.71),
+                        center: LatLng(42.719,
+                            -73.6767), //_getCentroid(routeStops).latitude.isNaN ? LatLng(42.731, -73.6767) : _getCentroid(routeStops),
+                        zoom: 13.9,
+                        maxZoom: 16, // max you can zoom in
+                        minZoom: 13, // min you can zoom out
+                      ),
+                      layers: [
+                        TileLayerOptions(
+                          backgroundColor: theme.getTheme.bottomAppBarColor,
+                          urlTemplate: isDarkMode
+                              ? LoadedMap.darkLink
+                              : LoadedMap.lightLink,
+                          subdomains: ['a', 'b', 'c'],
+                          tileProvider: CachedNetworkTileProvider(),
+                        ),
+                        PolylineLayerOptions(polylines: widget.polyline),
+                        MarkerLayerOptions(markers: _createStops(routeStops)),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            )),
+      );
     });
   }
 }

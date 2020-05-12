@@ -33,8 +33,8 @@ class _PanelState extends State<Panel> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ThemeBloc, ThemeData>(builder: (context, theme) {
-      var _stopTileList = _getStopTileList(theme);
+    return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, theme) {
+      var _stopTileList = _getStopTileList(theme.getTheme);
       return MediaQuery.removePadding(
           context: context,
           removeTop: true,
@@ -95,7 +95,7 @@ class _PanelState extends State<Panel> {
                 ),
                 Expanded(
                   child: Container(
-                    color: theme.appBarTheme.color,
+                    color: theme.getTheme.appBarTheme.color,
                     child: ListView.builder(
                         controller: widget.scrollController,
                         itemCount: _stopTileList.length,

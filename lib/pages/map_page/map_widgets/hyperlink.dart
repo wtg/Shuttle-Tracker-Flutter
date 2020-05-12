@@ -20,12 +20,13 @@ class Hyperlink extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ThemeBloc, ThemeData>(builder: (context, theme) {
+    return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, theme) {
       return InkWell(
         child: Text(
           text,
           style: TextStyle(
-              color: Colors.blue, fontSize: theme.textTheme.subtitle1.fontSize),
+              color: Colors.blue,
+              fontSize: theme.getTheme.textTheme.subtitle1.fontSize),
         ),
         onTap: _launchURL,
       );

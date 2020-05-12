@@ -34,7 +34,7 @@ class _MapkeyState extends State<Mapkey> {
       text: ' Shuttle Stop',
     ));
     //print("Number of rows in mapkey: ${mapkeyRows.length}\n\n");
-    return BlocBuilder<ThemeBloc, ThemeData>(builder: (context, theme) {
+    return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, theme) {
       return Positioned(
         bottom: 40,
         left: 10,
@@ -42,14 +42,16 @@ class _MapkeyState extends State<Mapkey> {
           opacity: 0.90,
           child: Container(
             decoration: BoxDecoration(
-                color: theme.backgroundColor,
+                color: theme.getTheme.backgroundColor,
                 border: Border.all(
                   width: 5,
-                  color: theme.backgroundColor,
+                  color: theme.getTheme.backgroundColor,
                 ),
                 borderRadius: BorderRadius.circular(5),
                 boxShadow: [
-                  BoxShadow(color: theme.hoverColor, offset: Offset(0.0, 1.0))
+                  BoxShadow(
+                      color: theme.getTheme.hoverColor,
+                      offset: Offset(0.0, 1.0))
                 ]),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,

@@ -11,7 +11,7 @@ class MapkeyRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ThemeBloc, ThemeData>(builder: (context, theme) {
+    return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, theme) {
       return Row(
         children: <Widget>[
           Container(
@@ -21,7 +21,7 @@ class MapkeyRow extends StatelessWidget {
           ),
           Text(
             text,
-            style: theme.textTheme.bodyText1,
+            style: theme.getTheme.textTheme.bodyText1,
           ),
         ],
       );

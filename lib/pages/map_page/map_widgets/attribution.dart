@@ -15,34 +15,34 @@ class Attribution extends StatefulWidget {
 class _AttributionState extends State<Attribution> {
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ThemeBloc, ThemeData>(builder: (context, theme) {
+    return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, theme) {
       var attribution = <Widget>[
         Text(
           'Map tiles: ',
-          style: theme.textTheme.subtitle1,
+          style: theme.getTheme.textTheme.subtitle1,
         ),
         Hyperlink(url: 'https://stamen.com/', text: 'Stamen Design '),
         Text(
           '(',
-          style: theme.textTheme.subtitle1,
+          style: theme.getTheme.textTheme.subtitle1,
         ),
         Hyperlink(
             url: 'https://creativecommons.org/licenses/by/3.0/',
             text: 'CC BY 3.0'),
         Text(
           ') Data: ',
-          style: theme.textTheme.subtitle1,
+          style: theme.getTheme.textTheme.subtitle1,
         ),
         Hyperlink(
             url: 'https://www.openstreetmap.org/', text: 'OpenStreetMap '),
         Text(
           '(',
-          style: theme.textTheme.subtitle1,
+          style: theme.getTheme.textTheme.subtitle1,
         ),
         Hyperlink(url: 'https://www.openstreetmap.org/copyright', text: 'ODbL'),
         Text(
           ') ',
-          style: theme.textTheme.subtitle1,
+          style: theme.getTheme.textTheme.subtitle1,
         ),
       ];
       return Align(
@@ -50,7 +50,7 @@ class _AttributionState extends State<Attribution> {
         child: Opacity(
             opacity: 0.9,
             child: Container(
-              color: theme.backgroundColor,
+              color: theme.getTheme.backgroundColor,
               child: Row(
                   mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.end,

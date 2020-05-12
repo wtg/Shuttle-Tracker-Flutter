@@ -98,7 +98,7 @@ class _LoadedMapState extends State<LoadedMap> with TickerProviderStateMixin {
 
     for (var stop in stops) {
       if (_ids.contains(stop.id)) {
-        markers.add(stop.getMarker(animatedMapMove, context, theme));
+        markers.add(stop.getMarker(animatedMapMove, context));
       }
     }
     //print("Number of stops on map: ${markers.length}");
@@ -136,51 +136,54 @@ class _LoadedMapState extends State<LoadedMap> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ThemeBloc, ThemeState>(
-      builder: (context, theme) {
-        var isDarkMode = theme.getTheme.bottomAppBarColor == Colors.black;
-        var routes = _createRoutes(widget.routes, _ids, _mapkey, _colors);
-        var updates = _createUpdates(widget.updates, _colors);
-        var stops = _createStops(widget.stops, context, theme.getTheme);
-        var location = _createLocation(widget.location);
-        return Stack(children: <Widget>[
-          Column(
-            children: [
-              /// Map
-              Flexible(
-                child: FlutterMap(
-                  mapController: _mapController,
-                  options: MapOptions(
-                    nePanBoundary: LatLng(42.78, -73.63),
-                    swPanBoundary: LatLng(42.68, -73.71),
-                    center: LatLng(42.729, -73.6758),
-                    zoom: 14,
-                    maxZoom: 16, // max you can zoom in
-                    minZoom: 13, // min you can zoom out
-                  ),
-                  layers: [
-                    TileLayerOptions(
-                      backgroundColor: theme.getTheme.bottomAppBarColor,
-                      urlTemplate:
-                          isDarkMode ? LoadedMap.darkLink : LoadedMap.lightLink,
-                      subdomains: ['a', 'b', 'c'],
-                      tileProvider: CachedNetworkTileProvider(),
+    return Scaffold(
+      body: BlocBuilder<ThemeBloc, ThemeState>(
+        builder: (context, theme) {
+          var isDarkMode = theme.getTheme.bottomAppBarColor == Colors.black;
+          var routes = _createRoutes(widget.routes, _ids, _mapkey, _colors);
+          var updates = _createUpdates(widget.updates, _colors);
+          var stops = _createStops(widget.stops, context, theme.getTheme);
+          var location = _createLocation(widget.location);
+          return Stack(children: <Widget>[
+            Column(
+              children: [
+                /// Map
+                Flexible(
+                  child: FlutterMap(
+                    mapController: _mapController,
+                    options: MapOptions(
+                      nePanBoundary: LatLng(42.78, -73.63),
+                      swPanBoundary: LatLng(42.68, -73.71),
+                      center: LatLng(42.729, -73.6758),
+                      zoom: 14,
+                      maxZoom: 16, // max you can zoom in
+                      minZoom: 13, // min you can zoom out
                     ),
-                    PolylineLayerOptions(polylines: routes),
-                    MarkerLayerOptions(markers: updates),
-                    MarkerLayerOptions(markers: stops),
-                    MarkerLayerOptions(markers: location),
-                  ],
+                    layers: [
+                      TileLayerOptions(
+                        backgroundColor: theme.getTheme.bottomAppBarColor,
+                        urlTemplate: isDarkMode
+                            ? LoadedMap.darkLink
+                            : LoadedMap.lightLink,
+                        subdomains: ['a', 'b', 'c'],
+                        tileProvider: CachedNetworkTileProvider(),
+                      ),
+                      PolylineLayerOptions(polylines: routes),
+                      MarkerLayerOptions(markers: updates),
+                      MarkerLayerOptions(markers: stops),
+                      MarkerLayerOptions(markers: location),
+                    ],
+                  ),
                 ),
-              ),
-            ],
-          ),
-          Attribution(),
-          Mapkey(
-            mapkey: _mapkey,
-          ),
-        ]);
-      },
+              ],
+            ),
+            Attribution(),
+            Mapkey(
+              mapkey: _mapkey,
+            ),
+          ]);
+        },
+      ),
     );
   }
 }

@@ -39,7 +39,7 @@ class ShuttleStop extends ShuttlePoint {
     description = json['description'];
   }
 
-  Widget _createBottomSheet(BuildContext context, ThemeData theme) {
+  Widget _createBottomSheet(BuildContext context) {
     return Container(
       height: 100,
       child: Center(
@@ -49,47 +49,45 @@ class ShuttleStop extends ShuttlePoint {
             mainAxisAlignment: MainAxisAlignment.end,
             children: <Widget>[
               IconButton(
-                icon: Icon(Icons.clear, color: theme.hoverColor),
+                icon: Icon(Icons.clear, color: Theme.of(context).hoverColor),
                 onPressed: () => Navigator.pop(context),
               )
             ],
           ),
           Text(
             '$name',
-            style: TextStyle(color: theme.hoverColor),
+            style: TextStyle(color: Theme.of(context).hoverColor),
           ),
         ],
       )),
     );
   }
 
-  Marker getMarker(dynamic animatedMapMove,
-          [BuildContext context, ThemeData theme]) =>
-      Marker(
-          width: 35.0,
-          height: 35.0,
-          point: getLatLng,
-          builder: (ctx) => GestureDetector(
-              onTap: () {
-                animatedMapMove(getLatLng, 14.2);
-                print('Stop $name clicked on');
-                if (context != null) {
-                  showBottomSheet(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(18.0),
-                              topRight: Radius.circular(18.0))),
-                      context: context,
-                      builder: (context) {
-                        return _createBottomSheet(context, theme);
-                      });
-                }
-              },
-              child: Container(
-                  decoration: BoxDecoration(
-                      border: Border.all(width: 12, style: BorderStyle.none),
-                      shape: BoxShape.circle),
-                  child: Image.asset(
-                    'assets/img/circle.png',
-                  ))));
+  Marker getMarker(dynamic animatedMapMove, [BuildContext context]) => Marker(
+      width: 35.0,
+      height: 35.0,
+      point: getLatLng,
+      builder: (ctx) => GestureDetector(
+          onTap: () {
+            animatedMapMove(getLatLng, 14.2);
+            print('Stop $name clicked on');
+            if (context != null) {
+              showBottomSheet(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(18.0),
+                          topRight: Radius.circular(18.0))),
+                  context: context,
+                  builder: (context) {
+                    return _createBottomSheet(context);
+                  });
+            }
+          },
+          child: Container(
+              decoration: BoxDecoration(
+                  border: Border.all(width: 12, style: BorderStyle.none),
+                  shape: BoxShape.circle),
+              child: Image.asset(
+                'assets/img/circle.png',
+              ))));
 }

@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
+import 'package:flutter_shuttletracker/pages/settings_page/widgets/about_settings.dart';
+import 'package:flutter_shuttletracker/pages/settings_page/widgets/general_settings.dart';
 
 import '../../blocs/theme/theme_bloc.dart';
 
@@ -16,9 +18,67 @@ class SettingsPage extends StatefulWidget {
 class _SettingsPageState extends State<SettingsPage> {
   @override
   Widget build(BuildContext context) {
-    ThemeBloc themeBloc = context.bloc<ThemeBloc>();
     return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, theme) {
-      bool isSwitched = theme.isDarkMode;
+      List<Widget> aboutSettingsList = [
+        ListTile(
+          leading: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Text(
+                'Send Feedback',
+                style:
+                    TextStyle(color: theme.getTheme.hoverColor, fontSize: 16),
+              ),
+              Text(
+                'Any comments? Send them here!',
+                style: TextStyle(color: Colors.grey, fontSize: 14),
+              ),
+            ],
+          ),
+        ),
+        ListTile(
+          leading: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Text(
+                'FAQ',
+                style:
+                    TextStyle(color: theme.getTheme.hoverColor, fontSize: 16),
+              ),
+              Text(
+                'View frequently asked questions',
+                style: TextStyle(color: Colors.grey, fontSize: 14),
+              ),
+            ],
+          ),
+        ),
+        ListTile(
+          dense: true,
+          leading: Text(
+            'Privacy Policy',
+            style: TextStyle(color: theme.getTheme.hoverColor, fontSize: 16),
+          ),
+        ),
+        ListTile(
+          leading: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Text(
+                'Version',
+                style:
+                    TextStyle(color: theme.getTheme.hoverColor, fontSize: 16),
+              ),
+              Text(
+                '1.0',
+                style: TextStyle(color: Colors.grey, fontSize: 14),
+              ),
+            ],
+          ),
+        ),
+      ];
       return PlatformScaffold(
         appBar: PlatformAppBar(
           automaticallyImplyLeading: false,
@@ -30,27 +90,10 @@ class _SettingsPageState extends State<SettingsPage> {
         ),
         body: Material(
           child: Center(
-              child: ListView(
+              child: Column(
             children: <Widget>[
-              ListTile(
-                  leading: Icon(
-                    Icons.settings_brightness,
-                    color: theme.getTheme.hoverColor,
-                  ),
-                  title: Text('Dark Mode',
-                      style: TextStyle(
-                          color: theme.getTheme.hoverColor, fontSize: 18)),
-                  trailing: PlatformSwitch(
-                      value: isSwitched,
-                      onChanged: (value) {
-                        isSwitched = value;
-                        themeBloc.add(ThemeEvent.toggle);
-                      },
-                      activeColor: Colors.white,
-                      android: (_) =>
-                          MaterialSwitchData(activeTrackColor: Colors.green),
-                      ios: (_) =>
-                          CupertinoSwitchData(activeColor: Colors.green))),
+              GeneralSettings(theme: theme),
+              AboutSettings(theme: theme)
             ],
           )),
         ),

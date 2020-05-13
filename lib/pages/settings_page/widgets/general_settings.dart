@@ -1,0 +1,48 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
+import 'package:flutter_shuttletracker/blocs/theme/theme_bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+class GeneralSettings extends StatefulWidget {
+  final ThemeState theme;
+  GeneralSettings({this.theme});
+
+  @override
+  _GeneralSettings createState() => _GeneralSettings();
+}
+
+class _GeneralSettings extends State<GeneralSettings> {
+  @override
+  Widget build(BuildContext context) {
+    ThemeBloc themeBloc = context.bloc<ThemeBloc>();
+    bool isSwitched = widget.theme.isDarkMode;
+    return Column(children: <Widget>[
+      ListTile(
+        dense: true,
+        leading: Text(
+          'General',
+          style: TextStyle(color: Colors.red, fontWeight: FontWeight.w600),
+        ),
+      ),
+      ListTile(
+          dense: true,
+          leading: Icon(
+            Icons.settings_brightness,
+            color: widget.theme.getTheme.hoverColor,
+          ),
+          title: Text('Dark Mode',
+              style: TextStyle(
+                  color: widget.theme.getTheme.hoverColor, fontSize: 16)),
+          trailing: PlatformSwitch(
+              value: isSwitched,
+              onChanged: (value) {
+                isSwitched = value;
+                themeBloc.add(ThemeEvent.toggle);
+              },
+              activeColor: Colors.white,
+              android: (_) =>
+                  MaterialSwitchData(activeTrackColor: Colors.green),
+              ios: (_) => CupertinoSwitchData(activeColor: Colors.green))),
+    ]);
+  }
+}

@@ -5,10 +5,10 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:flutter_shuttletracker/blocs/theme/theme_bloc.dart';
 
 import '../../blocs/shuttle/shuttle_bloc.dart';
-import 'map_states/error_map.dart';
-import 'map_states/initial_map.dart';
-import 'map_states/loaded_map.dart';
-import 'map_states/loading_map.dart';
+import 'states/error_map.dart';
+import 'states/initial_map.dart';
+import 'states/loaded_map.dart';
+import 'states/loading_map.dart';
 
 class MapPage extends StatefulWidget {
   @override

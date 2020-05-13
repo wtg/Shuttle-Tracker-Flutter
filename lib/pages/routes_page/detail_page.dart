@@ -7,8 +7,8 @@ import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 import '../../blocs/theme/theme_bloc.dart';
 import '../../models/shuttle_stop.dart';
-import '../map_page/map_states/loaded_map.dart';
-import 'route_widgets/panel.dart';
+import '../map_page/states/loaded_map.dart';
+import 'widgets/panel.dart';
 
 class DetailPage extends StatefulWidget {
   final String title;

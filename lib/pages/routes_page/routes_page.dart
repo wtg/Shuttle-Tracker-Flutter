@@ -7,8 +7,8 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import '../../blocs/shuttle/shuttle_bloc.dart';
 import '../../blocs/theme/theme_bloc.dart';
 import '../../models/shuttle_image.dart';
-import 'route_states/loaded_state.dart';
-import 'route_states/loading_state.dart';
+import 'states/loaded_state.dart';
+import 'states/loading_state.dart';
 
 class RoutesPage extends StatefulWidget {
   @override

@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter/widgets.dart';
 //import 'package:flutter_map_marker_popup/flutter_map_marker_popup.dart';
-//import 'package:flutter_shuttletracker/pages/map_page/map_widgets/popup.dart';
+//import 'package:flutter_shuttletracker/pages/map_page/widgets/popup.dart';
 import 'package:latlong/latlong.dart';
 
 import '../../../blocs/theme/theme_bloc.dart';
@@ -11,8 +11,8 @@ import '../../../models/shuttle_image.dart';
 import '../../../models/shuttle_route.dart';
 import '../../../models/shuttle_stop.dart';
 import '../../../models/shuttle_update.dart';
-import '../map_widgets/attribution.dart';
-import '../map_widgets/mapkey.dart';
+import '../widgets/attribution.dart';
+import '../widgets/mapkey.dart';
 
 class LoadedMap extends StatefulWidget {
   final List<ShuttleRoute> routes;

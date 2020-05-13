@@ -78,8 +78,8 @@ class ShuttleStop extends ShuttlePoint {
               showBottomSheet(
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(18.0),
-                          topRight: Radius.circular(18.0))),
+                          topLeft: Radius.circular(25.0),
+                          topRight: Radius.circular(25.0))),
                   context: context,
                   builder: (context) {
                     return _createBottomSheet(context);

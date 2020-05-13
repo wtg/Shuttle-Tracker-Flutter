@@ -139,8 +139,8 @@ class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
                   ids: widget.ids),
               maxHeight: _panelHeightOpen,
               borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(18.0),
-                  topRight: Radius.circular(18.0)),
+                  topLeft: Radius.circular(25.0),
+                  topRight: Radius.circular(25.0)),
               parallaxEnabled: true,
               parallaxOffset: 0.25,
               body: Column(

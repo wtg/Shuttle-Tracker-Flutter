@@ -16,6 +16,7 @@ class SettingsPage extends StatefulWidget {
 class _SettingsPageState extends State<SettingsPage> {
   @override
   Widget build(BuildContext context) {
+    ThemeBloc themeBloc = context.bloc<ThemeBloc>();
     return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, theme) {
       bool isSwitched = theme.isDarkMode;
       return PlatformScaffold(
@@ -43,7 +44,7 @@ class _SettingsPageState extends State<SettingsPage> {
                       value: isSwitched,
                       onChanged: (value) {
                         isSwitched = value;
-                        context.bloc<ThemeBloc>().add(ThemeEvent.toggle);
+                        themeBloc.add(ThemeEvent.toggle);
                       },
                       activeColor: Colors.white,
                       android: (_) =>

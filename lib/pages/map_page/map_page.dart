@@ -16,11 +16,11 @@ class MapPage extends StatefulWidget {
 }
 
 class _MapPageState extends State<MapPage> {
-  ShuttleBloc shuttleBloc;
   int i = 0;
 
   @override
   Widget build(BuildContext context) {
+    ShuttleBloc shuttleBloc = context.bloc<ShuttleBloc>();
     return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, theme) {
       return PlatformScaffold(
         appBar: PlatformAppBar(
@@ -40,8 +40,6 @@ class _MapPageState extends State<MapPage> {
           child: Center(
             child: BlocBuilder<ShuttleBloc, ShuttleState>(
                 builder: (context, state) {
-              shuttleBloc = BlocProvider.of<ShuttleBloc>(context);
-
               if (state is ShuttleInitial) {
                 shuttleBloc.add(ShuttleEvent.getShuttleMap);
                 print('state is initial');

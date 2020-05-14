@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
-import 'package:flutter_shuttletracker/models/shuttle_stop.dart';
+
 import '../../../models/shuttle_image.dart';
 import '../../../models/shuttle_route.dart';
+import '../../../models/shuttle_stop.dart';
 
 import '../detail_page.dart';
 

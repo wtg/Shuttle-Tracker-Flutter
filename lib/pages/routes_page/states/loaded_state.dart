@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_shuttletracker/models/shuttle_stop.dart';
+
 import '../../../models/shuttle_route.dart';
+import '../../../models/shuttle_stop.dart';
 import '../widgets/custom_list_tile.dart';
 
 class LoadedState extends StatefulWidget {

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../../blocs/theme/theme_bloc.dart';
 
 class AboutSettings extends StatefulWidget {

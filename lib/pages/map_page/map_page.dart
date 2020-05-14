@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
-import 'package:flutter_shuttletracker/blocs/theme/theme_bloc.dart';
 
 import '../../blocs/shuttle/shuttle_bloc.dart';
+import '../../blocs/theme/theme_bloc.dart';
 import 'states/error_map.dart';
 import 'states/initial_map.dart';
 import 'states/loaded_map.dart';
@@ -20,7 +20,7 @@ class _MapPageState extends State<MapPage> {
 
   @override
   Widget build(BuildContext context) {
-    ShuttleBloc shuttleBloc = context.bloc<ShuttleBloc>();
+    var shuttleBloc = context.bloc<ShuttleBloc>();
     return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, theme) {
       return PlatformScaffold(
         appBar: PlatformAppBar(

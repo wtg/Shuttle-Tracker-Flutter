@@ -29,7 +29,7 @@ class _RoutesPageState extends State<RoutesPage> {
           appBar: PlatformAppBar(
             automaticallyImplyLeading: false,
             title: Text(
-              "Routes",
+              'Routes',
               style: TextStyle(color: theme.getTheme.hoverColor),
             ),
             backgroundColor: theme.getTheme.appBarTheme.color,

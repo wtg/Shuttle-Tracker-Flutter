@@ -10,7 +10,7 @@ class Hyperlink extends StatelessWidget {
 
   Hyperlink({this.url, this.text});
 
-  _launchURL() async {
+  void _launchURL() async {
     if (await canLaunch(url)) {
       await launch(url);
     } else {

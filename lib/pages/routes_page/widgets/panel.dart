@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_shuttletracker/blocs/theme/theme_bloc.dart';
-import 'package:flutter_shuttletracker/models/shuttle_stop.dart';
+
+import '../../../blocs/theme/theme_bloc.dart';
+import '../../../models/shuttle_stop.dart';
 
 class Panel extends StatefulWidget {
   final ScrollController scrollController;
@@ -77,7 +78,7 @@ class _PanelState extends State<Panel> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
                             Text(
-                              "Shuttle Stops",
+                              'Shuttle Stops',
                               style: TextStyle(
                                 fontWeight: FontWeight.normal,
                                 color: Colors.white,

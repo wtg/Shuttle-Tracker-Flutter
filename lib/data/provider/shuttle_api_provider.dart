@@ -1,13 +1,14 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:flutter_shuttletracker/models/shuttle_route.dart';
-import 'package:flutter_shuttletracker/models/shuttle_stop.dart';
-import 'package:flutter_shuttletracker/models/shuttle_update.dart';
 import 'package:geolocation/geolocation.dart';
 import 'package:http/http.dart' as http;
 import 'package:path_provider/path_provider.dart';
 import 'package:latlong/latlong.dart';
+
+import '../../models/shuttle_route.dart';
+import '../../models/shuttle_stop.dart';
+import '../../models/shuttle_update.dart';
 
 /// This class contains methods for providing data to Repository
 class ShuttleApiProvider {
@@ -20,7 +21,7 @@ class ShuttleApiProvider {
     http.Response response;
     try {
       response = await client.get('https://shuttles.rpi.edu/$type');
-      createJSONFile('$type', response);
+      await createJSONFile('$type', response);
 
       if (response.statusCode == 200) {
         isConnected = true;

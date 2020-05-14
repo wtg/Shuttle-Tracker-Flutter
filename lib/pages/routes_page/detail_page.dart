@@ -104,7 +104,7 @@ class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
   */
   @override
   Widget build(BuildContext context) {
-    List<ShuttleStop> routeStops = [];
+    var routeStops = <ShuttleStop>[];
     for (var shuttleStop in widget.shuttleStops) {
       if (widget.ids.contains(shuttleStop.id)) {
         routeStops.add(shuttleStop);
@@ -152,8 +152,7 @@ class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
                       options: MapOptions(
                         nePanBoundary: LatLng(42.78, -73.63),
                         swPanBoundary: LatLng(42.68, -73.71),
-                        center: LatLng(42.719,
-                            -73.6767), //_getCentroid(routeStops).latitude.isNaN ? LatLng(42.731, -73.6767) : _getCentroid(routeStops),
+                        center: LatLng(42.719, -73.6767),
                         zoom: 13.9,
                         maxZoom: 16, // max you can zoom in
                         minZoom: 13, // min you can zoom out

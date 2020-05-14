@@ -26,7 +26,7 @@ class _MapkeyState extends State<Mapkey> {
     widget.mapkey.forEach((key, value) {
       mapkeyRows.add(MapkeyRow(
         widget: value.getSVG,
-        text: " $key",
+        text: ' $key',
       ));
     });
     mapkeyRows.add(MapkeyRow(

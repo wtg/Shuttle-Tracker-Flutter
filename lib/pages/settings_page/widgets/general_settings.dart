@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
-import 'package:flutter_shuttletracker/blocs/theme/theme_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../blocs/theme/theme_bloc.dart';
 
 class GeneralSettings extends StatefulWidget {
   final ThemeState theme;
@@ -14,8 +15,8 @@ class GeneralSettings extends StatefulWidget {
 class _GeneralSettings extends State<GeneralSettings> {
   @override
   Widget build(BuildContext context) {
-    ThemeBloc themeBloc = context.bloc<ThemeBloc>();
-    bool isSwitched = widget.theme.isDarkMode;
+    var themeBloc = context.bloc<ThemeBloc>();
+    var isSwitched = widget.theme.isDarkMode;
     return Column(children: <Widget>[
       ListTile(
         dense: true,

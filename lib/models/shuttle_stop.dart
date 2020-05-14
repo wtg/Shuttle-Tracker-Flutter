@@ -81,9 +81,7 @@ class ShuttleStop extends ShuttlePoint {
                           topLeft: Radius.circular(25.0),
                           topRight: Radius.circular(25.0))),
                   context: context,
-                  builder: (context) {
-                    return _createBottomSheet(context);
-                  });
+                  builder: _createBottomSheet);
             }
           },
           child: Container(

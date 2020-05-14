@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
-import 'package:flutter_shuttletracker/blocs/theme/theme_bloc.dart';
+
+import '../../blocs/theme/theme_bloc.dart';
 
 class SchedulesPage extends StatefulWidget {
   @override
@@ -16,7 +17,7 @@ class _SchedulesPageState extends State<SchedulesPage> {
           appBar: PlatformAppBar(
             automaticallyImplyLeading: false,
             title: Text(
-              "Schedules",
+              'Schedules',
               style: TextStyle(color: theme.getTheme.hoverColor),
             ),
             backgroundColor: theme.getTheme.appBarTheme.color,
@@ -25,7 +26,7 @@ class _SchedulesPageState extends State<SchedulesPage> {
             children: <Widget>[
               Container(
                 color: Colors.white,
-                child: Text("\n"),
+                child: Text('\n'),
               ),
               Container(
                 decoration: BoxDecoration(
@@ -33,7 +34,7 @@ class _SchedulesPageState extends State<SchedulesPage> {
                     border: Border.all(
                       width: 0.2,
                     )),
-                child: Text("\nWeekday Routes\n"),
+                child: Text('\nWeekday Routes\n'),
               ),
               Container(
                 decoration: BoxDecoration(
@@ -41,12 +42,12 @@ class _SchedulesPageState extends State<SchedulesPage> {
                     border: Border.all(
                       width: 0.2,
                     )),
-                child: Text("\nNorth, South, and New West Routes\n"
-                    "Monday–Friday 7am – 11pm\n"),
+                child: Text('\nNorth, South, and New West Routes\n'
+                    'Monday–Friday 7am – 11pm\n'),
               ),
               Container(
                 color: Colors.white,
-                child: Text("\n\n"),
+                child: Text('\n\n'),
               ),
               Container(
                 decoration: BoxDecoration(
@@ -54,7 +55,7 @@ class _SchedulesPageState extends State<SchedulesPage> {
                     border: Border.all(
                       width: 0.2,
                     )),
-                child: Text("\nWeekend Routes\n"),
+                child: Text('\nWeekend Routes\n'),
               ),
               Container(
                 decoration: BoxDecoration(
@@ -62,12 +63,12 @@ class _SchedulesPageState extends State<SchedulesPage> {
                     border: Border.all(
                       width: 0.2,
                     )),
-                child: Text("\nWest and East Routes\n"
-                    "Saturday–Sunday 9:30am – 5pm\n\n"
-                    "Weekend Express Route\n"
-                    "Saturday–Sunday 4:30pm – 8pm\n\n"
-                    "Late Night Route\n"
-                    "Friday–Saturday 8pm – 4am\n\n"),
+                child: Text('\nWest and East Routes\n'
+                    'Saturday–Sunday 9:30am – 5pm\n\n'
+                    'Weekend Express Route\n'
+                    'Saturday–Sunday 4:30pm – 8pm\n\n'
+                    'Late Night Route\n'
+                    'Friday–Saturday 8pm – 4am\n\n'),
               ),
             ],
           ));

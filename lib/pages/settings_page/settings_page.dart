@@ -2,10 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
-import 'widgets/about_settings.dart';
-import 'widgets/general_settings.dart';
 
 import '../../blocs/theme/theme_bloc.dart';
+import 'widgets/about_settings.dart';
+import 'widgets/general_settings.dart';
 
 class SettingsPage extends StatefulWidget {
   SettingsPage({Key key, this.title}) : super(key: key);
@@ -23,7 +23,7 @@ class _SettingsPageState extends State<SettingsPage> {
         appBar: PlatformAppBar(
           automaticallyImplyLeading: false,
           title: Text(
-            "Settings",
+            'Settings',
             style: TextStyle(color: theme.getTheme.hoverColor),
           ),
           backgroundColor: theme.getTheme.appBarTheme.color,

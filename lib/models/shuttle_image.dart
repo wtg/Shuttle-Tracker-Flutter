@@ -12,7 +12,7 @@ class ShuttleImage {
     var svgInput =
         svgColor.value.toRadixString(16).toString().replaceAll('0xff', '');
     svgString =
-        """<svg width="60px" height="60px" viewBox="0 0 60 60" version="1.1" 
+        '''<svg width="60px" height="60px" viewBox="0 0 60 60" version="1.1" 
         xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
         <title>shuttle</title>
         <defs></defs>
@@ -33,7 +33,7 @@ class ShuttleImage {
                       L48.485,3.697 L27.226,46.582 Z" id="Shape" fill="#000"></path>
             </g>
         </g>
-        </svg>""";
+        </svg>''';
   }
 
   Color get getSVGColor => svgColor;

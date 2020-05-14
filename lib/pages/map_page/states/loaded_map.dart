@@ -32,16 +32,16 @@ class LoadedMap extends StatefulWidget {
 }
 
 class _LoadedMapState extends State<LoadedMap> with TickerProviderStateMixin {
-  MapController _mapController = MapController();
+  final MapController _mapController = MapController();
 
   /// Map of with the route number as key and color of that route as the value
-  Map<int, Color> _colors = {};
+  final Map<int, Color> _colors = {};
 
   /// Map of with name of route as key and ShuttleImage as the value
-  Map<String, ShuttleImage> _mapkey = {};
+  final Map<String, ShuttleImage> _mapkey = {};
 
   /// List of all ids
-  List<int> _ids = [];
+  final List<int> _ids = [];
 
   void animatedMapMove(LatLng destLocation, double destZoom) {
     final _latTween = Tween<double>(

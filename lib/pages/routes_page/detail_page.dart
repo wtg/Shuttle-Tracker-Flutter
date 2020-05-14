@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
@@ -118,8 +120,8 @@ class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
             appBar: PlatformAppBar(
                 leading: IconButton(
                   alignment: Alignment.centerLeft,
-                  icon: Icon(Icons.arrow_back_ios),
-                  iconSize: 20,
+                  icon: Icon(
+                      Platform.isIOS ? Icons.arrow_back_ios : Icons.arrow_back),
                   onPressed: () => Navigator.pop(context),
                 ),
                 title: Text(

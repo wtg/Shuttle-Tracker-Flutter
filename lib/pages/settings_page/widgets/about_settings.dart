@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_shuttletracker/blocs/theme/theme_bloc.dart';
+import '../../../blocs/theme/theme_bloc.dart';
 
 class AboutSettings extends StatefulWidget {
   final ThemeState theme;
@@ -12,7 +12,7 @@ class AboutSettings extends StatefulWidget {
 class _AboutSettings extends State<AboutSettings> {
   @override
   Widget build(BuildContext context) {
-    List<Widget> aboutSettingsList = [
+    var aboutSettingsList = <Widget>[
       ListTile(
         leading: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

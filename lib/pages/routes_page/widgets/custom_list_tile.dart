@@ -31,33 +31,43 @@ class _CustomListTileState extends State<CustomListTile> {
     var image = ShuttleImage(svgColor: widget.route.color);
     var shuttleArrow = image.getSVG;
     var color = image.getSVGColor;
+
+    var icon = widget.isEnabled && widget.isActive
+        ? Icon(
+            Icons.check_circle,
+            color: Colors.green,
+          )
+        : widget.isEnabled && !widget.isActive
+            ? Icon(
+                Icons.error,
+                color: Colors.yellow[700],
+              )
+            : Icon(
+                Icons.error,
+                color: Colors.red,
+              );
     return ListTile(
       leading: Container(width: 35, height: 40, child: shuttleArrow),
       title: Text(widget.route.name,
           style: TextStyle(color: widget.theme.hoverColor, fontSize: 16)),
-      /*
-      subtitle: Text('${widget.route.enabled ? "ACTIVE" : "INACTIVE"}',
-          style: TextStyle(color: widget.theme.hoverColor)),
-      */
       trailing: Row(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.end,
         children: <Widget>[
-          Container(
-              child: widget.isEnabled && widget.isActive
-                  ? Icon(
-                      Icons.check_circle,
-                      color: Colors.green,
-                    )
-                  : widget.isEnabled && !widget.isActive
-                      ? Icon(
-                          Icons.error,
-                          color: Colors.yellow[700],
-                        )
-                      : Icon(
-                          Icons.error,
-                          color: Colors.red,
-                        )),
+          Stack(
+            alignment: AlignmentDirectional.center,
+            children: <Widget>[
+              Container(
+                height: 20,
+                width: 20,
+                decoration: ShapeDecoration(
+                  color: widget.theme.hoverColor,
+                  shape: CircleBorder(),
+                ),
+              ),
+              icon,
+            ],
+          ),
           Icon(
             Icons.keyboard_arrow_right,
             color: widget.theme.hoverColor,
@@ -71,7 +81,6 @@ class _CustomListTileState extends State<CustomListTile> {
             fullscreenDialog: true,
             context: context,
             builder: (_) {
-              //sleep(const Duration(milliseconds: 300));
               return DetailPage(
                 title: widget.route.name,
                 polyline: polyline,

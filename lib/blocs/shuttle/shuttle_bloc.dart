@@ -77,15 +77,6 @@ class ShuttleBloc extends Bloc<ShuttleEvent, ShuttleState> {
         yield ShuttleLoaded(
             routes: routes, location: location, updates: updates, stops: stops);
         break;
-      /*
-      if (repository.getIsConnected) {
-        yield ShuttleLoaded(
-            routes: routes, location: location, updates: updates, stops: stops);
-      } else {
-        await Future.delayed(const Duration(seconds: 5));
-        yield ShuttleError(message: "NETWORK ISSUE");
-      }
-      */
     }
   }
 }

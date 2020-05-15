@@ -35,7 +35,7 @@ class _GeneralSettingsState extends State<GeneralSettings> {
               style: TextStyle(
                   color: widget.theme.getTheme.hoverColor, fontSize: 16)),
           trailing: Transform.scale(
-            scale: 0.90,
+            scale: 0.95,
             child: PlatformSwitch(
                 value: isSwitched,
                 onChanged: (value) {

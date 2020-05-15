@@ -5,6 +5,7 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 import '../../blocs/theme/theme_bloc.dart';
 import 'widgets/about_settings.dart';
+import 'widgets/feedback_settings.dart';
 import 'widgets/general_settings.dart';
 
 class SettingsPage extends StatefulWidget {
@@ -13,6 +14,7 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
+  
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, theme) {
@@ -27,11 +29,18 @@ class _SettingsPageState extends State<SettingsPage> {
         ),
         body: Material(
           child: Center(
-              child: ListView(
-            children: <Widget>[
-              GeneralSettings(theme: theme),
-              AboutSettings(theme: theme)
-            ],
+              child: NotificationListener<OverscrollIndicatorNotification>(
+            onNotification: (overscroll) {
+              overscroll.disallowGlow();
+              return null;
+            },
+            child: ListView(
+              children: <Widget>[
+                GeneralSettings(theme: theme),
+                FeedbackSettings(theme: theme),
+                AboutSettings(theme: theme)
+              ],
+            ),
           )),
         ),
       );

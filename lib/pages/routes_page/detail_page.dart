@@ -121,7 +121,9 @@ class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
                 leading: GestureDetector(
                     onTap: () => Navigator.pop(context),
                     child: Stack(
-                      alignment: AlignmentDirectional.centerStart,
+                      alignment: Platform.isIOS
+                          ? AlignmentDirectional.centerStart
+                          : AlignmentDirectional.center,
                       children: <Widget>[
                         Container(
                           width: 80,
@@ -132,11 +134,9 @@ class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
                           Platform.isIOS
                               ? Icons.arrow_back_ios
                               : Icons.arrow_back,
-                          size: 22,
+                          size: 26,
                         ),
-                        
                       ],
-                      
                     )),
                 title: Text(
                   widget.title,

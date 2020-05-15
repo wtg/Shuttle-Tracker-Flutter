@@ -2,47 +2,30 @@ import 'package:flutter/material.dart';
 
 import '../../../blocs/theme/theme_bloc.dart';
 
-class AboutSettings extends StatefulWidget {
+class FeedbackSettings extends StatefulWidget {
   final ThemeState theme;
-  AboutSettings({this.theme});
+  FeedbackSettings({this.theme});
 
   @override
-  _AboutSettingsState createState() => _AboutSettingsState();
+  _FeedbackSettingsState createState() => _FeedbackSettingsState();
 }
 
-class _AboutSettingsState extends State<AboutSettings> {
+class _FeedbackSettingsState extends State<FeedbackSettings> {
   @override
   Widget build(BuildContext context) {
-    var aboutSettingsList = <Widget>[
+    var feedbackSettingsList = <Widget>[
       ListTile(
         leading: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              'FAQ',
+              'Send Feedback',
               style: TextStyle(
                   color: widget.theme.getTheme.hoverColor, fontSize: 16),
             ),
             Text(
-              'View frequently asked questions',
-              style: TextStyle(color: Colors.grey, fontSize: 14),
-            ),
-          ],
-        ),
-      ),
-      ListTile(
-        leading: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'GitHub Repo',
-              style: TextStyle(
-                  color: widget.theme.getTheme.hoverColor, fontSize: 16),
-            ),
-            Text(
-              'Interested in contributing? Check out our repo!',
+              'Any comments? Send them here!',
               style: TextStyle(color: Colors.grey, fontSize: 14),
             ),
           ],
@@ -51,26 +34,9 @@ class _AboutSettingsState extends State<AboutSettings> {
       ListTile(
         dense: true,
         leading: Text(
-          'Privacy Policy',
+          'Rate this app',
           style:
               TextStyle(color: widget.theme.getTheme.hoverColor, fontSize: 16),
-        ),
-      ),
-      ListTile(
-        leading: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'Version',
-              style: TextStyle(
-                  color: widget.theme.getTheme.hoverColor, fontSize: 16),
-            ),
-            Text(
-              '1.0',
-              style: TextStyle(color: Colors.grey, fontSize: 14),
-            ),
-          ],
         ),
       ),
     ];
@@ -79,7 +45,7 @@ class _AboutSettingsState extends State<AboutSettings> {
         ListTile(
           dense: true,
           leading: Text(
-            'About',
+            'Feedback',
             style: TextStyle(color: Colors.red, fontWeight: FontWeight.w600),
           ),
         ),
@@ -91,8 +57,8 @@ class _AboutSettingsState extends State<AboutSettings> {
           child: ListView.separated(
             physics: const NeverScrollableScrollPhysics(),
             shrinkWrap: true,
-            itemCount: aboutSettingsList.length,
-            itemBuilder: (context, index) => aboutSettingsList[index],
+            itemCount: feedbackSettingsList.length,
+            itemBuilder: (context, index) => feedbackSettingsList[index],
             separatorBuilder: (context, index) {
               return Divider(
                 color: Colors.grey[600],

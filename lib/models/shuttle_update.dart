@@ -72,11 +72,15 @@ class ShuttleUpdate extends ShuttlePoint {
     );
   }
 
-  Marker get getMarker => Marker(
-      point: getLatLng,
-      width: 30.0,
-      height: 30.0,
-      builder: (ctx) => RotationTransition(
-          turns: AlwaysStoppedAnimation((heading - 45) / 360),
-          child: image.getSVG));
+  Marker get getMarker {
+    return Marker(
+        point: getLatLng,
+        width: 30.0,
+        height: 30.0,
+        builder: (ctx) {
+          return RotationTransition(
+              turns: AlwaysStoppedAnimation((heading - 45) / 360),
+              child: image.getSVG);
+        });
+  }
 }

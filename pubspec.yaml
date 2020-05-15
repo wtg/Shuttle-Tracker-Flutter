@@ -14,10 +14,9 @@ description: A new Flutter project.
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.1.0 <3.0.0"
+  sdk: ">=2.5.2 <3.0.0"
 
 dependencies:
-  flutter_cupertino_settings: ^0.3.0
   google_fonts: ^1.1.0
   settings_ui: ^0.2.0
   hydrated_bloc: ^4.0.0
@@ -81,10 +80,7 @@ flutter:
     - assets/json_test/stops.json
     - assets/json_test/updates.json
   
-  fonts:
-    - family: Helvetica
-      fonts:
-        - asset: fonts/helvetica.ttf
+
 
 
 

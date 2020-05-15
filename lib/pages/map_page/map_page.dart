@@ -5,10 +5,10 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 import '../../blocs/shuttle/shuttle_bloc.dart';
 import '../../blocs/theme/theme_bloc.dart';
+import '../../widgets/loading_state.dart';
 import 'states/error_map.dart';
 import 'states/initial_map.dart';
 import 'states/loaded_map.dart';
-import 'states/loading_map.dart';
 
 class MapPage extends StatefulWidget {
   @override
@@ -63,7 +63,7 @@ class _MapPageState extends State<MapPage> {
                 );
               }
               print('state is loading');
-              return LoadingMap();
+              return LoadingState(theme: theme.getTheme);
             }),
           ),
         ),

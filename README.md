@@ -6,7 +6,7 @@
 </div>
 
 <h5 align="center">
-Flutter ShuttleTracker is a cross-platform port of RPI ShuttleTracker that utilizes the Flutter framework for development.
+Flutter ShuttleTracker is a cross-platform port of <a href="https://github.com/wtg/shuttletracker">ShuttleTracker</a> that utilizes the Flutter framework for development.
 </h5>
 
 ## Showcase

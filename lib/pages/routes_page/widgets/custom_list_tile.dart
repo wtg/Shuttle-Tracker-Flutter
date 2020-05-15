@@ -62,7 +62,7 @@ class _CustomListTileState extends State<CustomListTile> {
                 height: 20,
                 width: 20,
                 decoration: ShapeDecoration(
-                  color: widget.theme.hoverColor,
+                  color: Colors.white,
                   shape: CircleBorder(),
                 ),
               ),

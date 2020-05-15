@@ -118,12 +118,26 @@ class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
       return Material(
         child: PlatformScaffold(
             appBar: PlatformAppBar(
-                leading: IconButton(
-                  alignment: Alignment.centerLeft,
-                  icon: Icon(
-                      Platform.isIOS ? Icons.arrow_back_ios : Icons.arrow_back),
-                  onPressed: () => Navigator.pop(context),
-                ),
+                leading: GestureDetector(
+                    onTap: () => Navigator.pop(context),
+                    child: Stack(
+                      alignment: AlignmentDirectional.centerStart,
+                      children: <Widget>[
+                        Container(
+                          width: 80,
+                          height: 50,
+                          color: widget.routeColor,
+                        ),
+                        Icon(
+                          Platform.isIOS
+                              ? Icons.arrow_back_ios
+                              : Icons.arrow_back,
+                          size: 22,
+                        ),
+                        
+                      ],
+                      
+                    )),
                 title: Text(
                   widget.title,
                   style: TextStyle(

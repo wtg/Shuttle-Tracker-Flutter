@@ -29,9 +29,9 @@ final ThemeData darkMode = ThemeData(
     color: Colors.black,
     brightness: Brightness.dark,
   ),
-  backgroundColor: Colors.grey[900],
+  backgroundColor: Color(0xFF181818),
   bottomAppBarColor: Colors.black,
-  canvasColor: Colors.grey[900],
+  canvasColor: Color(0xFF181818),
   hoverColor: Colors.white,
   primarySwatch: Colors.red,
   textTheme: TextTheme(

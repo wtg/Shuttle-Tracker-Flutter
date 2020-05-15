@@ -8,9 +8,6 @@ import 'widgets/about_settings.dart';
 import 'widgets/general_settings.dart';
 
 class SettingsPage extends StatefulWidget {
-  SettingsPage({Key key, this.title}) : super(key: key);
-  final String title;
-
   @override
   _SettingsPageState createState() => _SettingsPageState();
 }
@@ -30,7 +27,7 @@ class _SettingsPageState extends State<SettingsPage> {
         ),
         body: Material(
           child: Center(
-              child: Column(
+              child: ListView(
             children: <Widget>[
               GeneralSettings(theme: theme),
               AboutSettings(theme: theme)

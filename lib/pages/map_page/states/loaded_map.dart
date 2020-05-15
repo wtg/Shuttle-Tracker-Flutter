@@ -12,7 +12,7 @@ import '../../../models/shuttle_route.dart';
 import '../../../models/shuttle_stop.dart';
 import '../../../models/shuttle_update.dart';
 import '../widgets/attribution.dart';
-import '../widgets/mapkey.dart';
+import '../widgets/legend.dart';
 
 class LoadedMap extends StatefulWidget {
   final List<ShuttleRoute> routes;
@@ -38,7 +38,7 @@ class _LoadedMapState extends State<LoadedMap> with TickerProviderStateMixin {
   final Map<int, Color> _colors = {};
 
   /// Map of with name of route as key and ShuttleImage as the value
-  final Map<String, ShuttleImage> _mapkey = {};
+  final Map<String, ShuttleImage> _legend = {};
 
   /// List of all ids
   final List<int> _ids = [];
@@ -75,12 +75,12 @@ class _LoadedMapState extends State<LoadedMap> with TickerProviderStateMixin {
   }
 
   List<Polyline> _createRoutes(List<ShuttleRoute> routes, List<int> _ids,
-      Map<String, ShuttleImage> _mapkey, Map<int, Color> _colors) {
+      Map<String, ShuttleImage> _legend, Map<int, Color> _colors) {
     var polylines = <Polyline>[];
 
     for (var route in routes) {
       if (route.active && route.enabled) {
-        _mapkey[route.name] = ShuttleImage(svgColor: route.color);
+        _legend[route.name] = ShuttleImage(svgColor: route.color);
         _ids.addAll(route.stopIds);
         polylines.add(route.getPolyline);
         for (var schedule in route.schedules) {
@@ -140,7 +140,7 @@ class _LoadedMapState extends State<LoadedMap> with TickerProviderStateMixin {
       body: BlocBuilder<ThemeBloc, ThemeState>(
         builder: (context, theme) {
           var isDarkMode = theme.getTheme.bottomAppBarColor == Colors.black;
-          var routes = _createRoutes(widget.routes, _ids, _mapkey, _colors);
+          var routes = _createRoutes(widget.routes, _ids, _legend, _colors);
           var updates = _createUpdates(widget.updates, _colors);
           var stops = _createStops(widget.stops, context, theme.getTheme);
           var location = _createLocation(widget.location);
@@ -178,8 +178,8 @@ class _LoadedMapState extends State<LoadedMap> with TickerProviderStateMixin {
               ],
             ),
             Attribution(),
-            Mapkey(
-              mapkey: _mapkey,
+            Legend(
+              legend: _legend,
             ),
           ]);
         },

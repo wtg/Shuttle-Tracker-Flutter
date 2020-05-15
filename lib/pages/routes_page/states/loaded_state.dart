@@ -36,7 +36,7 @@ class _LoadedState extends State<LoadedState> {
   @override
   Widget build(BuildContext context) {
     var tileList = _getTileList();
-    //notification listender used to remove scroll glow
+    //notification listener used to remove scroll glow
 
     return NotificationListener<OverscrollIndicatorNotification>(
       onNotification: (overscroll) {

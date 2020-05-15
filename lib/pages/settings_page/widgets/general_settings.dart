@@ -9,10 +9,10 @@ class GeneralSettings extends StatefulWidget {
   GeneralSettings({this.theme});
 
   @override
-  _GeneralSettings createState() => _GeneralSettings();
+  _GeneralSettingsState createState() => _GeneralSettingsState();
 }
 
-class _GeneralSettings extends State<GeneralSettings> {
+class _GeneralSettingsState extends State<GeneralSettings> {
   @override
   Widget build(BuildContext context) {
     var themeBloc = context.bloc<ThemeBloc>();
@@ -34,16 +34,19 @@ class _GeneralSettings extends State<GeneralSettings> {
           title: Text('Dark Mode',
               style: TextStyle(
                   color: widget.theme.getTheme.hoverColor, fontSize: 16)),
-          trailing: PlatformSwitch(
-              value: isSwitched,
-              onChanged: (value) {
-                isSwitched = value;
-                themeBloc.add(ThemeEvent.toggle);
-              },
-              activeColor: Colors.white,
-              android: (_) =>
-                  MaterialSwitchData(activeTrackColor: Colors.green),
-              ios: (_) => CupertinoSwitchData(activeColor: Colors.green))),
+          trailing: Transform.scale(
+            scale: 0.90,
+            child: PlatformSwitch(
+                value: isSwitched,
+                onChanged: (value) {
+                  isSwitched = value;
+                  themeBloc.add(ThemeEvent.toggle);
+                },
+                activeColor: Colors.white,
+                android: (_) =>
+                    MaterialSwitchData(activeTrackColor: Colors.green),
+                ios: (_) => CupertinoSwitchData(activeColor: Colors.green)),
+          )),
     ]);
   }
 }

@@ -7,10 +7,10 @@ class AboutSettings extends StatefulWidget {
   AboutSettings({this.theme});
 
   @override
-  _AboutSettings createState() => _AboutSettings();
+  _AboutSettingsState createState() => _AboutSettingsState();
 }
 
-class _AboutSettings extends State<AboutSettings> {
+class _AboutSettingsState extends State<AboutSettings> {
   @override
   Widget build(BuildContext context) {
     var aboutSettingsList = <Widget>[
@@ -89,6 +89,7 @@ class _AboutSettings extends State<AboutSettings> {
             return null;
           },
           child: ListView.separated(
+            physics: const NeverScrollableScrollPhysics(),
             shrinkWrap: true,
             itemCount: aboutSettingsList.length,
             itemBuilder: (context, index) => aboutSettingsList[index],

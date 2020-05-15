@@ -3,37 +3,37 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../blocs/theme/theme_bloc.dart';
 import '../../../models/shuttle_image.dart';
 
-import 'mapkey_row.dart';
+import 'legend_row.dart';
 
-class Mapkey extends StatefulWidget {
-  final Map<String, ShuttleImage> mapkey;
+class Legend extends StatefulWidget {
+  final Map<String, ShuttleImage> legend;
 
-  Mapkey({this.mapkey});
+  Legend({this.legend});
 
   @override
-  _MapkeyState createState() => _MapkeyState();
+  _LegendState createState() => _LegendState();
 }
 
-class _MapkeyState extends State<Mapkey> {
+class _LegendState extends State<Legend> {
   @override
   Widget build(BuildContext context) {
-    var mapkeyRows = <Widget>[
-      MapkeyRow(
+    var legendRows = <Widget>[
+      LegendRow(
         widget: Image.asset('assets/img/user.png'),
         text: ' You',
       ),
     ];
-    widget.mapkey.forEach((key, value) {
-      mapkeyRows.add(MapkeyRow(
+    widget.legend.forEach((key, value) {
+      legendRows.add(LegendRow(
         widget: value.getSVG,
         text: ' $key',
       ));
     });
-    mapkeyRows.add(MapkeyRow(
+    legendRows.add(LegendRow(
       widget: Image.asset('assets/img/circle.png'),
       text: ' Shuttle Stop',
     ));
-    //print("Number of rows in mapkey: ${mapkeyRows.length}\n\n");
+    //print("Number of rows in legend: ${legendRows.length}\n\n");
     return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, theme) {
       return Positioned(
         bottom: 40,
@@ -51,11 +51,11 @@ class _MapkeyState extends State<Mapkey> {
                 boxShadow: [
                   BoxShadow(
                       color: theme.getTheme.hoverColor,
-                      offset: Offset(0.0, 1.0))
+                      offset: Offset(0.0, 0.5))
                 ]),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: mapkeyRows,
+              children: legendRows,
             ),
           ),
         ),

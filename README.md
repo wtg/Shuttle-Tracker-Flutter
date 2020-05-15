@@ -6,7 +6,7 @@
 </div>
 
 <h5 align="center">
-Flutter ShuttleTracker is a native cross-platform port of ShuttleTracker that utilizes the Flutter framework for development.
+Flutter ShuttleTracker is a cross-platform port of RPI ShuttleTracker that utilizes the Flutter framework for development.
 </h5>
 
 ## Showcase
@@ -21,7 +21,9 @@ Flutter ShuttleTracker is a native cross-platform port of ShuttleTracker that ut
 
 - Live updates displayed on map for shuttles, routes, and stops
 
-- Basic Dark Mode functionality
+- Persistence for certain settings
+
+- Dark Mode functionality
 
 - Automatic route toggling
 
@@ -40,7 +42,9 @@ Flutter ShuttleTracker is a native cross-platform port of ShuttleTracker that ut
 ## Dependencies
 
   - [flutter_bloc](https://pub.dev/packages/flutter_bloc)
+  - [flutter_native_splash](https://pub.dev/packages/flutter_native_splash)
   - [flutter_map](https://pub.dev/packages/flutter_map)
+  - [hydrated_bloc](https://pub.dev/packages/hydrated_bloc)
   - [geolocation](https://pub.dev/packages/geolocation)
   - [cupertino_icons](https://pub.dev/packages/cupertino_icons)
   - [responsive_framework](https://pub.dev/packages/responsive_framework)

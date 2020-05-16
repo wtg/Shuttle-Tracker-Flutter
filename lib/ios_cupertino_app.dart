@@ -41,6 +41,9 @@ class _IOSCupertinoAppState extends State<IOSCupertinoApp> {
     return Theme(
       data: widget.theme,
       child: CupertinoApp(
+        theme: CupertinoThemeData(
+          brightness: widget.theme.brightness,
+        ),
         localizationsDelegates: [
           DefaultMaterialLocalizations.delegate,
           DefaultCupertinoLocalizations.delegate,

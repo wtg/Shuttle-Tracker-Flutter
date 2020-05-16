@@ -8,6 +8,7 @@ final ThemeData lightMode = ThemeData(
   appBarTheme: AppBarTheme(color: Colors.white, brightness: Brightness.light),
   backgroundColor: Colors.white,
   bottomAppBarColor: Colors.white,
+  brightness: Brightness.light,
   hoverColor: Colors.black,
   primarySwatch: Colors.red,
   textTheme: TextTheme(
@@ -31,6 +32,7 @@ final ThemeData darkMode = ThemeData(
   ),
   backgroundColor: Color(0xFF181818),
   bottomAppBarColor: Colors.black,
+  brightness: Brightness.dark,
   canvasColor: Color(0xFF181818),
   hoverColor: Colors.white,
   primarySwatch: Colors.red,

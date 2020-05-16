@@ -17,6 +17,7 @@ environment:
   sdk: ">=2.5.2 <3.0.0"
 
 dependencies:
+  flutter_cupertino_settings: ^0.3.0
   google_fonts: ^1.1.0
   settings_ui: ^0.2.0
   hydrated_bloc: ^4.0.0

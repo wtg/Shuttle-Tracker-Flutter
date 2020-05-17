@@ -116,7 +116,7 @@ class _LoadedMapState extends State<LoadedMap> with TickerProviderStateMixin {
         update.setColor = Colors.white;
       }
 
-      markers.add(update.getMarker);
+      markers.add(update.getMarker(animatedMapMove, context));
     }
     //print("Number of shuttles on map: ${markers.length}");
     return markers;

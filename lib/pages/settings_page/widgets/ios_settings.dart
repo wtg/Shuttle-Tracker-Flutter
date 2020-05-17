@@ -53,7 +53,7 @@ class _IOSSetttingsState extends State<IOSSetttings> {
       CSControl(
           nameWidget: Text('Version'),
           contentWidget: Text(
-            '1.0',
+            '1.0.0',
             style: TextStyle(color: Colors.grey),
           )),
     ]);

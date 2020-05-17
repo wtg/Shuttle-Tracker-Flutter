@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_map/flutter_map.dart';
 
+import '../widgets/custom_bottom_sheet.dart';
 import 'shuttle_image.dart';
 import 'shuttle_point.dart';
 
@@ -72,15 +74,32 @@ class ShuttleUpdate extends ShuttlePoint {
     );
   }
 
-  Marker get getMarker {
+  Marker getMarker(dynamic animatedMapMove, [BuildContext context]) {
     return Marker(
         point: getLatLng,
         width: 30.0,
         height: 30.0,
         builder: (ctx) {
-          return RotationTransition(
-              turns: AlwaysStoppedAnimation((heading - 45) / 360),
-              child: image.getSVG);
+          return GestureDetector(
+            onTap: () {
+              animatedMapMove(getLatLng, 14.2);
+              print('Shuttle $vehicleId clicked on');
+              if (context != null) {
+                showBottomSheet(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(25.0),
+                            topRight: Radius.circular(25.0))),
+                    context: context,
+                    builder: (_) => CustomBottomSheet(
+                          markerName: "Bus ${vehicleId.toString()}",
+                        ));
+              }
+            },
+            child: RotationTransition(
+                turns: AlwaysStoppedAnimation((heading - 45) / 360),
+                child: image.getSVG),
+          );
         });
   }
 }

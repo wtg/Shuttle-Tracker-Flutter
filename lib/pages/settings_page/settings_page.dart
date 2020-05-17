@@ -30,14 +30,13 @@ class _SettingsPageState extends State<SettingsPage> {
         body: Material(
           child: Center(
               child: NotificationListener<OverscrollIndicatorNotification>(
-            onNotification: (overscroll) {
-              overscroll.disallowGlow();
-              return null;
-            },
-            child: Platform.isIOS
-                ? IOSSetttings(theme: theme)
-                : AndroidSettings(theme: theme)
-          )),
+                  onNotification: (overscroll) {
+                    overscroll.disallowGlow();
+                    return null;
+                  },
+                  child: Platform.isIOS
+                      ? IOSSetttings(theme: theme)
+                      : AndroidSettings(theme: theme))),
         ),
       );
     });

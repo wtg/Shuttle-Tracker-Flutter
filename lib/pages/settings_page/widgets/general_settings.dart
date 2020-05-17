@@ -34,19 +34,16 @@ class _GeneralSettingsState extends State<GeneralSettings> {
           title: Text('Dark Mode',
               style: TextStyle(
                   color: widget.theme.getTheme.hoverColor, fontSize: 16)),
-          trailing: Transform.scale(
-            scale: 0.95,
-            child: PlatformSwitch(
-                value: isSwitched,
-                onChanged: (value) {
-                  isSwitched = value;
-                  themeBloc.add(ThemeEvent.toggle);
-                },
-                activeColor: Colors.white,
-                android: (_) =>
-                    MaterialSwitchData(activeTrackColor: Colors.green),
-                ios: (_) => CupertinoSwitchData(activeColor: Colors.green)),
-          )),
+          trailing: PlatformSwitch(
+              value: isSwitched,
+              onChanged: (value) {
+                isSwitched = value;
+                themeBloc.add(ThemeEvent.toggle);
+              },
+              activeColor: Colors.white,
+              android: (_) =>
+                  MaterialSwitchData(activeTrackColor: Colors.green),
+              ios: (_) => CupertinoSwitchData(activeColor: Colors.green))),
     ]);
   }
 }

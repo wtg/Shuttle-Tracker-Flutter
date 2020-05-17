@@ -4,14 +4,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../blocs/theme/theme_bloc.dart';
 import '../../../models/shuttle_stop.dart';
+import 'shuttle_line.dart';
 
 class Panel extends StatefulWidget {
   final ScrollController scrollController;
   final Color routeColor;
-  final List<ShuttleStop> routeStops;
-  final List<int> ids;
+  final Map<int, ShuttleStop> routeStops;
 
-  Panel({this.scrollController, this.routeColor, this.routeStops, this.ids});
+  Panel({this.scrollController, this.routeColor, this.routeStops});
 
   @override
   _PanelState createState() => _PanelState();
@@ -19,16 +19,28 @@ class Panel extends StatefulWidget {
 
 class _PanelState extends State<Panel> {
   List<Widget> _getStopTileList(ThemeData theme) {
-    var tileList = <Card>[];
-    for (var shuttleStop in widget.routeStops) {
-      tileList.add(Card(
-          color: theme.backgroundColor,
-          child: ListTile(
-              leading: Text(
-            shuttleStop.name,
-            style: theme.textTheme.bodyText1,
-          ))));
-    }
+    var tileList = <Widget>[];
+    widget.routeStops.forEach((key, value) {
+      tileList.add(IntrinsicHeight(
+        child: ListTile(
+            dense: true,
+            title: Row(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: <Widget>[
+                ShuttleLine(color: widget.routeColor),
+                SizedBox(
+                  width: 20,
+                ),
+                Center(
+                  child: Text(
+                    value.name,
+                    style: theme.textTheme.bodyText1,
+                  ),
+                ),
+              ],
+            )),
+      ));
+    });
     return tileList;
   }
 
@@ -96,11 +108,12 @@ class _PanelState extends State<Panel> {
                 ),
                 Expanded(
                   child: Container(
-                    color: theme.getTheme.appBarTheme.color,
+                    color: theme.getTheme.canvasColor,
                     child: ListView.builder(
-                        controller: widget.scrollController,
-                        itemCount: _stopTileList.length,
-                        itemBuilder: (context, index) => _stopTileList[index]),
+                      controller: widget.scrollController,
+                      itemCount: _stopTileList.length,
+                      itemBuilder: (context, index) => _stopTileList[index],
+                    ),
                   ),
                 ),
               ],

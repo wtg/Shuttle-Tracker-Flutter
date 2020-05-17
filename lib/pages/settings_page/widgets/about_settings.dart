@@ -67,7 +67,7 @@ class _AboutSettingsState extends State<AboutSettings> {
                   color: widget.theme.getTheme.hoverColor, fontSize: 16),
             ),
             Text(
-              '1.0',
+              '1.0.0',
               style: TextStyle(color: Colors.grey, fontSize: 14),
             ),
           ],

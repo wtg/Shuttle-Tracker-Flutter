@@ -105,8 +105,8 @@ class _LoadedMapState extends State<LoadedMap> with TickerProviderStateMixin {
     return markers;
   }
 
-  List<Marker> _createUpdates(
-      List<ShuttleUpdate> updates, Map<int, Color> colors) {
+  List<Marker> _createUpdates(List<ShuttleUpdate> updates, BuildContext context,
+      Map<int, Color> colors) {
     var markers = <Marker>[];
 
     for (var update in updates) {
@@ -116,7 +116,7 @@ class _LoadedMapState extends State<LoadedMap> with TickerProviderStateMixin {
         update.setColor = Colors.white;
       }
 
-      markers.add(update.getMarker);
+      markers.add(update.getMarker(animatedMapMove, context));
     }
     //print("Number of shuttles on map: ${markers.length}");
     return markers;
@@ -141,7 +141,7 @@ class _LoadedMapState extends State<LoadedMap> with TickerProviderStateMixin {
         builder: (context, theme) {
           var isDarkMode = theme.getTheme.bottomAppBarColor == Colors.black;
           var routes = _createRoutes(widget.routes, _ids, _legend, _colors);
-          var updates = _createUpdates(widget.updates, _colors);
+          var updates = _createUpdates(widget.updates, context, _colors);
           var stops = _createStops(widget.stops, context, theme.getTheme);
           var location = _createLocation(widget.location);
           return Stack(children: <Widget>[

@@ -45,8 +45,8 @@ class ShuttleStop extends ShuttlePoint {
 
   Marker getMarker(dynamic animatedMapMove, [BuildContext context]) {
     return Marker(
-        width: 35.0,
-        height: 35.0,
+        width: 44.0,
+        height: 44.0,
         point: getLatLng,
         builder: (ctx) => GestureDetector(
             onTap: () {
@@ -66,7 +66,7 @@ class ShuttleStop extends ShuttlePoint {
             },
             child: Container(
                 decoration: BoxDecoration(
-                    border: Border.all(width: 12, style: BorderStyle.none),
+                    border: Border.all(width: 15, style: BorderStyle.none),
                     shape: BoxShape.circle),
                 child: Image.asset(
                   'assets/img/stop.png',

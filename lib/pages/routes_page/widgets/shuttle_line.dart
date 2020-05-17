@@ -14,19 +14,19 @@ class _ShuttleLineState extends State<ShuttleLine> {
       alignment: Alignment.center,
       children: <Widget>[
         Container(
-          width: 5,
+          width: 9,
           height: 50,
           color: widget.color,
         ),
         Container(
             child: Image.asset(
           'assets/img/stop.png',
-          height: 15,
-          width: 15,
+          height: 20,
+          width: 20,
         )),
         Positioned(
-          child: Icon(Icons.keyboard_arrow_down, size: 18),
-          top: 33,
+          child: Icon(Icons.keyboard_arrow_down, size: 19, color: Colors.white),
+          top: 34,
         )
       ],
     );

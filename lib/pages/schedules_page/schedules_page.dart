@@ -52,12 +52,12 @@ class _SchedulesPageState extends State<SchedulesPage> {
                             'Monday–Friday 7am – 11pm\n',
                             style: TextStyle(
                                 color: theme.getTheme.hoverColor,
-                                fontSize: 14)),
+                                fontSize: 13)),
                         Text('View PDF',
                             style: TextStyle(
                                 color: Colors.red,
                                 fontWeight: FontWeight.w600,
-                                fontSize: 14)),
+                                fontSize: 13)),
                         SizedBox(height: 10)
                       ],
                     ),
@@ -89,11 +89,11 @@ class _SchedulesPageState extends State<SchedulesPage> {
                             'Friday–Saturday 8pm – 4am\n',
                             style: TextStyle(
                                 color: theme.getTheme.hoverColor,
-                                fontSize: 14)),
+                                fontSize: 13)),
                         Text('View PDF',
                             style: TextStyle(
                                 color: Colors.red,
-                                fontSize: 14,
+                                fontSize: 13,
                                 fontWeight: FontWeight.w600)),
                         SizedBox(height: 10)
                       ],

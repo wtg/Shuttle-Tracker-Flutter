@@ -20,57 +20,88 @@ class _SchedulesPageState extends State<SchedulesPage> {
               'Schedules',
               style: TextStyle(color: theme.getTheme.hoverColor),
             ),
-            backgroundColor: theme.getTheme.appBarTheme.color,
+            backgroundColor: theme.getTheme.bottomAppBarColor,
           ),
-          body: ListView(
-            children: <Widget>[
-              Container(
-                color: Colors.white,
-                child: Text('\n'),
-              ),
-              Container(
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    border: Border.all(
-                      width: 0.2,
-                    )),
-                child: Text('\nWeekday Routes\n'),
-              ),
-              Container(
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    border: Border.all(
-                      width: 0.2,
-                    )),
-                child: Text('\nNorth, South, and New West Routes\n'
-                    'Monday–Friday 7am – 11pm\n'),
-              ),
-              Container(
-                color: Colors.white,
-                child: Text('\n\n'),
-              ),
-              Container(
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    border: Border.all(
-                      width: 0.2,
-                    )),
-                child: Text('\nWeekend Routes\n'),
-              ),
-              Container(
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    border: Border.all(
-                      width: 0.2,
-                    )),
-                child: Text('\nWest and East Routes\n'
-                    'Saturday–Sunday 9:30am – 5pm\n\n'
-                    'Weekend Express Route\n'
-                    'Saturday–Sunday 4:30pm – 8pm\n\n'
-                    'Late Night Route\n'
-                    'Friday–Saturday 8pm – 4am\n\n'),
-              ),
-            ],
+          backgroundColor: theme.getTheme.bottomAppBarColor,
+          body: NotificationListener<OverscrollIndicatorNotification>(
+            onNotification: (overscroll) {
+              overscroll.disallowGlow();
+              return null;
+            },
+            child: ListView(
+              children: <Widget>[
+                SizedBox(
+                  height: 10,
+                ),
+                Card(
+                  shadowColor: theme.getTheme.hoverColor,
+                  color: theme.getTheme.backgroundColor,
+                  elevation: 2,
+                  child: ListTile(
+                    title: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        SizedBox(height: 10),
+                        Text('Weekday Routes',
+                            style: TextStyle(
+                                color: theme.getTheme.hoverColor,
+                                fontWeight: FontWeight.w600,
+                                fontSize: 20)),
+                        Text(
+                            '\nNorth, South, and New West Routes\n'
+                            'Monday–Friday 7am – 11pm\n',
+                            style: TextStyle(
+                                color: theme.getTheme.hoverColor,
+                                fontSize: 14)),
+                        Text('View PDF',
+                            style: TextStyle(
+                                color: Colors.red,
+                                fontWeight: FontWeight.w600,
+                                fontSize: 14)),
+                        SizedBox(height: 10)
+                      ],
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Card(
+                  shadowColor: theme.getTheme.hoverColor,
+                  color: theme.getTheme.backgroundColor,
+                  elevation: 2,
+                  child: ListTile(
+                    title: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        SizedBox(height: 10),
+                        Text('Weekend Routes\n',
+                            style: TextStyle(
+                                color: theme.getTheme.hoverColor,
+                                fontWeight: FontWeight.w600,
+                                fontSize: 20)),
+                        Text(
+                            'West and East Routes\n'
+                            'Saturday–Sunday 9:30am – 5pm\n\n'
+                            'Weekend Express Route\n'
+                            'Saturday–Sunday 4:30pm – 8pm\n\n'
+                            'Late Night Route\n'
+                            'Friday–Saturday 8pm – 4am\n',
+                            style: TextStyle(
+                                color: theme.getTheme.hoverColor,
+                                fontSize: 14)),
+                        Text('View PDF',
+                            style: TextStyle(
+                                color: Colors.red,
+                                fontSize: 14,
+                                fontWeight: FontWeight.w600)),
+                        SizedBox(height: 10)
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ));
     });
   }

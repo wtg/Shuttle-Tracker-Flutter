@@ -92,7 +92,7 @@ class ShuttleUpdate extends ShuttlePoint {
                             topRight: Radius.circular(25.0))),
                     context: context,
                     builder: (_) => CustomBottomSheet(
-                          markerName: vehicleId.toString(),
+                          markerName: "Bus ${vehicleId.toString()}",
                         ));
               }
             },

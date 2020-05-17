@@ -51,6 +51,7 @@ class _LegendState extends State<Legend> {
                 boxShadow: [
                   BoxShadow(
                       color: theme.getTheme.hoverColor,
+                      blurRadius: 2.0,
                       offset: Offset(0.0, 0.5))
                 ]),
             child: Column(

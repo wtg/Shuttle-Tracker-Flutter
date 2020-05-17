@@ -23,7 +23,11 @@ class _ShuttleLineState extends State<ShuttleLine> {
           'assets/img/stop.png',
           height: 15,
           width: 15,
-        ))
+        )),
+        Positioned(
+          child: Icon(Icons.keyboard_arrow_down, size: 18),
+          top: 33,
+        )
       ],
     );
   }

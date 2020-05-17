@@ -15,16 +15,10 @@ import 'widgets/panel.dart';
 class DetailPage extends StatefulWidget {
   final String title;
   final List<Polyline> polyline;
-  final List<ShuttleStop> shuttleStops;
-  final List<int> ids;
+  final Map<int, ShuttleStop> routeStops;
   final Color routeColor;
 
-  DetailPage(
-      {this.title,
-      this.polyline,
-      this.shuttleStops,
-      this.ids,
-      this.routeColor});
+  DetailPage({this.title, this.polyline, this.routeStops, this.routeColor});
 
   @override
   _DetailPageState createState() => _DetailPageState();
@@ -64,12 +58,12 @@ class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
     controller.forward();
   }
 
-  List<Marker> _createStops(List<ShuttleStop> shuttleStops) {
+  List<Marker> _createStops(Map<int, ShuttleStop> shuttleStops) {
     var markers = <Marker>[];
+    shuttleStops.forEach((key, value) {
+      markers.add(value.getMarker(animatedMapMove));
+    });
 
-    for (var shuttleStop in shuttleStops) {
-      markers.add(shuttleStop.getMarker(animatedMapMove));
-    }
     //print("Number of stops on map: ${markers.length}");
     return markers;
   }
@@ -106,12 +100,6 @@ class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
   */
   @override
   Widget build(BuildContext context) {
-    var routeStops = <ShuttleStop>[];
-    for (var shuttleStop in widget.shuttleStops) {
-      if (widget.ids.contains(shuttleStop.id)) {
-        routeStops.add(shuttleStop);
-      }
-    }
     return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, theme) {
       var isDarkMode = theme.getTheme.bottomAppBarColor == Colors.black;
       var _panelHeightOpen = MediaQuery.of(context).size.height * .45;
@@ -151,8 +139,7 @@ class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
               panelBuilder: (sc) => Panel(
                   scrollController: sc,
                   routeColor: widget.routeColor,
-                  routeStops: routeStops,
-                  ids: widget.ids),
+                  routeStops: widget.routeStops),
               maxHeight: _panelHeightOpen,
               borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(25.0),
@@ -183,7 +170,8 @@ class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
                           tileProvider: CachedNetworkTileProvider(),
                         ),
                         PolylineLayerOptions(polylines: widget.polyline),
-                        MarkerLayerOptions(markers: _createStops(routeStops)),
+                        MarkerLayerOptions(
+                            markers: _createStops(widget.routeStops)),
                       ],
                     ),
                   ),

@@ -24,15 +24,7 @@ class CustomListTile extends StatefulWidget {
 }
 
 class _CustomListTileState extends State<CustomListTile> {
-  @override
-  Widget build(BuildContext context) {
-    var polyline = <Polyline>[widget.route.getPolyline];
-    var ids = widget.route.stopIds;
-
-    var image = ShuttleImage(svgColor: widget.route.color);
-    var shuttleArrow = image.getSVG;
-    var color = image.getSVGColor;
-
+  _getIcon() {
     var icon = widget.isEnabled && widget.isActive
         ? Icon(
             Icons.check_circle,
@@ -47,6 +39,34 @@ class _CustomListTileState extends State<CustomListTile> {
                 Icons.error,
                 color: Colors.red,
               );
+    return icon;
+  }
+
+  Map<int, ShuttleStop> _getRouteStops() {
+    var stopIds = widget.route.stopIds;
+    var routeStops = <int, ShuttleStop>{};
+
+    for (var stopId in stopIds) {
+      routeStops[stopId] = null;
+    }
+
+    for (var shuttleStop in widget.stops) {
+      if (stopIds.contains(shuttleStop.id)) {
+        routeStops[shuttleStop.id] = shuttleStop;
+      }
+    }
+
+    return routeStops;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    var polyline = <Polyline>[widget.route.getPolyline];
+
+    var image = ShuttleImage(svgColor: widget.route.color);
+    var shuttleArrow = image.getSVG;
+    var color = image.getSVGColor;
+
     return ListTile(
       leading: Container(width: 35, height: 40, child: shuttleArrow),
       title: Text(widget.route.name,
@@ -66,7 +86,7 @@ class _CustomListTileState extends State<CustomListTile> {
                   shape: CircleBorder(),
                 ),
               ),
-              icon,
+              _getIcon(),
             ],
           ),
           Icon(
@@ -85,9 +105,8 @@ class _CustomListTileState extends State<CustomListTile> {
               return DetailPage(
                 title: widget.route.name,
                 polyline: polyline,
-                shuttleStops: widget.stops,
-                ids: ids,
                 routeColor: color,
+                routeStops: _getRouteStops(),
               );
             },
           ),

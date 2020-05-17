@@ -69,7 +69,7 @@ class ShuttleStop extends ShuttlePoint {
                     border: Border.all(width: 12, style: BorderStyle.none),
                     shape: BoxShape.circle),
                 child: Image.asset(
-                  'assets/img/circle.png',
+                  'assets/img/stop.png',
                 ))));
   }
 }

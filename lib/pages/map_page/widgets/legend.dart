@@ -30,7 +30,7 @@ class _LegendState extends State<Legend> {
       ));
     });
     legendRows.add(LegendRow(
-      widget: Image.asset('assets/img/circle.png'),
+      widget: Image.asset('assets/img/stop.png'),
       text: ' Shuttle Stop',
     ));
     //print("Number of rows in legend: ${legendRows.length}\n\n");

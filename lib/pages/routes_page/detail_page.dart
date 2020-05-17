@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
@@ -7,8 +9,8 @@ import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 import '../../blocs/theme/theme_bloc.dart';
 import '../../models/shuttle_stop.dart';
-import '../map_page/map_states/loaded_map.dart';
-import 'route_widgets/panel.dart';
+import '../map_page/states/loaded_map.dart';
+import 'widgets/panel.dart';
 
 class DetailPage extends StatefulWidget {
   final String title;
@@ -104,7 +106,7 @@ class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
   */
   @override
   Widget build(BuildContext context) {
-    List<ShuttleStop> routeStops = [];
+    var routeStops = <ShuttleStop>[];
     for (var shuttleStop in widget.shuttleStops) {
       if (widget.ids.contains(shuttleStop.id)) {
         routeStops.add(shuttleStop);
@@ -116,12 +118,26 @@ class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
       return Material(
         child: PlatformScaffold(
             appBar: PlatformAppBar(
-                leading: IconButton(
-                  alignment: Alignment.centerLeft,
-                  icon: Icon(Icons.arrow_back_ios),
-                  iconSize: 20,
-                  onPressed: () => Navigator.pop(context),
-                ),
+                leading: GestureDetector(
+                    onTap: () => Navigator.pop(context),
+                    child: Stack(
+                      alignment: Platform.isIOS
+                          ? AlignmentDirectional.centerStart
+                          : AlignmentDirectional.center,
+                      children: <Widget>[
+                        Container(
+                          width: 80,
+                          height: 50,
+                          color: widget.routeColor,
+                        ),
+                        Icon(
+                          Platform.isIOS
+                              ? Icons.arrow_back_ios
+                              : Icons.arrow_back,
+                          size: 26,
+                        ),
+                      ],
+                    )),
                 title: Text(
                   widget.title,
                   style: TextStyle(
@@ -139,8 +155,8 @@ class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
                   ids: widget.ids),
               maxHeight: _panelHeightOpen,
               borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(18.0),
-                  topRight: Radius.circular(18.0)),
+                  topLeft: Radius.circular(25.0),
+                  topRight: Radius.circular(25.0)),
               parallaxEnabled: true,
               parallaxOffset: 0.25,
               body: Column(
@@ -152,8 +168,7 @@ class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
                       options: MapOptions(
                         nePanBoundary: LatLng(42.78, -73.63),
                         swPanBoundary: LatLng(42.68, -73.71),
-                        center: LatLng(42.719,
-                            -73.6767), //_getCentroid(routeStops).latitude.isNaN ? LatLng(42.731, -73.6767) : _getCentroid(routeStops),
+                        center: LatLng(42.719, -73.6767),
                         zoom: 13.9,
                         maxZoom: 16, // max you can zoom in
                         minZoom: 13, // min you can zoom out

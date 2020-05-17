@@ -8,8 +8,8 @@ class ShuttlePoint {
 
   ShuttlePoint({this.latitude, this.longitude});
 
-  ShuttlePoint.fromJson(Map<String, dynamic> json) {
-    latitude = json['latitude'];
-    longitude = json['longitude'];
+  factory ShuttlePoint.fromJson(Map<String, dynamic> json) {
+    return ShuttlePoint(
+        latitude: json['latitude'], longitude: json['longitude']);
   }
 }

@@ -48,7 +48,7 @@ class ShuttleUpdate extends ShuttlePoint {
       this.created,
       this.vehicleId,
       this.routeId})
-      : super(latitude: 0.0, longitude: 0.0);
+      : super(latitude: latitude, longitude: longitude);
 
   Color get getColor => color;
 
@@ -57,24 +57,30 @@ class ShuttleUpdate extends ShuttlePoint {
     image = ShuttleImage(svgColor: color);
   }
 
-  ShuttleUpdate.fromJson(Map<String, dynamic> json) {
-    latitude = json['latitude'];
-    longitude = json['longitude'];
-    id = json['id'];
-    trackerId = json['tracker_id'];
-    heading = (json['heading'] as num).toDouble();
-    speed = json['speed'];
-    time = json['time'];
-    created = json['created'];
-    vehicleId = json['vehicle_id'];
-    routeId = json['route_id'];
+  factory ShuttleUpdate.fromJson(Map<String, dynamic> json) {
+    return ShuttleUpdate(
+      id: json['id'],
+      trackerId: json['tracker_id'],
+      heading: (json['heading'] as num).toDouble(),
+      speed: json['speed'],
+      time: json['time'],
+      created: json['created'],
+      vehicleId: json['vehicle_id'],
+      routeId: json['route_id'],
+      latitude: json['latitude'],
+      longitude: json['longitude'],
+    );
   }
 
-  Marker get getMarker => Marker(
-      point: getLatLng,
-      width: 30.0,
-      height: 30.0,
-      builder: (ctx) => RotationTransition(
-          turns: AlwaysStoppedAnimation((heading - 45) / 360),
-          child: image.getSVG));
+  Marker get getMarker {
+    return Marker(
+        point: getLatLng,
+        width: 30.0,
+        height: 30.0,
+        builder: (ctx) {
+          return RotationTransition(
+              turns: AlwaysStoppedAnimation((heading - 45) / 360),
+              child: image.getSVG);
+        });
+  }
 }

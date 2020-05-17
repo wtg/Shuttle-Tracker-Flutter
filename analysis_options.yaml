@@ -1,1 +1,8 @@
-#include: package:effective_dart/analysis_options.yaml
+include: package:effective_dart/analysis_options.yaml
+#include: package:pedantic/analysis_options.yaml
+
+linter:
+  rules:
+    public_member_api_docs: false
+    avoid_catches_without_on_clauses: false
+    avoid_setters_without_getters: false

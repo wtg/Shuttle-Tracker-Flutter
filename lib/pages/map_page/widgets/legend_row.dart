@@ -3,11 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../blocs/theme/theme_bloc.dart';
 
-class MapkeyRow extends StatelessWidget {
+class LegendRow extends StatelessWidget {
   final Widget widget;
   final String text;
 
-  MapkeyRow({this.widget, this.text});
+  LegendRow({this.widget, this.text});
 
   @override
   Widget build(BuildContext context) {

@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter/widgets.dart';
 //import 'package:flutter_map_marker_popup/flutter_map_marker_popup.dart';
-//import 'package:flutter_shuttletracker/pages/map_page/map_widgets/popup.dart';
+//import 'package:flutter_shuttletracker/pages/map_page/widgets/popup.dart';
 import 'package:latlong/latlong.dart';
 
 import '../../../blocs/theme/theme_bloc.dart';
@@ -11,8 +11,8 @@ import '../../../models/shuttle_image.dart';
 import '../../../models/shuttle_route.dart';
 import '../../../models/shuttle_stop.dart';
 import '../../../models/shuttle_update.dart';
-import '../map_widgets/attribution.dart';
-import '../map_widgets/mapkey.dart';
+import '../widgets/attribution.dart';
+import '../widgets/legend.dart';
 
 class LoadedMap extends StatefulWidget {
   final List<ShuttleRoute> routes;
@@ -32,16 +32,16 @@ class LoadedMap extends StatefulWidget {
 }
 
 class _LoadedMapState extends State<LoadedMap> with TickerProviderStateMixin {
-  MapController _mapController = MapController();
+  final MapController _mapController = MapController();
 
   /// Map of with the route number as key and color of that route as the value
-  Map<int, Color> _colors = {};
+  final Map<int, Color> _colors = {};
 
   /// Map of with name of route as key and ShuttleImage as the value
-  Map<String, ShuttleImage> _mapkey = {};
+  final Map<String, ShuttleImage> _legend = {};
 
   /// List of all ids
-  List<int> _ids = [];
+  final List<int> _ids = [];
 
   void animatedMapMove(LatLng destLocation, double destZoom) {
     final _latTween = Tween<double>(
@@ -75,12 +75,12 @@ class _LoadedMapState extends State<LoadedMap> with TickerProviderStateMixin {
   }
 
   List<Polyline> _createRoutes(List<ShuttleRoute> routes, List<int> _ids,
-      Map<String, ShuttleImage> _mapkey, Map<int, Color> _colors) {
+      Map<String, ShuttleImage> _legend, Map<int, Color> _colors) {
     var polylines = <Polyline>[];
 
     for (var route in routes) {
       if (route.active && route.enabled) {
-        _mapkey[route.name] = ShuttleImage(svgColor: route.color);
+        _legend[route.name] = ShuttleImage(svgColor: route.color);
         _ids.addAll(route.stopIds);
         polylines.add(route.getPolyline);
         for (var schedule in route.schedules) {
@@ -140,7 +140,7 @@ class _LoadedMapState extends State<LoadedMap> with TickerProviderStateMixin {
       body: BlocBuilder<ThemeBloc, ThemeState>(
         builder: (context, theme) {
           var isDarkMode = theme.getTheme.bottomAppBarColor == Colors.black;
-          var routes = _createRoutes(widget.routes, _ids, _mapkey, _colors);
+          var routes = _createRoutes(widget.routes, _ids, _legend, _colors);
           var updates = _createUpdates(widget.updates, _colors);
           var stops = _createStops(widget.stops, context, theme.getTheme);
           var location = _createLocation(widget.location);
@@ -178,8 +178,8 @@ class _LoadedMapState extends State<LoadedMap> with TickerProviderStateMixin {
               ],
             ),
             Attribution(),
-            Mapkey(
-              mapkey: _mapkey,
+            Legend(
+              legend: _legend,
             ),
           ]);
         },

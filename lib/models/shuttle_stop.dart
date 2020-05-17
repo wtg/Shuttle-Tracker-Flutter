@@ -23,20 +23,23 @@ class ShuttleStop extends ShuttlePoint {
   ShuttleStop(
       {latitude,
       longitude,
+      this.id,
       this.name,
       this.created,
       this.updated,
       this.description})
       : super(latitude: latitude, longitude: longitude);
 
-  ShuttleStop.fromJson(Map<String, dynamic> json) {
-    latitude = json['latitude'];
-    longitude = json['longitude'];
-    id = json['id'];
-    name = json['name'];
-    created = json['created'];
-    updated = json['updated'];
-    description = json['description'];
+  factory ShuttleStop.fromJson(Map<String, dynamic> json) {
+    return ShuttleStop(
+      latitude: json['latitude'],
+      longitude: json['longitude'],
+      id: json['id'],
+      name: json['name'],
+      created: json['created'],
+      updated: json['updated'],
+      description: json['description'],
+    );
   }
 
   Widget _createBottomSheet(BuildContext context) {
@@ -75,12 +78,10 @@ class ShuttleStop extends ShuttlePoint {
               showBottomSheet(
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(18.0),
-                          topRight: Radius.circular(18.0))),
+                          topLeft: Radius.circular(25.0),
+                          topRight: Radius.circular(25.0))),
                   context: context,
-                  builder: (context) {
-                    return _createBottomSheet(context);
-                  });
+                  builder: _createBottomSheet);
             }
           },
           child: Container(

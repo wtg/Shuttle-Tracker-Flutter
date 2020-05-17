@@ -7,8 +7,8 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import '../../blocs/shuttle/shuttle_bloc.dart';
 import '../../blocs/theme/theme_bloc.dart';
 import '../../models/shuttle_image.dart';
-import 'route_states/loaded_state.dart';
-import 'route_states/loading_state.dart';
+import '../../widgets/loading_state.dart';
+import 'states/loaded_state.dart';
 
 class RoutesPage extends StatefulWidget {
   @override
@@ -18,7 +18,7 @@ class RoutesPage extends StatefulWidget {
 class _RoutesPageState extends State<RoutesPage> {
   ShuttleBloc shuttleBloc;
   bool isSwitched = false;
-  Map<String, ShuttleImage> mapkey = {};
+  Map<String, ShuttleImage> legend = {};
   Completer<void> _refreshCompleter;
 
   @override
@@ -29,7 +29,7 @@ class _RoutesPageState extends State<RoutesPage> {
           appBar: PlatformAppBar(
             automaticallyImplyLeading: false,
             title: Text(
-              "Routes",
+              'Routes',
               style: TextStyle(color: theme.getTheme.hoverColor),
             ),
             backgroundColor: theme.getTheme.appBarTheme.color,

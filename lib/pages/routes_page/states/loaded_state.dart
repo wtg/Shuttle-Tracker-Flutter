@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_shuttletracker/models/shuttle_stop.dart';
+
 import '../../../models/shuttle_route.dart';
-import '../route_widgets/custom_list_tile.dart';
+import '../../../models/shuttle_stop.dart';
+import '../widgets/custom_list_tile.dart';
 
 class LoadedState extends StatefulWidget {
   final List<ShuttleRoute> routes;
@@ -35,7 +36,7 @@ class _LoadedState extends State<LoadedState> {
   @override
   Widget build(BuildContext context) {
     var tileList = _getTileList();
-    //notification listender used to remove scroll glow
+    //notification listener used to remove scroll glow
 
     return NotificationListener<OverscrollIndicatorNotification>(
       onNotification: (overscroll) {

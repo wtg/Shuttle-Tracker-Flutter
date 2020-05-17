@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
-import 'package:flutter_shuttletracker/blocs/theme/theme_bloc.dart';
 
 import '../../blocs/shuttle/shuttle_bloc.dart';
-import 'map_states/error_map.dart';
-import 'map_states/initial_map.dart';
-import 'map_states/loaded_map.dart';
-import 'map_states/loading_map.dart';
+import '../../blocs/theme/theme_bloc.dart';
+import '../../widgets/loading_state.dart';
+import 'states/error_map.dart';
+import 'states/initial_map.dart';
+import 'states/loaded_map.dart';
 
 class MapPage extends StatefulWidget {
   @override
@@ -16,11 +16,11 @@ class MapPage extends StatefulWidget {
 }
 
 class _MapPageState extends State<MapPage> {
-  ShuttleBloc shuttleBloc;
   int i = 0;
 
   @override
   Widget build(BuildContext context) {
+    var shuttleBloc = context.bloc<ShuttleBloc>();
     return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, theme) {
       return PlatformScaffold(
         appBar: PlatformAppBar(
@@ -40,8 +40,6 @@ class _MapPageState extends State<MapPage> {
           child: Center(
             child: BlocBuilder<ShuttleBloc, ShuttleState>(
                 builder: (context, state) {
-              shuttleBloc = BlocProvider.of<ShuttleBloc>(context);
-
               if (state is ShuttleInitial) {
                 shuttleBloc.add(ShuttleEvent.getShuttleMap);
                 print('state is initial');
@@ -65,7 +63,7 @@ class _MapPageState extends State<MapPage> {
                 );
               }
               print('state is loading');
-              return LoadingMap();
+              return LoadingState(theme: theme.getTheme);
             }),
           ),
         ),

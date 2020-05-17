@@ -44,37 +44,39 @@ class ShuttleRoute {
   /// List of shuttles currently associated with this route
   List<ShuttleSchedule> schedules;
 
-  ShuttleRoute({
-    this.id,
-    this.name,
-    this.desc,
-    this.enabled,
-    this.color,
-    this.width,
-    this.stopIds,
-    this.created,
-    this.updated,
-    this.points,
-    this.active,
-  });
+  ShuttleRoute(
+      {this.id,
+      this.name,
+      this.desc,
+      this.enabled,
+      this.color,
+      this.width,
+      this.stopIds,
+      this.created,
+      this.updated,
+      this.points,
+      this.active,
+      this.schedules});
 
-  ShuttleRoute.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    name = json['name'].toString();
-    desc = json['description'].toString();
-    enabled = json['enabled'];
-    color = Color(int.parse(json['color'].toString().replaceAll('#', '0xff')));
-    width = (json['width'] as num).toDouble();
-    stopIds = List<int>.from(json['stop_ids'] as List);
-    created = json['created'];
-    updated = json['updated'];
-    points = (json['points'] as List)
-        .map((i) => ShuttlePoint.fromJson(i).getLatLng)
-        .toList();
-    active = json['active'];
-    schedules = (json['schedule'] as List)
-        .map((i) => ShuttleSchedule.fromJson(i))
-        .toList();
+  factory ShuttleRoute.fromJson(Map<String, dynamic> json) {
+    return ShuttleRoute(
+      id: json['id'],
+      name: json['name'].toString(),
+      desc: json['description'].toString(),
+      enabled: json['enabled'],
+      color: Color(int.parse(json['color'].toString().replaceAll('#', '0xff'))),
+      width: (json['width'] as num).toDouble(),
+      stopIds: List<int>.from(json['stop_ids'] as List),
+      created: json['created'],
+      updated: json['updated'],
+      points: (json['points'] as List)
+          .map((i) => ShuttlePoint.fromJson(i).getLatLng)
+          .toList(),
+      active: json['active'],
+      schedules: (json['schedule'] as List)
+          .map((i) => ShuttleSchedule.fromJson(i))
+          .toList(),
+    );
   }
 
   Polyline get getPolyline => Polyline(

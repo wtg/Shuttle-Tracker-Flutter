@@ -2,12 +2,13 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter_shuttletracker/models/shuttle_route.dart';
-import 'package:flutter_shuttletracker/models/shuttle_stop.dart';
-import 'package:flutter_shuttletracker/models/shuttle_update.dart';
+
 import 'package:latlong/latlong.dart';
 
 import '../../data/repository/shuttle_repository.dart';
+import '../../models/shuttle_route.dart';
+import '../../models/shuttle_stop.dart';
+import '../../models/shuttle_update.dart';
 
 part 'shuttle_state.dart';
 
@@ -61,7 +62,7 @@ class ShuttleBloc extends Bloc<ShuttleEvent, ShuttleState> {
               stops: stops);
         } else {
           isLoading = true;
-          yield ShuttleError(message: "NETWORK ISSUE");
+          yield ShuttleError(message: 'NETWORK ISSUE');
         }
         await Future.delayed(const Duration(seconds: 2));
         break;
@@ -76,15 +77,6 @@ class ShuttleBloc extends Bloc<ShuttleEvent, ShuttleState> {
         yield ShuttleLoaded(
             routes: routes, location: location, updates: updates, stops: stops);
         break;
-      /*
-      if (repository.getIsConnected) {
-        yield ShuttleLoaded(
-            routes: routes, location: location, updates: updates, stops: stops);
-      } else {
-        await Future.delayed(const Duration(seconds: 5));
-        yield ShuttleError(message: "NETWORK ISSUE");
-      }
-      */
     }
   }
 }

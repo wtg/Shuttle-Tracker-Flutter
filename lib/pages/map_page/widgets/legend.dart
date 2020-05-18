@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../blocs/theme/theme_bloc.dart';
 import '../../../models/shuttle_image.dart';
 
 import 'legend_row.dart';
@@ -34,7 +32,7 @@ class _LegendState extends State<Legend> {
       text: ' Shuttle Stop',
     ));
     //print("Number of rows in legend: ${legendRows.length}\n\n");
-    return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, theme) {
+
       return Positioned(
         bottom: 40,
         left: 10,
@@ -42,15 +40,15 @@ class _LegendState extends State<Legend> {
           opacity: 0.90,
           child: Container(
             decoration: BoxDecoration(
-                color: theme.getTheme.backgroundColor,
+                color: Theme.of(context).backgroundColor,
                 border: Border.all(
                   width: 5,
-                  color: theme.getTheme.backgroundColor,
+                  color: Theme.of(context).backgroundColor,
                 ),
                 borderRadius: BorderRadius.circular(5),
                 boxShadow: [
                   BoxShadow(
-                      color: theme.getTheme.hoverColor,
+                      color: Theme.of(context).hoverColor,
                       blurRadius: 1.0,
                       offset: Offset(0.0, 0.5))
                 ]),
@@ -61,6 +59,5 @@ class _LegendState extends State<Legend> {
           ),
         ),
       );
-    });
   }
 }

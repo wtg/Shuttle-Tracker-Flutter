@@ -5,7 +5,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 import '../../blocs/shuttle/shuttle_bloc.dart';
-import '../../blocs/theme/theme_bloc.dart';
 import '../../models/shuttle_image.dart';
 import '../../widgets/loading_state.dart';
 import 'states/loaded_state.dart';
@@ -24,15 +23,14 @@ class _RoutesPageState extends State<RoutesPage> {
   @override
   Widget build(BuildContext context) {
     _refreshCompleter = Completer<void>();
-    return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, theme) {
       return PlatformScaffold(
           appBar: PlatformAppBar(
             automaticallyImplyLeading: false,
             title: Text(
               'Routes',
-              style: TextStyle(color: theme.getTheme.hoverColor),
+              style: TextStyle(color: Theme.of(context).hoverColor),
             ),
-            backgroundColor: theme.getTheme.appBarTheme.color,
+            backgroundColor: Theme.of(context).appBarTheme.color,
           ),
           body: Material(
             child: Center(child: BlocBuilder<ShuttleBloc, ShuttleState>(
@@ -43,7 +41,7 @@ class _RoutesPageState extends State<RoutesPage> {
                 shuttleBloc.add(ShuttleEvent.getRoutes);
               } else if (state is ShuttleLoaded) {
                 return RefreshIndicator(
-                  backgroundColor: theme.getTheme.appBarTheme.color,
+                  backgroundColor: Theme.of(context).appBarTheme.color,
                   onRefresh: () {
                     shuttleBloc.add(ShuttleEvent.getRoutes);
                     return _refreshCompleter.future;
@@ -51,13 +49,13 @@ class _RoutesPageState extends State<RoutesPage> {
                   child: LoadedState(
                     routes: state.routes,
                     stops: state.stops,
-                    theme: theme.getTheme,
+                    theme: Theme.of(context),
                   ),
                 );
               }
-              return LoadingState(theme: theme.getTheme);
+              return LoadingState(theme: Theme.of(context));
             })),
           ));
-    });
+
   }
 }

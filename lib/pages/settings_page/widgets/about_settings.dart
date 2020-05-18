@@ -22,7 +22,7 @@ class _AboutSettingsState extends State<AboutSettings> {
             Text(
               'FAQ',
               style: TextStyle(
-                  color: widget.theme.getTheme.hoverColor, fontSize: 16),
+                  color: Theme.of(context).hoverColor, fontSize: 16),
             ),
             Text(
               'View frequently asked questions',
@@ -39,7 +39,7 @@ class _AboutSettingsState extends State<AboutSettings> {
             Text(
               'GitHub Repo',
               style: TextStyle(
-                  color: widget.theme.getTheme.hoverColor, fontSize: 16),
+                  color: Theme.of(context).hoverColor, fontSize: 16),
             ),
             Text(
               'Interested in contributing? Check out our repo!',
@@ -53,7 +53,7 @@ class _AboutSettingsState extends State<AboutSettings> {
         leading: Text(
           'Privacy Policy',
           style:
-              TextStyle(color: widget.theme.getTheme.hoverColor, fontSize: 16),
+              TextStyle(color: Theme.of(context).hoverColor, fontSize: 16),
         ),
       ),
       ListTile(
@@ -64,7 +64,7 @@ class _AboutSettingsState extends State<AboutSettings> {
             Text(
               'Version',
               style: TextStyle(
-                  color: widget.theme.getTheme.hoverColor, fontSize: 16),
+                  color: Theme.of(context).hoverColor, fontSize: 16),
             ),
             Text(
               '1.0.0',

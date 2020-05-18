@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
-import '../../blocs/theme/theme_bloc.dart';
 
 class SchedulesPage extends StatefulWidget {
   @override
@@ -12,17 +10,17 @@ class SchedulesPage extends StatefulWidget {
 class _SchedulesPageState extends State<SchedulesPage> {
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, theme) {
+
       return PlatformScaffold(
           appBar: PlatformAppBar(
             automaticallyImplyLeading: false,
             title: Text(
               'Schedules',
-              style: TextStyle(color: theme.getTheme.hoverColor),
+              style: TextStyle(color: Theme.of(context).hoverColor),
             ),
-            backgroundColor: theme.getTheme.bottomAppBarColor,
+            backgroundColor: Theme.of(context).bottomAppBarColor,
           ),
-          backgroundColor: theme.getTheme.bottomAppBarColor,
+          backgroundColor: Theme.of(context).bottomAppBarColor,
           body: NotificationListener<OverscrollIndicatorNotification>(
             onNotification: (overscroll) {
               overscroll.disallowGlow();
@@ -34,8 +32,8 @@ class _SchedulesPageState extends State<SchedulesPage> {
                   height: 10,
                 ),
                 Card(
-                  shadowColor: theme.getTheme.hoverColor,
-                  color: theme.getTheme.backgroundColor,
+                  shadowColor: Theme.of(context).hoverColor,
+                  color: Theme.of(context).backgroundColor,
                   elevation: 2,
                   child: ListTile(
                     title: Column(
@@ -44,14 +42,14 @@ class _SchedulesPageState extends State<SchedulesPage> {
                         SizedBox(height: 10),
                         Text('Weekday Routes',
                             style: TextStyle(
-                                color: theme.getTheme.hoverColor,
+                                color: Theme.of(context).hoverColor,
                                 fontWeight: FontWeight.w600,
                                 fontSize: 20)),
                         Text(
                             '\nNorth, South, and New West Routes\n'
                             'Monday–Friday 7am – 11pm\n',
                             style: TextStyle(
-                                color: theme.getTheme.hoverColor,
+                                color: Theme.of(context).hoverColor,
                                 fontSize: 13)),
                         Text('View PDF',
                             style: TextStyle(
@@ -67,8 +65,8 @@ class _SchedulesPageState extends State<SchedulesPage> {
                   height: 10,
                 ),
                 Card(
-                  shadowColor: theme.getTheme.hoverColor,
-                  color: theme.getTheme.backgroundColor,
+                  shadowColor: Theme.of(context).hoverColor,
+                  color: Theme.of(context).backgroundColor,
                   elevation: 2,
                   child: ListTile(
                     title: Column(
@@ -77,7 +75,7 @@ class _SchedulesPageState extends State<SchedulesPage> {
                         SizedBox(height: 10),
                         Text('Weekend Routes\n',
                             style: TextStyle(
-                                color: theme.getTheme.hoverColor,
+                                color: Theme.of(context).hoverColor,
                                 fontWeight: FontWeight.w600,
                                 fontSize: 20)),
                         Text(
@@ -88,7 +86,7 @@ class _SchedulesPageState extends State<SchedulesPage> {
                             'Late Night Route\n'
                             'Friday–Saturday 8pm – 4am\n',
                             style: TextStyle(
-                                color: theme.getTheme.hoverColor,
+                                color: Theme.of(context).hoverColor,
                                 fontSize: 13)),
                         Text('View PDF',
                             style: TextStyle(
@@ -103,6 +101,5 @@ class _SchedulesPageState extends State<SchedulesPage> {
               ],
             ),
           ));
-    });
   }
 }

@@ -1,13 +1,11 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:latlong/latlong.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
-import '../../blocs/theme/theme_bloc.dart';
 import '../../models/shuttle_stop.dart';
 import '../map_page/states/loaded_map.dart';
 import 'widgets/panel.dart';
@@ -100,8 +98,7 @@ class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
   */
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, theme) {
-      var isDarkMode = theme.getTheme.bottomAppBarColor == Colors.black;
+      var isDarkMode = Theme.of(context).bottomAppBarColor == Colors.black;
       var _panelHeightOpen = MediaQuery.of(context).size.height * .45;
       return Material(
         child: PlatformScaffold(
@@ -162,7 +159,7 @@ class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
                       ),
                       layers: [
                         TileLayerOptions(
-                          backgroundColor: theme.getTheme.bottomAppBarColor,
+                          backgroundColor: Theme.of(context).bottomAppBarColor,
                           urlTemplate: isDarkMode
                               ? LoadedMap.darkLink
                               : LoadedMap.lightLink,
@@ -179,6 +176,6 @@ class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
               ),
             )),
       );
-    });
+
   }
 }

@@ -4,7 +4,6 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 import '../../blocs/shuttle/shuttle_bloc.dart';
-import '../../blocs/theme/theme_bloc.dart';
 import '../../widgets/loading_state.dart';
 import 'states/error_map.dart';
 import 'states/initial_map.dart';
@@ -21,7 +20,6 @@ class _MapPageState extends State<MapPage> {
   @override
   Widget build(BuildContext context) {
     var shuttleBloc = context.bloc<ShuttleBloc>();
-    return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, theme) {
       return PlatformScaffold(
         appBar: PlatformAppBar(
           automaticallyImplyLeading: false,
@@ -30,7 +28,7 @@ class _MapPageState extends State<MapPage> {
             height: 40,
             width: 40,
           ),
-          backgroundColor: theme.getTheme.appBarTheme.color,
+          backgroundColor: Theme.of(context).appBarTheme.color,
           ios: (_) => CupertinoNavigationBarData(
             padding: EdgeInsetsDirectional.only(bottom: 10),
           ),
@@ -63,11 +61,10 @@ class _MapPageState extends State<MapPage> {
                 );
               }
               print('state is loading');
-              return LoadingState(theme: theme.getTheme);
+              return LoadingState(theme: Theme.of(context));
             }),
           ),
         ),
       );
-    });
   }
 }

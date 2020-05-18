@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter/widgets.dart';
 //import 'package:flutter_map_marker_popup/flutter_map_marker_popup.dart';
 //import 'package:flutter_shuttletracker/pages/map_page/widgets/popup.dart';
 import 'package:latlong/latlong.dart';
 
-import '../../../blocs/theme/theme_bloc.dart';
 import '../../../models/shuttle_image.dart';
 import '../../../models/shuttle_route.dart';
 import '../../../models/shuttle_stop.dart';
@@ -136,15 +134,15 @@ class _LoadedMapState extends State<LoadedMap> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: BlocBuilder<ThemeBloc, ThemeState>(
-        builder: (context, theme) {
-          var isDarkMode = theme.getTheme.bottomAppBarColor == Colors.black;
+    var isDarkMode = Theme.of(context).bottomAppBarColor == Colors.black;
           var routes = _createRoutes(widget.routes, _ids, _legend, _colors);
           var updates = _createUpdates(widget.updates, context, _colors);
-          var stops = _createStops(widget.stops, context, theme.getTheme);
+          var stops = _createStops(widget.stops, context, Theme.of(context));
           var location = _createLocation(widget.location);
-          return Stack(children: <Widget>[
+    return Scaffold(
+      body: 
+          
+          Stack(children: <Widget>[
             Column(
               children: [
                 /// Map
@@ -161,7 +159,7 @@ class _LoadedMapState extends State<LoadedMap> with TickerProviderStateMixin {
                     ),
                     layers: [
                       TileLayerOptions(
-                        backgroundColor: theme.getTheme.bottomAppBarColor,
+                        backgroundColor: Theme.of(context).bottomAppBarColor,
                         urlTemplate: isDarkMode
                             ? LoadedMap.darkLink
                             : LoadedMap.lightLink,
@@ -181,9 +179,7 @@ class _LoadedMapState extends State<LoadedMap> with TickerProviderStateMixin {
             Legend(
               legend: _legend,
             ),
-          ]);
-        },
-      ),
+          ])
     );
   }
 }

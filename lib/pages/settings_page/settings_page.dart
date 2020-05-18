@@ -23,9 +23,9 @@ class _SettingsPageState extends State<SettingsPage> {
           automaticallyImplyLeading: false,
           title: Text(
             'Settings',
-            style: TextStyle(color: theme.getTheme.hoverColor),
+            style: TextStyle(color: Theme.of(context).hoverColor),
           ),
-          backgroundColor: theme.getTheme.appBarTheme.color,
+          backgroundColor: Theme.of(context).appBarTheme.color,
         ),
         body: Material(
           child: Center(

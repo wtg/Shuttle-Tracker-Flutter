@@ -29,11 +29,11 @@ class _GeneralSettingsState extends State<GeneralSettings> {
           dense: true,
           leading: Icon(
             Icons.settings_brightness,
-            color: widget.theme.getTheme.hoverColor,
+            color: Theme.of(context).hoverColor,
           ),
           title: Text('Dark Mode',
               style: TextStyle(
-                  color: widget.theme.getTheme.hoverColor, fontSize: 16)),
+                  color: Theme.of(context).hoverColor, fontSize: 16)),
           trailing: PlatformSwitch(
               value: isSwitched,
               onChanged: (value) {

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../blocs/theme/theme_bloc.dart';
 import '../../../models/shuttle_stop.dart';
 import 'shuttle_line.dart';
 
@@ -46,8 +44,7 @@ class _PanelState extends State<Panel> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, theme) {
-      var _stopTileList = _getStopTileList(theme.getTheme);
+      var _stopTileList = _getStopTileList(Theme.of(context));
       return MediaQuery.removePadding(
           context: context,
           removeTop: true,
@@ -108,7 +105,7 @@ class _PanelState extends State<Panel> {
                 ),
                 Expanded(
                   child: Container(
-                    color: theme.getTheme.canvasColor,
+                    color: Theme.of(context).canvasColor,
                     child: ListView.builder(
                       controller: widget.scrollController,
                       itemCount: _stopTileList.length,
@@ -119,6 +116,6 @@ class _PanelState extends State<Panel> {
               ],
             ),
           ));
-    });
+
   }
 }

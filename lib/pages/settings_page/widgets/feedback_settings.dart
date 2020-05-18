@@ -22,7 +22,7 @@ class _FeedbackSettingsState extends State<FeedbackSettings> {
             Text(
               'Send Feedback',
               style: TextStyle(
-                  color: widget.theme.getTheme.hoverColor, fontSize: 16),
+                  color: Theme.of(context).hoverColor, fontSize: 16),
             ),
             Text(
               'Any comments? Send them here!',
@@ -36,7 +36,7 @@ class _FeedbackSettingsState extends State<FeedbackSettings> {
         leading: Text(
           'Rate this app',
           style:
-              TextStyle(color: widget.theme.getTheme.hoverColor, fontSize: 16),
+              TextStyle(color: Theme.of(context).hoverColor, fontSize: 16),
         ),
       ),
     ];

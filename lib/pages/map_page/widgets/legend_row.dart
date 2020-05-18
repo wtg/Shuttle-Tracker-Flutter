@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../blocs/theme/theme_bloc.dart';
 
 class LegendRow extends StatelessWidget {
   final Widget widget;
@@ -11,7 +9,7 @@ class LegendRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, theme) {
+
       return Row(
         children: <Widget>[
           Container(
@@ -21,10 +19,10 @@ class LegendRow extends StatelessWidget {
           ),
           Text(
             text,
-            style: theme.getTheme.textTheme.bodyText1,
+            style: Theme.of(context).textTheme.bodyText1,
           ),
         ],
       );
-    });
+
   }
 }

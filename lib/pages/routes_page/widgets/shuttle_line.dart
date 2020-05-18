@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
 
-class ShuttleLine extends StatefulWidget {
+class ShuttleLine extends StatelessWidget {
   final Color color;
   ShuttleLine({this.color});
-  @override
-  _ShuttleLineState createState() => _ShuttleLineState();
-}
 
-class _ShuttleLineState extends State<ShuttleLine> {
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -16,7 +12,7 @@ class _ShuttleLineState extends State<ShuttleLine> {
         Container(
           width: 9,
           height: 50,
-          color: widget.color,
+          color: color,
         ),
         Container(
             child: Image.asset(
@@ -25,9 +21,15 @@ class _ShuttleLineState extends State<ShuttleLine> {
           width: 20,
         )),
         Positioned(
-          child: Icon(Icons.keyboard_arrow_down, size: 19, color: Colors.white),
-          top: 34,
-        )
+          child: Icon(Icons.keyboard_arrow_down,
+              size: 50, color: Theme.of(context).canvasColor),
+          top: 23,
+        ),
+        Positioned(
+          child: Icon(Icons.keyboard_arrow_down,
+              size: 50, color: Theme.of(context).canvasColor),
+          bottom: 27,
+        ),
       ],
     );
   }

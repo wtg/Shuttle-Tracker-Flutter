@@ -24,7 +24,7 @@ class CustomListTile extends StatefulWidget {
 }
 
 class _CustomListTileState extends State<CustomListTile> {
-  _getIcon() {
+  Icon _getIcon() {
     var icon = widget.isEnabled && widget.isActive
         ? Icon(
             Icons.check_circle,

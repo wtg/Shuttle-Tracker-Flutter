@@ -51,10 +51,13 @@ class _AttributionState extends State<Attribution> {
             opacity: 0.9,
             child: Container(
               color: theme.getTheme.backgroundColor,
-              child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: attribution),
+              width: MediaQuery.of(context).size.width * 0.9,
+              child: FittedBox(
+                child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: attribution),
+              ),
             )),
       );
     });

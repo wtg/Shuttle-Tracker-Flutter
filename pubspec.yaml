@@ -25,7 +25,7 @@ dependencies:
   sliding_up_panel: ^1.0.2
   shared_preferences: ^0.5.7
   flutter_native_splash: ^0.1.9
-  flutter_platform_widgets: ^0.40.0
+  flutter_platform_widgets: ^0.41.0
   flutter_widget_from_html: ^0.3.3
   observable: ^0.22.2
   flutter_svg: ^0.17.4

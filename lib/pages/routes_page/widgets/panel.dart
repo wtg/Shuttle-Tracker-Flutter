@@ -29,7 +29,7 @@ class _PanelState extends State<Panel> {
               children: <Widget>[
                 ShuttleLine(color: widget.routeColor),
                 SizedBox(
-                  width: 20,
+                  width: 30,
                 ),
                 Center(
                   child: Text(

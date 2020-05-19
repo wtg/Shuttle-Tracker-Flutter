@@ -37,7 +37,8 @@ Flutter ShuttleTracker is a cross-platform port of <a href="https://github.com/w
 2. Clone the repository to your computer.
 3. Check the status of flutter by running ```flutter doctor```
 4. Retrieve all the required dependencies with ```flutter pub get```
-5. Run the app with ```flutter run```
+5. Make sure you are in the stable channel by running ```flutter channel stable```
+6. Run the app with ```flutter run```
 
 ## Dependencies
 

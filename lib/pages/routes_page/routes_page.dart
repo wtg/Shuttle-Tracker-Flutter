@@ -23,39 +23,37 @@ class _RoutesPageState extends State<RoutesPage> {
   @override
   Widget build(BuildContext context) {
     _refreshCompleter = Completer<void>();
-      return PlatformScaffold(
-          appBar: PlatformAppBar(
-            automaticallyImplyLeading: false,
-            title: Text(
-              'Routes',
-              style: TextStyle(color: Theme.of(context).hoverColor),
-            ),
-            backgroundColor: Theme.of(context).appBarTheme.color,
+    return PlatformScaffold(
+        appBar: PlatformAppBar(
+          automaticallyImplyLeading: false,
+          title: Text(
+            'Routes',
+            style: TextStyle(color: Theme.of(context).hoverColor),
           ),
-          body: Material(
-            child: Center(child: BlocBuilder<ShuttleBloc, ShuttleState>(
-                builder: (context, state) {
-              shuttleBloc = BlocProvider.of<ShuttleBloc>(context);
-              if (state is ShuttleInitial || state is ShuttleError) {
-                // TODO: MODIFY BLOC ERROR FOR ROUTE EVENT
-                shuttleBloc.add(ShuttleEvent.getRoutes);
-              } else if (state is ShuttleLoaded) {
-                return RefreshIndicator(
-                  backgroundColor: Theme.of(context).appBarTheme.color,
-                  onRefresh: () {
-                    shuttleBloc.add(ShuttleEvent.getRoutes);
-                    return _refreshCompleter.future;
-                  },
-                  child: LoadedState(
-                    routes: state.routes,
-                    stops: state.stops,
-                    theme: Theme.of(context),
-                  ),
-                );
-              }
-              return LoadingState(theme: Theme.of(context));
-            })),
-          ));
-
+          backgroundColor: Theme.of(context).appBarTheme.color,
+        ),
+        body: Material(
+          child: Center(child:
+              BlocBuilder<ShuttleBloc, ShuttleState>(builder: (context, state) {
+            shuttleBloc = BlocProvider.of<ShuttleBloc>(context);
+            if (state is ShuttleInitial || state is ShuttleError) {
+              // TODO: MODIFY BLOC ERROR FOR ROUTE EVENT
+              shuttleBloc.add(ShuttleEvent.getRoutes);
+            } else if (state is ShuttleLoaded) {
+              return RefreshIndicator(
+                backgroundColor: Theme.of(context).appBarTheme.color,
+                onRefresh: () {
+                  shuttleBloc.add(ShuttleEvent.getRoutes);
+                  return _refreshCompleter.future;
+                },
+                child: LoadedState(
+                  routes: state.routes,
+                  stops: state.stops,
+                ),
+              );
+            }
+            return LoadingState();
+          })),
+        ));
   }
 }

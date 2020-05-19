@@ -12,9 +12,8 @@ import '../detail_page.dart';
 class CustomListTile extends StatefulWidget {
   final ShuttleRoute route;
   final List<ShuttleStop> stops;
-  final ThemeData theme;
 
-  CustomListTile({this.route, this.stops, this.theme});
+  CustomListTile({this.route, this.stops});
 
   bool get isEnabled => route.enabled;
   bool get isActive => route.active;
@@ -70,7 +69,7 @@ class _CustomListTileState extends State<CustomListTile> {
     return ListTile(
       leading: Container(width: 35, height: 40, child: shuttleArrow),
       title: Text(widget.route.name,
-          style: TextStyle(color: widget.theme.hoverColor, fontSize: 16)),
+          style: TextStyle(color: Theme.of(context).hoverColor, fontSize: 16)),
       trailing: Row(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.end,
@@ -91,7 +90,7 @@ class _CustomListTileState extends State<CustomListTile> {
           ),
           Icon(
             Icons.keyboard_arrow_right,
-            color: widget.theme.hoverColor,
+            color: Theme.of(context).hoverColor,
           ),
         ],
       ),
@@ -99,6 +98,8 @@ class _CustomListTileState extends State<CustomListTile> {
         Navigator.push(
           context,
           platformPageRoute(
+            // TODO: FIGURE OUT WAY TO USE TO TRANSISTION
+            // FROM LEFT TO RIGHT OUT CREATING A NAV BAR GLITCH
             fullscreenDialog: true,
             context: context,
             builder: (_) {

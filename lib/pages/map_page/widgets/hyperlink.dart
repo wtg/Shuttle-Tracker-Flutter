@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-
 class Hyperlink extends StatelessWidget {
   final String url;
   final String text;
@@ -18,15 +17,14 @@ class Hyperlink extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-      return InkWell(
-        child: Text(
-          text,
-          style: TextStyle(
-              color: Colors.blue,
-              fontSize: Theme.of(context).textTheme.subtitle1.fontSize),
-        ),
-        onTap: _launchURL,
-      );
+    return InkWell(
+      child: Text(
+        text,
+        style: TextStyle(
+            color: Colors.blue,
+            fontSize: Theme.of(context).textTheme.subtitle1.fontSize),
+      ),
+      onTap: _launchURL,
+    );
   }
 }

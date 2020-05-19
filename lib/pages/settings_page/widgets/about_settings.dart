@@ -1,11 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../blocs/theme/theme_bloc.dart';
-
 class AboutSettings extends StatefulWidget {
-  final ThemeState theme;
-  AboutSettings({this.theme});
-
   @override
   _AboutSettingsState createState() => _AboutSettingsState();
 }
@@ -21,8 +16,8 @@ class _AboutSettingsState extends State<AboutSettings> {
           children: <Widget>[
             Text(
               'FAQ',
-              style: TextStyle(
-                  color: Theme.of(context).hoverColor, fontSize: 16),
+              style:
+                  TextStyle(color: Theme.of(context).hoverColor, fontSize: 16),
             ),
             Text(
               'View frequently asked questions',
@@ -38,8 +33,8 @@ class _AboutSettingsState extends State<AboutSettings> {
           children: <Widget>[
             Text(
               'GitHub Repo',
-              style: TextStyle(
-                  color: Theme.of(context).hoverColor, fontSize: 16),
+              style:
+                  TextStyle(color: Theme.of(context).hoverColor, fontSize: 16),
             ),
             Text(
               'Interested in contributing? Check out our repo!',
@@ -52,8 +47,7 @@ class _AboutSettingsState extends State<AboutSettings> {
         dense: true,
         leading: Text(
           'Privacy Policy',
-          style:
-              TextStyle(color: Theme.of(context).hoverColor, fontSize: 16),
+          style: TextStyle(color: Theme.of(context).hoverColor, fontSize: 16),
         ),
       ),
       ListTile(
@@ -63,8 +57,8 @@ class _AboutSettingsState extends State<AboutSettings> {
           children: <Widget>[
             Text(
               'Version',
-              style: TextStyle(
-                  color: Theme.of(context).hoverColor, fontSize: 16),
+              style:
+                  TextStyle(color: Theme.of(context).hoverColor, fontSize: 16),
             ),
             Text(
               '1.0.0',

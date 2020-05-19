@@ -8,9 +8,8 @@ import '../widgets/custom_list_tile.dart';
 class LoadedState extends StatefulWidget {
   final List<ShuttleRoute> routes;
   final List<ShuttleStop> stops;
-  final ThemeData theme;
 
-  LoadedState({this.routes, this.stops, this.theme});
+  LoadedState({this.routes, this.stops});
   @override
   _LoadedState createState() => _LoadedState();
 }
@@ -19,8 +18,7 @@ class _LoadedState extends State<LoadedState> {
   List<Widget> _getTileList() {
     var tileList = <CustomListTile>[];
     for (var route in widget.routes) {
-      tileList.add(CustomListTile(
-          route: route, stops: widget.stops, theme: widget.theme));
+      tileList.add(CustomListTile(route: route, stops: widget.stops));
     }
     tileList.sort((a, b) {
       return ((a.isEnabled == true && a.isActive == true) &&
@@ -44,7 +42,7 @@ class _LoadedState extends State<LoadedState> {
         return null;
       },
       child: Container(
-        color: widget.theme.backgroundColor,
+        color: Theme.of(context).backgroundColor,
         child: ListView.separated(
           itemCount: tileList.length,
           itemBuilder: (context, index) => tileList[index],

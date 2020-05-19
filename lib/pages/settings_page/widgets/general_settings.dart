@@ -32,8 +32,8 @@ class _GeneralSettingsState extends State<GeneralSettings> {
             color: Theme.of(context).hoverColor,
           ),
           title: Text('Dark Mode',
-              style: TextStyle(
-                  color: Theme.of(context).hoverColor, fontSize: 16)),
+              style:
+                  TextStyle(color: Theme.of(context).hoverColor, fontSize: 16)),
           trailing: PlatformSwitch(
               value: isSwitched,
               onChanged: (value) {

@@ -33,31 +33,31 @@ class _LegendState extends State<Legend> {
     ));
     //print("Number of rows in legend: ${legendRows.length}\n\n");
 
-      return Positioned(
-        bottom: 40,
-        left: 10,
-        child: Opacity(
-          opacity: 0.90,
-          child: Container(
-            decoration: BoxDecoration(
+    return Positioned(
+      bottom: 40,
+      left: 10,
+      child: Opacity(
+        opacity: 0.90,
+        child: Container(
+          decoration: BoxDecoration(
+              color: Theme.of(context).backgroundColor,
+              border: Border.all(
+                width: 5,
                 color: Theme.of(context).backgroundColor,
-                border: Border.all(
-                  width: 5,
-                  color: Theme.of(context).backgroundColor,
-                ),
-                borderRadius: BorderRadius.circular(5),
-                boxShadow: [
-                  BoxShadow(
-                      color: Theme.of(context).hoverColor,
-                      blurRadius: 1.0,
-                      offset: Offset(0.0, 0.5))
-                ]),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: legendRows,
-            ),
+              ),
+              borderRadius: BorderRadius.circular(5),
+              boxShadow: [
+                BoxShadow(
+                    color: Theme.of(context).hoverColor,
+                    blurRadius: 1.0,
+                    offset: Offset(0.0, 0.5))
+              ]),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: legendRows,
           ),
         ),
-      );
+      ),
+    );
   }
 }

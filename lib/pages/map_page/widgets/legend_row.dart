@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 class LegendRow extends StatelessWidget {
   final Widget widget;
   final String text;
@@ -9,20 +8,18 @@ class LegendRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-      return Row(
-        children: <Widget>[
-          Container(
-            width: 13,
-            height: 13,
-            child: widget,
-          ),
-          Text(
-            text,
-            style: Theme.of(context).textTheme.bodyText1,
-          ),
-        ],
-      );
-
+    return Row(
+      children: <Widget>[
+        Container(
+          width: 13,
+          height: 13,
+          child: widget,
+        ),
+        Text(
+          text,
+          style: Theme.of(context).textTheme.bodyText1,
+        ),
+      ],
+    );
   }
 }

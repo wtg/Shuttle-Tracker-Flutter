@@ -20,51 +20,51 @@ class _MapPageState extends State<MapPage> {
   @override
   Widget build(BuildContext context) {
     var shuttleBloc = context.bloc<ShuttleBloc>();
-      return PlatformScaffold(
-        appBar: PlatformAppBar(
-          automaticallyImplyLeading: false,
-          title: Image.asset(
-            'assets/img/logo.png',
-            height: 40,
-            width: 40,
-          ),
-          backgroundColor: Theme.of(context).appBarTheme.color,
-          ios: (_) => CupertinoNavigationBarData(
-            padding: EdgeInsetsDirectional.only(bottom: 10),
-          ),
-          android: (_) => MaterialAppBarData(centerTitle: true),
+    return PlatformScaffold(
+      appBar: PlatformAppBar(
+        automaticallyImplyLeading: false,
+        title: Image.asset(
+          'assets/img/logo.png',
+          height: 40,
+          width: 40,
         ),
-        body: Material(
-          child: Center(
-            child: BlocBuilder<ShuttleBloc, ShuttleState>(
-                builder: (context, state) {
-              if (state is ShuttleInitial) {
-                shuttleBloc.add(ShuttleEvent.getShuttleMap);
-                print('state is initial');
-                return InitialMap();
-              } else if (state is ShuttleError) {
-                shuttleBloc.add(ShuttleEvent.getShuttleMap);
-                print('state has error\n\n');
-                return ErrorMap(
-                  message: state.message,
-                );
-              } else if (state is ShuttleLoaded) {
-                print('state is loaded');
-                i++;
-                print('API poll $i\n\n');
-                shuttleBloc.add(ShuttleEvent.getShuttleMap);
-                return LoadedMap(
-                  routes: state.routes,
-                  location: state.location,
-                  stops: state.stops,
-                  updates: state.updates,
-                );
-              }
-              print('state is loading');
-              return LoadingState(theme: Theme.of(context));
-            }),
-          ),
+        backgroundColor: Theme.of(context).appBarTheme.color,
+        ios: (_) => CupertinoNavigationBarData(
+          padding: EdgeInsetsDirectional.only(bottom: 10),
         ),
-      );
+        android: (_) => MaterialAppBarData(centerTitle: true),
+      ),
+      body: Material(
+        child: Center(
+          child:
+              BlocBuilder<ShuttleBloc, ShuttleState>(builder: (context, state) {
+            if (state is ShuttleInitial) {
+              shuttleBloc.add(ShuttleEvent.getShuttleMap);
+              print('state is initial');
+              return InitialMap();
+            } else if (state is ShuttleError) {
+              shuttleBloc.add(ShuttleEvent.getShuttleMap);
+              print('state has error\n\n');
+              return ErrorMap(
+                message: state.message,
+              );
+            } else if (state is ShuttleLoaded) {
+              print('state is loaded');
+              i++;
+              print('API poll $i\n\n');
+              shuttleBloc.add(ShuttleEvent.getShuttleMap);
+              return LoadedMap(
+                routes: state.routes,
+                location: state.location,
+                stops: state.stops,
+                updates: state.updates,
+              );
+            }
+            print('state is loading');
+            return LoadingState();
+          }),
+        ),
+      ),
+    );
   }
 }

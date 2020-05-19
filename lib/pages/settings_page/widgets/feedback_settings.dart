@@ -1,11 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../blocs/theme/theme_bloc.dart';
-
 class FeedbackSettings extends StatefulWidget {
-  final ThemeState theme;
-  FeedbackSettings({this.theme});
-
   @override
   _FeedbackSettingsState createState() => _FeedbackSettingsState();
 }
@@ -21,8 +16,8 @@ class _FeedbackSettingsState extends State<FeedbackSettings> {
           children: <Widget>[
             Text(
               'Send Feedback',
-              style: TextStyle(
-                  color: Theme.of(context).hoverColor, fontSize: 16),
+              style:
+                  TextStyle(color: Theme.of(context).hoverColor, fontSize: 16),
             ),
             Text(
               'Any comments? Send them here!',
@@ -35,8 +30,7 @@ class _FeedbackSettingsState extends State<FeedbackSettings> {
         dense: true,
         leading: Text(
           'Rate this app',
-          style:
-              TextStyle(color: Theme.of(context).hoverColor, fontSize: 16),
+          style: TextStyle(color: Theme.of(context).hoverColor, fontSize: 16),
         ),
       ),
     ];

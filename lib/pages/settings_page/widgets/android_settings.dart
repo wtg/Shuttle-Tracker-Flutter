@@ -19,8 +19,8 @@ class _AndroidSettingsState extends State<AndroidSettings> {
     return ListView(
       children: <Widget>[
         GeneralSettings(theme: widget.theme),
-        FeedbackSettings(theme: widget.theme),
-        AboutSettings(theme: widget.theme)
+        FeedbackSettings(),
+        AboutSettings()
       ],
     );
   }

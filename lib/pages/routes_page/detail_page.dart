@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
@@ -120,7 +121,7 @@ class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
                         ),
                         Icon(
                           Platform.isIOS
-                              ? Icons.arrow_back_ios
+                              ? CupertinoIcons.left_chevron
                               : Icons.arrow_back,
                           size: 26,
                         ),

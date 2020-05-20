@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_map/flutter_map.dart';
@@ -90,7 +93,9 @@ class _CustomListTileState extends State<CustomListTile> {
             ],
           ),
           Icon(
-            Icons.keyboard_arrow_right,
+            Platform.isIOS
+                ? CupertinoIcons.right_chevron
+                : Icons.keyboard_arrow_right,
             color: widget.theme.hoverColor,
           ),
         ],

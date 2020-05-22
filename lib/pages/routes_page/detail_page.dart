@@ -107,6 +107,7 @@ class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
       return Material(
         child: PlatformScaffold(
             appBar: PlatformAppBar(
+                automaticallyImplyLeading: true,
                 leading: GestureDetector(
                     onTap: () => Navigator.pop(context),
                     child: Stack(
@@ -115,7 +116,7 @@ class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
                           : AlignmentDirectional.center,
                       children: <Widget>[
                         Container(
-                          width: 80,
+                          width: 70,
                           height: 50,
                           color: widget.routeColor,
                         ),
@@ -123,7 +124,6 @@ class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
                           Platform.isIOS
                               ? CupertinoIcons.left_chevron
                               : Icons.arrow_back,
-                          size: 26,
                         ),
                       ],
                     )),
@@ -134,7 +134,9 @@ class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
                 ),
                 backgroundColor: widget.routeColor,
                 ios: (_) => CupertinoNavigationBarData(
-                    actionsForegroundColor: Colors.white)),
+                      actionsForegroundColor: Colors.white,
+                      transitionBetweenRoutes: true
+                    )),
             body: SlidingUpPanel(
               //minHeight: 0,
               panelBuilder: (sc) => Panel(

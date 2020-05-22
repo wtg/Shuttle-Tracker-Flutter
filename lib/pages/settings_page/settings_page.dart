@@ -26,6 +26,12 @@ class _SettingsPageState extends State<SettingsPage> {
             style: TextStyle(color: theme.getTheme.hoverColor),
           ),
           backgroundColor: theme.getTheme.appBarTheme.color,
+          ios: (_) => CupertinoNavigationBarData(
+              border: Border(
+                  bottom: BorderSide(
+            color: Colors.grey,
+            width: 0.1,
+          ))),
         ),
         body: Material(
           child: Center(

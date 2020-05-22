@@ -32,8 +32,12 @@ class _MapPageState extends State<MapPage> {
           ),
           backgroundColor: theme.getTheme.appBarTheme.color,
           ios: (_) => CupertinoNavigationBarData(
-            padding: EdgeInsetsDirectional.only(bottom: 10),
-          ),
+              padding: EdgeInsetsDirectional.only(bottom: 10),
+              border: Border(
+                  bottom: BorderSide(
+                color: Colors.grey,
+                width: 0.1,
+              ))),
           android: (_) => MaterialAppBarData(centerTitle: true),
         ),
         body: Material(

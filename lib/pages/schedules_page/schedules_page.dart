@@ -21,6 +21,12 @@ class _SchedulesPageState extends State<SchedulesPage> {
               style: TextStyle(color: theme.getTheme.hoverColor),
             ),
             backgroundColor: theme.getTheme.bottomAppBarColor,
+            ios: (_) => CupertinoNavigationBarData(
+                border: Border(
+                    bottom: BorderSide(
+              color: Colors.grey,
+              width: 0.1,
+            ))),
           ),
           backgroundColor: theme.getTheme.bottomAppBarColor,
           body: NotificationListener<OverscrollIndicatorNotification>(

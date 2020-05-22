@@ -33,6 +33,12 @@ class _RoutesPageState extends State<RoutesPage> {
               style: TextStyle(color: theme.getTheme.hoverColor),
             ),
             backgroundColor: theme.getTheme.appBarTheme.color,
+            ios: (_) => CupertinoNavigationBarData(
+                border: Border(
+                    bottom: BorderSide(
+              color: Colors.grey,
+              width: 0.1,
+            ))),
           ),
           body: Material(
             child: Center(child: BlocBuilder<ShuttleBloc, ShuttleState>(

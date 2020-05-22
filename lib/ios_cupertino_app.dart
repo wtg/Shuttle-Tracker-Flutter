@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_framework/responsive_framework.dart';
@@ -25,14 +27,11 @@ class _IOSCupertinoAppState extends State<IOSCupertinoApp> {
       title: Text('Routes'),
     ),
     BottomNavigationBarItem(
-      icon: Icon(Icons.access_time),
+      icon: Icon(Platform.isIOS ? CupertinoIcons.time : Icons.access_time),
       title: Text('Schedules'),
     ),
     BottomNavigationBarItem(
-      icon: Icon(IconData(0xf43d,
-          fontFamily: 'CupertinoIcons',
-          fontPackage: 'cupertino_icons',
-          matchTextDirection: true)),
+      icon: Icon(Platform.isIOS ? CupertinoIcons.gear_solid : Icons.settings),
       title: Text('Settings'),
     )
   ];

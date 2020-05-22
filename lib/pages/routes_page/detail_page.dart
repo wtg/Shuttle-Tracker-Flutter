@@ -1,10 +1,8 @@
-import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:latlong/latlong.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
@@ -104,84 +102,64 @@ class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
     return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, theme) {
       var isDarkMode = theme.getTheme.bottomAppBarColor == Colors.black;
       var _panelHeightOpen = MediaQuery.of(context).size.height * .45;
-      return Material(
-        child: PlatformScaffold(
-            appBar: PlatformAppBar(
-                automaticallyImplyLeading: true,
-                leading: GestureDetector(
-                    onTap: () => Navigator.pop(context),
-                    child: Stack(
-                      alignment: Platform.isIOS
-                          ? AlignmentDirectional.centerStart
-                          : AlignmentDirectional.center,
-                      children: <Widget>[
-                        Container(
-                          width: 70,
-                          height: 50,
-                          color: widget.routeColor,
-                        ),
-                        Icon(
-                          Platform.isIOS
-                              ? CupertinoIcons.left_chevron
-                              : Icons.arrow_back,
-                        ),
-                      ],
-                    )),
-                title: Text(
-                  widget.title,
-                  style: TextStyle(
-                      color: Colors.white, fontWeight: FontWeight.normal),
-                ),
-                backgroundColor: widget.routeColor,
-                ios: (_) => CupertinoNavigationBarData(
-                      actionsForegroundColor: Colors.white,
-                      transitionBetweenRoutes: true
-                    )),
-            body: SlidingUpPanel(
-              //minHeight: 0,
-              panelBuilder: (sc) => Panel(
-                  scrollController: sc,
-                  routeColor: widget.routeColor,
-                  routeStops: widget.routeStops),
-              maxHeight: _panelHeightOpen,
-              borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(25.0),
-                  topRight: Radius.circular(25.0)),
-              parallaxEnabled: true,
-              parallaxOffset: 0.25,
-              body: Column(
-                children: [
-                  /// Map
-                  Flexible(
-                    child: FlutterMap(
-                      mapController: mapController,
-                      options: MapOptions(
-                        nePanBoundary: LatLng(42.78, -73.63),
-                        swPanBoundary: LatLng(42.68, -73.71),
-                        center: LatLng(42.719, -73.6767),
-                        zoom: 13.9,
-                        maxZoom: 16, // max you can zoom in
-                        minZoom: 13, // min you can zoom out
-                      ),
-                      layers: [
-                        TileLayerOptions(
-                          backgroundColor: theme.getTheme.bottomAppBarColor,
-                          urlTemplate: isDarkMode
-                              ? LoadedMap.darkLink
-                              : LoadedMap.lightLink,
-                          subdomains: ['a', 'b', 'c'],
-                          tileProvider: CachedNetworkTileProvider(),
-                        ),
-                        PolylineLayerOptions(polylines: widget.polyline),
-                        MarkerLayerOptions(
-                            markers: _createStops(widget.routeStops)),
-                      ],
-                    ),
-                  ),
-                ],
+      return Scaffold(
+          appBar: PreferredSize(
+            preferredSize:
+                Size.fromHeight(MediaQuery.of(context).size.width * 0.115),
+            child: AppBar(
+              title: Text(
+                widget.title,
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 15,
+                    fontWeight: FontWeight.w600),
               ),
-            )),
-      );
+              backgroundColor: widget.routeColor,
+            ),
+          ),
+          body: SlidingUpPanel(
+            panelBuilder: (sc) => Panel(
+                scrollController: sc,
+                routeColor: widget.routeColor,
+                routeStops: widget.routeStops),
+            maxHeight: _panelHeightOpen,
+            borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(25.0),
+                topRight: Radius.circular(25.0)),
+            parallaxEnabled: true,
+            parallaxOffset: 0.25,
+            body: Column(
+              children: [
+                /// Map
+                Flexible(
+                  child: FlutterMap(
+                    mapController: mapController,
+                    options: MapOptions(
+                      nePanBoundary: LatLng(42.78, -73.63),
+                      swPanBoundary: LatLng(42.68, -73.71),
+                      center: LatLng(42.719, -73.6767),
+                      zoom: 13.9,
+                      maxZoom: 16, // max you can zoom in
+                      minZoom: 13, // min you can zoom out
+                    ),
+                    layers: [
+                      TileLayerOptions(
+                        backgroundColor: theme.getTheme.bottomAppBarColor,
+                        urlTemplate: isDarkMode
+                            ? LoadedMap.darkLink
+                            : LoadedMap.lightLink,
+                        subdomains: ['a', 'b', 'c'],
+                        tileProvider: CachedNetworkTileProvider(),
+                      ),
+                      PolylineLayerOptions(polylines: widget.polyline),
+                      MarkerLayerOptions(
+                          markers: _createStops(widget.routeStops)),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ));
     });
   }
 }

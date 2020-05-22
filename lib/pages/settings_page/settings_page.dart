@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 import '../../blocs/theme/theme_bloc.dart';
 import 'widgets/android_settings.dart';
@@ -18,20 +17,21 @@ class _SettingsPageState extends State<SettingsPage> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, theme) {
-      return PlatformScaffold(
-        appBar: PlatformAppBar(
-          automaticallyImplyLeading: false,
-          title: Text(
-            'Settings',
-            style: TextStyle(color: theme.getTheme.hoverColor),
+      return Scaffold(
+        appBar: PreferredSize(
+          preferredSize:
+              Size.fromHeight(MediaQuery.of(context).size.width * 0.115),
+          child: AppBar(
+            automaticallyImplyLeading: false,
+            title: Text(
+              'Settings',
+              style: TextStyle(
+                  color: theme.getTheme.hoverColor,
+                  fontSize: 15,
+                  fontWeight: FontWeight.w600),
+            ),
+            backgroundColor: theme.getTheme.appBarTheme.color,
           ),
-          backgroundColor: theme.getTheme.appBarTheme.color,
-          ios: (_) => CupertinoNavigationBarData(
-              border: Border(
-                  bottom: BorderSide(
-            color: Colors.grey,
-            width: 0.1,
-          ))),
         ),
         body: Material(
           child: Center(

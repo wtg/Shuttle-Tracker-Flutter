@@ -4,7 +4,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_map/flutter_map.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 import '../../../models/shuttle_image.dart';
 import '../../../models/shuttle_route.dart';
@@ -103,9 +102,7 @@ class _CustomListTileState extends State<CustomListTile> {
       onTap: () {
         Navigator.push(
           context,
-          platformPageRoute(
-            fullscreenDialog: true,
-            context: context,
+          MaterialPageRoute(
             builder: (_) {
               return DetailPage(
                 title: widget.route.name,

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 import '../../blocs/shuttle/shuttle_bloc.dart';
 import '../../blocs/theme/theme_bloc.dart';
@@ -22,54 +21,50 @@ class _MapPageState extends State<MapPage> {
   Widget build(BuildContext context) {
     var shuttleBloc = context.bloc<ShuttleBloc>();
     return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, theme) {
-      return PlatformScaffold(
-        appBar: PlatformAppBar(
-          automaticallyImplyLeading: false,
-          title: Image.asset(
-            'assets/img/logo.png',
-            height: 40,
-            width: 40,
+      return Scaffold(
+        appBar: PreferredSize(
+          preferredSize:
+              Size.fromHeight(MediaQuery.of(context).size.width * 0.115),
+          child: AppBar(
+            automaticallyImplyLeading: false,
+            title: Text(
+                'Map',
+                style: TextStyle(
+                    color: theme.getTheme.hoverColor,
+                    fontSize: 15,
+                    fontWeight: FontWeight.w600),
+              ),
+            backgroundColor: theme.getTheme.appBarTheme.color,
           ),
-          backgroundColor: theme.getTheme.appBarTheme.color,
-          ios: (_) => CupertinoNavigationBarData(
-              padding: EdgeInsetsDirectional.only(bottom: 10),
-              border: Border(
-                  bottom: BorderSide(
-                color: Colors.grey,
-                width: 0.1,
-              ))),
-          android: (_) => MaterialAppBarData(centerTitle: true),
         ),
-        body: Material(
-          child: Center(
-            child: BlocBuilder<ShuttleBloc, ShuttleState>(
-                builder: (context, state) {
-              if (state is ShuttleInitial) {
-                shuttleBloc.add(ShuttleEvent.getShuttleMap);
-                print('state is initial');
-                return InitialMap();
-              } else if (state is ShuttleError) {
-                shuttleBloc.add(ShuttleEvent.getShuttleMap);
-                print('state has error\n\n');
-                return ErrorMap(
-                  message: state.message,
-                );
-              } else if (state is ShuttleLoaded) {
-                print('state is loaded');
-                i++;
-                print('API poll $i\n\n');
-                shuttleBloc.add(ShuttleEvent.getShuttleMap);
-                return LoadedMap(
-                  routes: state.routes,
-                  location: state.location,
-                  stops: state.stops,
-                  updates: state.updates,
-                );
-              }
-              print('state is loading');
-              return LoadingState(theme: theme.getTheme);
-            }),
-          ),
+        body: Center(
+          child:
+              BlocBuilder<ShuttleBloc, ShuttleState>(builder: (context, state) {
+            if (state is ShuttleInitial) {
+              shuttleBloc.add(ShuttleEvent.getShuttleMap);
+              print('state is initial');
+              return InitialMap();
+            } else if (state is ShuttleError) {
+              shuttleBloc.add(ShuttleEvent.getShuttleMap);
+              print('state has error\n\n');
+              return ErrorMap(
+                message: state.message,
+              );
+            } else if (state is ShuttleLoaded) {
+              print('state is loaded');
+              i++;
+              print('API poll $i\n\n');
+              shuttleBloc.add(ShuttleEvent.getShuttleMap);
+              return LoadedMap(
+                routes: state.routes,
+                location: state.location,
+                stops: state.stops,
+                updates: state.updates,
+              );
+            }
+            print('state is loading');
+            return LoadingState(theme: theme.getTheme);
+          }),
         ),
       );
     });

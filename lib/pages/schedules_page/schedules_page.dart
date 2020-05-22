@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 import '../../blocs/theme/theme_bloc.dart';
 
@@ -13,20 +12,21 @@ class _SchedulesPageState extends State<SchedulesPage> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, theme) {
-      return PlatformScaffold(
-          appBar: PlatformAppBar(
-            automaticallyImplyLeading: false,
-            title: Text(
-              'Schedules',
-              style: TextStyle(color: theme.getTheme.hoverColor),
+      return Scaffold(
+          appBar: PreferredSize(
+            preferredSize:
+                Size.fromHeight(MediaQuery.of(context).size.width * 0.115),
+            child: AppBar(
+              automaticallyImplyLeading: false,
+              title: Text(
+                'Schedules',
+                style: TextStyle(
+                    color: theme.getTheme.hoverColor,
+                    fontSize: 15,
+                    fontWeight: FontWeight.w600),
+              ),
+              backgroundColor: theme.getTheme.bottomAppBarColor,
             ),
-            backgroundColor: theme.getTheme.bottomAppBarColor,
-            ios: (_) => CupertinoNavigationBarData(
-                border: Border(
-                    bottom: BorderSide(
-              color: Colors.grey,
-              width: 0.1,
-            ))),
           ),
           backgroundColor: theme.getTheme.bottomAppBarColor,
           body: NotificationListener<OverscrollIndicatorNotification>(

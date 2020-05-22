@@ -28,12 +28,12 @@ class _MapPageState extends State<MapPage> {
           child: AppBar(
             automaticallyImplyLeading: false,
             title: Text(
-                'Map',
-                style: TextStyle(
-                    color: theme.getTheme.hoverColor,
-                    fontSize: 15,
-                    fontWeight: FontWeight.w600),
-              ),
+              'Map',
+              style: TextStyle(
+                  color: theme.getTheme.hoverColor,
+                  fontSize: 15,
+                  fontWeight: FontWeight.w600),
+            ),
             backgroundColor: theme.getTheme.appBarTheme.color,
           ),
         ),

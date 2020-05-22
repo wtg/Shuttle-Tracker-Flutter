@@ -102,7 +102,7 @@ class _CustomListTileState extends State<CustomListTile> {
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(
+          CupertinoPageRoute(
             builder: (_) {
               return DetailPage(
                 title: widget.route.name,

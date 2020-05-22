@@ -29,6 +29,7 @@ class _RoutesPageState extends State<RoutesPage> {
             preferredSize:
                 Size.fromHeight(MediaQuery.of(context).size.width * 0.115),
             child: AppBar(
+              automaticallyImplyLeading: false,
               title: Text(
                 'Routes',
                 style: TextStyle(

@@ -82,6 +82,12 @@ flutter:
     - assets/json_test/stops.json
     - assets/json_test/updates.json
   
+  fonts:
+    - family: CustomIcons
+      fonts:
+          - asset: assets/fonts/shuttle_icon.ttf
+
+  
 
 
 

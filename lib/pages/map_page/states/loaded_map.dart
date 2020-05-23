@@ -77,6 +77,9 @@ class _LoadedMapState extends State<LoadedMap> with TickerProviderStateMixin {
 
     for (var route in routes) {
       if (route.active && route.enabled) {
+        _legend.clear();
+        _ids.clear();
+        _colors.clear();
         _legend[route.name] = ShuttleImage(svgColor: route.color);
         _ids.addAll(route.stopIds);
         polylines.add(route.getPolyline);
@@ -85,7 +88,7 @@ class _LoadedMapState extends State<LoadedMap> with TickerProviderStateMixin {
         }
       }
     }
-    //print("Number of routes on map: ${polylines.length}");
+    print("Number of routes on map: ${polylines.length}");
     return polylines;
   }
 
@@ -95,10 +98,10 @@ class _LoadedMapState extends State<LoadedMap> with TickerProviderStateMixin {
 
     for (var stop in stops) {
       if (_ids.contains(stop.id)) {
-        markers.add(stop.getMarker(animatedMapMove, context));
+        markers.add(stop.getAnimatedMarker(animatedMapMove, context));
       }
     }
-    //print("Number of stops on map: ${markers.length}");
+    print("Number of stops on map: ${markers.length}");
     return markers;
   }
 
@@ -115,7 +118,7 @@ class _LoadedMapState extends State<LoadedMap> with TickerProviderStateMixin {
 
       markers.add(update.getMarker(animatedMapMove, context));
     }
-    //print("Number of shuttles on map: ${markers.length}");
+    print("Number of shuttles on map: ${markers.length}");
     return markers;
   }
 

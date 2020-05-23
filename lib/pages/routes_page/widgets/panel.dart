@@ -13,11 +13,7 @@ class Panel extends StatefulWidget {
   final Map<int, ShuttleStop> routeStops;
   final ThemeData theme;
 
-  Panel(
-      {this.scrollController,
-      this.routeColor,
-      this.routeStops,
-      this.theme});
+  Panel({this.scrollController, this.routeColor, this.routeStops, this.theme});
 
   @override
   _PanelState createState() => _PanelState();

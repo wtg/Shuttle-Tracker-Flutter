@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
+import 'shuttle_icon.dart';
+
 class IOSCupertinoApp extends StatefulWidget {
   final ThemeData theme;
 
@@ -21,7 +23,7 @@ class _IOSCupertinoAppState extends State<IOSCupertinoApp> {
       title: Text('Map'),
     ),
     BottomNavigationBarItem(
-      icon: Icon(Icons.directions_bus),
+      icon: Icon(ShuttleIcon.logo),
       title: Text('Routes'),
     ),
     BottomNavigationBarItem(

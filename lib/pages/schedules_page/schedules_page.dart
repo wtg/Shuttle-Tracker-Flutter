@@ -37,7 +37,7 @@ class _SchedulesPageState extends State<SchedulesPage> {
             child: ListView(
               children: <Widget>[
                 SizedBox(
-                  height: 10,
+                  height: 20,
                 ),
                 Card(
                   shadowColor: theme.getTheme.hoverColor,
@@ -52,25 +52,25 @@ class _SchedulesPageState extends State<SchedulesPage> {
                             style: TextStyle(
                                 color: theme.getTheme.hoverColor,
                                 fontWeight: FontWeight.w600,
-                                fontSize: 20)),
+                                fontSize: 25)),
                         Text(
                             '\nNorth, South, and New West Routes\n'
                             'Monday–Friday 7am – 11pm\n',
                             style: TextStyle(
                                 color: theme.getTheme.hoverColor,
-                                fontSize: 13)),
+                                fontSize: 15)),
                         Text('View PDF',
                             style: TextStyle(
                                 color: Colors.red,
                                 fontWeight: FontWeight.w600,
-                                fontSize: 13)),
+                                fontSize: 15)),
                         SizedBox(height: 10)
                       ],
                     ),
                   ),
                 ),
                 SizedBox(
-                  height: 10,
+                  height: 20,
                 ),
                 Card(
                   shadowColor: theme.getTheme.hoverColor,
@@ -85,7 +85,7 @@ class _SchedulesPageState extends State<SchedulesPage> {
                             style: TextStyle(
                                 color: theme.getTheme.hoverColor,
                                 fontWeight: FontWeight.w600,
-                                fontSize: 20)),
+                                fontSize: 25)),
                         Text(
                             'West and East Routes\n'
                             'Saturday–Sunday 9:30am – 5pm\n\n'
@@ -95,11 +95,11 @@ class _SchedulesPageState extends State<SchedulesPage> {
                             'Friday–Saturday 8pm – 4am\n',
                             style: TextStyle(
                                 color: theme.getTheme.hoverColor,
-                                fontSize: 13)),
+                                fontSize: 15)),
                         Text('View PDF',
                             style: TextStyle(
                                 color: Colors.red,
-                                fontSize: 13,
+                                fontSize: 15,
                                 fontWeight: FontWeight.w600)),
                         SizedBox(height: 10)
                       ],

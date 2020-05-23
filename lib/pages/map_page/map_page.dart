@@ -56,11 +56,11 @@ class _MapPageState extends State<MapPage> {
               print('API poll $i\n\n');
               shuttleBloc.add(ShuttleEvent.getShuttleMap);
               return LoadedMap(
-                routes: state.routes,
-                location: state.location,
-                stops: state.stops,
-                updates: state.updates,
-              );
+                  routes: state.routes,
+                  location: state.location,
+                  stops: state.stops,
+                  updates: state.updates,
+                  theme: theme.getTheme);
             }
             print('state is loading');
             return LoadingState(theme: theme.getTheme);

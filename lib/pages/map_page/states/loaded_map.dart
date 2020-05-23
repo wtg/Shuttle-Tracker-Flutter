@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter/widgets.dart';
-//import 'package:flutter_map_marker_popup/flutter_map_marker_popup.dart';
-//import 'package:flutter_shuttletracker/pages/map_page/widgets/popup.dart';
 import 'package:latlong/latlong.dart';
 
-import '../../../blocs/theme/theme_bloc.dart';
 import '../../../models/shuttle_image.dart';
 import '../../../models/shuttle_route.dart';
 import '../../../models/shuttle_stop.dart';
@@ -19,13 +15,14 @@ class LoadedMap extends StatefulWidget {
   final List<ShuttleStop> stops;
   final List<ShuttleUpdate> updates;
   final LatLng location;
+  final ThemeData theme;
 
   static const darkLink =
       'https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}@2x.png';
   static const lightLink =
       'http://tile.stamen.com/toner-lite/{z}/{x}/{y}@2x.png';
 
-  LoadedMap({this.routes, this.location, this.stops, this.updates});
+  LoadedMap({this.routes, this.location, this.stops, this.updates, this.theme});
 
   @override
   _LoadedMapState createState() => _LoadedMapState();
@@ -136,54 +133,46 @@ class _LoadedMapState extends State<LoadedMap> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    var isDarkMode = widget.theme.bottomAppBarColor == Colors.black;
+    var routes = _createRoutes(widget.routes, _ids, _legend, _colors);
+    var updates = _createUpdates(widget.updates, context, _colors);
+    var stops = _createStops(widget.stops, context, widget.theme);
+    var location = _createLocation(widget.location);
     return Scaffold(
-      body: BlocBuilder<ThemeBloc, ThemeState>(
-        builder: (context, theme) {
-          var isDarkMode = theme.getTheme.bottomAppBarColor == Colors.black;
-          var routes = _createRoutes(widget.routes, _ids, _legend, _colors);
-          var updates = _createUpdates(widget.updates, context, _colors);
-          var stops = _createStops(widget.stops, context, theme.getTheme);
-          var location = _createLocation(widget.location);
-          return Stack(children: <Widget>[
-            Column(
-              children: [
-                /// Map
-                Flexible(
-                  child: FlutterMap(
-                    mapController: _mapController,
-                    options: MapOptions(
-                      nePanBoundary: LatLng(42.78, -73.63),
-                      swPanBoundary: LatLng(42.68, -73.71),
-                      center: LatLng(42.729, -73.6758),
-                      zoom: 14,
-                      maxZoom: 16, // max you can zoom in
-                      minZoom: 13, // min you can zoom out
-                    ),
-                    layers: [
-                      TileLayerOptions(
-                        backgroundColor: theme.getTheme.bottomAppBarColor,
-                        urlTemplate: isDarkMode
-                            ? LoadedMap.darkLink
-                            : LoadedMap.lightLink,
-                        subdomains: ['a', 'b', 'c'],
-                        tileProvider: CachedNetworkTileProvider(),
-                      ),
-                      PolylineLayerOptions(polylines: routes),
-                      MarkerLayerOptions(markers: updates),
-                      MarkerLayerOptions(markers: stops),
-                      MarkerLayerOptions(markers: location),
-                    ],
-                  ),
+        body: Stack(children: <Widget>[
+      Column(
+        children: [
+          /// Map
+          Flexible(
+            child: FlutterMap(
+              mapController: _mapController,
+              options: MapOptions(
+                nePanBoundary: LatLng(42.78, -73.63),
+                swPanBoundary: LatLng(42.68, -73.71),
+                center: LatLng(42.729, -73.6758),
+                zoom: 14,
+                maxZoom: 16, // max you can zoom in
+                minZoom: 13, // min you can zoom out
+              ),
+              layers: [
+                TileLayerOptions(
+                  backgroundColor: widget.theme.bottomAppBarColor,
+                  urlTemplate:
+                      isDarkMode ? LoadedMap.darkLink : LoadedMap.lightLink,
+                  subdomains: ['a', 'b', 'c'],
+                  tileProvider: CachedNetworkTileProvider(),
                 ),
+                PolylineLayerOptions(polylines: routes),
+                MarkerLayerOptions(markers: updates),
+                MarkerLayerOptions(markers: stops),
+                MarkerLayerOptions(markers: location),
               ],
             ),
-            Attribution(),
-            Legend(
-              legend: _legend,
-            ),
-          ]);
-        },
+          ),
+        ],
       ),
-    );
+      Attribution(theme: widget.theme),
+      Legend(legend: _legend, theme: widget.theme),
+    ]));
   }
 }

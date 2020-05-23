@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:url_launcher/url_launcher.dart';
-
-import '../../../blocs/theme/theme_bloc.dart';
 
 class Hyperlink extends StatelessWidget {
   final String url;
   final String text;
+  final ThemeData theme;
 
-  Hyperlink({this.url, this.text});
+  Hyperlink({this.url, this.text, this.theme});
 
   void _launchURL() async {
     if (await canLaunch(url)) {
@@ -20,16 +18,13 @@ class Hyperlink extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, theme) {
-      return InkWell(
-        child: Text(
-          text,
-          style: TextStyle(
-              color: Colors.blue,
-              fontSize: theme.getTheme.textTheme.subtitle1.fontSize),
-        ),
-        onTap: _launchURL,
-      );
-    });
+    return InkWell(
+      child: Text(
+        text,
+        style: TextStyle(
+            color: Colors.blue, fontSize: theme.textTheme.subtitle1.fontSize),
+      ),
+      onTap: _launchURL,
+    );
   }
 }

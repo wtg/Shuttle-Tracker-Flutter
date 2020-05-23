@@ -8,7 +8,6 @@ import 'package:flutter_map/flutter_map.dart';
 import '../../../models/shuttle_image.dart';
 import '../../../models/shuttle_route.dart';
 import '../../../models/shuttle_stop.dart';
-
 import '../detail_page.dart';
 
 class CustomListTile extends StatefulWidget {
@@ -105,11 +104,11 @@ class _CustomListTileState extends State<CustomListTile> {
           CupertinoPageRoute(
             builder: (_) {
               return DetailPage(
-                title: widget.route.name,
-                polyline: polyline,
-                routeColor: color,
-                routeStops: _getRouteStops(),
-              );
+                  title: widget.route.name,
+                  polyline: polyline,
+                  routeColor: color,
+                  routeStops: _getRouteStops(),
+                  theme: widget.theme);
             },
           ),
         );

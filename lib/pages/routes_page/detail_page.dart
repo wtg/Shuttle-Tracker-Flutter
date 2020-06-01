@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong/latlong.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
+import 'package:flutter_map_marker_popup/flutter_map_marker_popup.dart';
 
 import '../../models/shuttle_stop.dart';
 import '../map_page/states/loaded_map.dart';
 import 'widgets/panel.dart';
+import 'widgets/popup.dart';
 
 class DetailPage extends StatefulWidget {
   final String title;
@@ -26,84 +28,26 @@ class DetailPage extends StatefulWidget {
   _DetailPageState createState() => _DetailPageState();
 }
 
-class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
-  MapController mapController = MapController();
-
-  void animatedMapMove(LatLng destLocation, double destZoom) {
-    final _latTween = Tween<double>(
-        begin: mapController.center.latitude, end: destLocation.latitude);
-    final _lngTween = Tween<double>(
-        begin: mapController.center.longitude, end: destLocation.longitude);
-    final _zoomTween = Tween<double>(begin: mapController.zoom, end: destZoom);
-
-    // Create a animation controller that has a duration and a TickerProvider.
-    var controller = AnimationController(
-        duration: const Duration(milliseconds: 500), vsync: this);
-
-    Animation<double> animation =
-        CurvedAnimation(parent: controller, curve: Curves.fastOutSlowIn);
-
-    controller.addListener(() {
-      mapController.move(
-          LatLng(_latTween.evaluate(animation), _lngTween.evaluate(animation)),
-          _zoomTween.evaluate(animation));
-    });
-
-    animation.addStatusListener((status) {
-      if (status == AnimationStatus.completed) {
-        controller.dispose();
-      } else if (status == AnimationStatus.dismissed) {
-        controller.dispose();
-      }
-    });
-
-    controller.forward();
-  }
+class _DetailPageState extends State<DetailPage> {
+  final PopupController _popupLayerController = PopupController();
+  Map<LatLng, ShuttleStop> markerMap = {};
 
   List<Marker> _createStops(Map<int, ShuttleStop> shuttleStops) {
     var markers = <Marker>[];
     shuttleStops.forEach((key, value) {
-      markers.add(value.getMarker(animatedMapMove));
+      markers.add(value.getMarker());
+      markerMap[value.getLatLng] = value;
     });
 
     //print("Number of stops on map: ${markers.length}");
     return markers;
   }
 
-  /*
-  LatLng _getCentroid(List<ShuttleStop> routeStops) {
-    LatLng centroid = LatLng(0, 0);
-    double signedArea = 0.0;
-    double x0 = 0.0; // Current vertex X
-    double y0 = 0.0; // Current vertex Y
-    double x1 = 0.0; // Next vertex X
-    double y1 = 0.0; // Next vertex Y
-    double a = 0.0;
-
-    int i = 0;
-    for (i = 0; i < routeStops.length; ++i) {
-      x0 = routeStops[i].getLatLng.latitude;
-      y0 = routeStops[i].getLatLng.longitude;
-      x1 = routeStops[(i + 1) % routeStops.length].getLatLng.latitude;
-      ;
-      y1 = routeStops[(i + 1) % routeStops.length].getLatLng.longitude;
-      a = x0 * y1 - x1 * y0;
-      signedArea += a;
-      centroid.latitude += (x0 + x1) * a;
-      centroid.longitude += (y0 + y1) * a;
-    }
-
-    signedArea *= 0.5;
-    centroid.latitude /= (6.0 * signedArea);
-    centroid.longitude /= (6.0 * signedArea);
-
-    return centroid;
-  }
-  */
   @override
   Widget build(BuildContext context) {
     var isDarkMode = widget.theme.bottomAppBarColor == Colors.black;
     var _panelHeightOpen = MediaQuery.of(context).size.height * .45;
+    var markers = _createStops(widget.routeStops);
     return Scaffold(
         appBar: PreferredSize(
           preferredSize:
@@ -136,15 +80,15 @@ class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
               /// Map
               Flexible(
                 child: FlutterMap(
-                  mapController: mapController,
                   options: MapOptions(
-                    nePanBoundary: LatLng(42.78, -73.63),
-                    swPanBoundary: LatLng(42.68, -73.71),
-                    center: LatLng(42.719, -73.6767),
-                    zoom: 13.9,
-                    maxZoom: 16, // max you can zoom in
-                    minZoom: 13, // min you can zoom out
-                  ),
+                      nePanBoundary: LatLng(42.78, -73.63),
+                      swPanBoundary: LatLng(42.68, -73.71),
+                      center: LatLng(42.719, -73.6767),
+                      zoom: 13.9,
+                      maxZoom: 16, // max you can zoom in
+                      minZoom: 13, // min you can zoom out
+                      plugins: [PopupMarkerPlugin()],
+                      onTap: (_) => _popupLayerController.hidePopup()),
                   layers: [
                     TileLayerOptions(
                       backgroundColor: widget.theme.bottomAppBarColor,
@@ -154,8 +98,17 @@ class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
                       tileProvider: CachedNetworkTileProvider(),
                     ),
                     PolylineLayerOptions(polylines: widget.polyline),
-                    MarkerLayerOptions(
-                        markers: _createStops(widget.routeStops)),
+                    MarkerLayerOptions(markers: markers),
+                    PopupMarkerLayerOptions(
+                        markers: markers,
+                        popupSnap: PopupSnap.top,
+                        popupController: _popupLayerController,
+                        popupBuilder: (_, marker) {
+                          return Popup(
+                            marker: marker,
+                            markerMap: markerMap,
+                          );
+                        }),
                   ],
                 ),
               ),

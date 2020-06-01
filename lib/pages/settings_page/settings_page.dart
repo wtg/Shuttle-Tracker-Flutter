@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../blocs/theme/theme_bloc.dart';
+import '../../widgets/custom_app_bar.dart';
 import 'widgets/android_settings.dart';
 import 'widgets/ios_settings.dart';
 
@@ -19,20 +20,9 @@ class _SettingsPageState extends State<SettingsPage> {
     return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, theme) {
       return Scaffold(
         appBar: PreferredSize(
-          preferredSize:
-              Size.fromHeight(MediaQuery.of(context).size.width * 0.115),
-          child: AppBar(
-            automaticallyImplyLeading: false,
-            title: Text(
-              'Settings',
-              style: TextStyle(
-                  color: theme.getTheme.hoverColor,
-                  fontSize: 15,
-                  fontWeight: FontWeight.w600),
-            ),
-            backgroundColor: theme.getTheme.appBarTheme.color,
-          ),
-        ),
+            preferredSize:
+                Size.fromHeight(MediaQuery.of(context).size.width * 0.115),
+            child: CustomAppBar(pageName: 'Settings')),
         body: Material(
           child: Center(
               child: NotificationListener<OverscrollIndicatorNotification>(

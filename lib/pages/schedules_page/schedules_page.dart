@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../blocs/theme/theme_bloc.dart';
+import '../../widgets/custom_app_bar.dart';
 
 class SchedulesPage extends StatefulWidget {
   @override
@@ -14,20 +15,9 @@ class _SchedulesPageState extends State<SchedulesPage> {
     return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, theme) {
       return Scaffold(
           appBar: PreferredSize(
-            preferredSize:
-                Size.fromHeight(MediaQuery.of(context).size.width * 0.115),
-            child: AppBar(
-              automaticallyImplyLeading: false,
-              title: Text(
-                'Schedules',
-                style: TextStyle(
-                    color: theme.getTheme.hoverColor,
-                    fontSize: 15,
-                    fontWeight: FontWeight.w600),
-              ),
-              backgroundColor: theme.getTheme.bottomAppBarColor,
-            ),
-          ),
+              preferredSize:
+                  Size.fromHeight(MediaQuery.of(context).size.width * 0.115),
+              child: CustomAppBar(pageName: 'Schedules')),
           backgroundColor: theme.getTheme.bottomAppBarColor,
           body: NotificationListener<OverscrollIndicatorNotification>(
             onNotification: (overscroll) {

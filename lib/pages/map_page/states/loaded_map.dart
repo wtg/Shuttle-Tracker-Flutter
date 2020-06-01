@@ -77,9 +77,6 @@ class _LoadedMapState extends State<LoadedMap> with TickerProviderStateMixin {
 
     for (var route in routes) {
       if (route.active && route.enabled) {
-        _legend.clear();
-        _ids.clear();
-        _colors.clear();
         _legend[route.name] = ShuttleImage(svgColor: route.color);
         _ids.addAll(route.stopIds);
         polylines.add(route.getPolyline);

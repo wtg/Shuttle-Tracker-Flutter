@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../blocs/shuttle/shuttle_bloc.dart';
 import '../../blocs/theme/theme_bloc.dart';
 import '../../models/shuttle_image.dart';
+import '../../widgets/custom_app_bar.dart';
 import '../../widgets/loading_state.dart';
 import 'states/loaded_state.dart';
 
@@ -26,20 +27,9 @@ class _RoutesPageState extends State<RoutesPage> {
     return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, theme) {
       return Scaffold(
           appBar: PreferredSize(
-            preferredSize:
-                Size.fromHeight(MediaQuery.of(context).size.width * 0.115),
-            child: AppBar(
-              automaticallyImplyLeading: false,
-              title: Text(
-                'Routes',
-                style: TextStyle(
-                    color: theme.getTheme.hoverColor,
-                    fontSize: 15,
-                    fontWeight: FontWeight.w600),
-              ),
-              backgroundColor: theme.getTheme.appBarTheme.color,
-            ),
-          ),
+              preferredSize:
+                  Size.fromHeight(MediaQuery.of(context).size.width * 0.115),
+              child: CustomAppBar(pageName: 'Routes')),
           body: Center(child:
               BlocBuilder<ShuttleBloc, ShuttleState>(builder: (context, state) {
             shuttleBloc = BlocProvider.of<ShuttleBloc>(context);

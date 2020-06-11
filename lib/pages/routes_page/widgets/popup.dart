@@ -58,7 +58,7 @@ class _PopupState extends State<Popup> {
           children: <Widget>[
             const Padding(padding: EdgeInsets.symmetric(vertical: 4.0)),
             Text(
-              "Stop: ${widget.markerMap[widget.marker.point].name}",
+              'Stop: ${widget.markerMap[widget.marker.point].name}',
               style: const TextStyle(fontSize: 12.0),
             ),
           ],

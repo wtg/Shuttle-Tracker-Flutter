@@ -3,7 +3,6 @@ import 'package:latlong/latlong.dart';
 import '../../models/shuttle_route.dart';
 import '../../models/shuttle_stop.dart';
 import '../../models/shuttle_update.dart';
-
 import '../provider/shuttle_api_provider.dart';
 //import '../provider/shuttle_local_provider.dart';
 

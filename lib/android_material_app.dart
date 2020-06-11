@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'shuttle_icon.dart';
+
+import 'icons/shuttle_icon.dart';
 
 class AndroidMaterialApp extends StatefulWidget {
   final ThemeData theme;

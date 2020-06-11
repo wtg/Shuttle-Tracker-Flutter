@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
-import 'shuttle_icon.dart';
+import 'icons/shuttle_icon.dart';
 
 class IOSCupertinoApp extends StatefulWidget {
   final ThemeData theme;

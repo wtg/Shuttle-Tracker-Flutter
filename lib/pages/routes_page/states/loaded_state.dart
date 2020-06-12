@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_shuttletracker/pages/routes_page/widgets/route_section.dart';
 
 import '../../../models/shuttle_route.dart';
 import '../../../models/shuttle_stop.dart';
 import '../widgets/custom_list_tile.dart';
+import '../widgets/route_section.dart';
 
 class LoadedState extends StatefulWidget {
   final List<ShuttleRoute> routes;

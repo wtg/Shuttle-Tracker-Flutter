@@ -48,11 +48,12 @@ class _LegendState extends State<Legend> {
               borderRadius: BorderRadius.circular(5),
               boxShadow: theme.getThemeState
                   ? null
-                  : [ BoxShadow(
-                  color: Colors.grey, // Changed from black
-                  blurRadius: 1.0,
-                  offset: Offset(0.0, 0.5))
-              ]),
+                  : [
+                      BoxShadow(
+                          color: Colors.grey, // Changed from black
+                          blurRadius: 1.0,
+                          offset: Offset(0.0, 0.5))
+                    ]),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: legendRows,

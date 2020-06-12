@@ -19,7 +19,7 @@ class _RoutesSectionState extends State<RoutesSection> {
           dense: true,
           leading: Text(
             widget.sectionHeader,
-            style: TextStyle(color: Colors.red, fontWeight: FontWeight.w600),
+            style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
           ),
         ),
         NotificationListener<OverscrollIndicatorNotification>(

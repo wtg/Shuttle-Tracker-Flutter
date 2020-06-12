@@ -65,13 +65,28 @@ class _CustomListTileState extends State<CustomListTile> {
     var polyline = <Polyline>[widget.route.getPolyline];
 
     var image = ShuttleImage(svgColor: widget.route.color);
-    var shuttleArrow = image.getSVG;
     var color = image.getSVGColor;
 
+    var circle = ColorFiltered(
+      colorFilter: ColorFilter.mode(color, BlendMode.modulate),
+      child: Image.asset('assets/img/stop_thin.png'),
+    );
+    var shuttleArrow = image.getSVG;
+
     return ListTile(
-      leading: Container(width: 35, height: 40, child: shuttleArrow),
-      title: Text(widget.route.name,
-          style: TextStyle(color: widget.theme.hoverColor, fontSize: 16)),
+      leading: Container(
+        width: 25,
+        height: 30,
+        child: Center(child: circle),
+      ),
+      title: Text(
+        widget.route.name,
+        style: TextStyle(
+          color: widget.theme.hoverColor,
+          fontSize: 16,
+          fontWeight: FontWeight.w500,
+        ),
+      ),
       trailing: Row(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.end,

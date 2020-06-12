@@ -45,10 +45,13 @@ class _PrivacyPolicyPageState extends State<PrivacyPolicyPage> {
     return PlatformScaffold(
       appBar: PlatformAppBar(
         leading: Material(
-          child: IconButton(
-            icon: Icon(Icons.arrow_back),
-            color: widget.theme.getTheme.hoverColor,
-            onPressed: () => Navigator.pop(context, false),
+          child: Container(
+            color: widget.theme.getTheme.appBarTheme.color,
+            child: IconButton(
+              icon: Icon(Icons.arrow_back),
+              color: widget.theme.getTheme.hoverColor,
+              onPressed: () => Navigator.pop(context, false),
+            ),
           ),
         ),
         title: Text(

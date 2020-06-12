@@ -19,7 +19,7 @@ class _IOSCupertinoAppState extends State<IOSCupertinoApp> {
   int _selectedTab = 0;
   final _items = [
     BottomNavigationBarItem(
-      icon: Icon(Icons.navigation),
+      icon: Icon(Icons.near_me),
       title: Text('Map'),
     ),
     BottomNavigationBarItem(
@@ -27,11 +27,11 @@ class _IOSCupertinoAppState extends State<IOSCupertinoApp> {
       title: Text('Routes'),
     ),
     BottomNavigationBarItem(
-      icon: Icon(CupertinoIcons.time),
+      icon: Icon(Icons.access_time),
       title: Text('Schedules'),
     ),
     BottomNavigationBarItem(
-      icon: Icon(CupertinoIcons.gear_solid),
+      icon: Icon(Icons.settings),
       title: Text('Settings'),
     )
   ];
@@ -58,6 +58,7 @@ class _IOSCupertinoAppState extends State<IOSCupertinoApp> {
         ),
         home: CupertinoTabScaffold(
           tabBar: CupertinoTabBar(
+            iconSize: 25.0,
             activeColor: Colors.red,
             backgroundColor: widget.theme.appBarTheme.color,
             items: _items,

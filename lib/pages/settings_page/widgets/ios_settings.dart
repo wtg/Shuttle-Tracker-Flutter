@@ -5,15 +5,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../blocs/theme/theme_bloc.dart';
 
-class IOSSetttings extends StatefulWidget {
+class IOSSettings extends StatefulWidget {
   final ThemeState theme;
-  IOSSetttings({this.theme});
+  IOSSettings({this.theme});
 
   @override
-  _IOSSetttingsState createState() => _IOSSetttingsState();
+  _IOSSettingsState createState() => _IOSSettingsState();
 }
 
-class _IOSSetttingsState extends State<IOSSetttings> {
+class _IOSSettingsState extends State<IOSSettings> {
   //TODO: Add functionality to the iOS settings page
   @override
   Widget build(BuildContext context) {

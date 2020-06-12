@@ -58,11 +58,13 @@ class MyAppState extends State<MyApp> {
           SystemChrome.setPreferredOrientations([
             DeviceOrientation.portraitUp,
           ]);
+//          return  AndroidMaterialApp(
+//              theme: theme.getTheme, pageOptions: _pageOptions);
           return Platform.isIOS
               ? IOSCupertinoApp(
                   theme: theme.getTheme, pageOptions: _pageOptions)
               : AndroidMaterialApp(
-                  theme: theme.getTheme, pageOptions: _pageOptions);
+              theme: theme.getTheme, pageOptions: _pageOptions);
         }));
   }
 }

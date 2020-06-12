@@ -41,9 +41,10 @@ class _SettingsPageState extends State<SettingsPage> {
                 overscroll.disallowGlow();
                 return null;
               },
-              child: Platform.isIOS
-                  ? IOSSetttings(theme: theme)
-                  : AndroidSettings(theme: theme),
+              child: AndroidSettings(theme: theme),
+//              child: Platform.isIOS
+//                  ? IOSSettings(theme: theme)
+//                  : AndroidSettings(theme: theme),
             ),
           ),
         ),

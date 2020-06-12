@@ -26,6 +26,7 @@ class _RoutesPageState extends State<RoutesPage> {
     return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, theme) {
       return Scaffold(
           appBar: AppBar(
+            automaticallyImplyLeading: false,
             title: Text(
               'Routes',
               style: TextStyle(

@@ -19,6 +19,7 @@ class _SettingsPageState extends State<SettingsPage> {
     return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, theme) {
       return Scaffold(
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           title: Text(
             'Settings',
             style: TextStyle(

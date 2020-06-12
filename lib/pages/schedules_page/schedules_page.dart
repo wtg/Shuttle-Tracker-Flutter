@@ -14,6 +14,7 @@ class _SchedulesPageState extends State<SchedulesPage> {
     return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, theme) {
       return Scaffold(
           appBar: AppBar(
+            automaticallyImplyLeading: false,
             title: Text(
               'Schedules',
               style: TextStyle(

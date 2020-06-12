@@ -134,6 +134,18 @@ class _LoadedMapState extends State<LoadedMap> with TickerProviderStateMixin {
     return location;
   }
 
+  LatLng findAvgLatLong(List<ShuttleStop> shuttleStops) {
+    var lat = 0.0;
+    var long = 0.0;
+    shuttleStops.forEach((value) {
+      var temp = value.getLatLng;
+      lat += temp.latitude;
+      long += temp.longitude;
+    });
+    var totalLen = shuttleStops.length;
+    return LatLng(lat / totalLen, long / totalLen);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -154,7 +166,7 @@ class _LoadedMapState extends State<LoadedMap> with TickerProviderStateMixin {
                     options: MapOptions(
                       nePanBoundary: LatLng(42.78, -73.63),
                       swPanBoundary: LatLng(42.68, -73.71),
-                      center: LatLng(42.729, -73.6758),
+                      center: findAvgLatLong(widget.stops),
                       zoom: 14,
                       maxZoom: 16, // max you can zoom in
                       minZoom: 13, // min you can zoom out

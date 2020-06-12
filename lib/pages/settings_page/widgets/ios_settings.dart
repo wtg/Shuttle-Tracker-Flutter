@@ -14,6 +14,7 @@ class IOSSetttings extends StatefulWidget {
 }
 
 class _IOSSetttingsState extends State<IOSSetttings> {
+  //TODO: Add functionality to the iOS settings page
   @override
   Widget build(BuildContext context) {
     var themeBloc = context.bloc<ThemeBloc>();

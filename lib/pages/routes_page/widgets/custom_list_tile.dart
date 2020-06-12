@@ -107,8 +107,7 @@ class _CustomListTileState extends State<CustomListTile> {
                   title: widget.route.name,
                   polyline: polyline,
                   routeColor: color,
-                  routeStops: _getRouteStops(),
-                  theme: widget.theme);
+                  routeStops: _getRouteStops());
             },
           ),
         );

@@ -28,7 +28,7 @@ class _GeneralSettingsState extends State<GeneralSettings> {
       ListTile(
           dense: true,
           leading: Icon(
-            Icons.settings_brightness,
+            Icons.brightness_medium,
             color: widget.theme.getTheme.hoverColor,
           ),
           title: Text('Dark Mode',

@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_shuttletracker/pages/settings_page/widgets/faq_detail.dart';
+import 'package:flutter_shuttletracker/pages/settings_page/widgets/privacy_detail.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../blocs/theme/theme_bloc.dart';
 
@@ -30,6 +33,14 @@ class _AboutSettingsState extends State<AboutSettings> {
             ),
           ],
         ),
+        onTap: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => FaqPage(
+                        theme: widget.theme,
+                      )));
+        },
       ),
       ListTile(
         leading: Column(
@@ -47,6 +58,14 @@ class _AboutSettingsState extends State<AboutSettings> {
             ),
           ],
         ),
+        onTap: () async {
+          var url = 'https://github.com/wtg/shuttletracker';
+          if (await canLaunch(url)) {
+            await launch(url);
+          } else {
+            throw 'Could not launch $url';
+          }
+        },
       ),
       ListTile(
         dense: true,
@@ -55,6 +74,14 @@ class _AboutSettingsState extends State<AboutSettings> {
           style:
               TextStyle(color: widget.theme.getTheme.hoverColor, fontSize: 16),
         ),
+        onTap: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => PrivacyPolicyPage(
+                    theme: widget.theme,
+                  )));
+        },
       ),
       ListTile(
         leading: Column(

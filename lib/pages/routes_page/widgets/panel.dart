@@ -1,19 +1,19 @@
-import 'dart:io';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_map/flutter_map.dart';
+import 'package:latlong/latlong.dart';
 
+import '../../../blocs/theme/theme_bloc.dart';
 import '../../../models/shuttle_stop.dart';
 import 'shuttle_line.dart';
 
 class Panel extends StatefulWidget {
-  final ScrollController scrollController;
   final Color routeColor;
   final Map<int, ShuttleStop> routeStops;
-  final ThemeData theme;
+  final MapCallback animate;
 
-  Panel({this.scrollController, this.routeColor, this.routeStops, this.theme});
+  Panel({this.routeColor, this.routeStops, this.animate});
 
   @override
   _PanelState createState() => _PanelState();
@@ -22,116 +22,76 @@ class Panel extends StatefulWidget {
 class _PanelState extends State<Panel> {
   List<Widget> _getStopTileList(ThemeData theme) {
     var tileList = <Widget>[];
-    var i = 0;
     widget.routeStops.forEach((key, value) {
-      tileList.add(IntrinsicHeight(
-        child: ListTile(
-          dense: true,
-          title: Row(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              ShuttleLine(
-                color: widget.routeColor,
-                isFirst: i == 0,
-                isLast: i == widget.routeStops.length - 1,
-              ),
-              SizedBox(
-                width: 30,
-              ),
-              Center(
-                child: Text(
-                  value.name,
-                  style: theme.textTheme.bodyText1,
+      tileList.add(
+        IntrinsicHeight(
+          child: ListTile(
+            dense: true,
+            title: Row(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: <Widget>[
+                ShuttleLine(color: widget.routeColor),
+                SizedBox(
+                  width: 30,
                 ),
-              ),
-            ],
-          ),
-          trailing: Icon(
-            Platform.isIOS
-                ? CupertinoIcons.right_chevron
-                : Icons.keyboard_arrow_right,
-            color: widget.theme.hoverColor,
+                Center(
+                  child: Text(
+                    value.name,
+                    style: theme.textTheme.bodyText1,
+                  ),
+                ),
+              ],
+            ),
+            onTap: () {
+              widget.animate(value.getLatLng, 14.2);
+            },
           ),
         ),
-      ));
-      i++;
+      );
     });
     return tileList;
   }
 
   @override
   Widget build(BuildContext context) {
-    var _stopTileList = _getStopTileList(widget.theme);
-    return MediaQuery.removePadding(
-        context: context,
-        removeTop: true,
-        //notification listender used to remove scroll glow
-        child: NotificationListener<OverscrollIndicatorNotification>(
-          onNotification: (overscroll) {
-            overscroll.disallowGlow();
-            return null;
-          },
-          child: Column(
-            children: <Widget>[
-              ClipRRect(
-                borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(18.0),
-                    topRight: Radius.circular(18.0)),
-                child: Container(
-                  color: widget.routeColor,
-                  child: Column(
-                    children: <Widget>[
-                      SizedBox(
-                        height: 12.0,
+    return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, theme) {
+      var _stopTileList = _getStopTileList(theme.getTheme);
+      return MediaQuery.removePadding(
+          context: context,
+          removeTop: true,
+          //notification listener used to remove scroll glow
+          child: NotificationListener<OverscrollIndicatorNotification>(
+            onNotification: (overscroll) {
+              overscroll.disallowGlow();
+              return null;
+            },
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8.0),
+              child: Column(
+                children: <Widget>[
+                  Expanded(
+                    child: Container(
+                      color: theme.getTheme.canvasColor,
+                      child: ListView.separated(
+//                      controller: widget.scrollController,
+                        itemCount: _stopTileList.length,
+                        itemBuilder: (context, index) => _stopTileList[index],
+                        separatorBuilder: (context, index) {
+                          return Divider(
+                            color: Colors.grey[600],
+                            indent: 50.0,
+                            height: 3,
+                          );
+                        },
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Container(
-                            width: 30,
-                            height: 5,
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(12.0))),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 18.0,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Text(
-                            'Shuttle Stops',
-                            style: TextStyle(
-                              fontWeight: FontWeight.normal,
-                              color: Colors.white,
-                              fontSize: 24.0,
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 40.0,
-                      ),
-                    ],
+                    ),
                   ),
-                ),
+                ],
               ),
-              Expanded(
-                child: Container(
-                  color: widget.theme.canvasColor,
-                  child: ListView.builder(
-                    controller: widget.scrollController,
-                    itemCount: _stopTileList.length,
-                    itemBuilder: (context, index) => _stopTileList[index],
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ));
+            ),
+          ));
+    });
   }
 }
+
+typedef MapCallback = void Function(LatLng pos, double zoom);

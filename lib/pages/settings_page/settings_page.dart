@@ -3,9 +3,9 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 import '../../blocs/theme/theme_bloc.dart';
-import '../../widgets/custom_app_bar.dart';
 import 'widgets/android_settings.dart';
 import 'widgets/ios_settings.dart';
 
@@ -18,21 +18,34 @@ class _SettingsPageState extends State<SettingsPage> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, theme) {
-      return Scaffold(
-        appBar: PreferredSize(
-            preferredSize:
-                Size.fromHeight(MediaQuery.of(context).size.width * 0.115),
-            child: CustomAppBar(pageName: 'Settings')),
+      return PlatformScaffold(
+        appBar: PlatformAppBar(
+          automaticallyImplyLeading: false,
+          title: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              'Settings',
+              style: TextStyle(
+                color: theme.getTheme.hoverColor,
+                fontWeight: FontWeight.bold,
+                fontSize: 30,
+              ),
+            ),
+          ),
+          backgroundColor: theme.getTheme.appBarTheme.color,
+        ),
         body: Material(
           child: Center(
-              child: NotificationListener<OverscrollIndicatorNotification>(
-                  onNotification: (overscroll) {
-                    overscroll.disallowGlow();
-                    return null;
-                  },
-                  child: Platform.isIOS
-                      ? IOSSetttings(theme: theme)
-                      : AndroidSettings(theme: theme))),
+            child: NotificationListener<OverscrollIndicatorNotification>(
+              onNotification: (overscroll) {
+                overscroll.disallowGlow();
+                return null;
+              },
+              child: Platform.isIOS
+                  ? IOSSetttings(theme: theme)
+                  : AndroidSettings(theme: theme),
+            ),
+          ),
         ),
       );
     });

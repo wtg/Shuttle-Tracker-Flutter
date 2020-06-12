@@ -74,7 +74,7 @@ class ShuttleApiProvider {
     return updatesList;
   }
 
-  /// Getter method to retrived location of user
+  /// Getter method to retrieved location of user
   Future<LatLng> getLocation() async {
     var lat = 0.00;
     var lng = 0.00;

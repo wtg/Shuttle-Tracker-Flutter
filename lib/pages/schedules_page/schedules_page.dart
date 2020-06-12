@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 import '../../blocs/theme/theme_bloc.dart';
 
@@ -13,21 +12,17 @@ class _SchedulesPageState extends State<SchedulesPage> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, theme) {
-      return PlatformScaffold(
-          appBar: PlatformAppBar(
+      return Scaffold(
+          appBar: AppBar(
             automaticallyImplyLeading: false,
-            title: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                'Schedules',
-                style: TextStyle(
-                  color: theme.getTheme.hoverColor,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 30,
-                ),
+            title: Text(
+              'Schedules',
+              style: TextStyle(
+                color: theme.getTheme.hoverColor,
+                fontWeight: FontWeight.bold,
+                fontSize: 30,
               ),
             ),
-            backgroundColor: theme.getTheme.bottomAppBarColor,
           ),
           backgroundColor: theme.getTheme.bottomAppBarColor,
           body: NotificationListener<OverscrollIndicatorNotification>(
@@ -58,7 +53,7 @@ class _SchedulesPageState extends State<SchedulesPage> {
                                   fontSize: 19)),
                           Text(
                               '\nNorth, South, and New West Routes\n'
-                                  'Monday–Friday 7am – 11pm\n',
+                              'Monday–Friday 7am – 11pm\n',
                               style: TextStyle(
                                   color: theme.getTheme.hoverColor,
                                   fontSize: 13)),
@@ -94,11 +89,11 @@ class _SchedulesPageState extends State<SchedulesPage> {
                                   fontSize: 19)),
                           Text(
                               'West and East Routes\n'
-                                  'Saturday–Sunday 9:30am – 5pm\n\n'
-                                  'Weekend Express Route\n'
-                                  'Saturday–Sunday 4:30pm – 8pm\n\n'
-                                  'Late Night Route\n'
-                                  'Friday–Saturday 8pm – 4am\n',
+                              'Saturday–Sunday 9:30am – 5pm\n\n'
+                              'Weekend Express Route\n'
+                              'Saturday–Sunday 4:30pm – 8pm\n\n'
+                              'Late Night Route\n'
+                              'Friday–Saturday 8pm – 4am\n',
                               style: TextStyle(
                                   color: theme.getTheme.hoverColor,
                                   fontSize: 13)),

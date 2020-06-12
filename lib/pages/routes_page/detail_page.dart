@@ -38,7 +38,7 @@ class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
         duration: const Duration(milliseconds: 500), vsync: this);
 
     Animation<double> animation =
-    CurvedAnimation(parent: controller, curve: Curves.fastOutSlowIn);
+        CurvedAnimation(parent: controller, curve: Curves.fastOutSlowIn);
 
     controller.addListener(() {
       mapController.move(
@@ -67,15 +67,24 @@ class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
   }
 
   LatLng findAvgLatLong(Map<int, ShuttleStop> shuttleStops) {
-    var lat = 0.0;
-    var long = 0.0;
-    shuttleStops.forEach((key, value) {
-      var temp = value.getLatLng;
-      lat += temp.latitude;
-      long += temp.longitude;
-    });
+    var lat = 42.729;
+    var long = -73.6758;
     var totalLen = shuttleStops.length;
-    return LatLng(lat / totalLen, long / totalLen);
+    if (totalLen != 0) {
+      lat = 0;
+      long = 0;
+
+      shuttleStops.forEach((key, value) {
+        var temp = value.getLatLng;
+        lat += temp.latitude;
+        long += temp.longitude;
+      });
+
+      lat /= totalLen;
+      long /= totalLen;
+    }
+
+    return LatLng(lat, long);
   }
 
   @override
@@ -83,8 +92,9 @@ class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
     return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, theme) {
       var isDarkMode = theme.getTheme.bottomAppBarColor == Colors.black;
 //      var selectedMarker =
-
+      
       var mapCenter = findAvgLatLong(widget.routeStops);
+      
       return Material(
         child: PlatformScaffold(
           appBar: PlatformAppBar(
@@ -134,7 +144,7 @@ class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
                     TileLayerOptions(
                       backgroundColor: theme.getTheme.bottomAppBarColor,
                       urlTemplate:
-                      isDarkMode ? LoadedMap.darkLink : LoadedMap.lightLink,
+                          isDarkMode ? LoadedMap.darkLink : LoadedMap.lightLink,
                       subdomains: ['a', 'b', 'c'],
                       tileProvider: CachedNetworkTileProvider(),
                     ),

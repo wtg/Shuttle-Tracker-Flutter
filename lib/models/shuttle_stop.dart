@@ -23,12 +23,12 @@ class ShuttleStop extends ShuttlePoint {
   /// Uses a super constructor to define lat/lng attributes
   ShuttleStop(
       {latitude,
-        longitude,
-        this.id,
-        this.name,
-        this.created,
-        this.updated,
-        this.description})
+      longitude,
+      this.id,
+      this.name,
+      this.created,
+      this.updated,
+      this.description})
       : super(latitude: latitude, longitude: longitude);
 
   factory ShuttleStop.fromJson(Map<String, dynamic> json) {

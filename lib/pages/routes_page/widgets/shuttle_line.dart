@@ -16,10 +16,10 @@ class ShuttleLine extends StatelessWidget {
         ),
         Container(
             child: Image.asset(
-              'assets/img/stop.png',
-              height: 20,
-              width: 20,
-            )),
+          'assets/img/stop.png',
+          height: 20,
+          width: 20,
+        )),
         Positioned(
           child: Icon(Icons.keyboard_arrow_down,
               size: 50, color: Theme.of(context).canvasColor),

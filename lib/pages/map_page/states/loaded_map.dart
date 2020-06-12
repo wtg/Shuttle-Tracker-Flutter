@@ -11,7 +11,6 @@ import '../../../models/shuttle_image.dart';
 import '../../../models/shuttle_route.dart';
 import '../../../models/shuttle_stop.dart';
 import '../../../models/shuttle_update.dart';
-import '../widgets/attribution.dart';
 import '../widgets/legend.dart';
 
 class LoadedMap extends StatefulWidget {
@@ -55,7 +54,7 @@ class _LoadedMapState extends State<LoadedMap> with TickerProviderStateMixin {
         duration: const Duration(milliseconds: 500), vsync: this);
 
     Animation<double> animation =
-    CurvedAnimation(parent: controller, curve: Curves.fastOutSlowIn);
+        CurvedAnimation(parent: controller, curve: Curves.fastOutSlowIn);
 
     controller.addListener(() {
       _mapController.move(

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_shuttletracker/pages/settings_page/widgets/faq_detail.dart';
-import 'package:flutter_shuttletracker/pages/settings_page/widgets/privacy_detail.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../blocs/theme/theme_bloc.dart';
+import 'faq_detail.dart';
+import 'privacy_detail.dart';
 
 class AboutSettings extends StatefulWidget {
   final ThemeState theme;
@@ -79,8 +79,8 @@ class _AboutSettingsState extends State<AboutSettings> {
               context,
               MaterialPageRoute(
                   builder: (context) => PrivacyPolicyPage(
-                    theme: widget.theme,
-                  )));
+                        theme: widget.theme,
+                      )));
         },
       ),
       ListTile(

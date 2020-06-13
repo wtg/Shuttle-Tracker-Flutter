@@ -95,18 +95,11 @@ class _PanelState extends State<Panel> {
             children: <Widget>[
               Expanded(
                 child: Container(
-                  color: theme.getTheme.canvasColor,
+                  color: theme.getTheme.backgroundColor,
                   child: _stopTileList.length != 0
                       ? ListView.builder(
                           itemCount: _stopTileList.length,
                           itemBuilder: (context, index) => _stopTileList[index],
-//                          separatorBuilder: (context, index) {
-//                            return Divider(
-//                              color: Colors.grey[600],
-//                              indent: 55.0,
-//                              height: 4,
-//                            );
-//                          },
                         )
                       : Center(
                           child: Text(

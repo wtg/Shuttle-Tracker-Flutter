@@ -59,7 +59,7 @@ class _AboutSettingsState extends State<AboutSettings> {
           ],
         ),
         onTap: () async {
-          var url = 'https://github.com/wtg/shuttletracker';
+          var url = 'https://github.com/wtg/Flutter_ShuttleTracker';
           if (await canLaunch(url)) {
             await launch(url);
           } else {

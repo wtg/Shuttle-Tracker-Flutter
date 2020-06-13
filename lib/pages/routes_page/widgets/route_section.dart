@@ -36,6 +36,8 @@ class _RoutesSectionState extends State<RoutesSection> {
               return Divider(
                 color: Colors.grey[600],
                 height: 4,
+                thickness: 0,
+                indent: 55.0,
               );
             },
           ),

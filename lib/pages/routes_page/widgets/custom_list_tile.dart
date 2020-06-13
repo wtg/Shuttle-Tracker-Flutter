@@ -64,27 +64,29 @@ class _CustomListTileState extends State<CustomListTile> {
   Widget build(BuildContext context) {
     var polyline = <Polyline>[widget.route.getPolyline];
 
-    var image = ShuttleImage(svgColor: widget.route.color);
-    var color = image.getSVGColor;
+//    var image = ShuttleImage(svgColor: widget.route.color);
+    var color = widget.route.color;
 
     var circle = ColorFiltered(
       colorFilter: ColorFilter.mode(color, BlendMode.modulate),
-      child: Image.asset('assets/img/stop_thin.png'),
+      child: Image.asset(
+        'assets/img/stop_thin.png',
+        width: 25,
+        height: 25,
+      ),
     );
-    var shuttleArrow = image.getSVG;
 
     return ListTile(
-      leading: Container(
-        width: 25,
-        height: 30,
-        child: Center(child: circle),
-      ),
-      title: Text(
-        widget.route.name,
-        style: TextStyle(
-          color: widget.theme.hoverColor,
-          fontSize: 16,
-          fontWeight: FontWeight.w500,
+      leading: circle,
+      title: Align(
+        alignment: Alignment(-1.2, 0),
+        child: Text(
+          widget.route.name,
+          style: TextStyle(
+            color: widget.theme.hoverColor,
+            fontSize: 16,
+            fontWeight: FontWeight.w500,
+          ),
         ),
       ),
       trailing: Row(
@@ -119,10 +121,11 @@ class _CustomListTileState extends State<CustomListTile> {
           CupertinoPageRoute(
             builder: (_) {
               return DetailPage(
-                  title: widget.route.name,
-                  polyline: polyline,
-                  routeColor: color,
-                  routeStops: _getRouteStops());
+                title: widget.route.name,
+                polyline: polyline,
+                routeColor: color,
+                routeStops: _getRouteStops(),
+              );
             },
           ),
         );

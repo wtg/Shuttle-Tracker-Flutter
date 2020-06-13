@@ -97,7 +97,7 @@ class _LoadedMapState extends State<LoadedMap> with TickerProviderStateMixin {
 
     for (var stop in stops) {
       if (_ids.contains(stop.id)) {
-        markers.add(stop.getMarker(animatedMapMove, context));
+        markers.add(stop.getMarker(animatedMapMove, false, context));
       }
     }
     //print("Number of stops on map: ${markers.length}");
@@ -134,15 +134,24 @@ class _LoadedMapState extends State<LoadedMap> with TickerProviderStateMixin {
   }
 
   LatLng findAvgLatLong(List<ShuttleStop> shuttleStops) {
-    var lat = 0.0;
-    var long = 0.0;
-    shuttleStops.forEach((value) {
-      var temp = value.getLatLng;
-      lat += temp.latitude;
-      long += temp.longitude;
-    });
+    var lat = 42.729;
+    var long = -73.6758;
     var totalLen = shuttleStops.length;
-    return LatLng(lat / totalLen, long / totalLen);
+    if (totalLen != 0) {
+      lat = 0;
+      long = 0;
+
+      shuttleStops.forEach((value) {
+        var temp = value.getLatLng;
+        lat += temp.latitude;
+        long += temp.longitude;
+      });
+
+      lat /= totalLen;
+      long /= totalLen;
+    }
+
+    return LatLng(lat, long);
   }
 
   @override

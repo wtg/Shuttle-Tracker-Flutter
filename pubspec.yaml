@@ -78,6 +78,7 @@ flutter:
     - assets/img/stop.png
     - assets/img/shuttle.svg
     - assets/img/stop_thin.png
+    - assets/img/dark_stop.png
     - assets/img/user.png
     - assets/json_test/routes.json
     - assets/json_test/stops.json

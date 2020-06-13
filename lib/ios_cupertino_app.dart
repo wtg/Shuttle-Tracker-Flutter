@@ -23,7 +23,7 @@ class _IOSCupertinoAppState extends State<IOSCupertinoApp> {
       title: Text('Map'),
     ),
     BottomNavigationBarItem(
-      icon: Icon(ShuttleIcon.logo),
+      icon: Icon(ShuttleIcon.logo, size: 20,),
       title: Text('Routes'),
     ),
     BottomNavigationBarItem(

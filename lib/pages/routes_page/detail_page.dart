@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
@@ -25,6 +23,7 @@ class DetailPage extends StatefulWidget {
 
 class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
   MapController mapController = MapController();
+  var _markers = <Marker>[];
 
   void animatedMapMove(LatLng destLocation, double destZoom) {
     final _latTween = Tween<double>(
@@ -57,13 +56,28 @@ class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
     controller.forward();
   }
 
-  List<Marker> _createStops(Map<int, ShuttleStop> shuttleStops) {
-    var markers = <Marker>[];
-    shuttleStops.forEach((key, value) {
-      markers.add(value.getMarker(animatedMapMove));
+  void _createStops(Map<int, ShuttleStop> shuttleStops,
+      [ShuttleStop selected]) {
+    setState(() {
+      shuttleStops.forEach((key, value) {
+        if (selected != null) {
+          _markers.add(
+            value.getMarker(animatedMapMove, (selected.name == value.name)),
+          );
+        } else {
+          _markers.add(
+            value.getMarker(animatedMapMove),
+          );
+        }
+      });
     });
+//    return markers;
+  }
 
-    return markers;
+  @override
+  void initState() {
+    super.initState();
+    _createStops(widget.routeStops);
   }
 
   LatLng findAvgLatLong(Map<int, ShuttleStop> shuttleStops) {
@@ -91,39 +105,29 @@ class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, theme) {
       var isDarkMode = theme.getTheme.bottomAppBarColor == Colors.black;
-//      var selectedMarker =
-      
+
       var mapCenter = findAvgLatLong(widget.routeStops);
-      
       return Material(
         child: PlatformScaffold(
           appBar: PlatformAppBar(
-            leading: GestureDetector(
-                onTap: () => Navigator.pop(context),
-                child: Stack(
-                  alignment: Platform.isIOS
-                      ? AlignmentDirectional.centerStart
-                      : AlignmentDirectional.center,
-                  children: <Widget>[
-                    Container(
-                      width: 80,
-                      height: 50,
-                      color: widget.routeColor,
-                    ),
-                    Icon(
-                      Platform.isIOS ? Icons.arrow_back_ios : Icons.arrow_back,
-                      size: 26,
-                    ),
-                  ],
-                )),
+            leading: Material(
+              child: Container(
+                color: theme.getTheme.appBarTheme.color,
+                child: IconButton(
+                  icon: Icon(Icons.arrow_back),
+                  color: theme.getTheme.hoverColor,
+                  onPressed: () => Navigator.pop(context, false),
+                ),
+              ),
+            ),
             title: Text(
               widget.title,
               style: TextStyle(
-                color: Colors.white,
+                color: theme.getTheme.hoverColor,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            backgroundColor: widget.routeColor,
+            backgroundColor: theme.getTheme.appBarTheme.color,
             ios: (_) => CupertinoNavigationBarData(
                 actionsForegroundColor: Colors.white),
           ),
@@ -150,7 +154,8 @@ class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
                     ),
                     PolylineLayerOptions(polylines: widget.polyline),
                     MarkerLayerOptions(
-                        markers: _createStops(widget.routeStops)),
+                      markers: _markers,
+                    ),
                   ],
                 ),
               ),
@@ -163,6 +168,7 @@ class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
                   routeColor: widget.routeColor,
                   routeStops: widget.routeStops,
                   animate: animatedMapMove,
+                  changeMarker: _createStops,
                 ),
               ),
             ],

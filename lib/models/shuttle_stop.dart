@@ -20,16 +20,19 @@ class ShuttleStop extends ShuttlePoint {
   /// Brief description of the stop
   String description;
 
+  /// Whether or not the stop has been selected
+  bool selected;
+
   /// Uses a super constructor to define lat/lng attributes
-  ShuttleStop(
-      {latitude,
-      longitude,
-      this.id,
-      this.name,
-      this.created,
-      this.updated,
-      this.description})
-      : super(latitude: latitude, longitude: longitude);
+  ShuttleStop({
+    latitude,
+    longitude,
+    this.id,
+    this.name,
+    this.created,
+    this.updated,
+    this.description,
+  }) : super(latitude: latitude, longitude: longitude);
 
   factory ShuttleStop.fromJson(Map<String, dynamic> json) {
     return ShuttleStop(
@@ -43,7 +46,18 @@ class ShuttleStop extends ShuttlePoint {
     );
   }
 
-  Marker getMarker(dynamic animatedMapMove, [BuildContext context]) {
+  Marker getMarker(dynamic animatedMapMove,
+      [bool selected, BuildContext context, ThemeData theme]) {
+
+    var selectedAsset = ColorFiltered(
+      colorFilter: ColorFilter.mode(Colors.green[400], BlendMode.modulate),
+      child: Image.asset(
+        'assets/img/stop.png',
+        width: 20,
+        height: 20,
+      ),
+    );
+    selected ??= false;
     return Marker(
       width: 44.0,
       height: 44.0,
@@ -71,9 +85,11 @@ class ShuttleStop extends ShuttlePoint {
           decoration: BoxDecoration(
               border: Border.all(width: 15, style: BorderStyle.none),
               shape: BoxShape.circle),
-          child: Image.asset(
-            'assets/img/stop.png',
-          ),
+          child: selected
+              ? selectedAsset
+              : Image.asset(
+                  'assets/img/stop.png',
+                ),
         ),
       ),
     );

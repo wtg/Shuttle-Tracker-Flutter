@@ -124,6 +124,7 @@ class _AboutSettingsState extends State<AboutSettings> {
               return Divider(
                 color: Colors.grey[600],
                 height: 4,
+                indent: 15.0,
               );
             },
           ),

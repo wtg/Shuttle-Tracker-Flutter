@@ -29,6 +29,7 @@ class _LoadedState extends State<LoadedState> {
         tileList.add(tile);
       }
     }
+    tileList.sort((a, b) => a.route.name.compareTo(b.route.name));
     return tileList;
   }
 
@@ -41,7 +42,7 @@ class _LoadedState extends State<LoadedState> {
         tileList.add(tile);
       }
     }
-
+    tileList.sort((a, b) => a.route.name.length.compareTo(b.route.name.length));
     return tileList;
   }
 

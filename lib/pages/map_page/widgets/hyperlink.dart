@@ -1,12 +1,14 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Hyperlink extends StatelessWidget {
   final String url;
   final String text;
+  final Color color;
   final ThemeData theme;
 
-  Hyperlink({this.url, this.text, this.theme});
+  Hyperlink({this.url, this.text, this.theme, this.color});
 
   void _launchURL() async {
     if (await canLaunch(url)) {
@@ -16,15 +18,20 @@ class Hyperlink extends StatelessWidget {
     }
   }
 
+//  TextSpan buildHyperlinks(BuildContext context) {
+//    return TextSpan(
+//        text: text,
+//        style: TextStyle(color: color),
+//        recognizer: TapGestureRecognizer()..onTap = _launchURL);
+//  }
+//
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      child: Text(
-        text,
-        style: TextStyle(
-            color: Colors.blue, fontSize: theme.textTheme.subtitle1.fontSize),
-      ),
-      onTap: _launchURL,
+    return RichText(
+      text: TextSpan(
+          text: text,
+          style: TextStyle(color: color),
+          recognizer: TapGestureRecognizer()..onTap = _launchURL),
     );
   }
 }

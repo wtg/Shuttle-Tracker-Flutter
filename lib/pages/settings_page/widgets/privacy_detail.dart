@@ -118,7 +118,8 @@ class _PrivacyPolicyPageState extends State<PrivacyPolicyPage> {
                         "directed to ",
                     style: _subHeader),
                 buildHyperlink("mailto:webtech@union.lists.rpi.edu",
-                    "webtech@union.lists.rpi.edu")
+                    "webtech@union.lists.rpi.edu"),
+                TextSpan(text: ".", style: _subHeader),
               ]),
             ),
           ],

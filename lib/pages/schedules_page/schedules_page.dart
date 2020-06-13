@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../blocs/theme/theme_bloc.dart';
 
@@ -59,11 +60,22 @@ class _SchedulesPageState extends State<SchedulesPage> {
                                 style: TextStyle(
                                     color: theme.getTheme.hoverColor,
                                     fontSize: 13)),
-                            Text('View PDF',
-                                style: TextStyle(
-                                    color: Colors.red,
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 13)),
+                            GestureDetector(
+                              onTap: () async {
+                                var url =
+                                    'https://shuttles.rpi.edu/static/Weekday.pdf';
+                                if (await canLaunch(url)) {
+                                  await launch(url);
+                                } else {
+                                  throw 'Could not launch $url';
+                                }
+                              },
+                              child: Text('View PDF',
+                                  style: TextStyle(
+                                      color: Colors.red,
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 13)),
+                            ),
                             SizedBox(height: 10)
                           ],
                         ),
@@ -99,14 +111,21 @@ class _SchedulesPageState extends State<SchedulesPage> {
                                 style: TextStyle(
                                     color: theme.getTheme.hoverColor,
                                     fontSize: 13)),
-                            RichText(
-                              text: TextSpan(
-                                text: 'View PDF',
-                                style: TextStyle(
-                                    color: Colors.red,
-                                    fontSize: 13,
-                                    fontWeight: FontWeight.w600),
-                              ),
+                            GestureDetector(
+                              onTap: () async {
+                                var url =
+                                    'https://shuttles.rpi.edu/static/Weekend.pdf';
+                                if (await canLaunch(url)) {
+                                  await launch(url);
+                                } else {
+                                  throw 'Could not launch $url';
+                                }
+                              },
+                              child: Text('View PDF',
+                                  style: TextStyle(
+                                      color: Colors.red,
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 13)),
                             ),
                             SizedBox(height: 10)
                           ],

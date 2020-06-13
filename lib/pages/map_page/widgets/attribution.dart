@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'hyperlink.dart';
+import '../../../widgets/hyperlink.dart';
+
 
 class Attribution extends StatefulWidget {
   final ThemeData theme;

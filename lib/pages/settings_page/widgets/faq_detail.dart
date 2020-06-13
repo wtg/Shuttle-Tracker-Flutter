@@ -76,16 +76,16 @@ class _FaqPageState extends State<FaqPage> {
           text: TextSpan(children: [
             TextSpan(text: 'Shuttle Tracker is ', style: _subHeader),
             buildHyperlink(
-                "https://github.com/wtg/shuttletracker", 'open source'),
+                'https://github.com/wtg/shuttletracker', 'open source'),
             TextSpan(text: ' and maintained by the ', style: _subHeader),
             buildHyperlink(
-                "https://webtech.union.rpi.edu", 'Web Technologies Group'),
+                'https://webtech.union.rpi.edu', 'Web Technologies Group'),
             TextSpan(
                 text: ' of the Rensselaer Union Student Senate for '
                     'the benefit of the student body.\n'
                     'It is also an active ',
                 style: _subHeader),
-            buildHyperlink("https://rcos.io", 'RCOS'),
+            buildHyperlink('https://rcos.io', 'RCOS'),
             TextSpan(
                 text: ' project, and over 50 students have '
                     'contributed to it through RCOS in previous semesters.',
@@ -120,16 +120,16 @@ class _FaqPageState extends State<FaqPage> {
         RichText(
           text: TextSpan(children: [
             TextSpan(
-                text: "Since both the shuttles and routes "
-                    "change on a daily basis,"
+                text: 'Since both the shuttles and routes '
+                    'change on a daily basis,'
                     " a shuttle's route is determined "
-                    "dynamically by looking at "
-                    "which route it has been closest to"
-                    "recently. However, due to "
-                    "routes overlapping and drivers going"
+                    'dynamically by looking at '
+                    'which route it has been closest to'
+                    'recently. However, due to '
+                    'routes overlapping and drivers going'
                     " on break or off-course, a shuttle's "
-                    "route may be incorrectly "
-                    "determined. This "
+                    'route may be incorrectly '
+                    'determined. This '
                     'should resolve itself within a few minutes,'
                     ' however if there '
                     'are repeated issues feel free to send us a message.',
@@ -177,7 +177,7 @@ class _FaqPageState extends State<FaqPage> {
                     ' different routes). '
                     'More information can be found ',
                 style: _subHeader),
-            buildHyperlink("https://shuttles.rpi.edu/changes", 'here'),
+            buildHyperlink('https://shuttles.rpi.edu/changes', 'here'),
             TextSpan(text: '.', style: _subHeader),
           ]),
         ),
@@ -188,13 +188,13 @@ class _FaqPageState extends State<FaqPage> {
           text: TextSpan(children: [
             TextSpan(text: 'We have an active ', style: _subHeader),
             buildHyperlink(
-                "https://github.com/wtg/shuttletracker", 'repository'),
+                'https://github.com/wtg/shuttletracker', 'repository'),
             TextSpan(
                 text: ' on GitHub where we track'
                     ' issues and accept pull requests. '
                     'Learn more about what we do on our ',
                 style: _subHeader),
-            buildHyperlink("https://webtech.union.rpi.edu", 'website'),
+            buildHyperlink('https://webtech.union.rpi.edu', 'website'),
             TextSpan(text: ' or by sending us an ', style: _subHeader),
             buildHyperlink('mailto:webtech@union.lists.rpi.edu', 'email'),
             TextSpan(text: '.', style: _subHeader),

@@ -64,7 +64,7 @@ class MyAppState extends State<MyApp> {
               ? IOSCupertinoApp(
                   theme: theme.getTheme, pageOptions: _pageOptions)
               : AndroidMaterialApp(
-              theme: theme.getTheme, pageOptions: _pageOptions);
+                  theme: theme.getTheme, pageOptions: _pageOptions);
         }));
   }
 }

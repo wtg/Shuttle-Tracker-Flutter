@@ -23,7 +23,7 @@ class DetailPage extends StatefulWidget {
 
 class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
   MapController mapController = MapController();
-  var _markers = <Marker>[];
+  final _markers = <Marker>[];
 
   void animatedMapMove(LatLng destLocation, double destZoom) {
     final _latTween = Tween<double>(

@@ -48,7 +48,6 @@ class ShuttleStop extends ShuttlePoint {
 
   Marker getMarker(dynamic animatedMapMove,
       [bool selected, BuildContext context, ThemeData theme]) {
-
     var selectedAsset = ColorFiltered(
       colorFilter: ColorFilter.mode(Colors.green[400], BlendMode.modulate),
       child: Image.asset(

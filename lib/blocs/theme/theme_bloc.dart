@@ -50,4 +50,5 @@ class ThemeState {
   ThemeState({this.isDarkMode});
 
   ThemeData get getTheme => isDarkMode ? theme.darkMode : theme.lightMode;
+  bool get getThemeState => isDarkMode;
 }

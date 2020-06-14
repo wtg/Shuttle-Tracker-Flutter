@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 import '../../blocs/shuttle/shuttle_bloc.dart';
 import '../../blocs/theme/theme_bloc.dart';
@@ -25,14 +24,17 @@ class _RoutesPageState extends State<RoutesPage> {
   Widget build(BuildContext context) {
     _refreshCompleter = Completer<void>();
     return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, theme) {
-      return PlatformScaffold(
-          appBar: PlatformAppBar(
+      return Scaffold(
+          appBar: AppBar(
             automaticallyImplyLeading: false,
             title: Text(
               'Routes',
-              style: TextStyle(color: theme.getTheme.hoverColor),
+              style: TextStyle(
+                color: theme.getTheme.hoverColor,
+                fontWeight: FontWeight.bold,
+                fontSize: 30,
+              ),
             ),
-            backgroundColor: theme.getTheme.appBarTheme.color,
           ),
           body: Material(
             child: Center(child: BlocBuilder<ShuttleBloc, ShuttleState>(

@@ -15,8 +15,8 @@ class LegendRow extends StatelessWidget {
       return Row(
         children: <Widget>[
           Container(
-            width: 13,
-            height: 13,
+            width: 10,
+            height: 10,
             child: widget,
           ),
           Text(

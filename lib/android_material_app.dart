@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'icons/shuttle_icon.dart';
+
 class AndroidMaterialApp extends StatefulWidget {
   final ThemeData theme;
 
@@ -19,7 +21,7 @@ class _AndroidMaterialAppState extends State<AndroidMaterialApp> {
       title: Text('Map'),
     ),
     BottomNavigationBarItem(
-      icon: Icon(Icons.directions_bus),
+      icon: Icon(ShuttleIcon.logo),
       title: Text('Routes'),
     ),
     BottomNavigationBarItem(

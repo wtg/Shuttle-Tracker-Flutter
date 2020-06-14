@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_shuttletracker/pages/settings_page/widgets/sockets_test.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../blocs/theme/theme_bloc.dart';
+import 'faq_detail.dart';
+import 'privacy_detail.dart';
 
 class AboutSettings extends StatefulWidget {
   final ThemeState theme;
@@ -30,6 +34,14 @@ class _AboutSettingsState extends State<AboutSettings> {
             ),
           ],
         ),
+        onTap: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => FaqPage(
+                        theme: widget.theme,
+                      )));
+        },
       ),
       ListTile(
         leading: Column(
@@ -47,6 +59,31 @@ class _AboutSettingsState extends State<AboutSettings> {
             ),
           ],
         ),
+        onTap: () async {
+          var url = 'https://github.com/wtg/Flutter_ShuttleTracker';
+          if (await canLaunch(url)) {
+            await launch(url);
+          } else {
+            throw 'Could not launch $url';
+          }
+        },
+      ),
+      ListTile(
+        leading: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text(
+              'Map Attribution',
+              style: TextStyle(
+                  color: widget.theme.getTheme.hoverColor, fontSize: 16),
+            ),
+            Text(
+              '''Map tiles by Stamen Design, under CC BY 3.0. Data by OpenStreetMap, under ODbL.''',
+              style: TextStyle(color: Colors.grey, fontSize: 14),
+            ),
+          ],
+        ),
       ),
       ListTile(
         dense: true,
@@ -55,6 +92,14 @@ class _AboutSettingsState extends State<AboutSettings> {
           style:
               TextStyle(color: widget.theme.getTheme.hoverColor, fontSize: 16),
         ),
+        onTap: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => PrivacyPolicyPage(
+                        theme: widget.theme,
+                      )));
+        },
       ),
       ListTile(
         leading: Column(
@@ -72,6 +117,10 @@ class _AboutSettingsState extends State<AboutSettings> {
             ),
           ],
         ),
+        onTap: () {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => SocketTest()));
+        },
       ),
     ];
     return Column(
@@ -97,6 +146,7 @@ class _AboutSettingsState extends State<AboutSettings> {
               return Divider(
                 color: Colors.grey[600],
                 height: 4,
+                indent: 15.0,
               );
             },
           ),

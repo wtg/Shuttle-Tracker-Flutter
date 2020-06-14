@@ -26,24 +26,25 @@ class _GeneralSettingsState extends State<GeneralSettings> {
         ),
       ),
       ListTile(
-          dense: true,
-          leading: Icon(
-            Icons.settings_brightness,
-            color: widget.theme.getTheme.hoverColor,
-          ),
-          title: Text('Dark Mode',
-              style: TextStyle(
-                  color: widget.theme.getTheme.hoverColor, fontSize: 16)),
-          trailing: PlatformSwitch(
-              value: isSwitched,
-              onChanged: (value) {
-                isSwitched = value;
-                themeBloc.add(ThemeEvent.toggle);
-              },
-              activeColor: Colors.white,
-              android: (_) =>
-                  MaterialSwitchData(activeTrackColor: Colors.green),
-              ios: (_) => CupertinoSwitchData(activeColor: Colors.green))),
+        dense: true,
+        leading: Icon(
+          Icons.brightness_medium,
+          color: widget.theme.getTheme.hoverColor,
+        ),
+        title: Text('Dark Mode',
+            style: TextStyle(
+                color: widget.theme.getTheme.hoverColor, fontSize: 16)),
+        trailing: PlatformSwitch(
+          value: isSwitched,
+          onChanged: (value) {
+            isSwitched = value;
+            themeBloc.add(ThemeEvent.toggle);
+          },
+          activeColor: Colors.white,
+          android: (_) => MaterialSwitchData(activeTrackColor: Colors.green),
+          ios: (_) => CupertinoSwitchData(activeColor: Colors.green),
+        ),
+      ),
     ]);
   }
 }

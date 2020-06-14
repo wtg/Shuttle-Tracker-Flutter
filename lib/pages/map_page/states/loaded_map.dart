@@ -11,7 +11,6 @@ import '../../../models/shuttle_image.dart';
 import '../../../models/shuttle_route.dart';
 import '../../../models/shuttle_stop.dart';
 import '../../../models/shuttle_update.dart';
-import '../widgets/attribution.dart';
 import '../widgets/legend.dart';
 
 class LoadedMap extends StatefulWidget {
@@ -98,7 +97,7 @@ class _LoadedMapState extends State<LoadedMap> with TickerProviderStateMixin {
 
     for (var stop in stops) {
       if (_ids.contains(stop.id)) {
-        markers.add(stop.getMarker(animatedMapMove, context));
+        markers.add(stop.getMarker(animatedMapMove, false, context));
       }
     }
     //print("Number of stops on map: ${markers.length}");
@@ -134,12 +133,33 @@ class _LoadedMapState extends State<LoadedMap> with TickerProviderStateMixin {
     return location;
   }
 
+  LatLng findAvgLatLong(List<ShuttleStop> shuttleStops) {
+    var lat = 42.729;
+    var long = -73.6758;
+    var totalLen = shuttleStops.length;
+    if (totalLen != 0) {
+      lat = 0;
+      long = 0;
+
+      shuttleStops.forEach((value) {
+        var temp = value.getLatLng;
+        lat += temp.latitude;
+        long += temp.longitude;
+      });
+
+      lat /= totalLen;
+      long /= totalLen;
+    }
+
+    return LatLng(lat, long);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: BlocBuilder<ThemeBloc, ThemeState>(
         builder: (context, theme) {
-          var isDarkMode = theme.getTheme.bottomAppBarColor == Colors.black;
+          var isDarkMode = theme.getThemeState;
           var routes = _createRoutes(widget.routes, _ids, _legend, _colors);
           var updates = _createUpdates(widget.updates, context, _colors);
           var stops = _createStops(widget.stops, context, theme.getTheme);
@@ -154,7 +174,7 @@ class _LoadedMapState extends State<LoadedMap> with TickerProviderStateMixin {
                     options: MapOptions(
                       nePanBoundary: LatLng(42.78, -73.63),
                       swPanBoundary: LatLng(42.68, -73.71),
-                      center: LatLng(42.729, -73.6758),
+                      center: findAvgLatLong(widget.stops),
                       zoom: 14,
                       maxZoom: 16, // max you can zoom in
                       minZoom: 13, // min you can zoom out
@@ -177,7 +197,7 @@ class _LoadedMapState extends State<LoadedMap> with TickerProviderStateMixin {
                 ),
               ],
             ),
-            Attribution(),
+//            Attribution(),
             Legend(
               legend: _legend,
             ),

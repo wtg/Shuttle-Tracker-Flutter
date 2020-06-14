@@ -36,28 +36,27 @@ class _LegendState extends State<Legend> {
     //print("Number of rows in legend: ${legendRows.length}\n\n");
     return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, theme) {
       return Positioned(
-        bottom: 40,
+        bottom: 15,
         left: 10,
-        child: Opacity(
-          opacity: 0.90,
-          child: Container(
-            decoration: BoxDecoration(
+        child: Container(
+          decoration: BoxDecoration(
+              color: theme.getTheme.backgroundColor,
+              border: Border.all(
+                width: 5,
                 color: theme.getTheme.backgroundColor,
-                border: Border.all(
-                  width: 5,
-                  color: theme.getTheme.backgroundColor,
-                ),
-                borderRadius: BorderRadius.circular(5),
-                boxShadow: [
-                  BoxShadow(
-                      color: theme.getTheme.hoverColor,
-                      blurRadius: 1.0,
-                      offset: Offset(0.0, 0.5))
-                ]),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: legendRows,
-            ),
+              ),
+              borderRadius: BorderRadius.circular(5),
+              boxShadow: theme.getThemeState
+                  ? null
+                  : [
+                      BoxShadow(
+                          color: Colors.grey, // Changed from black
+                          blurRadius: 1.0,
+                          offset: Offset(0.0, 0.5))
+                    ]),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: legendRows,
           ),
         ),
       );

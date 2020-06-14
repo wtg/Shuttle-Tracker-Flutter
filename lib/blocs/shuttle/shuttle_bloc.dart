@@ -32,9 +32,7 @@ class ShuttleBloc extends Bloc<ShuttleEvent, ShuttleState> {
   ShuttleState get initialState => ShuttleInitial();
 
   @override
-  Stream<ShuttleState> mapEventToState(
-    ShuttleEvent event,
-  ) async* {
+  Stream<ShuttleState> mapEventToState(ShuttleEvent event) async* {
     switch (event) {
       case ShuttleEvent.getShuttleMap:
         if (isLoading) {

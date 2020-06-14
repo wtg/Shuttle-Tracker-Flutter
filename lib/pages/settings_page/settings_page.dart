@@ -1,13 +1,9 @@
-import 'dart:io';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 import '../../blocs/theme/theme_bloc.dart';
 import 'widgets/android_settings.dart';
-import 'widgets/ios_settings.dart';
 
 class SettingsPage extends StatefulWidget {
   @override
@@ -18,25 +14,31 @@ class _SettingsPageState extends State<SettingsPage> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, theme) {
-      return PlatformScaffold(
-        appBar: PlatformAppBar(
+      return Scaffold(
+        appBar: AppBar(
           automaticallyImplyLeading: false,
           title: Text(
             'Settings',
-            style: TextStyle(color: theme.getTheme.hoverColor),
+            style: TextStyle(
+              color: theme.getTheme.hoverColor,
+              fontWeight: FontWeight.bold,
+              fontSize: 30,
+            ),
           ),
-          backgroundColor: theme.getTheme.appBarTheme.color,
         ),
         body: Material(
           child: Center(
-              child: NotificationListener<OverscrollIndicatorNotification>(
-                  onNotification: (overscroll) {
-                    overscroll.disallowGlow();
-                    return null;
-                  },
-                  child: Platform.isIOS
-                      ? IOSSetttings(theme: theme)
-                      : AndroidSettings(theme: theme))),
+            child: NotificationListener<OverscrollIndicatorNotification>(
+              onNotification: (overscroll) {
+                overscroll.disallowGlow();
+                return null;
+              },
+              child: AndroidSettings(theme: theme),
+//              child: Platform.isIOS
+//                  ? IOSSettings(theme: theme)
+//                  : AndroidSettings(theme: theme),
+            ),
+          ),
         ),
       );
     });

@@ -3,7 +3,6 @@ import 'package:latlong/latlong.dart';
 import '../../models/shuttle_route.dart';
 import '../../models/shuttle_stop.dart';
 import '../../models/shuttle_update.dart';
-
 import '../provider/shuttle_api_provider.dart';
 //import '../provider/shuttle_local_provider.dart';
 
@@ -11,8 +10,8 @@ import '../provider/shuttle_api_provider.dart';
 /// distributes the data to BLoC pattern
 class ShuttleRepository {
   final _shuttleProvider = ShuttleApiProvider();
-  //final _shuttleProvider = ShuttleLocalProvider();
 
+//  void get openSocket => _shuttleProvider.openSocket();
   Future<List<ShuttleRoute>> get getRoutes async =>
       _shuttleProvider.getRoutes();
   Future<List<ShuttleStop>> get getStops async => _shuttleProvider.getStops();

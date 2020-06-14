@@ -63,6 +63,7 @@ class _FeedbackSettingsState extends State<FeedbackSettings> {
               return Divider(
                 color: Colors.grey[600],
                 height: 4,
+                indent: 15.0,
               );
             },
           ),

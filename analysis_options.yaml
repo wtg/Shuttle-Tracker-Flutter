@@ -6,3 +6,4 @@ linter:
     public_member_api_docs: false
     avoid_catches_without_on_clauses: false
     avoid_setters_without_getters: false
+    lowercase_with_underscores: false

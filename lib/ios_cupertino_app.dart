@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
+import 'icons/shuttle_icon.dart';
+
 class IOSCupertinoApp extends StatefulWidget {
   final ThemeData theme;
 
@@ -17,11 +19,14 @@ class _IOSCupertinoAppState extends State<IOSCupertinoApp> {
   int _selectedTab = 0;
   final _items = [
     BottomNavigationBarItem(
-      icon: Icon(Icons.navigation),
+      icon: Icon(Icons.near_me),
       title: Text('Map'),
     ),
     BottomNavigationBarItem(
-      icon: Icon(Icons.directions_bus),
+      icon: Icon(
+        ShuttleIcon.logo,
+        size: 20,
+      ),
       title: Text('Routes'),
     ),
     BottomNavigationBarItem(
@@ -29,10 +34,7 @@ class _IOSCupertinoAppState extends State<IOSCupertinoApp> {
       title: Text('Schedules'),
     ),
     BottomNavigationBarItem(
-      icon: Icon(IconData(0xf43d,
-          fontFamily: 'CupertinoIcons',
-          fontPackage: 'cupertino_icons',
-          matchTextDirection: true)),
+      icon: Icon(Icons.settings),
       title: Text('Settings'),
     )
   ];
@@ -59,6 +61,7 @@ class _IOSCupertinoAppState extends State<IOSCupertinoApp> {
         ),
         home: CupertinoTabScaffold(
           tabBar: CupertinoTabBar(
+            iconSize: 25.0,
             activeColor: Colors.red,
             backgroundColor: widget.theme.appBarTheme.color,
             items: _items,

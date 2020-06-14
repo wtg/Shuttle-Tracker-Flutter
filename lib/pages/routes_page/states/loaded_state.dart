@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 import '../../../models/shuttle_route.dart';
 import '../../../models/shuttle_stop.dart';
 import '../widgets/custom_list_tile.dart';
+import '../widgets/route_section.dart';
 
 class LoadedState extends StatefulWidget {
   final List<ShuttleRoute> routes;
@@ -16,46 +17,59 @@ class LoadedState extends StatefulWidget {
 }
 
 class _LoadedState extends State<LoadedState> {
-  List<Widget> _getTileList() {
+  List<Widget> _getActiveRoutes() {
     var tileList = <CustomListTile>[];
     for (var route in widget.routes) {
-      tileList.add(CustomListTile(
-          route: route, stops: widget.stops, theme: widget.theme));
+      var tile = CustomListTile(
+        route: route,
+        stops: widget.stops,
+        theme: widget.theme,
+      );
+      if (tile.isEnabled && tile.isActive) {
+        tileList.add(tile);
+      }
     }
-    tileList.sort((a, b) {
-      return ((a.isEnabled == true && a.isActive == true) &&
-              ((b.isEnabled == true ?? b.isActive == false) ||
-                  (b.isEnabled == false ?? b.isActive == true) ||
-                  (b.isEnabled == false ?? b.isActive == false)))
-          ? -1
-          : (a.isEnabled == b.isEnabled && a.isActive == b.isActive) ? 0 : 1;
-    });
+    tileList.sort((a, b) => a.route.name.compareTo(b.route.name));
+    return tileList;
+  }
+
+  List<Widget> _getScheduledRoutes() {
+    var tileList = <CustomListTile>[];
+    for (var route in widget.routes) {
+      var tile = CustomListTile(
+          route: route, stops: widget.stops, theme: widget.theme);
+      if (tile.isEnabled && !tile.isActive) {
+        tileList.add(tile);
+      }
+    }
+    tileList.sort((a, b) => a.route.name.length.compareTo(b.route.name.length));
     return tileList;
   }
 
   @override
   Widget build(BuildContext context) {
-    var tileList = _getTileList();
     //notification listener used to remove scroll glow
-
     return NotificationListener<OverscrollIndicatorNotification>(
       onNotification: (overscroll) {
         overscroll.disallowGlow();
         return null;
       },
       child: Container(
-        color: widget.theme.backgroundColor,
-        child: ListView.separated(
-          itemCount: tileList.length,
-          itemBuilder: (context, index) => tileList[index],
-          separatorBuilder: (context, index) {
-            return Divider(
-              color: Colors.grey,
-              height: 2,
-            );
-          },
-        ),
-      ),
+          color: widget.theme.backgroundColor,
+          child: ListView(
+            children: <Widget>[
+              RoutesSection(
+                theme: widget.theme,
+                routes: _getActiveRoutes(),
+                sectionHeader: 'Active Routes',
+              ),
+              RoutesSection(
+                theme: widget.theme,
+                routes: _getScheduledRoutes(),
+                sectionHeader: 'Scheduled Routes',
+              ),
+            ],
+          )),
     );
   }
 }

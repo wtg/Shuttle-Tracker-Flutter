@@ -1,12 +1,12 @@
+import 'dart:io';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_map/flutter_map.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
-import '../../../models/shuttle_image.dart';
 import '../../../models/shuttle_route.dart';
 import '../../../models/shuttle_stop.dart';
-
 import '../detail_page.dart';
 
 class CustomListTile extends StatefulWidget {
@@ -63,14 +63,31 @@ class _CustomListTileState extends State<CustomListTile> {
   Widget build(BuildContext context) {
     var polyline = <Polyline>[widget.route.getPolyline];
 
-    var image = ShuttleImage(svgColor: widget.route.color);
-    var shuttleArrow = image.getSVG;
-    var color = image.getSVGColor;
+//    var image = ShuttleImage(svgColor: widget.route.color);
+    var color = widget.route.color;
+
+    var circle = ColorFiltered(
+      colorFilter: ColorFilter.mode(color, BlendMode.modulate),
+      child: Image.asset(
+        'assets/img/stop_thin.png',
+        width: 25,
+        height: 25,
+      ),
+    );
 
     return ListTile(
-      leading: Container(width: 35, height: 40, child: shuttleArrow),
-      title: Text(widget.route.name,
-          style: TextStyle(color: widget.theme.hoverColor, fontSize: 16)),
+      leading: circle,
+      title: Align(
+        alignment: Alignment(-1.2, 0),
+        child: Text(
+          widget.route.name,
+          style: TextStyle(
+            color: widget.theme.hoverColor,
+            fontSize: 16,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
+      ),
       trailing: Row(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.end,
@@ -90,7 +107,9 @@ class _CustomListTileState extends State<CustomListTile> {
             ],
           ),
           Icon(
-            Icons.keyboard_arrow_right,
+            Platform.isIOS
+                ? CupertinoIcons.right_chevron
+                : Icons.keyboard_arrow_right,
             color: widget.theme.hoverColor,
           ),
         ],
@@ -98,9 +117,7 @@ class _CustomListTileState extends State<CustomListTile> {
       onTap: () {
         Navigator.push(
           context,
-          platformPageRoute(
-            fullscreenDialog: true,
-            context: context,
+          CupertinoPageRoute(
             builder: (_) {
               return DetailPage(
                 title: widget.route.name,

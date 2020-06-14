@@ -23,7 +23,7 @@ class DetailPage extends StatefulWidget {
 
 class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
   MapController mapController = MapController();
-  var _markers = <Marker>[];
+  final _markers = <Marker>[];
 
   void animatedMapMove(LatLng destLocation, double destZoom) {
     final _latTween = Tween<double>(
@@ -178,81 +178,3 @@ class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
     });
   }
 }
-
-/*
-  LatLng _getCentroid(List<ShuttleStop> routeStops) {
-    LatLng centroid = LatLng(0, 0);
-    double signedArea = 0.0;
-    double x0 = 0.0; // Current vertex X
-    double y0 = 0.0; // Current vertex Y
-    double x1 = 0.0; // Next vertex X
-    double y1 = 0.0; // Next vertex Y
-    double a = 0.0;
-
-    int i = 0;
-    for (i = 0; i < routeStops.length; ++i) {
-      x0 = routeStops[i].getLatLng.latitude;
-      y0 = routeStops[i].getLatLng.longitude;
-      x1 = routeStops[(i + 1) % routeStops.length].getLatLng.latitude;
-      ;
-      y1 = routeStops[(i + 1) % routeStops.length].getLatLng.longitude;
-      a = x0 * y1 - x1 * y0;
-      signedArea += a;
-      centroid.latitude += (x0 + x1) * a;
-      centroid.longitude += (y0 + y1) * a;
-    }
-
-    signedArea *= 0.5;
-    centroid.latitude /= (6.0 * signedArea);
-    centroid.longitude /= (6.0 * signedArea);
-
-    return centroid;
-  }
-  */
-
-//
-//      var header = ClipRRect(
-//        borderRadius: BorderRadius.only(
-//            topLeft: Radius.circular(18.0), topRight: Radius.circular(18.0)),
-//        child: Container(
-//          color: widget.routeColor,
-//          child: Column(
-//            children: <Widget>[
-//              SizedBox(
-//                height: 20.0,
-//              ),
-//              Row(
-//                mainAxisAlignment: MainAxisAlignment.center,
-//                children: <Widget>[
-//                  Container(
-//                    width: 30,
-//                    height: 5,
-//                    decoration: BoxDecoration(
-//                        color: Colors.white,
-//                        borderRadius: BorderRadius.all(Radius.circular(12.0))),
-//                  ),
-//                ],
-//              ),
-//              SizedBox(
-//                height: 10.0,
-//              ),
-//              Row(
-//                mainAxisAlignment: MainAxisAlignment.center,
-//                children: <Widget>[
-//                  Text(
-//                    'Shuttle Stops',
-//                    style: TextStyle(
-//                      fontWeight: FontWeight.normal,
-//                      color: Colors.white,
-//                      fontSize: 24.0,
-//                    ),
-//                  ),
-//                ],
-//              ),
-//              SizedBox(
-//                height: 10.0,
-//              ),
-//            ],
-//          ),
-//        ),
-//      );

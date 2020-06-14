@@ -74,7 +74,7 @@ class _PrivacyPolicyPageState extends State<PrivacyPolicyPage> {
                     text: 'Shuttle Tracker is operated by the ',
                     style: _subHeader),
                 buildHyperlink(
-                    "https://webtech.union.rpi.edu", "Web Technolgies Group"),
+                    'https://webtech.union.rpi.edu', 'Web Technolgies Group'),
                 TextSpan(
                     text: ' (WebTech), a committee of the Rensselaer Union '
                         'Student Senate. WebTech uses Google Analytics to'
@@ -91,22 +91,22 @@ class _PrivacyPolicyPageState extends State<PrivacyPolicyPage> {
             RichText(
               text: TextSpan(children: [
                 TextSpan(
-                    text: "If you grant permission for Shuttle Tracker to "
-                        "access your location, this information is used "
-                        "for two purposes. The first is to indicate your "
-                        "location on the map. The second is to enhance the "
-                        "accuracy of vehicle tracking. The information "
-                        "Shuttle Tracker gathers is limited to your "
+                    text: 'If you grant permission for Shuttle Tracker to '
+                        'access your location, this information is used '
+                        'for two purposes. The first is to indicate your '
+                        'location on the map. The second is to enhance the '
+                        'accuracy of vehicle tracking. The information '
+                        'Shuttle Tracker gathers is limited to your '
                         "device's latitude, longitude, speed, and heading. "
-                        "These data are associated with a random identifier"
-                        " that is generated whenever you open Shuttle "
-                        "Tracker. In order to protect your privacy, no "
-                        "two visits to Shuttle Tracker are associated. "
-                        "This identifier is not used to identify any "
-                        "specific user of the service. All data gathered"
-                        " are only analyzed in aggregate in order to "
-                        "improve the quality of vehicle tracking for all"
-                        " users.",
+                        'These data are associated with a random identifier'
+                        ' that is generated whenever you open Shuttle '
+                        'Tracker. In order to protect your privacy, no '
+                        'two visits to Shuttle Tracker are associated. '
+                        'This identifier is not used to identify any '
+                        'specific user of the service. All data gathered'
+                        ' are only analyzed in aggregate in order to '
+                        'improve the quality of vehicle tracking for all'
+                        ' users.',
                     style: _subHeader),
               ]),
             ),
@@ -114,12 +114,12 @@ class _PrivacyPolicyPageState extends State<PrivacyPolicyPage> {
             RichText(
               text: TextSpan(children: [
                 TextSpan(
-                    text: "Any questions about this privacy policy should be "
-                        "directed to ",
+                    text: 'Any questions about this privacy policy should be '
+                        'directed to ',
                     style: _subHeader),
-                buildHyperlink("mailto:webtech@union.lists.rpi.edu",
-                    "webtech@union.lists.rpi.edu"),
-                TextSpan(text: ".", style: _subHeader),
+                buildHyperlink('mailto:webtech@union.lists.rpi.edu',
+                    'webtech@union.lists.rpi.edu'),
+                TextSpan(text: '.', style: _subHeader),
               ]),
             ),
           ],

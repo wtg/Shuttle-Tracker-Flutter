@@ -60,13 +60,30 @@ class _AboutSettingsState extends State<AboutSettings> {
           ],
         ),
         onTap: () async {
-          var url = 'https://github.com/wtg/shuttletracker';
+          var url = 'https://github.com/wtg/Flutter_ShuttleTracker';
           if (await canLaunch(url)) {
             await launch(url);
           } else {
             throw 'Could not launch $url';
           }
         },
+      ),
+      ListTile(
+        leading: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text(
+              'Map Attribution',
+              style: TextStyle(
+                  color: widget.theme.getTheme.hoverColor, fontSize: 16),
+            ),
+            Text(
+              '''Map tiles by Stamen Design, under CC BY 3.0. Data by OpenStreetMap, under ODbL.''',
+              style: TextStyle(color: Colors.grey, fontSize: 14),
+            ),
+          ],
+        ),
       ),
       ListTile(
         dense: true,

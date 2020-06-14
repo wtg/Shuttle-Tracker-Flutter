@@ -23,13 +23,14 @@ class _MapPageState extends State<MapPage> {
     return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, theme) {
       return Scaffold(
         appBar: AppBar(
-            automaticallyImplyLeading: false,
-            centerTitle: true,
-            title: Image.asset(
-              'assets/img/logo.png',
-              height: 40,
-              width: 40,
-            )),
+          automaticallyImplyLeading: false,
+          centerTitle: true,
+          title: Image.asset(
+            'assets/img/logo.png',
+            height: 40,
+            width: 40,
+          ),
+        ),
         body: Center(
           child:
               BlocBuilder<ShuttleBloc, ShuttleState>(builder: (context, state) {

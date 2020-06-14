@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_shuttletracker/pages/settings_page/widgets/sockets_test.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../blocs/theme/theme_bloc.dart';
@@ -99,6 +100,10 @@ class _AboutSettingsState extends State<AboutSettings> {
             ),
           ],
         ),
+        onTap: () {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => SocketTest()));
+        },
       ),
     ];
     return Column(

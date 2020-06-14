@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_shuttletracker/pages/settings_page/widgets/sockets_test.dart';
+
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../blocs/theme/theme_bloc.dart';
 import 'faq_detail.dart';
 import 'privacy_detail.dart';
+import 'sockets_test.dart';
 
 class AboutSettings extends StatefulWidget {
   final ThemeState theme;

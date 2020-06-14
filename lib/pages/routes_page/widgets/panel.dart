@@ -95,7 +95,7 @@ class _PanelState extends State<Panel> {
               Expanded(
                 child: Container(
                   color: theme.getTheme.backgroundColor,
-                  child: _stopTileList.length != 0
+                  child: _stopTileList.isNotEmpty
                       ? ListView.builder(
                           itemCount: _stopTileList.length,
                           itemBuilder: (context, index) => _stopTileList[index],

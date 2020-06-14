@@ -1,7 +1,8 @@
 import 'dart:convert';
 
-import 'package:flutter_shuttletracker/models/shuttle_update.dart';
 import 'package:web_socket_channel/io.dart';
+
+import '../../models/shuttle_update.dart';
 
 class FusionSocket {
   String serverID;
@@ -26,7 +27,6 @@ class FusionSocket {
     });
   }
 
-
   /// Subscribe to certain socket channels
   /// Tells the server to update this listener
   /// with information
@@ -42,12 +42,12 @@ class FusionSocket {
   }
 
   void _requestSubscription(String topic) {
-    var data = {"type": "subscribe", "message": topic};
+    var data = {'type': 'subscribe', 'message': topic};
     channel.sink.add(jsonEncode(data));
   }
 
   void _requestUnsubscription(String topic) {
-    var data = {"type": "unsubscribe", "message": topic};
+    var data = {'type': 'unsubscribe', 'message': topic};
     channel.sink.add(jsonEncode(data));
   }
 
@@ -55,9 +55,9 @@ class FusionSocket {
     var jsonMessage = jsonDecode(message);
     List<ShuttleUpdate> updatesList = jsonMessage != null
         ? json
-        .decode(jsonMessage.body)
-        .map<ShuttleUpdate>((json) => ShuttleUpdate.fromJson(json))
-        .toList()
+            .decode(jsonMessage.body)
+            .map<ShuttleUpdate>((json) => ShuttleUpdate.fromJson(json))
+            .toList()
         : [];
     return updatesList;
   }

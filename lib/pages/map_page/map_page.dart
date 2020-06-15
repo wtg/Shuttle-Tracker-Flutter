@@ -35,11 +35,11 @@ class _MapPageState extends State<MapPage> {
           child:
               BlocBuilder<ShuttleBloc, ShuttleState>(builder: (context, state) {
             if (state is ShuttleInitial) {
-              shuttleBloc.add(ShuttleEvent.getShuttleMap);
+              shuttleBloc.add(ShuttleEvent.getMapPageData);
               print('state is initial');
               return InitialMap();
             } else if (state is ShuttleError) {
-              shuttleBloc.add(ShuttleEvent.getShuttleMap);
+              shuttleBloc.add(ShuttleEvent.getMapPageData);
               print('state has error\n\n');
               return ErrorMap(
                 message: state.message,
@@ -48,7 +48,7 @@ class _MapPageState extends State<MapPage> {
               print('state is loaded');
               i++;
               print('API poll $i\n\n');
-              shuttleBloc.add(ShuttleEvent.getShuttleMap);
+              shuttleBloc.add(ShuttleEvent.getMapPageData);
               return LoadedMap(
                 routes: state.routes,
                 location: state.location,

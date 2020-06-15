@@ -42,12 +42,12 @@ class _RoutesPageState extends State<RoutesPage> {
               shuttleBloc = BlocProvider.of<ShuttleBloc>(context);
               if (state is ShuttleInitial || state is ShuttleError) {
                 // TODO: MODIFY BLOC ERROR FOR ROUTE EVENT
-                shuttleBloc.add(ShuttleEvent.getRoutes);
+                shuttleBloc.add(ShuttleEvent.getRoutesPageData);
               } else if (state is ShuttleLoaded) {
                 return RefreshIndicator(
                   backgroundColor: theme.getTheme.appBarTheme.color,
                   onRefresh: () {
-                    shuttleBloc.add(ShuttleEvent.getRoutes);
+                    shuttleBloc.add(ShuttleEvent.getRoutesPageData);
                     return _refreshCompleter.future;
                   },
                   child: LoadedState(

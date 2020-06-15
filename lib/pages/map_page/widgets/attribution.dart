@@ -13,7 +13,7 @@ class Attribution extends StatefulWidget {
 class _AttributionState extends State<Attribution> {
   @override
   Widget build(BuildContext context) {
-    var attribution = <Widget>[
+    var attribution1 = <Widget>[
       Text(
         'Map tiles: ',
         style: widget.theme.textTheme.subtitle1,
@@ -31,7 +31,14 @@ class _AttributionState extends State<Attribution> {
           url: 'https://creativecommons.org/licenses/by/3.0/',
           text: 'CC BY 3.0'),
       Text(
-        ') Data: ',
+        ')',
+        style: widget.theme.textTheme.subtitle1,
+      ),
+    ];
+
+    var attribution2 = <Widget>[
+      Text(
+        'Data: ',
         style: widget.theme.textTheme.subtitle1,
       ),
       Hyperlink(
@@ -47,24 +54,46 @@ class _AttributionState extends State<Attribution> {
           url: 'https://www.openstreetmap.org/copyright',
           text: 'ODbL'),
       Text(
-        ') ',
+        ')',
         style: widget.theme.textTheme.subtitle1,
       ),
     ];
+
     return Align(
       alignment: Alignment.bottomRight,
-      child: Opacity(
+      child: Padding(
+        padding: const EdgeInsets.all(2.0),
+        child: Opacity(
           opacity: 0.9,
           child: Container(
-            color: widget.theme.backgroundColor,
-            width: MediaQuery.of(context).size.width * 0.9,
-            child: FittedBox(
-              child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: attribution),
+            decoration: BoxDecoration(
+                color: widget.theme.backgroundColor,
+                borderRadius: BorderRadius.circular(8.0)
             ),
-          )),
+            padding: const EdgeInsets.all(5.0),
+            width: MediaQuery.of(context).size.width * 0.4,
+            child: FittedBox(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: attribution1,
+                  ),
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: attribution2,
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
     );
   }
 }

@@ -197,7 +197,9 @@ class _LoadedMapState extends State<LoadedMap> with TickerProviderStateMixin {
                 ),
               ],
             ),
-            Attribution(theme: theme.getTheme,),
+            Attribution(
+              theme: theme.getTheme,
+            ),
             Legend(
               legend: _legend,
             ),

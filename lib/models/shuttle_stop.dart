@@ -63,7 +63,7 @@ class ShuttleStop extends ShuttlePoint {
       point: getLatLng,
       builder: (ctx) => GestureDetector(
         onTap: () {
-          animatedMapMove(getLatLng, 14.2);
+          animatedMapMove(getLatLng, 15.2);
           print('Stop $name clicked on');
           if (context != null) {
             showBottomSheet(

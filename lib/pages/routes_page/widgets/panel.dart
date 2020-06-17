@@ -27,7 +27,9 @@ class _PanelState extends State<Panel> {
       tileList.add(
         IntrinsicHeight(
           child: ListTileTheme(
-            selectedColor: Colors.green[600],
+            selectedColor: theme.brightness == Brightness.dark
+                ? Colors.white
+                : Colors.green[600],
             child: ListTile(
               dense: true,
               selected: selected != null && selected.name == value.name
@@ -44,11 +46,14 @@ class _PanelState extends State<Panel> {
                     child: Container(
                       padding: const EdgeInsets.all(8.0),
                       decoration: BoxDecoration(
-                          color: selected != null && selected.name == value.name
-                              ? Colors.green.withOpacity(0.1)
-                              : theme.backgroundColor,
-                          borderRadius: BorderRadius.circular(16.0),
-                          shape: BoxShape.rectangle),
+                        color: selected != null && selected.name == value.name
+                            ? theme.brightness == Brightness.dark
+                                ? Colors.white.withOpacity(0.1)
+                                : Colors.green.withOpacity(0.1)
+                            : theme.backgroundColor,
+                        borderRadius: BorderRadius.circular(16.0),
+                        shape: BoxShape.rectangle,
+                      ),
                       child: Align(
                         alignment: Alignment.centerLeft,
                         child: Text(

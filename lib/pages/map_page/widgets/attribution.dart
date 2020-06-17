@@ -64,7 +64,7 @@ class _AttributionState extends State<Attribution> {
       child: Padding(
         padding: const EdgeInsets.all(2.0),
         child: Opacity(
-          opacity: 0.9,
+          opacity: 1.0,
           child: Container(
             decoration: BoxDecoration(
                 color: widget.theme.backgroundColor,

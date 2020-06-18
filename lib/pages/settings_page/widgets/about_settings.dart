@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_shuttletracker/pages/settings_page/widgets/sockets_test.dart';
+
 import 'package:url_launcher/url_launcher.dart';
+import 'package:toast/toast.dart';
 
 import '../../../blocs/theme/theme_bloc.dart';
 import 'faq_detail.dart';
 import 'privacy_detail.dart';
+import 'sockets_test.dart';
 
 class AboutSettings extends StatefulWidget {
   final ThemeState theme;
@@ -15,6 +17,8 @@ class AboutSettings extends StatefulWidget {
 }
 
 class _AboutSettingsState extends State<AboutSettings> {
+//  int devSettings = 0;
+
   @override
   Widget build(BuildContext context) {
     var aboutSettingsList = <Widget>[
@@ -69,23 +73,6 @@ class _AboutSettingsState extends State<AboutSettings> {
         },
       ),
       ListTile(
-        leading: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'Map Attribution',
-              style: TextStyle(
-                  color: widget.theme.getTheme.hoverColor, fontSize: 16),
-            ),
-            Text(
-              '''Map tiles by Stamen Design, under CC BY 3.0. Data by OpenStreetMap, under ODbL.''',
-              style: TextStyle(color: Colors.grey, fontSize: 14),
-            ),
-          ],
-        ),
-      ),
-      ListTile(
         dense: true,
         leading: Text(
           'Privacy Policy',
@@ -118,8 +105,24 @@ class _AboutSettingsState extends State<AboutSettings> {
           ],
         ),
         onTap: () {
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => SocketTest()));
+          // This was just to play around with some stuff, can add more later
+//          setState(() {
+//            devSettings++;
+//            if (devSettings < 10) {
+//              Toast.show(
+//                "You are ${10 - devSettings} "
+//                    "steps away from being a developer!",
+//                context,
+//                duration: Toast.LENGTH_LONG,
+//                gravity: Toast.BOTTOM,
+//              );
+//            }
+//
+//          });
+//          if (devSettings >= 10) {
+//            Navigator.push(
+//                context, MaterialPageRoute(builder: (context) => SocketTest()));
+//          }
         },
       ),
     ];

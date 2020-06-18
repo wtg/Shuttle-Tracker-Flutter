@@ -7,3 +7,5 @@ linter:
     avoid_catches_without_on_clauses: false
     avoid_setters_without_getters: false
     lowercase_with_underscores: false
+    avoid_positional_boolean_parameters: false
+    avoid_function_literals_in_foreach_calls: false

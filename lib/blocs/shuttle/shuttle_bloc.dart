@@ -12,7 +12,7 @@ import '../../models/shuttle_update.dart';
 
 part 'shuttle_state.dart';
 
-enum ShuttleEvent { getShuttleMap, getRoutes }
+enum ShuttleEvent { getMapPageData, getRoutesPageData }
 
 /// ShuttleBloc class
 class ShuttleBloc extends Bloc<ShuttleEvent, ShuttleState> {
@@ -34,7 +34,7 @@ class ShuttleBloc extends Bloc<ShuttleEvent, ShuttleState> {
   @override
   Stream<ShuttleState> mapEventToState(ShuttleEvent event) async* {
     switch (event) {
-      case ShuttleEvent.getShuttleMap:
+      case ShuttleEvent.getMapPageData:
         if (isLoading) {
           yield ShuttleLoading();
           isLoading = false;
@@ -64,7 +64,7 @@ class ShuttleBloc extends Bloc<ShuttleEvent, ShuttleState> {
         }
         await Future.delayed(const Duration(seconds: 2));
         break;
-      case ShuttleEvent.getRoutes:
+      case ShuttleEvent.getRoutesPageData:
         yield ShuttleLoading();
 
         location = await repository.getLocation;

@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter/widgets.dart';
-//import 'package:flutter_map_marker_popup/flutter_map_marker_popup.dart';
-//import 'package:flutter_shuttletracker/pages/map_page/widgets/popup.dart';
+
 import 'package:latlong/latlong.dart';
 
 import '../../../blocs/theme/theme_bloc.dart';
@@ -11,6 +10,7 @@ import '../../../models/shuttle_image.dart';
 import '../../../models/shuttle_route.dart';
 import '../../../models/shuttle_stop.dart';
 import '../../../models/shuttle_update.dart';
+import '../widgets/attribution.dart';
 import '../widgets/legend.dart';
 
 class LoadedMap extends StatefulWidget {
@@ -197,7 +197,9 @@ class _LoadedMapState extends State<LoadedMap> with TickerProviderStateMixin {
                 ),
               ],
             ),
-//            Attribution(),
+            Attribution(
+              theme: theme.getTheme,
+            ),
             Legend(
               legend: _legend,
             ),

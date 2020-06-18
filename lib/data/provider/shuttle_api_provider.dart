@@ -1,16 +1,15 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:flutter_shuttletracker/data/models/fusion_model.dart';
 import 'package:geolocation/geolocation.dart';
 import 'package:http/http.dart' as http;
 import 'package:path_provider/path_provider.dart';
 import 'package:latlong/latlong.dart';
-import 'package:web_socket_channel/io.dart';
 
 import '../../models/shuttle_route.dart';
 import '../../models/shuttle_stop.dart';
 import '../../models/shuttle_update.dart';
+import '../models/fusion_model.dart';
 
 /// This class contains methods for providing data to Repository
 class ShuttleApiProvider {
@@ -75,9 +74,9 @@ class ShuttleApiProvider {
 
     List<ShuttleUpdate> updatesList = response != null
         ? json
-        .decode(response.body)
-        .map<ShuttleUpdate>((json) => ShuttleUpdate.fromJson(json))
-        .toList()
+            .decode(response.body)
+            .map<ShuttleUpdate>((json) => ShuttleUpdate.fromJson(json))
+            .toList()
         : [];
     return updatesList;
   }
@@ -116,5 +115,4 @@ class ShuttleApiProvider {
       await file.writeAsString(response.body);
     }
   }
-
 }

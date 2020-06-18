@@ -12,7 +12,7 @@ class _CustomBottomSheetState extends State<CustomBottomSheet> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 100,
+      height: MediaQuery.of(context).size.height * 0.15,
       child: Center(
           child: Column(
         children: <Widget>[

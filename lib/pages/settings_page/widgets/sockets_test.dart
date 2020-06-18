@@ -9,11 +9,12 @@ class SocketTest extends StatefulWidget {
 }
 
 class _SocketTestState extends State<SocketTest> {
-  final channel = IOWebSocketChannel.connect('wss://shuttles.rpi.edu/fusion/');
+  final IOWebSocketChannel channel =
+      IOWebSocketChannel.connect('wss://shuttles.rpi.edu/fusion/');
 
   void connectToSocket() {
     var topic = 'vehicle_location';
-    var data = {"type": "subscribe", "message": topic};
+    var data = {'type': 'subscribe', 'message': topic};
     print(jsonEncode(data));
     channel.sink.add(jsonEncode(data));
     channel.stream.listen(print);
@@ -22,7 +23,7 @@ class _SocketTestState extends State<SocketTest> {
   // bus button
   void sendToSocket() {
     var send =
-        '{"type":"bus_button","message":{"latitude":42.729216,"longitude":-73.673618,"emojiChoice":"shirls"}}';
+        '''{"type":"bus_button","message":{"latitude":42.729216,"longitude":-73.673618,"emojiChoice":"shirls"}}''';
     channel.sink.add(send);
   }
 

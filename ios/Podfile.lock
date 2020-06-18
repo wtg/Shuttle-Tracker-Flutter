@@ -8,6 +8,8 @@ PODS:
     - streams_channel
   - path_provider (0.0.1):
     - Flutter
+  - path_provider_linux (0.0.1):
+    - Flutter
   - path_provider_macos (0.0.1):
     - Flutter
   - shared_preferences (0.0.1):
@@ -40,6 +42,7 @@ DEPENDENCIES:
   - Flutter (from `Flutter`)
   - geolocation (from `.symlinks/plugins/geolocation/ios`)
   - path_provider (from `.symlinks/plugins/path_provider/ios`)
+  - path_provider_linux (from `.symlinks/plugins/path_provider_linux/ios`)
   - path_provider_macos (from `.symlinks/plugins/path_provider_macos/ios`)
   - shared_preferences (from `.symlinks/plugins/shared_preferences/ios`)
   - shared_preferences_macos (from `.symlinks/plugins/shared_preferences_macos/ios`)
@@ -65,6 +68,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/geolocation/ios"
   path_provider:
     :path: ".symlinks/plugins/path_provider/ios"
+  path_provider_linux:
+    :path: ".symlinks/plugins/path_provider_linux/ios"
   path_provider_macos:
     :path: ".symlinks/plugins/path_provider_macos/ios"
   shared_preferences:
@@ -97,19 +102,20 @@ SPEC CHECKSUMS:
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   geolocation: c194aabfd0f48cd7d6041afa8ba6542aa5714dc2
   path_provider: abfe2b5c733d04e238b0d8691db0cfd63a27a93c
+  path_provider_linux: 4d630dc393e1f20364f3e3b4a2ff41d9674a84e4
   path_provider_macos: f760a3c5b04357c380e2fddb6f9db6f3015897e0
   shared_preferences: af6bfa751691cdc24be3045c43ec037377ada40d
   shared_preferences_macos: f3f29b71ccbb56bf40c9dd6396c9acf15e214087
   shared_preferences_web: 141cce0c3ed1a1c5bf2a0e44f52d31eeb66e5ea9
   sqflite: 4001a31ff81d210346b500c55b17f4d6c7589dd0
   streams_channel: 16855ffd0568eded9563b2fec6a1bfa94420b353
-  url_launcher: a1c0cc845906122c4784c542523d8cacbded5626
+  url_launcher: 6fef411d543ceb26efce54b05a0a40bfd74cbbef
   url_launcher_macos: fd7894421cd39320dce5f292fc99ea9270b2a313
   url_launcher_web: e5527357f037c87560776e36436bf2b0288b965c
-  video_player: 69c5f029fac4ffe4fc8a85ea7f7b793709661549
+  video_player: 9cc823b1d9da7e8427ee591e8438bfbcde500e6e
   video_player_web: da8cadb8274ed4f8dbee8d7171b420dedd437ce7
   wakelock: 0d4a70faf8950410735e3f61fb15d517c8a6efc4
-  webview_flutter: bec7599de6bfbe8008a739aa3ebd7b364ea9d0cd
+  webview_flutter: d2b4d6c66968ad042ad94cbb791f5b72b4678a96
 
 PODFILE CHECKSUM: e45c292f618eeca3034958d33b444b6e1249b55f
 

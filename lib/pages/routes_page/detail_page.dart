@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
-import 'package:latlong/latlong.dart';
 
+import 'package:latlong/latlong.dart';
+import '../../blocs/stops_ontap/stops_ontap_bloc.dart';
 import '../../blocs/theme/theme_bloc.dart';
 import '../../models/shuttle_stop.dart';
 import '../map_page/states/loaded_map.dart';
@@ -14,8 +15,10 @@ class DetailPage extends StatefulWidget {
   final List<Polyline> polyline;
   final Map<int, ShuttleStop> routeStops;
   final Color routeColor;
+  final StopsOntapBloc bloc;
 
-  DetailPage({this.title, this.polyline, this.routeStops, this.routeColor});
+  DetailPage(
+      {this.title, this.polyline, this.routeStops, this.routeColor, this.bloc});
 
   @override
   _DetailPageState createState() => _DetailPageState();
@@ -62,11 +65,18 @@ class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
       shuttleStops.forEach((key, value) {
         if (selected != null) {
           _markers.add(
-            value.getMarker(animatedMapMove, (selected.name == value.name)),
+            value.getMarker(
+                animatedMapMove: animatedMapMove,
+                selected: (selected.name == value.name),
+                bloc: widget.bloc,
+                ),
           );
         } else {
           _markers.add(
-            value.getMarker(animatedMapMove),
+            value.getMarker(
+              animatedMapMove: animatedMapMove,
+              bloc: widget.bloc,
+            ),
           );
         }
       });
@@ -165,11 +175,11 @@ class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
               ),
               Flexible(
                 child: Panel(
-                  routeColor: widget.routeColor,
-                  routeStops: widget.routeStops,
-                  animate: animatedMapMove,
-                  changeMarker: _createStops,
-                ),
+                    routeColor: widget.routeColor,
+                    routeStops: widget.routeStops,
+                    animate: animatedMapMove,
+                    changeMarker: _createStops,
+                    bloc: widget.bloc),
               ),
             ],
           ),

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter/widgets.dart';
-
 import 'package:latlong/latlong.dart';
 
 import '../../../blocs/theme/theme_bloc.dart';
@@ -97,7 +96,10 @@ class _LoadedMapState extends State<LoadedMap> with TickerProviderStateMixin {
 
     for (var stop in stops) {
       if (_ids.contains(stop.id)) {
-        markers.add(stop.getMarker(animatedMapMove, false, context));
+        markers.add(stop.getMarker(
+            animatedMapMove: animatedMapMove,
+            selected: false,
+            context: context));
       }
     }
     //print("Number of stops on map: ${markers.length}");

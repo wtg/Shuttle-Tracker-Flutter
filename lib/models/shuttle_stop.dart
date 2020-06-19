@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
 
+import '../blocs/stops_ontap/stops_ontap_bloc.dart';
 import '../widgets/custom_bottom_sheet.dart';
 import 'shuttle_point.dart';
 
@@ -46,8 +48,12 @@ class ShuttleStop extends ShuttlePoint {
     );
   }
 
-  Marker getMarker(dynamic animatedMapMove,
-      [bool selected, BuildContext context, ThemeData theme]) {
+  Marker getMarker(
+      {dynamic animatedMapMove,
+      bool selected,
+      BuildContext context,
+      ThemeData theme,
+      StopsOntapBloc bloc}) {
     var selectedAsset = ColorFiltered(
       colorFilter: ColorFilter.mode(Colors.green[400], BlendMode.modulate),
       child: Image.asset(
@@ -64,7 +70,7 @@ class ShuttleStop extends ShuttlePoint {
       builder: (ctx) => GestureDetector(
         onTap: () {
           animatedMapMove(getLatLng, 15.2);
-          print('Stop $name clicked on');
+          //print('Stop $name clicked on');
           if (context != null) {
             showBottomSheet(
               shape: RoundedRectangleBorder(
@@ -78,6 +84,10 @@ class ShuttleStop extends ShuttlePoint {
                 markerName: name,
               ),
             );
+          }
+
+          if (bloc != null) {
+            bloc.add(MapStopTapped(stopName: name));
           }
         },
         child: Container(

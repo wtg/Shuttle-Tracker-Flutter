@@ -3,8 +3,10 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
 
+import '../../../blocs/stops_ontap/stops_ontap_bloc.dart';
 import '../../../models/shuttle_route.dart';
 import '../../../models/shuttle_stop.dart';
 import '../detail_page.dart';
@@ -75,60 +77,66 @@ class _CustomListTileState extends State<CustomListTile> {
       ),
     );
 
-    return ListTile(
-      leading: circle,
-      title: Align(
-        alignment: Alignment(-1.2, 0),
-        child: Text(
-          widget.route.name,
-          style: TextStyle(
-            color: widget.theme.hoverColor,
-            fontSize: 16,
-            fontWeight: FontWeight.w500,
+    var bloc = StopsOntapBloc();
+
+    return BlocProvider(
+      create: (_) => bloc,
+      child: ListTile(
+        leading: circle,
+        title: Align(
+          alignment: Alignment(-1.2, 0),
+          child: Text(
+            widget.route.name,
+            style: TextStyle(
+              color: widget.theme.hoverColor,
+              fontSize: 16,
+              fontWeight: FontWeight.w500,
+            ),
           ),
         ),
-      ),
-      trailing: Row(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: <Widget>[
-          Stack(
-            alignment: AlignmentDirectional.center,
-            children: <Widget>[
-              Container(
-                height: 20,
-                width: 20,
-                decoration: ShapeDecoration(
-                  color: Colors.white,
-                  shape: CircleBorder(),
+        trailing: Row(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: <Widget>[
+            Stack(
+              alignment: AlignmentDirectional.center,
+              children: <Widget>[
+                Container(
+                  height: 20,
+                  width: 20,
+                  decoration: ShapeDecoration(
+                    color: Colors.white,
+                    shape: CircleBorder(),
+                  ),
                 ),
-              ),
-              _getIcon(),
-            ],
-          ),
-          Icon(
-            Platform.isIOS
-                ? CupertinoIcons.right_chevron
-                : Icons.keyboard_arrow_right,
-            color: widget.theme.hoverColor,
-          ),
-        ],
+                _getIcon(),
+              ],
+            ),
+            Icon(
+              Platform.isIOS
+                  ? CupertinoIcons.right_chevron
+                  : Icons.keyboard_arrow_right,
+              color: widget.theme.hoverColor,
+            ),
+          ],
+        ),
+        onTap: () {
+          Navigator.push(
+            context,
+            CupertinoPageRoute(
+              builder: (_) {
+                return DetailPage(
+                  title: widget.route.name,
+                  polyline: polyline,
+                  routeColor: color,
+                  routeStops: _getRouteStops(),
+                  bloc: bloc,
+                );
+              },
+            ),
+          );
+        },
       ),
-      onTap: () {
-        Navigator.push(
-          context,
-          CupertinoPageRoute(
-            builder: (_) {
-              return DetailPage(
-                title: widget.route.name,
-                polyline: polyline,
-                routeColor: color,
-                routeStops: _getRouteStops(),
-              );
-            },
-          ),
-        );
-      },
     );
   }
 }

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:latlong/latlong.dart';
 
+import '../../../blocs/stops_ontap/stops_ontap_bloc.dart';
 import '../../../blocs/theme/theme_bloc.dart';
 import '../../../models/shuttle_stop.dart';
 import 'shuttle_line.dart';
@@ -12,7 +14,13 @@ class Panel extends StatefulWidget {
   final Map<int, ShuttleStop> routeStops;
   final MapCallback animate;
   final MarkerCallback changeMarker;
-  Panel({this.routeColor, this.routeStops, this.animate, this.changeMarker});
+  final StopsOntapBloc bloc;
+  Panel(
+      {this.routeColor,
+      this.routeStops,
+      this.animate,
+      this.changeMarker,
+      this.bloc});
 
   @override
   _PanelState createState() => _PanelState();

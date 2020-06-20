@@ -4,24 +4,18 @@ abstract class StopsOntapState extends Equatable {
   const StopsOntapState();
 }
 
-class StopsOntapInitial extends StopsOntapState {
+class InitialState extends StopsOntapState {
+  final String stopName = "";
   @override
-  List<Object> get props => [];
+  List<Object> get props => [stopName];
 }
 
-class StopTapped extends StopsOntapState {
-  final bool isTapped = true;
+class TappedState extends StopsOntapState {
   final String stopName;
+  final int index;
 
-  StopTapped({this.stopName});
-
-  @override
-  List<Object> get props => [isTapped];
-}
-
-class StopNotTapped extends StopsOntapState {
-  final bool isTapped = false;
+  TappedState({this.stopName, this.index});
 
   @override
-  List<Object> get props => [isTapped];
+  List<Object> get props => [stopName, index];
 }

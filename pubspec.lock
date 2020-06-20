@@ -195,13 +195,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.8.2"
-  flutter_map_marker_popup:
-    dependency: "direct main"
-    description:
-      name: flutter_map_marker_popup
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.1.4"
   flutter_native_splash:
     dependency: "direct main"
     description:
@@ -296,6 +289,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.12"
+  indexed_list_view:
+    dependency: "direct main"
+    description:
+      name: indexed_list_view
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.9"
   intl:
     dependency: transitive
     description:

@@ -22,6 +22,7 @@ class Panel extends StatefulWidget {
 
 class _PanelState extends State<Panel> {
   String selectedName;
+  ScrollController controller = ScrollController();
 
   List<Widget> _getStopTileList(ThemeData theme) {
     var tileList = <Widget>[];
@@ -94,10 +95,12 @@ class _PanelState extends State<Panel> {
             overscroll.disallowGlow();
             return null;
           },
-          child: BlocBuilder<StopsOntapBloc, String>(
+          child: BlocBuilder<StopsOntapBloc, StopsOntapState>(
               bloc: widget.bloc,
-              builder: (context, stopName) {
-                selectedName = stopName;
+              builder: (context, state) {
+                if (state is TappedState) {
+                  selectedName = state.stopName;
+                }
                 var _stopTileList = _getStopTileList(theme.getTheme);
                 return Column(
                   children: <Widget>[
@@ -109,6 +112,7 @@ class _PanelState extends State<Panel> {
                                 itemCount: _stopTileList.length,
                                 itemBuilder: (context, index) =>
                                     _stopTileList[index],
+                                controller: controller,
                               )
                             : Center(
                                 child: Text(

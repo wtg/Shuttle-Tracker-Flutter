@@ -53,7 +53,8 @@ class ShuttleStop extends ShuttlePoint {
       bool selected,
       BuildContext context,
       ThemeData theme,
-      StopsOntapBloc bloc}) {
+      StopsOntapBloc bloc,
+      int index}) {
     var selectedAsset = ColorFiltered(
       colorFilter: ColorFilter.mode(Colors.green[400], BlendMode.modulate),
       child: Image.asset(
@@ -81,7 +82,7 @@ class ShuttleStop extends ShuttlePoint {
         }
 
         if (bloc != null) {
-          bloc.add(MapStopTapped(stopName: name));
+          bloc.add(MapStopTapped(stopName: name, index: index));
         }
       },
       child: Container(
@@ -101,24 +102,28 @@ class ShuttleStop extends ShuttlePoint {
       {dynamic animatedMapMove,
       BuildContext context,
       ThemeData theme,
-      StopsOntapBloc bloc}) {
+      StopsOntapBloc bloc,
+      int index}) {
     var selected = false;
     return Marker(
         width: 44.0,
         height: 44.0,
         point: getLatLng,
         builder: (ctx) => bloc != null
-            ? BlocBuilder<StopsOntapBloc, String>(
+            ? BlocBuilder<StopsOntapBloc, StopsOntapState>(
                 bloc: bloc,
-                builder: (context, stopName) {
-                  if (stopName == name) {
-                    selected = true;
+                builder: (context, state) {
+                  if (state is TappedState) {
+                    if (state.stopName == name) {
+                      selected = true;
+                    }
                   }
                   return _getGesture(
                       animatedMapMove: animatedMapMove,
                       selected: selected,
                       theme: theme,
-                      bloc: bloc);
+                      bloc: bloc,
+                      index: index);
                 })
             : _getGesture(
                 animatedMapMove: animatedMapMove,

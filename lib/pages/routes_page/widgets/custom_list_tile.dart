@@ -26,6 +26,8 @@ class CustomListTile extends StatefulWidget {
 }
 
 class _CustomListTileState extends State<CustomListTile> {
+  StopsOntapBloc bloc = StopsOntapBloc();
+
   Icon _getIcon() {
     var icon = widget.isEnabled && widget.isActive
         ? Icon(
@@ -76,8 +78,6 @@ class _CustomListTileState extends State<CustomListTile> {
         height: 25,
       ),
     );
-
-    var bloc = StopsOntapBloc();
 
     return BlocProvider(
       create: (_) => bloc,

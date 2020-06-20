@@ -6,8 +6,9 @@ abstract class StopsOntapEvent extends Equatable {
 
 class MapStopTapped extends StopsOntapEvent {
   final String stopName;
+  final int index;
 
-  const MapStopTapped({@required this.stopName});
+  const MapStopTapped({@required this.stopName, @required this.index});
 
   @override
   List<Object> get props => [stopName];

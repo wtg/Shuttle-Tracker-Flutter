@@ -21,8 +21,8 @@ dependencies:
     sdk: flutter
 
   flutter_cupertino_settings: ^0.3.0
+  indexed_list_view: ^1.0.9
   hydrated_bloc: ^4.0.0
-  flutter_map_marker_popup: ^0.1.4
   sliding_up_panel: ^1.0.2
   shared_preferences: ^0.5.7
   flutter_native_splash: ^0.1.9

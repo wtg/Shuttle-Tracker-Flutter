@@ -60,13 +60,13 @@ class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
   }
 
   void _createStops(Map<int, ShuttleStop> shuttleStops) {
+    var index = 0;
     shuttleStops.forEach((key, value) {
       _markers.add(
         value.getMarker(
-          animatedMapMove: animatedMapMove,
-          bloc: widget.bloc,
-        ),
+            animatedMapMove: animatedMapMove, bloc: widget.bloc, index: index),
       );
+      index++;
     });
 
 //    return markers;
@@ -129,9 +129,9 @@ class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
             ios: (_) => CupertinoNavigationBarData(
                 actionsForegroundColor: Colors.white),
           ),
-          body: BlocBuilder<StopsOntapBloc, String>(
+          body: BlocBuilder<StopsOntapBloc, StopsOntapState>(
               bloc: widget.bloc,
-              builder: (context, stopName) {
+              builder: (context, state) {
                 _createStops(widget.routeStops);
                 return Column(
                   children: <Widget>[

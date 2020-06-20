@@ -11,6 +11,9 @@ class StopsOntapInitial extends StopsOntapState {
 
 class StopTapped extends StopsOntapState {
   final bool isTapped = true;
+  final String stopName;
+
+  StopTapped({this.stopName});
 
   @override
   List<Object> get props => [isTapped];

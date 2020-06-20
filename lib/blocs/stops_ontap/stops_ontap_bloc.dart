@@ -7,19 +7,18 @@ import 'package:meta/meta.dart';
 part 'stops_ontap_event.dart';
 part 'stops_ontap_state.dart';
 
-class StopsOntapBloc extends Bloc<StopsOntapEvent, StopsOntapState> {
+class StopsOntapBloc extends Bloc<StopsOntapEvent, String> {
   @override
-  StopsOntapState get initialState => StopsOntapInitial();
+  String get initialState => "";
 
   @override
-  Stream<StopsOntapState> mapEventToState(
+  Stream<String> mapEventToState(
     StopsOntapEvent event,
   ) async* {
     if (event is MapStopTapped) {
-      print('Stop: ${event.stopName} was tapped');
-      yield StopTapped();
+      yield event.stopName;
     } else if (event is TileStopTapped) {
-      yield StopTapped();
+      yield event.stopName;
     }
   }
 }

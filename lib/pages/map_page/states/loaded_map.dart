@@ -96,10 +96,8 @@ class _LoadedMapState extends State<LoadedMap> with TickerProviderStateMixin {
 
     for (var stop in stops) {
       if (_ids.contains(stop.id)) {
-        markers.add(stop.getMarker(
-            animatedMapMove: animatedMapMove,
-            selected: false,
-            context: context));
+        markers.add(
+            stop.getMarker(animatedMapMove: animatedMapMove, context: context));
       }
     }
     //print("Number of stops on map: ${markers.length}");

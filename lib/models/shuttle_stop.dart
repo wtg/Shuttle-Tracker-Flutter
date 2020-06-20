@@ -48,7 +48,7 @@ class ShuttleStop extends ShuttlePoint {
     );
   }
 
-  Marker getMarker(
+  Widget _getGesture(
       {dynamic animatedMapMove,
       bool selected,
       BuildContext context,
@@ -62,45 +62,69 @@ class ShuttleStop extends ShuttlePoint {
         height: 20,
       ),
     );
-    selected ??= false;
-    return Marker(
-      width: 44.0,
-      height: 44.0,
-      point: getLatLng,
-      builder: (ctx) => GestureDetector(
-        onTap: () {
-          animatedMapMove(getLatLng, 15.2);
-          //print('Stop $name clicked on');
-          if (context != null) {
-            showBottomSheet(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(25.0),
-                  topRight: Radius.circular(25.0),
-                ),
+    return GestureDetector(
+      onTap: () {
+        animatedMapMove(getLatLng, 15.2);
+        if (context != null) {
+          showBottomSheet(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(25.0),
+                topRight: Radius.circular(25.0),
               ),
-              context: context,
-              builder: (_) => CustomBottomSheet(
-                markerName: name,
-              ),
-            );
-          }
+            ),
+            context: context,
+            builder: (_) => CustomBottomSheet(
+              markerName: name,
+            ),
+          );
+        }
 
-          if (bloc != null) {
-            bloc.add(MapStopTapped(stopName: name));
-          }
-        },
-        child: Container(
-          decoration: BoxDecoration(
-              border: Border.all(width: 15, style: BorderStyle.none),
-              shape: BoxShape.circle),
-          child: selected
-              ? selectedAsset
-              : Image.asset(
-                  'assets/img/stop.png',
-                ),
-        ),
+        if (bloc != null) {
+          bloc.add(MapStopTapped(stopName: name));
+        }
+      },
+      child: Container(
+        decoration: BoxDecoration(
+            border: Border.all(width: 15, style: BorderStyle.none),
+            shape: BoxShape.circle),
+        child: selected
+            ? selectedAsset
+            : Image.asset(
+                'assets/img/stop.png',
+              ),
       ),
     );
+  }
+
+  Marker getMarker(
+      {dynamic animatedMapMove,
+      BuildContext context,
+      ThemeData theme,
+      StopsOntapBloc bloc}) {
+    var selected = false;
+    return Marker(
+        width: 44.0,
+        height: 44.0,
+        point: getLatLng,
+        builder: (ctx) => bloc != null
+            ? BlocBuilder<StopsOntapBloc, String>(
+                bloc: bloc,
+                builder: (context, stopName) {
+                  if (stopName == name) {
+                    selected = true;
+                  }
+                  return _getGesture(
+                      animatedMapMove: animatedMapMove,
+                      selected: selected,
+                      theme: theme,
+                      bloc: bloc);
+                })
+            : _getGesture(
+                animatedMapMove: animatedMapMove,
+                context: context,
+                selected: selected,
+                theme: theme,
+              ));
   }
 }

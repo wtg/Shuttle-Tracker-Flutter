@@ -59,28 +59,16 @@ class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
     controller.forward();
   }
 
-  void _createStops(Map<int, ShuttleStop> shuttleStops,
-      [ShuttleStop selected]) {
-    setState(() {
-      shuttleStops.forEach((key, value) {
-        if (selected != null) {
-          _markers.add(
-            value.getMarker(
-                animatedMapMove: animatedMapMove,
-                selected: (selected.name == value.name),
-                bloc: widget.bloc,
-                ),
-          );
-        } else {
-          _markers.add(
-            value.getMarker(
-              animatedMapMove: animatedMapMove,
-              bloc: widget.bloc,
-            ),
-          );
-        }
-      });
+  void _createStops(Map<int, ShuttleStop> shuttleStops) {
+    shuttleStops.forEach((key, value) {
+      _markers.add(
+        value.getMarker(
+          animatedMapMove: animatedMapMove,
+          bloc: widget.bloc,
+        ),
+      );
     });
+
 //    return markers;
   }
 
@@ -141,48 +129,53 @@ class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
             ios: (_) => CupertinoNavigationBarData(
                 actionsForegroundColor: Colors.white),
           ),
-          body: Column(
-            children: <Widget>[
-              Flexible(
-                child: FlutterMap(
-                  mapController: mapController,
-                  options: MapOptions(
-                    nePanBoundary: LatLng(42.78, -73.63),
-                    swPanBoundary: LatLng(42.68, -73.71),
-                    center: mapCenter,
-                    zoom: 13.9,
-                    maxZoom: 16, // max you can zoom in
-                    minZoom: 13, // min you can zoom out
-                  ),
-                  layers: [
-                    TileLayerOptions(
-                      backgroundColor: theme.getTheme.bottomAppBarColor,
-                      urlTemplate:
-                          isDarkMode ? LoadedMap.darkLink : LoadedMap.lightLink,
-                      subdomains: ['a', 'b', 'c'],
-                      tileProvider: CachedNetworkTileProvider(),
+          body: BlocBuilder<StopsOntapBloc, String>(
+              bloc: widget.bloc,
+              builder: (context, stopName) {
+                _createStops(widget.routeStops);
+                return Column(
+                  children: <Widget>[
+                    Flexible(
+                      child: FlutterMap(
+                        mapController: mapController,
+                        options: MapOptions(
+                          nePanBoundary: LatLng(42.78, -73.63),
+                          swPanBoundary: LatLng(42.68, -73.71),
+                          center: mapCenter,
+                          zoom: 13.9,
+                          maxZoom: 16, // max you can zoom in
+                          minZoom: 13, // min you can zoom out
+                        ),
+                        layers: [
+                          TileLayerOptions(
+                            backgroundColor: theme.getTheme.bottomAppBarColor,
+                            urlTemplate: isDarkMode
+                                ? LoadedMap.darkLink
+                                : LoadedMap.lightLink,
+                            subdomains: ['a', 'b', 'c'],
+                            tileProvider: CachedNetworkTileProvider(),
+                          ),
+                          PolylineLayerOptions(polylines: widget.polyline),
+                          MarkerLayerOptions(
+                            markers: _markers,
+                          ),
+                        ],
+                      ),
                     ),
-                    PolylineLayerOptions(polylines: widget.polyline),
-                    MarkerLayerOptions(
-                      markers: _markers,
+                    Divider(
+                      color: widget.routeColor,
+                      thickness: 4,
+                    ),
+                    Flexible(
+                      child: Panel(
+                          routeColor: widget.routeColor,
+                          routeStops: widget.routeStops,
+                          animate: animatedMapMove,
+                          bloc: widget.bloc),
                     ),
                   ],
-                ),
-              ),
-              Divider(
-                color: widget.routeColor,
-                thickness: 4,
-              ),
-              Flexible(
-                child: Panel(
-                    routeColor: widget.routeColor,
-                    routeStops: widget.routeStops,
-                    animate: animatedMapMove,
-                    changeMarker: _createStops,
-                    bloc: widget.bloc),
-              ),
-            ],
-          ),
+                );
+              }),
         ),
       );
     });

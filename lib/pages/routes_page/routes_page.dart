@@ -36,30 +36,28 @@ class _RoutesPageState extends State<RoutesPage> {
               ),
             ),
           ),
-          body: Material(
-            child: Center(child: BlocBuilder<ShuttleBloc, ShuttleState>(
-                builder: (context, state) {
-              shuttleBloc = BlocProvider.of<ShuttleBloc>(context);
-              if (state is ShuttleInitial || state is ShuttleError) {
-                // TODO: MODIFY BLOC ERROR FOR ROUTE EVENT
-                shuttleBloc.add(ShuttleEvent.getRoutesPageData);
-              } else if (state is ShuttleLoaded) {
-                return RefreshIndicator(
-                  backgroundColor: theme.getTheme.appBarTheme.color,
-                  onRefresh: () {
-                    shuttleBloc.add(ShuttleEvent.getRoutesPageData);
-                    return _refreshCompleter.future;
-                  },
-                  child: LoadedState(
-                    routes: state.routes,
-                    stops: state.stops,
-                    theme: theme.getTheme,
-                  ),
-                );
-              }
-              return LoadingState(theme: theme.getTheme);
-            })),
-          ));
+          body: Center(child:
+              BlocBuilder<ShuttleBloc, ShuttleState>(builder: (context, state) {
+            shuttleBloc = BlocProvider.of<ShuttleBloc>(context);
+            if (state is ShuttleInitial || state is ShuttleError) {
+              // TODO: MODIFY BLOC ERROR FOR ROUTE EVENT
+              shuttleBloc.add(ShuttleEvent.getRoutesPageData);
+            } else if (state is ShuttleLoaded) {
+              return RefreshIndicator(
+                backgroundColor: theme.getTheme.appBarTheme.color,
+                onRefresh: () {
+                  shuttleBloc.add(ShuttleEvent.getRoutesPageData);
+                  return _refreshCompleter.future;
+                },
+                child: LoadedState(
+                  routes: state.routes,
+                  stops: state.stops,
+                  theme: theme.getTheme,
+                ),
+              );
+            }
+            return LoadingState(theme: theme.getTheme);
+          })));
     });
   }
 }

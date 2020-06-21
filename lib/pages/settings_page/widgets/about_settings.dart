@@ -119,7 +119,7 @@ class _AboutSettingsState extends State<AboutSettings> {
 //          });
 //          if (devSettings >= 10) {
 //            Navigator.push(
-//                context, MaterialPageRoute(builder: (context) => SocketTest()));
+//              context, MaterialPageRoute(builder: (context) => SocketTest()));
 //          }
         },
       ),

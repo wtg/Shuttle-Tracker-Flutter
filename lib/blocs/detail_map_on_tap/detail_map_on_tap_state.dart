@@ -5,7 +5,7 @@ abstract class DetailMapOnTapState extends Equatable {
 }
 
 class InitialState extends DetailMapOnTapState {
-  final String stopName = "";
+  final String stopName = '';
   @override
   List<Object> get props => [stopName];
 }

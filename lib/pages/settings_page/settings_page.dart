@@ -26,18 +26,16 @@ class _SettingsPageState extends State<SettingsPage> {
             ),
           ),
         ),
-        body: Material(
-          child: Center(
-            child: NotificationListener<OverscrollIndicatorNotification>(
-              onNotification: (overscroll) {
-                overscroll.disallowGlow();
-                return null;
-              },
-              child: AndroidSettings(theme: theme),
+        body: Center(
+          child: NotificationListener<OverscrollIndicatorNotification>(
+            onNotification: (overscroll) {
+              overscroll.disallowGlow();
+              return null;
+            },
+            child: AndroidSettings(theme: theme),
 //              child: Platform.isIOS
 //                  ? IOSSettings(theme: theme)
 //                  : AndroidSettings(theme: theme),
-            ),
           ),
         ),
       );

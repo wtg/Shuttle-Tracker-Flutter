@@ -4,16 +4,17 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
-part 'stops_ontap_event.dart';
-part 'stops_ontap_state.dart';
+part 'detail_map_on_tap_event.dart';
+part 'detail_map_on_tap_state.dart';
 
-class StopsOntapBloc extends Bloc<StopsOntapEvent, StopsOntapState> {
+class DetailMapOnTapBloc
+    extends Bloc<DetailMapOnTapEvent, DetailMapOnTapState> {
   @override
-  StopsOntapState get initialState => InitialState();
+  DetailMapOnTapState get initialState => InitialState();
 
   @override
-  Stream<StopsOntapState> mapEventToState(
-    StopsOntapEvent event,
+  Stream<DetailMapOnTapState> mapEventToState(
+    DetailMapOnTapEvent event,
   ) async* {
     if (event is MapStopTapped) {
       yield TappedState(stopName: event.stopName, index: event.index);

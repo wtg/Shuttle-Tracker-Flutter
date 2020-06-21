@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import 'package:latlong/latlong.dart';
 
-import '../../../blocs/stops_ontap/stops_ontap_bloc.dart';
+import '../../../blocs/detail_map_on_tap/detail_map_on_tap_bloc.dart';
 import '../../../blocs/theme/theme_bloc.dart';
 import '../../../models/shuttle_stop.dart';
 import 'shuttle_line.dart';
@@ -13,7 +13,7 @@ class Panel extends StatefulWidget {
   final Color routeColor;
   final Map<int, ShuttleStop> routeStops;
   final MapCallback animate;
-  final StopsOntapBloc bloc;
+  final DetailMapOnTapBloc bloc;
   Panel({this.routeColor, this.routeStops, this.animate, this.bloc});
 
   @override
@@ -95,7 +95,7 @@ class _PanelState extends State<Panel> {
             overscroll.disallowGlow();
             return null;
           },
-          child: BlocBuilder<StopsOntapBloc, StopsOntapState>(
+          child: BlocBuilder<DetailMapOnTapBloc, DetailMapOnTapState>(
               bloc: widget.bloc,
               builder: (context, state) {
                 if (state is TappedState) {

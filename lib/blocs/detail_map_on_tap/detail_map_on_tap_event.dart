@@ -1,10 +1,10 @@
-part of 'stops_ontap_bloc.dart';
+part of 'detail_map_on_tap_bloc.dart';
 
-abstract class StopsOntapEvent extends Equatable {
-  const StopsOntapEvent();
+abstract class DetailMapOnTapEvent extends Equatable {
+  const DetailMapOnTapEvent();
 }
 
-class MapStopTapped extends StopsOntapEvent {
+class MapStopTapped extends DetailMapOnTapEvent {
   final String stopName;
   final int index;
 
@@ -14,7 +14,7 @@ class MapStopTapped extends StopsOntapEvent {
   List<Object> get props => [stopName];
 }
 
-class TileStopTapped extends StopsOntapEvent {
+class TileStopTapped extends DetailMapOnTapEvent {
   final String stopName;
 
   const TileStopTapped({@required this.stopName});

@@ -72,12 +72,6 @@ class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
 //    return markers;
   }
 
-  @override
-  void initState() {
-    super.initState();
-    _createStops(widget.routeStops);
-  }
-
   LatLng findAvgLatLong(Map<int, ShuttleStop> shuttleStops) {
     var lat = 42.729;
     var long = -73.6758;

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
+import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import 'package:latlong/latlong.dart';
 
 import '../../../blocs/stops_ontap/stops_ontap_bloc.dart';
@@ -22,7 +22,7 @@ class Panel extends StatefulWidget {
 
 class _PanelState extends State<Panel> {
   String selectedName;
-  ScrollController controller = ScrollController();
+  ItemScrollController scrollController = ItemScrollController();
 
   List<Widget> _getStopTileList(ThemeData theme) {
     var tileList = <Widget>[];
@@ -100,6 +100,11 @@ class _PanelState extends State<Panel> {
               builder: (context, state) {
                 if (state is TappedState) {
                   selectedName = state.stopName;
+                  if (state.index != null && scrollController.isAttached) {
+                    scrollController.scrollTo(
+                        index: state.index,
+                        duration: Duration(milliseconds: 250));
+                  }
                 }
                 var _stopTileList = _getStopTileList(theme.getTheme);
                 return Column(
@@ -108,11 +113,11 @@ class _PanelState extends State<Panel> {
                       child: Container(
                         color: theme.getTheme.backgroundColor,
                         child: _stopTileList.isNotEmpty
-                            ? ListView.builder(
+                            ? ScrollablePositionedList.builder(
+                                itemScrollController: scrollController,
                                 itemCount: _stopTileList.length,
                                 itemBuilder: (context, index) =>
                                     _stopTileList[index],
-                                controller: controller,
                               )
                             : Center(
                                 child: Text(

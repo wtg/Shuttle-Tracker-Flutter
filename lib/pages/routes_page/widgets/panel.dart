@@ -107,27 +107,23 @@ class _PanelState extends State<Panel> {
                   }
                 }
                 var _stopTileList = _getStopTileList(theme.getTheme);
-                return Column(
-                  children: <Widget>[
-                    Expanded(
-                      child: Container(
-                        color: theme.getTheme.backgroundColor,
-                        child: _stopTileList.isNotEmpty
-                            ? ScrollablePositionedList.builder(
-                                physics: ClampingScrollPhysics(),
-                                itemScrollController: scrollController,
-                                itemCount: _stopTileList.length,
-                                itemBuilder: (context, index) =>
-                                    _stopTileList[index],
-                              )
-                            : Center(
-                                child: Text(
-                                  'No stops to show',
-                                ),
-                              ),
-                      ),
-                    ),
-                  ],
+                return Container(
+                  color: theme.getTheme.backgroundColor,
+                  child: _stopTileList.isNotEmpty
+                      ? Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 8.0),
+                        child: ScrollablePositionedList.builder(
+                            physics: ClampingScrollPhysics(),
+                            itemScrollController: scrollController,
+                            itemCount: _stopTileList.length,
+                            itemBuilder: (context, index) => _stopTileList[index],
+                          ),
+                      )
+                      : Center(
+                          child: Text(
+                            'No stops to show',
+                          ),
+                        ),
                 );
               }),
         ),

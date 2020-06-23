@@ -114,6 +114,7 @@ class _PanelState extends State<Panel> {
                         color: theme.getTheme.backgroundColor,
                         child: _stopTileList.isNotEmpty
                             ? ScrollablePositionedList.builder(
+                                physics: ClampingScrollPhysics(),
                                 itemScrollController: scrollController,
                                 itemCount: _stopTileList.length,
                                 itemBuilder: (context, index) =>

@@ -21,10 +21,8 @@ dependencies:
     sdk: flutter
 
   flutter_cupertino_settings: ^0.3.0
-  google_fonts: ^1.1.0
-  settings_ui: ^0.2.0
+  scrollable_positioned_list: ^0.1.6
   hydrated_bloc: ^4.0.0
-  flutter_map_marker_popup: ^0.1.4
   sliding_up_panel: ^1.0.2
   shared_preferences: ^0.5.7
   flutter_native_splash: ^0.1.9
@@ -91,35 +89,3 @@ flutter:
     - family: CustomIcons
       fonts:
           - asset: assets/fonts/shuttle_icon.ttf
-
-  
-
-
-
-
-
-  # An image asset can refer to one or more resolution-specific "variants", see
-  # https://flutter.dev/assets-and-images/#resolution-aware.
-
-  # For details regarding adding assets from package dependencies, see
-  # https://flutter.dev/assets-and-images/#from-packages
-
-  # To add custom fonts to your application, add a fonts section here,
-  # in this "flutter" section. Each entry in this list should have a
-  # "family" key with the font family name, and a "fonts" key with a
-  # list giving the asset and other descriptors for the font. For
-  # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
-  #       - asset: fonts/Schyler-Italic.ttf
-  #         style: italic
-  #   - family: Trajan Pro
-  #     fonts:
-  #       - asset: fonts/TrajanPro.ttf
-  #       - asset: fonts/TrajanPro_Bold.ttf
-  #         weight: 700
-  #
-  # For details regarding fonts from package dependencies,
-  # see https://flutter.dev/custom-fonts/#from-packages

@@ -105,21 +105,10 @@ class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, theme) {
       var isDarkMode = theme.getTheme.bottomAppBarColor == Colors.black;
-
       var mapCenter = findAvgLatLong(widget.routeStops);
       return Material(
         child: PlatformScaffold(
           appBar: PlatformAppBar(
-            leading: Material(
-              child: Container(
-                color: theme.getTheme.appBarTheme.color,
-                child: IconButton(
-                  icon: Icon(Icons.arrow_back),
-                  color: theme.getTheme.hoverColor,
-                  onPressed: () => Navigator.pop(context, false),
-                ),
-              ),
-            ),
             title: Text(
               widget.title,
               style: TextStyle(
@@ -129,7 +118,7 @@ class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
             ),
             backgroundColor: theme.getTheme.appBarTheme.color,
             ios: (_) => CupertinoNavigationBarData(
-                actionsForegroundColor: Colors.white),
+                actionsForegroundColor: theme.getTheme.hoverColor),
           ),
           body: Column(
             children: <Widget>[

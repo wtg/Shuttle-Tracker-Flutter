@@ -44,16 +44,16 @@ class _PrivacyPolicyPageState extends State<PrivacyPolicyPage> {
 
     return PlatformScaffold(
       appBar: PlatformAppBar(
-        leading: Material(
-          child: Container(
-            color: widget.theme.getTheme.appBarTheme.color,
-            child: IconButton(
-              icon: Icon(Icons.arrow_back),
-              color: widget.theme.getTheme.hoverColor,
-              onPressed: () => Navigator.pop(context, false),
-            ),
-          ),
-        ),
+//        leading: Material(
+//          child: Container(
+//            color: widget.theme.getTheme.appBarTheme.color,
+//            child: IconButton(
+//              icon: Icon(Icons.arrow_back),
+//              color: widget.theme.getTheme.hoverColor,
+//              onPressed: () => Navigator.pop(context, false),
+//            ),
+//          ),
+//        ),
         title: Text(
           'Privacy Policy',
           style: TextStyle(
@@ -63,6 +63,8 @@ class _PrivacyPolicyPageState extends State<PrivacyPolicyPage> {
           ),
         ),
         backgroundColor: widget.theme.getTheme.appBarTheme.color,
+        ios: (_) => CupertinoNavigationBarData(
+            actionsForegroundColor: widget.theme.getTheme.hoverColor),
       ),
       body: Container(
         padding: const EdgeInsets.all(8.0),

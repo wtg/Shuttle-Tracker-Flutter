@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
@@ -250,24 +251,22 @@ class _FaqPageState extends State<FaqPage> {
         ),
         backgroundColor: widget.theme.getTheme.appBarTheme.color,
       ),
-//        body: ListView.builder(
-//            itemCount: faqList.length,
-//            itemBuilder: (context, index) => faqList[index])
-
-      body: ListView.separated(
-//        physics: const NeverScrollableScrollPhysics(),
-        shrinkWrap: true,
-        itemCount: faqList.length,
-        itemBuilder: (context, index) => Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: faqList[index],
+      body: Container(
+        color: widget.theme.getTheme.backgroundColor,
+        child: ListView.separated(
+          shrinkWrap: true,
+          itemCount: faqList.length,
+          itemBuilder: (context, index) => Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: faqList[index],
+          ),
+          separatorBuilder: (context, index) {
+            return Divider(
+              color: Colors.grey[700],
+              height: 4,
+            );
+          },
         ),
-        separatorBuilder: (context, index) {
-          return Divider(
-            color: Colors.grey[700],
-            height: 4,
-          );
-        },
       ),
     );
   }

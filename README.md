@@ -12,7 +12,7 @@ Flutter ShuttleTracker is a cross-platform port of <a href="https://github.com/w
 ## Showcase
 
 <p float="center">
-  <img src="https://github.com/wtg/Flutter_ShuttleTracker/blob/master/assets/img/merged.png" />
+  <img src="https://github.com/wtg/Flutter_ShuttleTracker/blob/master/assets/img/merged_updated.png" />
 
 </p>
 
@@ -27,7 +27,7 @@ Flutter ShuttleTracker is a cross-platform port of <a href="https://github.com/w
 
 - Automatic route toggling
 
-- Clicking on a shuttle stop will zoom to its coordinates
+- Routes page detailing each route and their stops
 
 - Splash screen that displays ShuttleTracker logo
 
@@ -39,23 +39,6 @@ Flutter ShuttleTracker is a cross-platform port of <a href="https://github.com/w
 4. Retrieve all the required dependencies with ```flutter pub get```
 5. Make sure you are in the stable channel by running ```flutter channel stable```
 6. Run the app with ```flutter run```
-
-## Dependencies
-
-  - [flutter_bloc](https://pub.dev/packages/flutter_bloc)
-  - [flutter_native_splash](https://pub.dev/packages/flutter_native_splash)
-  - [flutter_map](https://pub.dev/packages/flutter_map)
-  - [hydrated_bloc](https://pub.dev/packages/hydrated_bloc)
-  - [geolocation](https://pub.dev/packages/geolocation)
-  - [cupertino_icons](https://pub.dev/packages/cupertino_icons)
-  - [responsive_framework](https://pub.dev/packages/responsive_framework)
-  - [loading](https://pub.dev/packages/loading)
-  - [flutter_widget_from_html](https://pub.dev/packages/flutter_widget_from_html)
-  - [observable](https://pub.dev/packages/observable)
-  - [flutter_svg](https://pub.dev/packages/flutter_svg)
-  - [equatable](https://pub.dev/packages/equatable)
-  - [flutter_platform_widgets](https://pub.dev/packages/flutter_platform_widgets)
-  - [http](https://pub.dev/packages/http)
 
 ## Contributing
 

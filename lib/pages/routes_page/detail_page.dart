@@ -156,10 +156,11 @@ class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
                   ),
                   Flexible(
                     child: Panel(
-                        routeColor: widget.routeColor,
-                        routeStops: widget.routeStops,
-                        animate: animatedMapMove,
-                        bloc: widget.bloc),
+                      routeColor: widget.routeColor,
+                      routeStops: widget.routeStops,
+                      animate: animatedMapMove,
+                      bloc: widget.bloc,
+                    ),
                   ),
                 ],
               );

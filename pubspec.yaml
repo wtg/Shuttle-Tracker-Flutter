@@ -20,6 +20,7 @@ dependencies:
   flutter:
     sdk: flutter
 
+  flushbar: ^1.10.4
   flutter_cupertino_settings: ^0.3.0
   scrollable_positioned_list: ^0.1.6
   hydrated_bloc: ^4.0.0
@@ -73,6 +74,7 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
+    - assets/img/student_union.jpg
     - assets/img/logo.png
     - assets/img/circle.png
     - assets/img/stop.png

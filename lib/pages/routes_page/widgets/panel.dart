@@ -111,14 +111,15 @@ class _PanelState extends State<Panel> {
                   color: theme.getTheme.backgroundColor,
                   child: _stopTileList.isNotEmpty
                       ? Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 8.0),
-                        child: ScrollablePositionedList.builder(
+                          padding: const EdgeInsets.symmetric(vertical: 8.0),
+                          child: ScrollablePositionedList.builder(
                             physics: ClampingScrollPhysics(),
                             itemScrollController: scrollController,
                             itemCount: _stopTileList.length,
-                            itemBuilder: (context, index) => _stopTileList[index],
+                            itemBuilder: (context, index) =>
+                                _stopTileList[index],
                           ),
-                      )
+                        )
                       : Center(
                           child: Text(
                             'No stops to show',

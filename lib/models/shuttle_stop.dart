@@ -1,9 +1,9 @@
+import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
 
 import '../blocs/detail_map_on_tap/detail_map_on_tap_bloc.dart';
-import '../widgets/custom_bottom_sheet.dart';
 import 'shuttle_point.dart';
 
 class ShuttleStop extends ShuttlePoint {
@@ -67,18 +67,16 @@ class ShuttleStop extends ShuttlePoint {
       onTap: () {
         animatedMapMove(getLatLng, 15.2);
         if (context != null) {
-          showBottomSheet(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(25.0),
-                topRight: Radius.circular(25.0),
-              ),
-            ),
-            context: context,
-            builder: (_) => CustomBottomSheet(
-              markerName: name,
-            ),
-          );
+          Flushbar(
+            margin: EdgeInsets.only(top: 10),
+            maxWidth: MediaQuery.of(context).size.width * 0.95,
+            flushbarStyle: FlushbarStyle.FLOATING,
+            borderRadius: 8,
+            flushbarPosition: FlushbarPosition.TOP,
+            message: name,
+            duration: Duration(seconds: 3),
+            //animationDuration: Duration(milliseconds: 100),
+          )..show(context);
         }
 
         if (bloc != null) {
@@ -99,37 +97,31 @@ class ShuttleStop extends ShuttlePoint {
   }
 
   Marker getMarker(
-      {dynamic animatedMapMove,
+      {@required dynamic animatedMapMove,
       BuildContext context,
       ThemeData theme,
-      DetailMapOnTapBloc bloc,
+      @required DetailMapOnTapBloc bloc,
       int index}) {
     var selected = false;
     return Marker(
         width: 44.0,
         height: 44.0,
         point: getLatLng,
-        builder: (ctx) => bloc != null
-            ? BlocBuilder<DetailMapOnTapBloc, DetailMapOnTapState>(
-                bloc: bloc,
-                builder: (context, state) {
-                  if (state is TappedState) {
-                    if (state.stopName == name) {
-                      selected = true;
-                    }
-                  }
-                  return _getGesture(
-                      animatedMapMove: animatedMapMove,
-                      selected: selected,
-                      theme: theme,
-                      bloc: bloc,
-                      index: index);
-                })
-            : _getGesture(
-                animatedMapMove: animatedMapMove,
-                context: context,
-                selected: selected,
-                theme: theme,
-              ));
+        builder: (ctx) => BlocBuilder<DetailMapOnTapBloc, DetailMapOnTapState>(
+            bloc: bloc,
+            builder: (_, state) {
+              if (state is TappedState) {
+                if (state.stopName == name) {
+                  selected = true;
+                }
+              }
+              return _getGesture(
+                  animatedMapMove: animatedMapMove,
+                  selected: selected,
+                  context: context,
+                  theme: theme,
+                  bloc: bloc,
+                  index: index);
+            }));
   }
 }

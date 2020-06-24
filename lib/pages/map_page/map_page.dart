@@ -49,6 +49,7 @@ class _MapPageState extends State<MapPage> {
               i++;
               print('API poll $i\n\n');
               shuttleBloc.add(ShuttleEvent.getMapPageData);
+
               return LoadedMap(
                 routes: state.routes,
                 location: state.location,

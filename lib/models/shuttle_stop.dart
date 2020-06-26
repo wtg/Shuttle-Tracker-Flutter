@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
 
-import '../blocs/detail_map_on_tap/detail_map_on_tap_bloc.dart';
+import '../blocs/on_tap/on_tap_bloc.dart';
 import 'shuttle_point.dart';
 
 class ShuttleStop extends ShuttlePoint {
@@ -53,7 +53,7 @@ class ShuttleStop extends ShuttlePoint {
       bool selected,
       BuildContext context,
       ThemeData theme,
-      DetailMapOnTapBloc bloc,
+      OnTapBloc bloc,
       int index}) {
     var selectedAsset = ColorFiltered(
       colorFilter: ColorFilter.mode(Colors.green[400], BlendMode.modulate),
@@ -101,14 +101,14 @@ class ShuttleStop extends ShuttlePoint {
       {@required dynamic animatedMapMove,
       BuildContext context,
       ThemeData theme,
-      @required DetailMapOnTapBloc bloc,
+      @required OnTapBloc bloc,
       int index}) {
     var selected = false;
     return Marker(
         width: 44.0,
         height: 44.0,
         point: getLatLng,
-        builder: (ctx) => BlocBuilder<DetailMapOnTapBloc, DetailMapOnTapState>(
+        builder: (ctx) => BlocBuilder<OnTapBloc, OnTapState>(
             bloc: bloc,
             builder: (_, state) {
               if (state is TappedState) {

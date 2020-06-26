@@ -6,7 +6,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
 
-import '../../../blocs/detail_map_on_tap/detail_map_on_tap_bloc.dart';
+import '../../../blocs/on_tap/on_tap_bloc.dart';
 import '../../../models/shuttle_route.dart';
 import '../../../models/shuttle_stop.dart';
 import '../detail_page.dart';
@@ -27,7 +27,7 @@ class CustomListTile extends StatefulWidget {
 }
 
 class _CustomListTileState extends State<CustomListTile> {
-  DetailMapOnTapBloc bloc = DetailMapOnTapBloc();
+  OnTapBloc bloc = OnTapBloc();
 
   Icon _getIcon() {
     var icon = widget.isEnabled && widget.isActive

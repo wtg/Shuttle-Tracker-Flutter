@@ -137,26 +137,11 @@ class _CustomListTileState extends State<CustomListTile> {
             ),
           );
         },
+        onLongPress: () {
+          widget.isFavorite ? widget.route.favorite = false :
+          widget.route.favorite = true;
+        },
       ),
-      onTap: () {
-        Navigator.push(
-          context,
-          CupertinoPageRoute(
-            builder: (_) {
-              return DetailPage(
-                title: widget.route.name,
-                polyline: polyline,
-                routeColor: color,
-                routeStops: _getRouteStops(),
-              );
-            },
-          ),
-        );
-      },
-      onLongPress: () {
-        widget.isFavorite ? widget.route.favorite = false :
-        widget.route.favorite = true;
-      },
     );
   }
 }

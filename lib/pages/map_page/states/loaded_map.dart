@@ -162,7 +162,6 @@ class _LoadedMapState extends State<LoadedMap> with TickerProviderStateMixin {
       body: BlocBuilder<ThemeBloc, ThemeState>(
         builder: (context, theme) {
           var isDarkMode = theme.getThemeState;
-
           return BlocBuilder<DetailMapOnTapBloc, DetailMapOnTapState>(
             builder: (context, state) {
               var routes = _createRoutes(widget.routes, _ids, _legend, _colors);

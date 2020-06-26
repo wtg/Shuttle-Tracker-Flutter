@@ -68,12 +68,13 @@ class ShuttleStop extends ShuttlePoint {
         animatedMapMove(getLatLng, 15.2);
         if (context != null) {
           Flushbar(
-            margin: EdgeInsets.only(top: 10),
+            margin: EdgeInsets.only(top: 60),
             maxWidth: MediaQuery.of(context).size.width * 0.95,
             flushbarStyle: FlushbarStyle.FLOATING,
             borderRadius: 8,
             flushbarPosition: FlushbarPosition.TOP,
             message: name,
+            isDismissible: true,
             duration: Duration(seconds: 3),
             //animationDuration: Duration(milliseconds: 100),
           )..show(context);

@@ -18,6 +18,7 @@ class CustomListTile extends StatefulWidget {
 
   bool get isEnabled => route.enabled;
   bool get isActive => route.active;
+  bool get isFavorite => route.favorite;
 
   @override
   _CustomListTileState createState() => _CustomListTileState();
@@ -128,6 +129,10 @@ class _CustomListTileState extends State<CustomListTile> {
             },
           ),
         );
+      },
+      onLongPress: () {
+        widget.isFavorite ? widget.route.favorite = false :
+        widget.route.favorite = true;
       },
     );
   }

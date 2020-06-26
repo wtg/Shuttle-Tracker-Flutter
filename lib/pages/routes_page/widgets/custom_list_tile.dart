@@ -138,8 +138,9 @@ class _CustomListTileState extends State<CustomListTile> {
           );
         },
         onLongPress: () {
-          widget.isFavorite ? widget.route.favorite = false :
-          widget.route.favorite = true;
+          widget.isFavorite
+              ? widget.route.favorite = false
+              : widget.route.favorite = true;
         },
       ),
     );

@@ -1,7 +1,9 @@
+import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
 
-import '../widgets/custom_bottom_sheet.dart';
+import '../blocs/detail_map_on_tap/detail_map_on_tap_bloc.dart';
 import 'shuttle_point.dart';
 
 class ShuttleStop extends ShuttlePoint {
@@ -46,8 +48,13 @@ class ShuttleStop extends ShuttlePoint {
     );
   }
 
-  Marker getMarker(dynamic animatedMapMove,
-      [bool selected, BuildContext context, ThemeData theme]) {
+  Widget _getGesture(
+      {dynamic animatedMapMove,
+      bool selected,
+      BuildContext context,
+      ThemeData theme,
+      DetailMapOnTapBloc bloc,
+      int index}) {
     var selectedAsset = ColorFiltered(
       colorFilter: ColorFilter.mode(Colors.green[400], BlendMode.modulate),
       child: Image.asset(
@@ -56,41 +63,66 @@ class ShuttleStop extends ShuttlePoint {
         height: 20,
       ),
     );
-    selected ??= false;
-    return Marker(
-      width: 44.0,
-      height: 44.0,
-      point: getLatLng,
-      builder: (ctx) => GestureDetector(
-        onTap: () {
-          animatedMapMove(getLatLng, 14.2);
-          print('Stop $name clicked on');
-          if (context != null) {
-            showBottomSheet(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(25.0),
-                  topRight: Radius.circular(25.0),
-                ),
+    return GestureDetector(
+      onTap: () {
+        animatedMapMove(getLatLng, 15.2);
+        if (context != null) {
+          Flushbar(
+            margin: EdgeInsets.only(top: 60),
+            maxWidth: MediaQuery.of(context).size.width * 0.95,
+            flushbarStyle: FlushbarStyle.FLOATING,
+            borderRadius: 8,
+            flushbarPosition: FlushbarPosition.TOP,
+            message: name,
+            isDismissible: true,
+            duration: Duration(seconds: 3),
+            //animationDuration: Duration(milliseconds: 100),
+          )..show(context);
+        }
+
+        if (bloc != null) {
+          bloc.add(MapStopTapped(stopName: name, index: index));
+        }
+      },
+      child: Container(
+        decoration: BoxDecoration(
+            border: Border.all(width: 15, style: BorderStyle.none),
+            shape: BoxShape.circle),
+        child: selected
+            ? selectedAsset
+            : Image.asset(
+                'assets/img/stop.png',
               ),
-              context: context,
-              builder: (_) => CustomBottomSheet(
-                markerName: name,
-              ),
-            );
-          }
-        },
-        child: Container(
-          decoration: BoxDecoration(
-              border: Border.all(width: 15, style: BorderStyle.none),
-              shape: BoxShape.circle),
-          child: selected
-              ? selectedAsset
-              : Image.asset(
-                  'assets/img/stop.png',
-                ),
-        ),
       ),
     );
+  }
+
+  Marker getMarker(
+      {@required dynamic animatedMapMove,
+      BuildContext context,
+      ThemeData theme,
+      @required DetailMapOnTapBloc bloc,
+      int index}) {
+    var selected = false;
+    return Marker(
+        width: 44.0,
+        height: 44.0,
+        point: getLatLng,
+        builder: (ctx) => BlocBuilder<DetailMapOnTapBloc, DetailMapOnTapState>(
+            bloc: bloc,
+            builder: (_, state) {
+              if (state is TappedState) {
+                if (state.stopName == name) {
+                  selected = true;
+                }
+              }
+              return _getGesture(
+                  animatedMapMove: animatedMapMove,
+                  selected: selected,
+                  context: context,
+                  theme: theme,
+                  bloc: bloc,
+                  index: index);
+            }));
   }
 }

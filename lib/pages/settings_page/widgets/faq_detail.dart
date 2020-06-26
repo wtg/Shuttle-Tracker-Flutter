@@ -230,14 +230,12 @@ class _FaqPageState extends State<FaqPage> {
     ];
     return PlatformScaffold(
       appBar: PlatformAppBar(
-        leading: Material(
-          child: Container(
-            color: widget.theme.getTheme.appBarTheme.color,
-            child: IconButton(
-              icon: Icon(Icons.arrow_back),
-              color: widget.theme.getTheme.hoverColor,
-              onPressed: () => Navigator.pop(context, false),
-            ),
+        leading: Container(
+          color: widget.theme.getTheme.appBarTheme.color,
+          child: IconButton(
+            icon: Icon(Icons.arrow_back),
+            color: widget.theme.getTheme.hoverColor,
+            onPressed: () => Navigator.pop(context, false),
           ),
         ),
         title: Text(

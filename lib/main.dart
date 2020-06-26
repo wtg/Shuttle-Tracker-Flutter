@@ -4,9 +4,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 
 import 'android_material_app.dart';
+import 'blocs/detail_map_on_tap/detail_map_on_tap_bloc.dart';
 import 'blocs/shuttle/shuttle_bloc.dart';
 import 'blocs/theme/theme_bloc.dart';
 import 'data/repository/shuttle_repository.dart';
@@ -29,8 +31,15 @@ class MyApp extends StatefulWidget {
 
 class MyAppState extends State<MyApp> {
   final _pageOptions = [
-    BlocProvider(
-      create: (context) => ShuttleBloc(repository: ShuttleRepository()),
+    MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => ShuttleBloc(repository: ShuttleRepository()),
+        ),
+        BlocProvider(
+          create: (context) => DetailMapOnTapBloc(),
+        ),
+      ],
       child: MapPage(),
     ),
     BlocProvider(

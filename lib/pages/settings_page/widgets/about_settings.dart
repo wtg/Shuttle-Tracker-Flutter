@@ -5,7 +5,6 @@ import 'package:url_launcher/url_launcher.dart';
 import '../../../blocs/theme/theme_bloc.dart';
 import 'faq_detail.dart';
 import 'privacy_detail.dart';
-import 'sockets_test.dart';
 
 class AboutSettings extends StatefulWidget {
   final ThemeState theme;
@@ -16,6 +15,8 @@ class AboutSettings extends StatefulWidget {
 }
 
 class _AboutSettingsState extends State<AboutSettings> {
+//  int devSettings = 0;
+
   @override
   Widget build(BuildContext context) {
     var aboutSettingsList = <Widget>[
@@ -102,8 +103,24 @@ class _AboutSettingsState extends State<AboutSettings> {
           ],
         ),
         onTap: () {
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => SocketTest()));
+          // This was just to play around with some stuff, can add more later
+//          setState(() {
+//            devSettings++;
+//            if (devSettings < 10) {
+//              Toast.show(
+//                "You are ${10 - devSettings} "
+//                    "steps away from being a developer!",
+//                context,
+//                duration: Toast.LENGTH_LONG,
+//                gravity: Toast.BOTTOM,
+//              );
+//            }
+//
+//          });
+//          if (devSettings >= 10) {
+//            Navigator.push(
+//              context, MaterialPageRoute(builder: (context) => SocketTest()));
+//          }
         },
       ),
     ];

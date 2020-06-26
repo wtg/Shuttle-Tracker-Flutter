@@ -64,12 +64,11 @@ class _AttributionState extends State<Attribution> {
       child: Padding(
         padding: const EdgeInsets.all(2.0),
         child: Opacity(
-          opacity: 0.9,
+          opacity: 1.0,
           child: Container(
             decoration: BoxDecoration(
                 color: widget.theme.backgroundColor,
-                borderRadius: BorderRadius.circular(8.0)
-            ),
+                borderRadius: BorderRadius.circular(8.0)),
             padding: const EdgeInsets.all(5.0),
             width: MediaQuery.of(context).size.width * 0.4,
             child: FittedBox(

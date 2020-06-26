@@ -44,6 +44,9 @@ class ShuttleRoute {
   /// List of shuttles currently associated with this route
   List<ShuttleSchedule> schedules;
 
+  /// Bool to determine if route is a favorite or not
+  bool favorite;
+
   ShuttleRoute(
       {this.id,
       this.name,
@@ -56,7 +59,8 @@ class ShuttleRoute {
       this.updated,
       this.points,
       this.active,
-      this.schedules});
+      this.schedules,
+      this.favorite});
 
   factory ShuttleRoute.fromJson(Map<String, dynamic> json) {
     return ShuttleRoute(
@@ -76,6 +80,7 @@ class ShuttleRoute {
       schedules: (json['schedule'] as List)
           .map((i) => ShuttleSchedule.fromJson(i))
           .toList(),
+      favorite: false
     );
   }
 

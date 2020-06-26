@@ -20,6 +20,7 @@ class CustomListTile extends StatefulWidget {
 
   bool get isEnabled => route.enabled;
   bool get isActive => route.active;
+  bool get isFavorite => route.favorite;
 
   @override
   _CustomListTileState createState() => _CustomListTileState();
@@ -137,6 +138,25 @@ class _CustomListTileState extends State<CustomListTile> {
           );
         },
       ),
+      onTap: () {
+        Navigator.push(
+          context,
+          CupertinoPageRoute(
+            builder: (_) {
+              return DetailPage(
+                title: widget.route.name,
+                polyline: polyline,
+                routeColor: color,
+                routeStops: _getRouteStops(),
+              );
+            },
+          ),
+        );
+      },
+      onLongPress: () {
+        widget.isFavorite ? widget.route.favorite = false :
+        widget.route.favorite = true;
+      },
     );
   }
 }

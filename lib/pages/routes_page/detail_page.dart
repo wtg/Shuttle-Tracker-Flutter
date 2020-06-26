@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
 
 import 'package:latlong/latlong.dart';
-import '../../blocs/detail_map_on_tap/detail_map_on_tap_bloc.dart';
+import '../../blocs/on_tap/on_tap_bloc.dart';
 import '../../blocs/theme/theme_bloc.dart';
 import '../../models/shuttle_stop.dart';
 import '../map_page/states/loaded_map.dart';
@@ -14,7 +14,7 @@ class DetailPage extends StatefulWidget {
   final List<Polyline> polyline;
   final Map<int, ShuttleStop> routeStops;
   final Color routeColor;
-  final DetailMapOnTapBloc bloc;
+  final OnTapBloc bloc;
 
   DetailPage(
       {this.title, this.polyline, this.routeStops, this.routeColor, this.bloc});
@@ -117,7 +117,7 @@ class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
           ),
           backgroundColor: theme.getTheme.appBarTheme.color,
         ),
-        body: BlocBuilder<DetailMapOnTapBloc, DetailMapOnTapState>(
+        body: BlocBuilder<OnTapBloc, OnTapState>(
             bloc: widget.bloc,
             builder: (context, state) {
               _createStops(widget.routeStops);

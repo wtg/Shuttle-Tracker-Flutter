@@ -8,7 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 
 import 'android_material_app.dart';
-import 'blocs/detail_map_on_tap/detail_map_on_tap_bloc.dart';
+import 'blocs/on_tap/on_tap_bloc.dart';
 import 'blocs/shuttle/shuttle_bloc.dart';
 import 'blocs/theme/theme_bloc.dart';
 import 'data/repository/shuttle_repository.dart';
@@ -37,7 +37,7 @@ class MyAppState extends State<MyApp> {
           create: (context) => ShuttleBloc(repository: ShuttleRepository()),
         ),
         BlocProvider(
-          create: (context) => DetailMapOnTapBloc(),
+          create: (context) => OnTapBloc(),
         ),
       ],
       child: MapPage(),
@@ -67,8 +67,6 @@ class MyAppState extends State<MyApp> {
           SystemChrome.setPreferredOrientations([
             DeviceOrientation.portraitUp,
           ]);
-//          return  AndroidMaterialApp(
-//              theme: theme.getTheme, pageOptions: _pageOptions);
           return Platform.isIOS
               ? IOSCupertinoApp(
                   theme: theme.getTheme, pageOptions: _pageOptions)

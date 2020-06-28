@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -27,7 +28,7 @@ class _LoadedState extends State<LoadedState> {
         stops: widget.stops,
         theme: widget.theme,
       );
-      if (tile.isEnabled && tile.isFavorite) {
+      if (tile.isEnabled && route.favorite) {
         tileList.add(tile);
       }
     }
@@ -76,20 +77,41 @@ class _LoadedState extends State<LoadedState> {
           color: widget.theme.backgroundColor,
           child: ListView(
             children: <Widget>[
-              FavoritesSection(
-                theme: widget.theme,
-                routes: _getFavoriteRoutes(),
-                sectionHeader: 'Favorite Routes',
+              NotificationListener<FavoriteNotification>(
+                child: FavoritesSection(
+                  theme: widget.theme,
+                  routes: _getFavoriteRoutes(),
+                  sectionHeader: 'Favorite Routes',
+                ),
+                onNotification: (favorited) {
+                  log("received notification");
+                  setState(() {});
+                  return true;
+                }
               ),
-              RoutesSection(
-                theme: widget.theme,
-                routes: _getActiveRoutes(),
-                sectionHeader: 'Active Routes',
+              NotificationListener<FavoriteNotification>(
+                child: RoutesSection(
+                  theme: widget.theme,
+                  routes: _getActiveRoutes(),
+                  sectionHeader: 'Active Routes',
+                ),
+                onNotification: (favorited){
+                  log("received notification");
+                  setState(() {});
+                  return true;
+                },
               ),
-              RoutesSection(
-                theme: widget.theme,
-                routes: _getScheduledRoutes(),
-                sectionHeader: 'Scheduled Routes',
+              NotificationListener<FavoriteNotification>(
+                child: RoutesSection(
+                  theme: widget.theme,
+                  routes: _getScheduledRoutes(),
+                  sectionHeader: 'Scheduled Routes',
+                ),
+                onNotification: (favorited){
+                  log("received notification");
+                  setState(() {});
+                  return true;
+                },
               ),
             ],
           )),

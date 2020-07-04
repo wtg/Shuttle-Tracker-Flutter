@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
@@ -20,7 +21,6 @@ class CustomListTile extends StatefulWidget {
 
   bool get isEnabled => route.enabled;
   bool get isActive => route.active;
-  bool get isFavorite => route.favorite;
 
   @override
   _CustomListTileState createState() => _CustomListTileState();
@@ -70,6 +70,8 @@ class _CustomListTileState extends State<CustomListTile> {
 
 //    var image = ShuttleImage(svgColor: widget.route.color);
     var color = widget.route.color;
+    var fav = widget.route.favorite;
+    var name = widget.route.name;
 
     var circle = ColorFiltered(
       colorFilter: ColorFilter.mode(color, BlendMode.modulate),
@@ -138,11 +140,21 @@ class _CustomListTileState extends State<CustomListTile> {
           );
         },
         onLongPress: () {
-          widget.isFavorite
+          widget.route.favorite
               ? widget.route.favorite = false
               : widget.route.favorite = true;
+          log("Set $name favorite route not $fav.");
+          setState(() {});
+          final favorited = widget.route.favorite;
+          FavoriteNotification(favorites: favorited)..dispatch(context);
         },
       ),
     );
   }
+}
+
+class FavoriteNotification extends Notification {
+  final bool favorites;
+
+  const FavoriteNotification({this.favorites});
 }

@@ -20,7 +20,7 @@ import 'pages/settings_page/settings_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  BlocSupervisor.delegate = await HydratedBlocDelegate.build();
+  HydratedBloc.storage = await HydratedStorage.build();
   return runApp(MyApp());
 }
 

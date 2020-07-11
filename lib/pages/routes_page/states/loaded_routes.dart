@@ -44,7 +44,7 @@ class _LoadedState extends State<LoadedState> {
         stops: widget.stops,
         theme: widget.theme,
       );
-      if (tile.isEnabled && tile.isActive) {
+      if (tile.isEnabled && tile.isActive && !route.favorite) {
         tileList.add(tile);
       }
     }
@@ -57,7 +57,7 @@ class _LoadedState extends State<LoadedState> {
     for (var route in widget.routes) {
       var tile = CustomListTile(
           route: route, stops: widget.stops, theme: widget.theme);
-      if (tile.isEnabled && !tile.isActive) {
+      if (tile.isEnabled && !tile.isActive && !route.favorite) {
         tileList.add(tile);
       }
     }

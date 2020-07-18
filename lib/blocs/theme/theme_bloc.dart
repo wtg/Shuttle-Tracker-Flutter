@@ -8,9 +8,7 @@ import '../../theme/theme.dart' as theme;
 enum ThemeEvent { toggle }
 
 class ThemeBloc extends HydratedBloc<ThemeEvent, ThemeState> {
-
   ThemeBloc() : super(ThemeState(isDarkMode: false));
-
 
   @override
   ThemeState fromJson(Map<String, dynamic> source) {

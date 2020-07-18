@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 class FavoritesSection extends StatefulWidget {
   final ThemeData theme;
   final List<Widget> routes;
@@ -14,7 +13,7 @@ class FavoritesSection extends StatefulWidget {
 class _FavoritesSectionState extends State<FavoritesSection> {
   @override
   Widget build(BuildContext context) {
-    if(widget.routes.length == 0){
+    if (widget.routes.length == 0) {
       return Column();
     }
     return Column(

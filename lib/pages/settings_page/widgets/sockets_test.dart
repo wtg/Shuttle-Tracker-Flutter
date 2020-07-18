@@ -17,7 +17,7 @@ class _SocketTestState extends State<SocketTest> {
     var data = {'type': 'subscribe', 'message': topic};
     print(jsonEncode(data));
     channel.sink.add(jsonEncode(data));
-    channel.stream.listen(print);
+    //channel.stream.listen(print);
   }
 
   // bus button
@@ -25,12 +25,13 @@ class _SocketTestState extends State<SocketTest> {
     var send =
         '''{"type":"bus_button","message":{"latitude":42.729216,"longitude":-73.673618,"emojiChoice":"shirls"}}''';
     channel.sink.add(send);
+    //channel.stream.listen(print);
   }
 
   @override
   void initState() {
+    connectToSocket();
     super.initState();
-//    connectToSocket();
   }
 
   @override
@@ -44,19 +45,20 @@ class _SocketTestState extends State<SocketTest> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Sockets'),
+        backgroundColor: Colors.blue,
       ),
       body: Center(
-        child: Container(
-          color: Colors.blue,
-//          child: StreamBuilder(
-//            stream: channel.stream,
-//            builder: (context, snapshot) {
-//              return Padding(
-//                padding: const EdgeInsets.all(8.0),
-//                child: Text(snapshot.hasData ? '${snapshot.data}' : ''),
-//              );
-//            },
-//          ),
+        child: StreamBuilder(
+          stream: channel.stream,
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              return Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(snapshot.hasData ? '${snapshot.data}' : ''),
+              );
+            }
+            return CircularProgressIndicator();
+          },
         ),
       ),
       floatingActionButton: FloatingActionButton(

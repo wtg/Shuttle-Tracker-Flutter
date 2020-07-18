@@ -28,7 +28,6 @@ class ShuttleBloc extends Bloc<ShuttleEvent, ShuttleState> {
   /// ShuttleBloc named constructor
   ShuttleBloc({this.repository}) : super(ShuttleInitial());
 
-
   @override
   Stream<ShuttleState> mapEventToState(ShuttleEvent event) async* {
     switch (event) {

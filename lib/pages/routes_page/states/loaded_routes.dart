@@ -8,7 +8,6 @@ import '../widgets/custom_list_tile.dart';
 import '../widgets/favorite_section.dart';
 import '../widgets/route_section.dart';
 
-
 class LoadedState extends StatefulWidget {
   final List<ShuttleRoute> routes;
   final List<ShuttleStop> stops;
@@ -78,24 +77,23 @@ class _LoadedState extends State<LoadedState> {
           child: ListView(
             children: <Widget>[
               NotificationListener<FavoriteNotification>(
-                child: FavoritesSection(
-                  theme: widget.theme,
-                  routes: _getFavoriteRoutes(),
-                  sectionHeader: 'Favorite Routes',
-                ),
-                onNotification: (favorited) {
-                  log("received notification");
-                  setState(() {});
-                  return true;
-                }
-              ),
+                  child: FavoritesSection(
+                    theme: widget.theme,
+                    routes: _getFavoriteRoutes(),
+                    sectionHeader: 'Favorite Routes',
+                  ),
+                  onNotification: (favorited) {
+                    log("received notification");
+                    setState(() {});
+                    return true;
+                  }),
               NotificationListener<FavoriteNotification>(
                 child: RoutesSection(
                   theme: widget.theme,
                   routes: _getActiveRoutes(),
                   sectionHeader: 'Active Routes',
                 ),
-                onNotification: (favorited){
+                onNotification: (favorited) {
                   log("received notification");
                   setState(() {});
                   return true;
@@ -107,7 +105,7 @@ class _LoadedState extends State<LoadedState> {
                   routes: _getScheduledRoutes(),
                   sectionHeader: 'Scheduled Routes',
                 ),
-                onNotification: (favorited){
+                onNotification: (favorited) {
                   log("received notification");
                   setState(() {});
                   return true;

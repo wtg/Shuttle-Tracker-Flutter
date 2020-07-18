@@ -7,13 +7,11 @@ class ShuttleUpdateManager extends StatefulWidget {
 }
 
 class _ShuttleUpdateManagerState extends State<ShuttleUpdateManager> {
-	final IOWebSocketChannel channel =
-	IOWebSocketChannel.connect('wss://shuttles.rpi.edu/fusion/');
+  final IOWebSocketChannel channel =
+      IOWebSocketChannel.connect('wss://shuttles.rpi.edu/fusion/');
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     throw UnimplementedError();
   }
-
 }

@@ -9,40 +9,40 @@ import 'shuttle_schedule.dart';
 
 class ShuttleRoute {
   /// Id for this route
-  int id;
+  final int id;
 
   /// Name of this route
-  String name;
+  final String name;
 
   /// Description of this route
-  String desc;
+  final String desc;
 
   /// Bool to determine if route is enabled for semester
-  bool enabled;
+  final bool enabled;
 
   /// Hex color of route
-  Color color;
+  final Color color;
 
   /// Width of route outline on map
-  num width;
+  final num width;
 
   /// All stop ids associated with route
-  List<int> stopIds;
+  final List<int> stopIds;
 
   /// Timestamp for when route was created
-  String created;
+  final String created;
 
   /// Timestamp for when route was last updated
-  String updated;
+  final String updated;
 
   /// All points required to create the route with respective lat/lng values
-  List<LatLng> points;
+  final List<LatLng> points;
 
   /// Bool to determine if route is active at current period of time
-  bool active;
+  final bool active;
 
   /// List of shuttles currently associated with this route
-  List<ShuttleSchedule> schedules;
+  final List<ShuttleSchedule> schedules;
 
   /// Bool to determine if route is a favorite or not
   bool favorite;

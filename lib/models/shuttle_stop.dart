@@ -7,19 +7,19 @@ import 'shuttle_point.dart';
 
 class ShuttleStop extends ShuttlePoint {
   /// ID associated with stop
-  int id;
+  final int id;
 
   /// Name of the stop
-  String name;
+  final String name;
 
   /// Timestamp of when stop was created
-  String created;
+  final String created;
 
   /// Timestamp ofr when stop was updated
-  String updated;
+  final String updated;
 
   /// Brief description of the stop
-  String description;
+  final String description;
 
   /// Whether or not the stop has been selected
   bool selected;

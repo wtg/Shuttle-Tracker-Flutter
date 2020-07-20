@@ -1,8 +1,8 @@
 import 'package:latlong/latlong.dart';
 
 class ShuttlePoint {
-  double latitude;
-  double longitude;
+  final double latitude;
+  final double longitude;
 
   LatLng get getLatLng => LatLng(latitude, longitude);
 

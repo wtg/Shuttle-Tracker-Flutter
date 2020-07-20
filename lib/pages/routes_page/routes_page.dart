@@ -56,7 +56,7 @@ class _RoutesPageState extends State<RoutesPage> {
                 ),
               );
             }
-            return LoadingState(theme: theme.getTheme);
+            return LoadingState();
           })));
     });
   }

@@ -1,4 +1,3 @@
-import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
@@ -66,20 +65,23 @@ class ShuttleStop extends ShuttlePoint {
     return GestureDetector(
       onTap: () {
         animatedMapMove(getLatLng, 15.2);
-        if (context != null) {
-          Flushbar(
-            margin: EdgeInsets.only(top: 60),
-            maxWidth: MediaQuery.of(context).size.width * 0.95,
-            flushbarStyle: FlushbarStyle.FLOATING,
-            borderRadius: 8,
-            flushbarPosition: FlushbarPosition.TOP,
-            message: name,
-            isDismissible: true,
-            duration: Duration(seconds: 3),
-            //animationDuration: Duration(milliseconds: 100),
-          )..show(context);
-        }
 
+        /// FLUSHBAR
+        // if (context != null) {
+        //   Flushbar(
+        //     margin: EdgeInsets.only(top: 60),
+        //     maxWidth: MediaQuery.of(context).size.width * 0.95,
+        //     flushbarStyle: FlushbarStyle.FLOATING,
+        //     borderRadius: 8,
+        //     flushbarPosition: FlushbarPosition.TOP,
+        //     message: name,
+        //     isDismissible: true,
+        //     duration: Duration(seconds: 3),
+        //     //animationDuration: Duration(milliseconds: 100),
+        //   )..show(context);
+        // }
+
+        /// ONTAP FEATURE
         // if (bloc != null) {
         //   bloc.add(MapStopTapped(stopName: name, index: index));
         // }

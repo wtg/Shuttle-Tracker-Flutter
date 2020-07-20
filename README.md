@@ -33,8 +33,8 @@ Flutter ShuttleTracker is a cross-platform port of <a href="https://github.com/w
 
 ## Setting up
 
-1. [Install Flutter](https://flutter.dev/docs/get-started/install).
-2. Clone the repository to your computer.
+1. [Install Flutter](https://flutter.dev/docs/get-started/install)
+2. Clone the repository to your computer
 3. Open the project in your preferred editor
    - NOTE: VS Code and Android Studio are the recommended editors for Flutter
 4. Retrieve all the required dependencies with ```flutter pub get```

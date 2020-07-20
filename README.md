@@ -6,7 +6,7 @@
 </div>
 
 <h5 align="center">
-Flutter ShuttleTracker is a cross-platform port of <a href="https://github.com/wtg/shuttletracker">ShuttleTracker</a> that utilizes the Flutter framework for development.
+Flutter ShuttleTracker is a cross-platform port of <a href="https://github.com/wtg/shuttletracker">ShuttleTracker</a> that utilizes the Flutter SDK for development.
 </h5>
 
 ## Showcase
@@ -19,25 +19,27 @@ Flutter ShuttleTracker is a cross-platform port of <a href="https://github.com/w
 
 ## Features
 
-- Live updates displayed on map for shuttles, routes, and stops
+- Map page that contains live updates for shuttles, routes, and stops
 
-- Persistence for certain settings
+- Routes page that allows users to see each route in detail and its associated stops
 
-- Dark Mode functionality
+- Schedules page that directs users to the schedules for all routes
 
-- Automatic route toggling
+- Settings page that allows users to customize the app to their liking
 
-- Routes page detailing each route and their stops
+- Dark Mode
 
-- Splash screen that displays ShuttleTracker logo
+- Automatic route toggling based on time of day
 
 ## Setting up
 
 1. [Install Flutter](https://flutter.dev/docs/get-started/install).
 2. Clone the repository to your computer.
-3. Check the status of flutter by running ```flutter doctor```
+3. Open the project in your preferred editor
+   - NOTE: VS Code and Android Studio are the recommended editors for Flutter
 4. Retrieve all the required dependencies with ```flutter pub get```
-5. Run the app with ```flutter run```
+5. Open your preferred emulator (Android or iOS)
+6. Run the app by clicking the "green play button" on the top right of Android Studio or VS Code
 
 ## Contributing
 

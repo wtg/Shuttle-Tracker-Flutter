@@ -139,6 +139,7 @@ class _CustomListTileState extends State<CustomListTile> {
             ),
           );
         },
+        /**                                                  Adds to Favorites
         onLongPress: () {
           widget.route.favorite
               ? widget.route.favorite = false
@@ -147,7 +148,7 @@ class _CustomListTileState extends State<CustomListTile> {
           setState(() {});
           final favorited = widget.route.favorite;
           FavoriteNotification(favorites: favorited)..dispatch(context);
-        },
+        }, **/
       ),
     );
   }

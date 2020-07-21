@@ -26,22 +26,31 @@ class _PanelState extends State<Panel> {
 
   List<Widget> _getStopTileList(ThemeData theme) {
     var tileList = <Widget>[];
+
     widget.routeStops.forEach((key, value) {
+      var tileSelected = selectedName != null && selectedName == value.name;
+      var tileTextColor = theme.brightness == Brightness.dark
+          ? Colors.white
+          : Colors.green[600];
+      var tileColor = tileSelected
+          ? theme.brightness == Brightness.dark
+              ? Colors.white.withOpacity(0.1)
+              : Colors.green.withOpacity(0.1)
+          : theme.backgroundColor;
       tileList.add(
         IntrinsicHeight(
           child: ListTileTheme(
-            selectedColor: theme.brightness == Brightness.dark
-                ? Colors.white
-                : Colors.green[600],
+            selectedColor: tileTextColor,
             child: ListTile(
               dense: true,
-              selected: selectedName != null && selectedName == value.name
-                  ? true
-                  : false,
+              selected: tileSelected ? true : false,
               title: Row(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
-                  ShuttleLine(color: widget.routeColor),
+                  ShuttleLine(
+                    routeColor: widget.routeColor,
+                    isSelected: tileSelected,
+                  ),
                   SizedBox(
                     width: 20,
                   ),
@@ -49,12 +58,7 @@ class _PanelState extends State<Panel> {
                     child: Container(
                       padding: const EdgeInsets.all(8.0),
                       decoration: BoxDecoration(
-                        color:
-                            selectedName != null && selectedName == value.name
-                                ? theme.brightness == Brightness.dark
-                                    ? Colors.white.withOpacity(0.1)
-                                    : Colors.green.withOpacity(0.1)
-                                : theme.backgroundColor,
+                        color: tileColor,
                         borderRadius: BorderRadius.circular(16.0),
                         shape: BoxShape.rectangle,
                       ),

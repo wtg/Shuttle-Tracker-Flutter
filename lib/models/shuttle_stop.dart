@@ -81,10 +81,9 @@ class ShuttleStop extends ShuttlePoint {
         //   )..show(context);
         // }
 
-        /// ONTAP FEATURE
-        // if (bloc != null) {
-        //   bloc.add(MapStopTapped(stopName: name, index: index));
-        // }
+        if (bloc != null) {
+          bloc.add(MapStopTapped(stopName: name, index: index));
+        }
       },
       child: Container(
         decoration: BoxDecoration(
@@ -103,7 +102,7 @@ class ShuttleStop extends ShuttlePoint {
       {@required dynamic animatedMapMove,
       BuildContext context,
       ThemeData theme,
-      @required OnTapBloc bloc,
+      OnTapBloc bloc,
       int index}) {
     var selected = false;
     return Marker(

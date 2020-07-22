@@ -35,7 +35,7 @@ packages:
       name: bloc
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "5.0.0"
+    version: "6.0.0"
   boolean_selector:
     dependency: transitive
     description:
@@ -113,13 +113,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.16.1"
-  cubit:
-    dependency: transitive
-    description:
-      name: cubit
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.1.0"
   cupertino_icons:
     dependency: "direct main"
     description:
@@ -173,7 +166,7 @@ packages:
       name: flutter_bloc
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "5.0.0"
+    version: "6.0.0"
   flutter_cache_manager:
     dependency: transitive
     description:
@@ -181,13 +174,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.4.1"
-  flutter_cubit:
-    dependency: transitive
-    description:
-      name: flutter_cubit
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.1.0"
   flutter_cupertino_settings:
     dependency: "direct main"
     description:
@@ -302,14 +288,7 @@ packages:
       name: hydrated_bloc
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "5.0.1"
-  hydrated_cubit:
-    dependency: transitive
-    description:
-      name: hydrated_cubit
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.1.0"
+    version: "6.0.0"
   image:
     dependency: transitive
     description:

@@ -1,24 +1,18 @@
 import 'package:flutter/material.dart';
 
-class RoutesSection extends StatefulWidget {
+class RoutesSection extends StatelessWidget {
   final ThemeData theme;
   final List<Widget> routes;
   final String sectionHeader;
   RoutesSection({this.theme, this.routes, this.sectionHeader});
 
-  @override
-  _RoutesSectionState createState() => _RoutesSectionState();
-}
-
-class _RoutesSectionState extends State<RoutesSection> {
-  @override
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
         ListTile(
           dense: true,
           leading: Text(
-            widget.sectionHeader,
+            sectionHeader,
             style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
           ),
         ),
@@ -30,14 +24,14 @@ class _RoutesSectionState extends State<RoutesSection> {
           child: ListView.separated(
             physics: const NeverScrollableScrollPhysics(),
             shrinkWrap: true,
-            itemCount: widget.routes.length,
-            itemBuilder: (context, index) => widget.routes[index],
+            itemCount: routes.length,
+            itemBuilder: (context, index) => routes[index],
             separatorBuilder: (context, index) {
               return Divider(
                 color: Colors.grey[600],
                 height: 4,
                 thickness: 0,
-                indent: 55.0,
+                indent: 57,
               );
             },
           ),

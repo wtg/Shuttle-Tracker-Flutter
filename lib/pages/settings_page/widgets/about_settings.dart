@@ -57,7 +57,7 @@ class _AboutSettingsState extends State<AboutSettings> {
                   color: widget.theme.getTheme.hoverColor, fontSize: 16),
             ),
             Text(
-              'Interested in contributing? Check out our repo!',
+              'Interested in contributing?',
               style: TextStyle(color: Colors.grey, fontSize: 14),
             ),
           ],

@@ -1,5 +1,7 @@
 // load up our shiny new route for updates
-const updateRoutes = require("./updates");
+const updateUpdates = require("./shuttle_updates");
+const updateStops = require('./shuttle_stops')
+const updateRoutes = require('./shuttle_routes')
 
 const appRouter = (app, fs) => {
   // we've added in a default route here that handles empty routes
@@ -9,6 +11,8 @@ const appRouter = (app, fs) => {
   });
 
   // run our update route module here to complete the wire up
+  updateUpdates(app, fs);
+  updateStops(app, fs);
   updateRoutes(app, fs);
 };
 

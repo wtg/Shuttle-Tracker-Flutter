@@ -6,15 +6,10 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../../../blocs/theme/theme_bloc.dart';
 
-class PrivacyPolicyPage extends StatefulWidget {
+class PrivacyPolicyPage extends StatelessWidget {
   final ThemeState theme;
   PrivacyPolicyPage({this.theme});
 
-  @override
-  State<StatefulWidget> createState() => _PrivacyPolicyPageState();
-}
-
-class _PrivacyPolicyPageState extends State<PrivacyPolicyPage> {
   void _launch(String url) async {
     if (await canLaunch(url)) {
       await launch(url);
@@ -39,28 +34,28 @@ class _PrivacyPolicyPageState extends State<PrivacyPolicyPage> {
   @override
   Widget build(BuildContext context) {
     var _subHeader = TextStyle(
-      color: widget.theme.getTheme.hoverColor,
+      color: theme.getTheme.hoverColor,
     );
 
     return PlatformScaffold(
       appBar: PlatformAppBar(
         leading: Container(
-          color: widget.theme.getTheme.appBarTheme.color,
+          color: theme.getTheme.appBarTheme.color,
           child: IconButton(
             icon: Icon(Icons.arrow_back),
-            color: widget.theme.getTheme.hoverColor,
+            color: theme.getTheme.hoverColor,
             onPressed: () => Navigator.pop(context, false),
           ),
         ),
         title: Text(
           'Privacy Policy',
           style: TextStyle(
-            color: widget.theme.getTheme.hoverColor,
+            color: theme.getTheme.hoverColor,
             fontWeight: FontWeight.bold,
             fontSize: 30,
           ),
         ),
-        backgroundColor: widget.theme.getTheme.appBarTheme.color,
+        backgroundColor: theme.getTheme.appBarTheme.color,
       ),
       body: Container(
         padding: const EdgeInsets.all(8.0),

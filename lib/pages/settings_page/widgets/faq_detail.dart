@@ -6,15 +6,10 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../../../blocs/theme/theme_bloc.dart';
 
-class FaqPage extends StatefulWidget {
+class FaqPage extends StatelessWidget {
   final ThemeState theme;
   FaqPage({this.theme});
 
-  @override
-  State<StatefulWidget> createState() => _FaqPageState();
-}
-
-class _FaqPageState extends State<FaqPage> {
   void _launch(String url) async {
     if (await canLaunch(url)) {
       await launch(url);
@@ -36,7 +31,7 @@ class _FaqPageState extends State<FaqPage> {
 
   Widget buildEntry(String head, RichText body) {
     var _mainHeader = TextStyle(
-      color: widget.theme.getTheme.accentColor,
+      color: theme.getTheme.accentColor,
       fontWeight: FontWeight.bold,
       fontSize: 20,
     );
@@ -66,7 +61,7 @@ class _FaqPageState extends State<FaqPage> {
   @override
   Widget build(BuildContext context) {
     var _subHeader = TextStyle(
-      color: widget.theme.getTheme.hoverColor,
+      color: theme.getTheme.hoverColor,
     );
 
     var faqList = <Widget>[
@@ -231,22 +226,22 @@ class _FaqPageState extends State<FaqPage> {
     return PlatformScaffold(
       appBar: PlatformAppBar(
         leading: Container(
-          color: widget.theme.getTheme.appBarTheme.color,
+          color: theme.getTheme.appBarTheme.color,
           child: IconButton(
             icon: Icon(Icons.arrow_back),
-            color: widget.theme.getTheme.hoverColor,
+            color: theme.getTheme.hoverColor,
             onPressed: () => Navigator.pop(context, false),
           ),
         ),
         title: Text(
           'FAQ',
           style: TextStyle(
-            color: widget.theme.getTheme.hoverColor,
+            color: theme.getTheme.hoverColor,
             fontWeight: FontWeight.bold,
             fontSize: 30,
           ),
         ),
-        backgroundColor: widget.theme.getTheme.appBarTheme.color,
+        backgroundColor: theme.getTheme.appBarTheme.color,
       ),
 //        body: ListView.builder(
 //            itemCount: faqList.length,

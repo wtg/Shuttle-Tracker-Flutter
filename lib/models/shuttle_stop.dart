@@ -110,7 +110,7 @@ class ShuttleStop extends ShuttlePoint {
         height: 44.0,
         point: getLatLng,
         builder: (ctx) => BlocBuilder<OnTapBloc, OnTapState>(
-            bloc: bloc,
+            cubit: bloc,
             builder: (_, state) {
               if (state is TappedState) {
                 if (state.stopName == name) {

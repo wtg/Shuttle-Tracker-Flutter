@@ -8,17 +8,17 @@ import '../widgets/custom_list_tile.dart';
 import '../widgets/favorite_section.dart';
 import '../widgets/route_section.dart';
 
-class LoadedState extends StatefulWidget {
+class LoadedRoutes extends StatefulWidget {
   final List<ShuttleRoute> routes;
   final List<ShuttleStop> stops;
   final ThemeData theme;
 
-  LoadedState({this.routes, this.stops, this.theme});
+  LoadedRoutes({this.routes, this.stops, this.theme});
   @override
-  _LoadedState createState() => _LoadedState();
+  _LoadedRoutes createState() => _LoadedRoutes();
 }
 
-class _LoadedState extends State<LoadedState> {
+class _LoadedRoutes extends State<LoadedRoutes> {
   List<Widget> _getFavoriteRoutes() {
     var tileList = <CustomListTile>[];
     for (var route in widget.routes) {

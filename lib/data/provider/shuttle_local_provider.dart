@@ -1,25 +1,29 @@
-/*
-import 'dart:async';
-import 'dart:convert';
 
-import 'package:flutter/services.dart' show rootBundle;
+import 'dart:async';
+import 'package:http/http.dart' as http;
 
 import 'shuttle_api_provider.dart';
 
 /// Provider class for testing via local JSON data
 class ShuttleLocalProvider extends ShuttleApiProvider {
+  /// This function will fetch the data from the JSON API and return a decoded
   @override
-  Future<List<dynamic>> fetch(String fileName) async {
-    List<dynamic> jsonDecoded;
+  Future<http.Response> fetch(String type) async {
+    var client = http.Client();
+    http.Response response;
     try {
-      jsonDecoded = json.decode(
-          await rootBundle.loadString('assets/json_test/$fileName.json'));
-      isConnected = true;
-    } catch (e) {
-      print(e);
+      response = await client.get('http://10.0.2.2:3001/$type');
+      await createJSONFile('$type', response);
+
+      if (response.statusCode == 200) {
+        isConnected = true;
+      }
+    } 
+    catch (error) {
       isConnected = false;
     }
-    return jsonDecoded;
+    //print("App has polled $type API: $isConnected");
+    return response;
   }
 }
-*/
+

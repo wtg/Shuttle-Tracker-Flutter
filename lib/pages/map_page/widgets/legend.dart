@@ -5,16 +5,11 @@ import '../../../models/shuttle_image.dart';
 
 import 'legend_row.dart';
 
-class Legend extends StatefulWidget {
+class Legend extends StatelessWidget {
   final Map<String, ShuttleImage> legend;
 
   Legend({this.legend});
 
-  @override
-  _LegendState createState() => _LegendState();
-}
-
-class _LegendState extends State<Legend> {
   @override
   Widget build(BuildContext context) {
     var legendRows = <Widget>[
@@ -23,7 +18,7 @@ class _LegendState extends State<Legend> {
         text: ' You',
       ),
     ];
-    widget.legend.forEach((key, value) {
+    legend.forEach((key, value) {
       legendRows.add(LegendRow(
         widget: value.getSVG,
         text: ' $key',

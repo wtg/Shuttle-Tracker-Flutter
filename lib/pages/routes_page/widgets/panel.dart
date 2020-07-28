@@ -100,7 +100,7 @@ class _PanelState extends State<Panel> {
             return null;
           },
           child: BlocBuilder<OnTapBloc, OnTapState>(
-              bloc: widget.bloc,
+              cubit: widget.bloc,
               builder: (context, state) {
                 if (state is TappedState) {
                   selectedName = state.stopName;

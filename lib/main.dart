@@ -1,10 +1,11 @@
 import 'dart:io';
 
+//import 'package:flutter/foundation.dart';
+import 'package:device_preview/device_preview.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:flutter/services.dart' as services;
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 
 import 'android_material_app.dart';
@@ -21,7 +22,12 @@ import 'pages/settings_page/settings_page.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   HydratedBloc.storage = await HydratedStorage.build();
-  return runApp(MyApp());
+  return runApp(
+    DevicePreview(
+      enabled: false, //!kReleaseMode,
+      builder: (context) => MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatefulWidget {
@@ -57,15 +63,16 @@ class MyAppState extends State<MyApp> {
     return BlocProvider(
         create: (_) => ThemeBloc(),
         child: BlocBuilder<ThemeBloc, ThemeState>(builder: (_, theme) {
-          SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+          services.SystemChrome.setSystemUIOverlayStyle(
+              services.SystemUiOverlayStyle(
             systemNavigationBarColor: theme.getTheme.bottomAppBarColor,
             systemNavigationBarIconBrightness:
                 theme.getTheme.accentColorBrightness,
             statusBarColor: theme.getTheme.bottomAppBarColor,
             statusBarIconBrightness: theme.getTheme.accentColorBrightness,
           ));
-          SystemChrome.setPreferredOrientations([
-            DeviceOrientation.portraitUp,
+          services.SystemChrome.setPreferredOrientations([
+            services.DeviceOrientation.portraitUp,
           ]);
           return Platform.isIOS
               ? IOSCupertinoApp(

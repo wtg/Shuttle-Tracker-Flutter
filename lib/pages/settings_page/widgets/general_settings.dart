@@ -4,19 +4,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../blocs/theme/theme_bloc.dart';
 
-class GeneralSettings extends StatefulWidget {
+class GeneralSettings extends StatelessWidget {
   final ThemeState theme;
   GeneralSettings({this.theme});
 
-  @override
-  _GeneralSettingsState createState() => _GeneralSettingsState();
-}
-
-class _GeneralSettingsState extends State<GeneralSettings> {
-  @override
   Widget build(BuildContext context) {
     var themeBloc = context.bloc<ThemeBloc>();
-    var isSwitched = widget.theme.isDarkMode;
+    var isSwitched = theme.isDarkMode;
     return Column(children: <Widget>[
       ListTile(
         dense: true,
@@ -29,11 +23,10 @@ class _GeneralSettingsState extends State<GeneralSettings> {
         dense: true,
         leading: Icon(
           Icons.brightness_medium,
-          color: widget.theme.getTheme.hoverColor,
+          color: theme.getTheme.hoverColor,
         ),
         title: Text('Dark Mode',
-            style: TextStyle(
-                color: widget.theme.getTheme.hoverColor, fontSize: 16)),
+            style: TextStyle(color: theme.getTheme.hoverColor, fontSize: 16)),
         trailing: PlatformSwitch(
           value: isSwitched,
           onChanged: (value) {

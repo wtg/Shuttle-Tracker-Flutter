@@ -49,7 +49,7 @@ class _RoutesPageState extends State<RoutesPage> {
                   shuttleBloc.add(ShuttleEvent.getRoutesPageData);
                   return _refreshCompleter.future;
                 },
-                child: LoadedState(
+                child: LoadedRoutes(
                   routes: state.routes,
                   stops: state.stops,
                   theme: theme.getTheme,

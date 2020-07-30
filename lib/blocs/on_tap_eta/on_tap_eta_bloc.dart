@@ -19,3 +19,4 @@ class OnTapEtaBloc extends Bloc<OnTapEtaEvent, OnTapEtaState> {
           index: event.index);
   }
 }
+}

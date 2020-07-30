@@ -25,7 +25,7 @@ dependencies:
   equatable: ^1.2.0
   responsive_framework: ^0.0.7
   http: ^0.12.1
-  flutter_map: 0.8.2 #DO NOT UPDATE PAST 0.8.2, LATER VERSIONS AFFECT DARK MODE FUNCTIONALITY!!
+  flutter_map: ^0.10.1
   geolocation: ^1.1.2
   loading: ^1.0.2
   web_socket_channel: ^1.1.0
@@ -36,8 +36,8 @@ dev_dependencies:
   flutter_launcher_icons: "^0.7.5"
   effective_dart: ^1.2.1
   pedantic: ^1.9.0
-  flutter_test:
-    sdk: flutter
+  # flutter_test:
+  #   sdk: flutter
 
 flutter_icons:
   android: "launcher_icon" 

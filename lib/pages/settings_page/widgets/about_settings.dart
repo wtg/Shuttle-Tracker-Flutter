@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-
 import 'package:url_launcher/url_launcher.dart';
+
+import 'package:flutter/foundation.dart';
 
 import '../../../blocs/theme/theme_bloc.dart';
 import 'faq_detail.dart';
@@ -104,8 +105,11 @@ class _AboutSettingsState extends State<AboutSettings> {
           ],
         ),
         onTap: () {
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => SocketTest()));
+          if (kDebugMode) {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => SocketTest()));
+          }
+
           // This was just to play around with some stuff, can add more later
 //          setState(() {
 //            devSettings++;

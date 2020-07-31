@@ -1,16 +1,16 @@
-part of 'detail_map_on_tap_bloc.dart';
+part of 'on_tap_bloc.dart';
 
-abstract class DetailMapOnTapState extends Equatable {
-  const DetailMapOnTapState();
+abstract class OnTapState extends Equatable {
+  const OnTapState();
 }
 
-class InitialState extends DetailMapOnTapState {
+class InitialState extends OnTapState {
   final String stopName = '';
   @override
   List<Object> get props => [stopName];
 }
 
-class TappedState extends DetailMapOnTapState {
+class TappedState extends OnTapState {
   final String stopName;
   final int index;
 

@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
-
 import 'package:url_launcher/url_launcher.dart';
+
+import 'package:flutter/foundation.dart';
 
 import '../../../blocs/theme/theme_bloc.dart';
 import 'faq_detail.dart';
 import 'privacy_detail.dart';
+import 'sockets_test.dart';
 
 class AboutSettings extends StatefulWidget {
   final ThemeState theme;
@@ -56,7 +58,7 @@ class _AboutSettingsState extends State<AboutSettings> {
                   color: widget.theme.getTheme.hoverColor, fontSize: 16),
             ),
             Text(
-              'Interested in contributing? Check out our repo!',
+              'Interested in contributing?',
               style: TextStyle(color: Colors.grey, fontSize: 14),
             ),
           ],
@@ -103,6 +105,11 @@ class _AboutSettingsState extends State<AboutSettings> {
           ],
         ),
         onTap: () {
+          if (kDebugMode) {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => SocketTest()));
+          }
+
           // This was just to play around with some stuff, can add more later
 //          setState(() {
 //            devSettings++;

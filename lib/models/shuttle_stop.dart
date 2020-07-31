@@ -2,25 +2,24 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
 
-import '../blocs/detail_map_on_tap/detail_map_on_tap_bloc.dart';
-import '../widgets/custom_bottom_sheet.dart';
+import '../blocs/on_tap/on_tap_bloc.dart';
 import 'shuttle_point.dart';
 
 class ShuttleStop extends ShuttlePoint {
   /// ID associated with stop
-  int id;
+  final int id;
 
   /// Name of the stop
-  String name;
+  final String name;
 
   /// Timestamp of when stop was created
-  String created;
+  final String created;
 
   /// Timestamp ofr when stop was updated
-  String updated;
+  final String updated;
 
   /// Brief description of the stop
-  String description;
+  final String description;
 
   /// Whether or not the stop has been selected
   bool selected;
@@ -53,7 +52,7 @@ class ShuttleStop extends ShuttlePoint {
       bool selected,
       BuildContext context,
       ThemeData theme,
-      DetailMapOnTapBloc bloc,
+      OnTapBloc bloc,
       int index}) {
     var selectedAsset = ColorFiltered(
       colorFilter: ColorFilter.mode(Colors.green[400], BlendMode.modulate),
@@ -66,20 +65,21 @@ class ShuttleStop extends ShuttlePoint {
     return GestureDetector(
       onTap: () {
         animatedMapMove(getLatLng, 15.2);
-        if (context != null) {
-          showBottomSheet(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(25.0),
-                topRight: Radius.circular(25.0),
-              ),
-            ),
-            context: context,
-            builder: (_) => CustomBottomSheet(
-              markerName: name,
-            ),
-          );
-        }
+
+        /// FLUSHBAR
+        // if (context != null) {
+        //   Flushbar(
+        //     margin: EdgeInsets.only(top: 60),
+        //     maxWidth: MediaQuery.of(context).size.width * 0.95,
+        //     flushbarStyle: FlushbarStyle.FLOATING,
+        //     borderRadius: 8,
+        //     flushbarPosition: FlushbarPosition.TOP,
+        //     message: name,
+        //     isDismissible: true,
+        //     duration: Duration(seconds: 3),
+        //     //animationDuration: Duration(milliseconds: 100),
+        //   )..show(context);
+        // }
 
         if (bloc != null) {
           bloc.add(MapStopTapped(stopName: name, index: index));
@@ -99,37 +99,31 @@ class ShuttleStop extends ShuttlePoint {
   }
 
   Marker getMarker(
-      {dynamic animatedMapMove,
+      {@required dynamic animatedMapMove,
       BuildContext context,
       ThemeData theme,
-      DetailMapOnTapBloc bloc,
+      OnTapBloc bloc,
       int index}) {
     var selected = false;
     return Marker(
         width: 44.0,
         height: 44.0,
         point: getLatLng,
-        builder: (ctx) => bloc != null
-            ? BlocBuilder<DetailMapOnTapBloc, DetailMapOnTapState>(
-                bloc: bloc,
-                builder: (context, state) {
-                  if (state is TappedState) {
-                    if (state.stopName == name) {
-                      selected = true;
-                    }
-                  }
-                  return _getGesture(
-                      animatedMapMove: animatedMapMove,
-                      selected: selected,
-                      theme: theme,
-                      bloc: bloc,
-                      index: index);
-                })
-            : _getGesture(
-                animatedMapMove: animatedMapMove,
-                context: context,
-                selected: selected,
-                theme: theme,
-              ));
+        builder: (ctx) => BlocBuilder<OnTapBloc, OnTapState>(
+            cubit: bloc,
+            builder: (_, state) {
+              if (state is TappedState) {
+                if (state.stopName == name) {
+                  selected = true;
+                }
+              }
+              return _getGesture(
+                  animatedMapMove: animatedMapMove,
+                  selected: selected,
+                  context: context,
+                  theme: theme,
+                  bloc: bloc,
+                  index: index);
+            }));
   }
 }

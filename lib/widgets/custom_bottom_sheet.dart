@@ -1,15 +1,9 @@
 import 'package:flutter/material.dart';
 
-class CustomBottomSheet extends StatefulWidget {
+class CustomBottomSheet extends StatelessWidget {
   final String markerName;
   CustomBottomSheet({this.markerName});
 
-  @override
-  _CustomBottomSheetState createState() => _CustomBottomSheetState();
-}
-
-class _CustomBottomSheetState extends State<CustomBottomSheet> {
-  @override
   Widget build(BuildContext context) {
     return Container(
       height: MediaQuery.of(context).size.height * 0.15,
@@ -26,7 +20,7 @@ class _CustomBottomSheetState extends State<CustomBottomSheet> {
             ],
           ),
           Text(
-            '${widget.markerName}',
+            '$markerName',
             style: TextStyle(color: Theme.of(context).hoverColor),
           ),
         ],

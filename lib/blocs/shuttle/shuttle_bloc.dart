@@ -26,10 +26,7 @@ class ShuttleBloc extends Bloc<ShuttleEvent, ShuttleState> {
   bool isLoading = true;
 
   /// ShuttleBloc named constructor
-  ShuttleBloc({this.repository});
-
-  @override
-  ShuttleState get initialState => ShuttleInitial();
+  ShuttleBloc({this.repository}) : super(ShuttleInitial());
 
   @override
   Stream<ShuttleState> mapEventToState(ShuttleEvent event) async* {

@@ -1,12 +1,15 @@
 import 'dart:io';
 
+//import 'package:flutter/foundation.dart';
+import 'package:device_preview/device_preview.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:flutter/services.dart' as services;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 
 import 'android_material_app.dart';
+import 'blocs/on_tap/on_tap_bloc.dart';
 import 'blocs/shuttle/shuttle_bloc.dart';
 import 'blocs/theme/theme_bloc.dart';
 import 'data/repository/shuttle_repository.dart';
@@ -18,8 +21,13 @@ import 'pages/settings_page/settings_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  BlocSupervisor.delegate = await HydratedBlocDelegate.build();
-  return runApp(MyApp());
+  HydratedBloc.storage = await HydratedStorage.build();
+  return runApp(
+    DevicePreview(
+      enabled: false, //!kReleaseMode,
+      builder: (context) => MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatefulWidget {
@@ -29,8 +37,15 @@ class MyApp extends StatefulWidget {
 
 class MyAppState extends State<MyApp> {
   final _pageOptions = [
-    BlocProvider(
-      create: (context) => ShuttleBloc(repository: ShuttleRepository()),
+    MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => ShuttleBloc(repository: ShuttleRepository()),
+        ),
+        BlocProvider(
+          create: (context) => OnTapBloc(),
+        ),
+      ],
       child: MapPage(),
     ),
     BlocProvider(
@@ -48,18 +63,17 @@ class MyAppState extends State<MyApp> {
     return BlocProvider(
         create: (_) => ThemeBloc(),
         child: BlocBuilder<ThemeBloc, ThemeState>(builder: (_, theme) {
-          SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+          services.SystemChrome.setSystemUIOverlayStyle(
+              services.SystemUiOverlayStyle(
             systemNavigationBarColor: theme.getTheme.bottomAppBarColor,
             systemNavigationBarIconBrightness:
                 theme.getTheme.accentColorBrightness,
             statusBarColor: theme.getTheme.bottomAppBarColor,
             statusBarIconBrightness: theme.getTheme.accentColorBrightness,
           ));
-          SystemChrome.setPreferredOrientations([
-            DeviceOrientation.portraitUp,
+          services.SystemChrome.setPreferredOrientations([
+            services.DeviceOrientation.portraitUp,
           ]);
-//          return  AndroidMaterialApp(
-//              theme: theme.getTheme, pageOptions: _pageOptions);
           return Platform.isIOS
               ? IOSCupertinoApp(
                   theme: theme.getTheme, pageOptions: _pageOptions)

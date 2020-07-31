@@ -1,21 +1,21 @@
 class ShuttleSchedule {
   /// Not sure what this is for
-  int id;
+  final int id;
 
   /// ID for the route
-  int routeId;
+  final int routeId;
 
   /// Day of the week route when is enabled (0-6)
-  int startDay;
+  final int startDay;
 
   /// Timestamp when route is enabled on startDay
-  String startTime;
+  final String startTime;
 
   /// Day of the week route when is disabled (0-6)
-  int endDay;
+  final int endDay;
 
   /// Timestamp when route is disabled on endDay
-  String endTime;
+  final String endTime;
 
   ShuttleSchedule(
       {this.id,

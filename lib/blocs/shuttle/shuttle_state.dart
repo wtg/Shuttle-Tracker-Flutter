@@ -37,3 +37,9 @@ class ShuttleError extends ShuttleState {
   @override
   List<Object> get props => [message];
 }
+
+class ShuttleRepeated extends ShuttleState {
+  const ShuttleRepeated();
+  @override
+  List<Object> get props => [];
+}

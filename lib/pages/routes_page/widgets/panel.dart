@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import 'package:latlong/latlong.dart';
 
-import '../../../blocs/detail_map_on_tap/detail_map_on_tap_bloc.dart';
+import '../../../blocs/on_tap/on_tap_bloc.dart';
 import '../../../blocs/theme/theme_bloc.dart';
 import '../../../models/shuttle_stop.dart';
 import 'shuttle_line.dart';
@@ -13,7 +13,7 @@ class Panel extends StatefulWidget {
   final Color routeColor;
   final Map<int, ShuttleStop> routeStops;
   final MapCallback animate;
-  final DetailMapOnTapBloc bloc;
+  final OnTapBloc bloc;
   Panel({this.routeColor, this.routeStops, this.animate, this.bloc});
 
   @override
@@ -26,22 +26,31 @@ class _PanelState extends State<Panel> {
 
   List<Widget> _getStopTileList(ThemeData theme) {
     var tileList = <Widget>[];
+
     widget.routeStops.forEach((key, value) {
+      var tileSelected = selectedName != null && selectedName == value.name;
+      var tileTextColor = theme.brightness == Brightness.dark
+          ? Colors.white
+          : Colors.green[600];
+      var tileColor = tileSelected
+          ? theme.brightness == Brightness.dark
+              ? Colors.white.withOpacity(0.1)
+              : Colors.green.withOpacity(0.1)
+          : theme.backgroundColor;
       tileList.add(
         IntrinsicHeight(
           child: ListTileTheme(
-            selectedColor: theme.brightness == Brightness.dark
-                ? Colors.white
-                : Colors.green[600],
+            selectedColor: tileTextColor,
             child: ListTile(
               dense: true,
-              selected: selectedName != null && selectedName == value.name
-                  ? true
-                  : false,
+              selected: tileSelected ? true : false,
               title: Row(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
-                  ShuttleLine(color: widget.routeColor),
+                  ShuttleLine(
+                    routeColor: widget.routeColor,
+                    isSelected: tileSelected,
+                  ),
                   SizedBox(
                     width: 20,
                   ),
@@ -49,12 +58,7 @@ class _PanelState extends State<Panel> {
                     child: Container(
                       padding: const EdgeInsets.all(8.0),
                       decoration: BoxDecoration(
-                        color:
-                            selectedName != null && selectedName == value.name
-                                ? theme.brightness == Brightness.dark
-                                    ? Colors.white.withOpacity(0.1)
-                                    : Colors.green.withOpacity(0.1)
-                                : theme.backgroundColor,
+                        color: tileColor,
                         borderRadius: BorderRadius.circular(16.0),
                         shape: BoxShape.rectangle,
                       ),
@@ -95,8 +99,8 @@ class _PanelState extends State<Panel> {
             overscroll.disallowGlow();
             return null;
           },
-          child: BlocBuilder<DetailMapOnTapBloc, DetailMapOnTapState>(
-              bloc: widget.bloc,
+          child: BlocBuilder<OnTapBloc, OnTapState>(
+              cubit: widget.bloc,
               builder: (context, state) {
                 if (state is TappedState) {
                   selectedName = state.stopName;
@@ -111,14 +115,15 @@ class _PanelState extends State<Panel> {
                   color: theme.getTheme.backgroundColor,
                   child: _stopTileList.isNotEmpty
                       ? Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 8.0),
-                        child: ScrollablePositionedList.builder(
+                          padding: const EdgeInsets.symmetric(vertical: 8.0),
+                          child: ScrollablePositionedList.builder(
                             physics: ClampingScrollPhysics(),
                             itemScrollController: scrollController,
                             itemCount: _stopTileList.length,
-                            itemBuilder: (context, index) => _stopTileList[index],
+                            itemBuilder: (context, index) =>
+                                _stopTileList[index],
                           ),
-                      )
+                        )
                       : Center(
                           child: Text(
                             'No stops to show',

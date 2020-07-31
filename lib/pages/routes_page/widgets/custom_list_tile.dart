@@ -6,35 +6,29 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
 
-import '../../../blocs/detail_map_on_tap/detail_map_on_tap_bloc.dart';
+import '../../../blocs/on_tap/on_tap_bloc.dart';
 import '../../../models/shuttle_route.dart';
 import '../../../models/shuttle_stop.dart';
 import '../detail_page.dart';
 
-class CustomListTile extends StatefulWidget {
+class CustomListTile extends StatelessWidget {
   final ShuttleRoute route;
   final List<ShuttleStop> stops;
   final ThemeData theme;
+  final OnTapBloc bloc = OnTapBloc();
 
   CustomListTile({this.route, this.stops, this.theme});
 
   bool get isEnabled => route.enabled;
   bool get isActive => route.active;
 
-  @override
-  _CustomListTileState createState() => _CustomListTileState();
-}
-
-class _CustomListTileState extends State<CustomListTile> {
-  DetailMapOnTapBloc bloc = DetailMapOnTapBloc();
-
   Icon _getIcon() {
-    var icon = widget.isEnabled && widget.isActive
+    var icon = isEnabled && isActive
         ? Icon(
             Icons.check_circle,
             color: Colors.green,
           )
-        : widget.isEnabled && !widget.isActive
+        : isEnabled && !isActive
             ? Icon(
                 Icons.error,
                 color: Colors.yellow[700],
@@ -47,14 +41,14 @@ class _CustomListTileState extends State<CustomListTile> {
   }
 
   Map<int, ShuttleStop> _getRouteStops() {
-    var stopIds = widget.route.stopIds;
+    var stopIds = route.stopIds;
     var routeStops = <int, ShuttleStop>{};
 
     for (var stopId in stopIds) {
       routeStops[stopId] = null;
     }
 
-    for (var shuttleStop in widget.stops) {
+    for (var shuttleStop in stops) {
       if (stopIds.contains(shuttleStop.id)) {
         routeStops[shuttleStop.id] = shuttleStop;
       }
@@ -65,10 +59,10 @@ class _CustomListTileState extends State<CustomListTile> {
 
   @override
   Widget build(BuildContext context) {
-    var polyline = <Polyline>[widget.route.getPolyline];
+    var polyline = <Polyline>[route.getPolyline];
 
-//    var image = ShuttleImage(svgColor: widget.route.color);
-    var color = widget.route.color;
+//    var image = ShuttleImage(svgColor: route.color);
+    var color = route.color;
 
     var circle = ColorFiltered(
       colorFilter: ColorFilter.mode(color, BlendMode.modulate),
@@ -82,17 +76,25 @@ class _CustomListTileState extends State<CustomListTile> {
     return BlocProvider(
       create: (_) => bloc,
       child: ListTile(
-        leading: circle,
-        title: Align(
-          alignment: Alignment(-1.2, 0),
-          child: Text(
-            widget.route.name,
-            style: TextStyle(
-              color: widget.theme.hoverColor,
-              fontSize: 16,
-              fontWeight: FontWeight.w500,
+        leading: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            circle,
+            SizedBox(
+              width: 15,
             ),
-          ),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                route.name,
+                style: TextStyle(
+                  color: theme.hoverColor,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ),
+          ],
         ),
         trailing: Row(
           mainAxisSize: MainAxisSize.min,
@@ -116,7 +118,7 @@ class _CustomListTileState extends State<CustomListTile> {
               Platform.isIOS
                   ? CupertinoIcons.right_chevron
                   : Icons.keyboard_arrow_right,
-              color: widget.theme.hoverColor,
+              color: theme.hoverColor,
             ),
           ],
         ),
@@ -126,7 +128,7 @@ class _CustomListTileState extends State<CustomListTile> {
             CupertinoPageRoute(
               builder: (_) {
                 return DetailPage(
-                  title: widget.route.name,
+                  title: route.name,
                   polyline: polyline,
                   routeColor: color,
                   routeStops: _getRouteStops(),
@@ -136,7 +138,23 @@ class _CustomListTileState extends State<CustomListTile> {
             ),
           );
         },
+        /**                                                  Adds to Favorites
+        onLongPress: () {
+          route.favorite
+              ? route.favorite = false
+              : route.favorite = true;
+          log("Set $name favorite route not $fav.");
+          setState(() {});
+          final favorited = route.favorite;
+          FavoriteNotification(favorites: favorited)..dispatch(context);
+        }, **/
       ),
     );
   }
+}
+
+class FavoriteNotification extends Notification {
+  final bool favorites;
+
+  const FavoriteNotification({this.favorites});
 }

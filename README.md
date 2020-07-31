@@ -39,8 +39,8 @@ Flutter ShuttleTracker is a cross-platform port of <a href="https://github.com/w
    - NOTE: VS Code and Android Studio are the recommended editors for Flutter
 4. Retrieve all the required dependencies with ```flutter pub get```
 5. If you're in a different Flutter release channel, switch back to stable with ```flutter channel stable```
-5. Open your preferred emulator (Android or iOS)
-6. Run the app by clicking the "green play button" on the top right of Android Studio or VS Code
+6. Open your preferred emulator (Android or iOS)
+7. Run the app by clicking the "green play button" on the top right of Android Studio or VS Code
 
 ## Contributing
 

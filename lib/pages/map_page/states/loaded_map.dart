@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_shuttletracker/blocs/on_tap_eta/on_tap_eta_bloc.dart';
 import 'package:latlong/latlong.dart';
 
 import '../../../blocs/on_tap/on_tap_bloc.dart';
@@ -92,7 +93,7 @@ class _LoadedMapState extends State<LoadedMap> with TickerProviderStateMixin {
   }
 
   List<Marker> _createStops(List<ShuttleStop> stops, BuildContext context,
-      ThemeData theme, OnTapBloc bloc) {
+      ThemeData theme, OnTapEtaBloc bloc) {
     var markers = <Marker>[];
 
     for (var stop in stops) {
@@ -100,7 +101,7 @@ class _LoadedMapState extends State<LoadedMap> with TickerProviderStateMixin {
         markers.add(stop.getMarker(
           animatedMapMove: animatedMapMove,
           context: context,
-        )); //bloc: bloc));
+        )); //bloc: bloc));                      //Ask Sam why this is commented
       }
     }
     //print("Number of stops on map: ${markers.length}");
@@ -159,13 +160,13 @@ class _LoadedMapState extends State<LoadedMap> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    var onTapBloc = context.bloc<OnTapBloc>();
+    var onTapBloc = context.bloc<OnTapEtaBloc>();
     return Scaffold(
       body: BlocBuilder<ThemeBloc, ThemeState>(
         builder: (context, theme) {
           var isDarkMode = theme.getThemeState;
 
-          return BlocBuilder<OnTapBloc, OnTapState>(
+          return BlocBuilder<OnTapEtaBloc, OnTapEtaState>(
             builder: (context, state) {
               var routes = _createRoutes(widget.routes, _ids, _legend, _colors);
               var updates = _createUpdates(widget.updates, context, _colors);

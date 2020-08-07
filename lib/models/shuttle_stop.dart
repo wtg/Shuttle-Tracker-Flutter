@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
 
 import '../blocs/on_tap/on_tap_bloc.dart';
+import '../blocs/on_tap_eta/on_tap_eta_bloc.dart';
 import 'shuttle_point.dart';
 
 class ShuttleStop extends ShuttlePoint {
@@ -53,6 +54,8 @@ class ShuttleStop extends ShuttlePoint {
       BuildContext context,
       ThemeData theme,
       OnTapBloc bloc,
+      OnTapEtaBloc bloc2,
+      double eta,
       int index}) {
     var selectedAsset = ColorFiltered(
       colorFilter: ColorFilter.mode(Colors.green[400], BlendMode.modulate),
@@ -80,7 +83,9 @@ class ShuttleStop extends ShuttlePoint {
         //     //animationDuration: Duration(milliseconds: 100),
         //   )..show(context);
         // }
-
+        if (bloc2 != null) {
+          bloc2.add(MainMapStopTapped(name: name, stopEta: eta, index: index));
+        }
         if (bloc != null) {
           bloc.add(MapStopTapped(stopName: name, index: index));
         }

@@ -34,8 +34,10 @@ class GeneralSettings extends StatelessWidget {
             themeBloc.add(ThemeEvent.toggle);
           },
           activeColor: Colors.white,
-          android: (_) => MaterialSwitchData(activeTrackColor: Colors.green),
-          ios: (_) => CupertinoSwitchData(activeColor: Colors.green),
+          material: (context, _) =>
+              MaterialSwitchData(activeTrackColor: Colors.green),
+          cupertino: (context, _) =>
+              CupertinoSwitchData(activeColor: Colors.green),
         ),
       ),
     ]);

@@ -1,5 +1,5 @@
 name: flutter_shuttletracker
-description: A new Flutter project.
+description: Flutter ShuttleTracker is a cross-platform port of ShuttleTracker that utilizes the Flutter SDK for development.
 
 version: 1.0.0+1
 
@@ -12,18 +12,18 @@ dependencies:
   
   device_preview: ^0.4.7
   flushbar: ^1.10.4
-  flutter_cupertino_settings: ^0.3.0
-  scrollable_positioned_list: ^0.1.6
-  hydrated_bloc: ^6.0.0
-  shared_preferences: ^0.5.7
+  flutter_cupertino_settings: ^0.3.1
+  scrollable_positioned_list: ^0.1.7
+  hydrated_bloc: ^6.0.1
+  shared_preferences: ^0.5.8
   flutter_native_splash: ^0.1.9
   flutter_platform_widgets: ^0.60.1
-  flutter_widget_from_html: ^0.3.3
+  flutter_widget_from_html: ^0.4.3
   observable: ^0.22.2
   flutter_svg: ^0.18.0
   flutter_bloc: ^6.0.1
-  equatable: ^1.2.0
-  responsive_framework: ^0.0.7
+  equatable: ^1.2.3
+  responsive_framework: ^0.0.8
   http: ^0.12.2
   flutter_map: ^0.8.2 #DO NOT UPDATE PAST 0.8.2, LATER VERSIONS AFFECT DARK MODE FUNCTIONALITY!!
   geolocation: ^1.1.2

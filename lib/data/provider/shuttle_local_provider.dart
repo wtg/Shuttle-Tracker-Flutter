@@ -1,4 +1,3 @@
-
 import 'dart:async';
 import 'package:http/http.dart' as http;
 
@@ -18,12 +17,10 @@ class ShuttleLocalProvider extends ShuttleApiProvider {
       if (response.statusCode == 200) {
         isConnected = true;
       }
-    } 
-    catch (error) {
+    } catch (error) {
       isConnected = false;
     }
     //print("App has polled $type API: $isConnected");
     return response;
   }
 }
-

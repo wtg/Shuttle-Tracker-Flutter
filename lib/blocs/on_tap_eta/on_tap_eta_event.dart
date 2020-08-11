@@ -9,8 +9,9 @@ abstract class OnTapEtaEvent extends Equatable {
 class MainMapStopTapped extends OnTapEtaEvent {
   final int index;
 
-  const MainMapStopTapped({@required name, @required stopEta,
-    @required this.index}) : super(stopName: name, eta: stopEta);
+  const MainMapStopTapped(
+      {@required name, @required stopEta, @required this.index})
+      : super(stopName: name, eta: stopEta);
 
   @override
   List<Object> get props => [eta];

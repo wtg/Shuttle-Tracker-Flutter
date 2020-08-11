@@ -11,10 +11,12 @@ class OnTapEtaBloc extends Bloc<OnTapEtaEvent, OnTapEtaState> {
   OnTapEtaBloc() : super(OnTapEtaInitial());
 
   @override
-  Stream<OnTapEtaState> mapEventToState(OnTapEtaEvent event,) async* {
+  Stream<OnTapEtaState> mapEventToState(
+    OnTapEtaEvent event,
+  ) async* {
     if (event is MainMapStopTapped) {
-      yield MainTappedState(stopName: event.stopName, stopEta: event.eta,
-          index: event.index);
+      yield MainTappedState(
+          stopName: event.stopName, stopEta: event.eta, index: event.index);
     }
   }
 }

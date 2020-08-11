@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
@@ -98,9 +100,10 @@ class _LoadedMapState extends State<LoadedMap> with TickerProviderStateMixin {
 
     for (var stop in stops) {
       if (_ids.contains(stop.id)) {
-        markers.add(stop.getMarker(
+        markers.add(stop.getEtaMarker(
           animatedMapMove: animatedMapMove,
           context: context,
+          bloc: bloc,
         )); //bloc: bloc));                      //Ask Sam why this is commented
       }
     }
@@ -173,6 +176,9 @@ class _LoadedMapState extends State<LoadedMap> with TickerProviderStateMixin {
               var stops = _createStops(
                   widget.stops, context, theme.getTheme, onTapBloc);
               var location = _createLocation(widget.location);
+
+              if (state is MainTappedState){log("The test works");}
+              
               return Stack(children: <Widget>[
                 Column(
                   children: [

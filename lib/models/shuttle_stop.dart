@@ -178,7 +178,6 @@ class ShuttleStop extends ShuttlePoint {
     return GestureDetector(
       onTap: () {
         animatedMapMove(getLatLng, 15.2);
-        log(bloc.toString());
         if (bloc != null) {
           bloc.add(MainMapStopTapped(name: name, stopEta: eta, index: index));
         }

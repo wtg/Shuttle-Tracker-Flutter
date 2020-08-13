@@ -14,6 +14,7 @@ import '../../../models/shuttle_route.dart';
 import '../../../models/shuttle_stop.dart';
 import '../../../models/shuttle_update.dart';
 import '../widgets/attribution.dart';
+import '../widgets/eta_panel.dart';
 import '../widgets/legend.dart';
 
 class LoadedMap extends StatefulWidget {
@@ -177,48 +178,105 @@ class _LoadedMapState extends State<LoadedMap> with TickerProviderStateMixin {
                   widget.stops, context, theme.getTheme, onTapBloc);
               var location = _createLocation(widget.location);
 
-              if (state is MainTappedState){log("The test works");}
-              
-              return Stack(children: <Widget>[
-                Column(
-                  children: [
-                    /// Map
-                    Flexible(
-                      child: FlutterMap(
-                        mapController: _mapController,
-                        options: MapOptions(
-                          nePanBoundary: LatLng(42.78, -73.63),
-                          swPanBoundary: LatLng(42.68, -73.71),
-                          center: findAvgLatLong(widget.stops),
-                          zoom: 14,
-                          maxZoom: 16, // max you can zoom in
-                          minZoom: 13, // min you can zoom out
-                        ),
-                        layers: [
-                          TileLayerOptions(
-                            backgroundColor: theme.getTheme.bottomAppBarColor,
-                            urlTemplate: isDarkMode
-                                ? LoadedMap.darkLink
-                                : LoadedMap.lightLink,
-                            subdomains: ['a', 'b', 'c'],
-                            tileProvider: CachedNetworkTileProvider(),
+              if (state is MainTappedState) {
+                log("TappedState initiated");
+                return Stack(children: <Widget>[
+                  Column(
+                    children: [
+                      /// Map
+                      Flexible(
+                        child: FlutterMap(
+                          mapController: _mapController,
+                          options: MapOptions(
+                            nePanBoundary: LatLng(42.78, -73.63),
+                            swPanBoundary: LatLng(42.68, -73.71),
+                            center: findAvgLatLong(widget.stops),
+                            zoom: 14,
+                            maxZoom: 16,
+                            // max you can zoom in
+                            minZoom: 13, // min you can zoom out
                           ),
-                          PolylineLayerOptions(polylines: routes),
-                          MarkerLayerOptions(markers: updates),
-                          MarkerLayerOptions(markers: stops),
-                          MarkerLayerOptions(markers: location),
-                        ],
+                          layers: [
+                            TileLayerOptions(
+                              backgroundColor: theme.getTheme.bottomAppBarColor,
+                              urlTemplate: isDarkMode
+                                  ? LoadedMap.darkLink
+                                  : LoadedMap.lightLink,
+                              subdomains: ['a', 'b', 'c'],
+                              tileProvider: CachedNetworkTileProvider(),
+                            ),
+                            PolylineLayerOptions(polylines: routes),
+                            MarkerLayerOptions(markers: updates),
+                            MarkerLayerOptions(markers: stops),
+                            MarkerLayerOptions(markers: location),
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-                Attribution(
-                  theme: theme.getTheme,
-                ),
-                Legend(
-                  legend: _legend,
-                ),
-              ]);
+                      Divider(
+                        color: theme.getTheme.brightness == Brightness.dark ?
+                                Colors.white : Colors.black,
+                        thickness: 4,
+                      ),
+                      Flexible(
+                        child: ETAPanel(
+                          animate: animatedMapMove,
+                          bloc: onTapBloc,
+                        ),
+                      )
+                    ],
+                  ),
+                  Attribution(
+                    theme: theme.getTheme,
+                  ),
+                  Legend(
+                    legend: _legend,
+                  ),
+                ]);
+              }
+              else{
+                return Stack(children: <Widget>[
+                  Column(
+                    children: [
+
+                      /// Map
+                      Flexible(
+                        child: FlutterMap(
+                          mapController: _mapController,
+                          options: MapOptions(
+                            nePanBoundary: LatLng(42.78, -73.63),
+                            swPanBoundary: LatLng(42.68, -73.71),
+                            center: findAvgLatLong(widget.stops),
+                            zoom: 14,
+                            maxZoom: 16,
+                            // max you can zoom in
+                            minZoom: 13, // min you can zoom out
+                          ),
+                          layers: [
+                            TileLayerOptions(
+                              backgroundColor: theme.getTheme.bottomAppBarColor,
+                              urlTemplate: isDarkMode
+                                  ? LoadedMap.darkLink
+                                  : LoadedMap.lightLink,
+                              subdomains: ['a', 'b', 'c'],
+                              tileProvider: CachedNetworkTileProvider(),
+                            ),
+                            PolylineLayerOptions(polylines: routes),
+                            MarkerLayerOptions(markers: updates),
+                            MarkerLayerOptions(markers: stops),
+                            MarkerLayerOptions(markers: location),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  Attribution(
+                    theme: theme.getTheme,
+                  ),
+                  Legend(
+                    legend: _legend,
+                  ),
+                ]);
+            }
             },
           );
         },

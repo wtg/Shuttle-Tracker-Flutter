@@ -6,25 +6,30 @@ import '../../models/shuttle_update.dart';
 
 class FusionSocket {
   String serverID;
-  List<String> subscriptionTopics;
+  List<String> subscriptionTopics = [];
   IOWebSocketChannel channel;
 
   /// Start of the Fusion web socket functions
   /// Initialize a connection with the server, check if the server
   /// is already running or timed out
-  void start() {
+  void openWS() {
     channel = IOWebSocketChannel.connect('wss://shuttles.rpi.edu/fusion/');
 
-    channel.stream.listen((message) {
-      // {"type":"server_id","message":"0ad35438-58bd-11ea-a696-0242ac110017"}
-      var response = jsonDecode(message);
-      if (response['type'] == 'server_id') {
-        serverID = response['message'];
-        return;
-      } else if (response['type'] == 'vehicle_location') {
-        handleVehicleLocations(message);
-      }
-    });
+    // channel.stream.listen((message) {
+    //   // {"type":"server_id","message":"0ad35438-58bd-11ea-a696-0242ac110017"}
+    //   var response = jsonDecode(message);
+    //   if (response['type'] == 'server_id') {
+    //     serverID = response['message'];
+    //     print(serverID);
+    //     return;
+    //   } else if (response['type'] == 'vehicle_location') {
+    //     handleVehicleLocations(message);
+    //   }
+    // });
+  }
+
+  void closeWS() {
+    channel.sink.close();
   }
 
   /// Subscribe to certain socket channels
@@ -59,6 +64,7 @@ class FusionSocket {
             .map<ShuttleUpdate>((json) => ShuttleUpdate.fromJson(json))
             .toList()
         : [];
+    print(updatesList);
     return updatesList;
   }
 }

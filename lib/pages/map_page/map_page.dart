@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/widgets.dart';
 
 import '../../blocs/shuttle/shuttle_bloc.dart';
-import '../../widgets/loading_state.dart';
+import '../../global_widgets/loading_state.dart';
 import 'states/error_map.dart';
 import 'states/initial_map.dart';
 import 'states/loaded_map.dart';

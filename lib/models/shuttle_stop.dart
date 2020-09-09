@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
 
 import '../blocs/on_tap/on_tap_bloc.dart';
+import '../blocs/on_tap_eta/on_tap_eta_bloc.dart';
+import '../pages/map_page/widgets/eta_panel.dart';
 import 'shuttle_point.dart';
 
 class ShuttleStop extends ShuttlePoint {
@@ -65,22 +67,6 @@ class ShuttleStop extends ShuttlePoint {
     return GestureDetector(
       onTap: () {
         animatedMapMove(getLatLng, 15.2);
-
-        /// FLUSHBAR
-        // if (context != null) {
-        //   Flushbar(
-        //     margin: EdgeInsets.only(top: 60),
-        //     maxWidth: MediaQuery.of(context).size.width * 0.95,
-        //     flushbarStyle: FlushbarStyle.FLOATING,
-        //     borderRadius: 8,
-        //     flushbarPosition: FlushbarPosition.TOP,
-        //     message: name,
-        //     isDismissible: true,
-        //     duration: Duration(seconds: 3),
-        //     //animationDuration: Duration(milliseconds: 100),
-        //   )..show(context);
-        // }
-
         if (bloc != null) {
           bloc.add(MapStopTapped(stopName: name, index: index));
         }
@@ -125,5 +111,86 @@ class ShuttleStop extends ShuttlePoint {
                   bloc: bloc,
                   index: index);
             }));
+  }
+
+  Marker getEtaMarker(
+      {@required dynamic animatedMapMove,
+      BuildContext context,
+      ThemeData theme,
+      OnTapEtaBloc bloc,
+      int index}) {
+    var selected = false;
+    return Marker(
+        width: 44.0,
+        height: 44.0,
+        point: getLatLng,
+        builder: (ctx) => BlocBuilder<OnTapEtaBloc, OnTapEtaState>(
+            cubit: bloc,
+            builder: (_, state) {
+              if (state is MainTappedState) {
+                if (state.stopName == name) {
+                  selected = true;
+                }
+              }
+              return _getEtaGesture(
+                  animatedMapMove: animatedMapMove,
+                  selected: selected,
+                  context: context,
+                  theme: theme,
+                  bloc: bloc,
+                  index: index);
+            }));
+  }
+
+  Widget _getEtaGesture(
+      {dynamic animatedMapMove,
+      bool selected,
+      BuildContext context,
+      ThemeData theme,
+      OnTapEtaBloc bloc,
+      double eta,
+      int index}) {
+    var selectedAsset = ColorFiltered(
+      colorFilter: ColorFilter.mode(Colors.green[400], BlendMode.modulate),
+      child: Image.asset(
+        'assets/img/stop.png',
+        width: 20,
+        height: 20,
+      ),
+    );
+
+    return GestureDetector(
+      onTap: () {
+        animatedMapMove(getLatLng, 14.2);
+        if (context != null) {
+          showBottomSheet(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(25.0),
+                      topRight: Radius.circular(25.0))),
+              context: context,
+              builder: (_) => ETAPanel(
+                    markerName: '$name',
+                  ));
+        }
+        //TODO: CHANGING MARKER FROM NORMAL TO GREEN CAUSES MAP TO REFRESH
+        
+        /*
+        if (bloc != null) {
+          bloc.add(MainMapStopTapped(name: name, stopEta: eta, index: index));
+        }
+        */
+      },
+      child: Container(
+        decoration: BoxDecoration(
+            border: Border.all(width: 15, style: BorderStyle.none),
+            shape: BoxShape.circle),
+        child: selected
+            ? selectedAsset
+            : Image.asset(
+                'assets/img/stop.png',
+              ),
+      ),
+    );
   }
 }

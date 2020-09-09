@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-class CustomBottomSheet extends StatelessWidget {
+class ETAPanel extends StatelessWidget {
   final String markerName;
-  CustomBottomSheet({this.markerName});
+  ETAPanel({this.markerName});
 
   Widget build(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height * 0.15,
+      height: MediaQuery.of(context).size.height * 0.35,
       child: Center(
           child: Column(
         children: <Widget>[
@@ -21,8 +21,15 @@ class CustomBottomSheet extends StatelessWidget {
           ),
           Text(
             '$markerName',
-            style: TextStyle(color: Theme.of(context).hoverColor),
+            style: TextStyle(
+                color: Theme.of(context).hoverColor,
+                fontSize: 20,
+                fontWeight: FontWeight.w700),
           ),
+          SizedBox(
+            height: 30,
+          ),
+          Text("Add ETA data here")
         ],
       )),
     );

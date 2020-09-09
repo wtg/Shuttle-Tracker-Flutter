@@ -10,6 +10,7 @@ import 'package:hydrated_bloc/hydrated_bloc.dart';
 
 import 'android_material_app.dart';
 import 'blocs/on_tap/on_tap_bloc.dart';
+import 'blocs/on_tap_eta/on_tap_eta_bloc.dart';
 import 'blocs/shuttle/shuttle_bloc.dart';
 import 'blocs/theme/theme_bloc.dart';
 import 'data/repository/shuttle_repository.dart';
@@ -44,6 +45,9 @@ class MyAppState extends State<MyApp> {
         ),
         BlocProvider(
           create: (context) => OnTapBloc(),
+        ),
+        BlocProvider(
+          create: (context) => OnTapEtaBloc(),
         ),
       ],
       child: MapPage(),

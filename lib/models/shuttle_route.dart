@@ -70,7 +70,7 @@ class ShuttleRoute {
         enabled: json['enabled'],
         color:
             Color(int.parse(json['color'].toString().replaceAll('#', '0xff'))),
-        width: (json['width'] as num).toDouble(),
+        width: (json['width'] as num).toDouble() * 0.7,
         stopIds: List<int>.from(json['stop_ids'] as List),
         created: json['created'],
         updated: json['updated'],

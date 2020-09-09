@@ -10,12 +10,12 @@ class OnTapEtaInitial extends OnTapEtaState {
   List<Object> get props => [stopName];
 }
 
-class TappedState extends OnTapEtaState {
-  final int stopEta;
+class MainTappedState extends OnTapEtaState {
+  final double stopEta;
   final String stopName;
   final int index;
 
-  TappedState({this.stopEta, this.stopName, this.index});
+  MainTappedState({this.stopEta, this.stopName, this.index});
 
   @override
   List<Object> get props => [stopEta, stopName, index];

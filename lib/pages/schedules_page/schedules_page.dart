@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 import '../../blocs/theme/theme_bloc.dart';
 
@@ -54,28 +53,41 @@ class _SchedulesPageState extends State<SchedulesPage> {
                                     color: theme.getTheme.hoverColor,
                                     fontWeight: FontWeight.w600,
                                     fontSize: 19)),
-                            Text(
-                                '\nNew North, South, and West Routes\n'
-                                'Monday–Friday 7am – 11pm\n',
+                            Text(''' 
+
+North and West Routes
+Monday–Friday 7am – 11:45pm
+
+Hudson Valley College Suites Shuttles
+Monday – Friday 7am – 7pm
+
+CDTA Express Route
+Monday–Friday 7am – 7pm
+                                ''',
                                 style: TextStyle(
                                     color: theme.getTheme.hoverColor,
                                     fontSize: 13)),
-                            GestureDetector(
-                              onTap: () async {
-                                var url =
-                                    'https://shuttles.rpi.edu/static/Weekday.pdf';
-                                if (await canLaunch(url)) {
-                                  await launch(url);
-                                } else {
-                                  throw 'Could not launch $url';
-                                }
-                              },
-                              child: Text('View PDF',
-                                  style: TextStyle(
-                                      color: Colors.red,
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 13)),
-                            ),
+                            // GestureDetector(
+                            //   onTap: () async {
+                            //     var url =
+                            //         'https://shuttles.rpi.edu/static/Weekday.pdf';
+                            //     if (await canLaunch(url)) {
+                            //       await launch(url);
+                            //     } else {
+                            //       throw 'Could not launch $url';
+                            //     }
+                            //   },
+                            //   child: Text('View PDF',
+                            //       style: TextStyle(
+                            //           color: Colors.red,
+                            //           fontWeight: FontWeight.w600,
+                            //           fontSize: 13)),
+                            // ),
+                            Text('No paper schedules this semester',
+                                style: TextStyle(
+                                    color: Colors.red,
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 13)),
                             SizedBox(height: 10)
                           ],
                         ),
@@ -101,32 +113,38 @@ class _SchedulesPageState extends State<SchedulesPage> {
                                     color: theme.getTheme.hoverColor,
                                     fontWeight: FontWeight.w600,
                                     fontSize: 19)),
-                            Text(
-                                'West and East Routes\n'
-                                'Saturday–Sunday 9:30am – 5pm\n\n'
-                                'Weekend Express Route\n'
-                                'Saturday–Sunday 4:30pm – 8pm\n\n'
-                                'Late Night Route\n'
-                                'Friday–Saturday 8pm – 4am\n',
+                            Text('''
+North and West Routes
+Saturday 9am – 11:45pm
+Sunday 9am – 8pm
+
+Hudson Valley College Suites Shuttles
+Saturday–Sunday 7am – 7pm
+                                ''',
                                 style: TextStyle(
                                     color: theme.getTheme.hoverColor,
                                     fontSize: 13)),
-                            GestureDetector(
-                              onTap: () async {
-                                var url =
-                                    'https://shuttles.rpi.edu/static/Weekend.pdf';
-                                if (await canLaunch(url)) {
-                                  await launch(url);
-                                } else {
-                                  throw 'Could not launch $url';
-                                }
-                              },
-                              child: Text('View PDF',
-                                  style: TextStyle(
-                                      color: Colors.red,
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 13)),
-                            ),
+                            // GestureDetector(
+                            //   onTap: () async {
+                            //     var url =
+                            //         'https://shuttles.rpi.edu/static/Weekend.pdf';
+                            //     if (await canLaunch(url)) {
+                            //       await launch(url);
+                            //     } else {
+                            //       throw 'Could not launch $url';
+                            //     }
+                            //   },
+                            //   child: Text('View PDF',
+                            //       style: TextStyle(
+                            //           color: Colors.red,
+                            //           fontWeight: FontWeight.w600,
+                            //           fontSize: 13)),
+                            // ),
+                            Text('No paper schedules this semester',
+                                style: TextStyle(
+                                    color: Colors.red,
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 13)),
                             SizedBox(height: 10)
                           ],
                         ),

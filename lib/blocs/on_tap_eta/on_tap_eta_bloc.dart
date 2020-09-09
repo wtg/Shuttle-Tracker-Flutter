@@ -14,9 +14,9 @@ class OnTapEtaBloc extends Bloc<OnTapEtaEvent, OnTapEtaState> {
   Stream<OnTapEtaState> mapEventToState(
     OnTapEtaEvent event,
   ) async* {
-    if (event is MapStopTapped) {
-      yield TappedState(stopName: event.stopName, stopEta: event.eta,
-          index: event.index);
+    if (event is MainMapStopTapped) {
+      yield MainTappedState(
+          stopName: event.stopName, stopEta: event.eta, index: event.index);
+    }
   }
-}
 }

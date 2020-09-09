@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
@@ -131,10 +129,10 @@ class ShuttleStop extends ShuttlePoint {
 
   Marker getEtaMarker(
       {@required dynamic animatedMapMove,
-        BuildContext context,
-        ThemeData theme,
-        OnTapEtaBloc bloc,
-        int index}) {
+      BuildContext context,
+      ThemeData theme,
+      OnTapEtaBloc bloc,
+      int index}) {
     var selected = false;
     return Marker(
         width: 44.0,
@@ -160,12 +158,12 @@ class ShuttleStop extends ShuttlePoint {
 
   Widget _getEtaGesture(
       {dynamic animatedMapMove,
-        bool selected,
-        BuildContext context,
-        ThemeData theme,
-        OnTapEtaBloc bloc,
-        double eta,
-        int index}) {
+      bool selected,
+      BuildContext context,
+      ThemeData theme,
+      OnTapEtaBloc bloc,
+      double eta,
+      int index}) {
     var selectedAsset = ColorFiltered(
       colorFilter: ColorFilter.mode(Colors.green[400], BlendMode.modulate),
       child: Image.asset(
@@ -189,8 +187,8 @@ class ShuttleStop extends ShuttlePoint {
         child: selected
             ? selectedAsset
             : Image.asset(
-          'assets/img/stop.png',
-        ),
+                'assets/img/stop.png',
+              ),
       ),
     );
   }

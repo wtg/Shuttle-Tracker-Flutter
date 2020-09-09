@@ -206,15 +206,16 @@ class _LoadedMapState extends State<LoadedMap> with TickerProviderStateMixin {
                               tileProvider: CachedNetworkTileProvider(),
                             ),
                             PolylineLayerOptions(polylines: routes),
-                            MarkerLayerOptions(markers: updates),
                             MarkerLayerOptions(markers: stops),
                             MarkerLayerOptions(markers: location),
+                            MarkerLayerOptions(markers: updates),
                           ],
                         ),
                       ),
                       Divider(
-                        color: theme.getTheme.brightness == Brightness.dark ?
-                                Colors.white : Colors.black,
+                        color: theme.getTheme.brightness == Brightness.dark
+                            ? Colors.white
+                            : Colors.black,
                         thickness: 4,
                       ),
                       Flexible(
@@ -232,12 +233,10 @@ class _LoadedMapState extends State<LoadedMap> with TickerProviderStateMixin {
                     legend: _legend,
                   ),
                 ]);
-              }
-              else{
+              } else {
                 return Stack(children: <Widget>[
                   Column(
                     children: [
-
                       /// Map
                       Flexible(
                         child: FlutterMap(
@@ -261,9 +260,9 @@ class _LoadedMapState extends State<LoadedMap> with TickerProviderStateMixin {
                               tileProvider: CachedNetworkTileProvider(),
                             ),
                             PolylineLayerOptions(polylines: routes),
-                            MarkerLayerOptions(markers: updates),
                             MarkerLayerOptions(markers: stops),
                             MarkerLayerOptions(markers: location),
+                            MarkerLayerOptions(markers: updates),
                           ],
                         ),
                       ),
@@ -276,7 +275,7 @@ class _LoadedMapState extends State<LoadedMap> with TickerProviderStateMixin {
                     legend: _legend,
                   ),
                 ]);
-            }
+              }
             },
           );
         },

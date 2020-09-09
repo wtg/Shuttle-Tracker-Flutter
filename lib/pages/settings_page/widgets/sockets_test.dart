@@ -4,16 +4,17 @@ import 'package:flutter/material.dart';
 import 'package:web_socket_channel/io.dart';
 
 class SocketTest extends StatefulWidget {
+
   @override
   State<StatefulWidget> createState() => _SocketTestState();
 }
 
 class _SocketTestState extends State<SocketTest> {
   final IOWebSocketChannel channel =
-      IOWebSocketChannel.connect('wss://shuttles.rpi.edu/fusion/');
+  IOWebSocketChannel.connect('wss://shuttles.rpi.edu/fusion/');
 
   void connectToSocket() {
-    var topic = 'vehicle_location';
+    var topic = 'eta';
     var data = {'type': 'subscribe', 'message': topic};
     print(jsonEncode(data));
     channel.sink.add(jsonEncode(data));
@@ -22,9 +23,9 @@ class _SocketTestState extends State<SocketTest> {
 
   // bus button
   void sendToSocket() {
-    var send =
-        '''{"type":"bus_button","message":{"latitude":42.729216,"longitude":-73.673618,"emojiChoice":"shirls"}}''';
-    channel.sink.add(send);
+    var send = {'type':'bus_button','message':{'latitude':42.729216,'longitude':-73.673618,'emojiChoice':'shirls'}};
+    channel.sink.add(jsonEncode(send));
+    print(jsonEncode(send));
     //channel.stream.listen(print);
   }
 

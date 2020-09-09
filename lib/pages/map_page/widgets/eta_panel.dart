@@ -24,7 +24,7 @@ class _ETAPanelState extends State<ETAPanel> {
 
   @override
   void dispose() {
-    ws.unsubscribe("eta");
+    // ws.unsubscribe("eta");
     ws.closeWS();
 
     super.dispose();

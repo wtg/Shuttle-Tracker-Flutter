@@ -67,4 +67,9 @@ class FusionSocket {
     print(updatesList);
     return updatesList;
   }
+
+  void sendToSocket(String message) {
+    print("sending $message");
+    channel.sink.add(message);
+  }
 }

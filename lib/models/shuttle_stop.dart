@@ -4,6 +4,7 @@ import 'package:flutter_map/flutter_map.dart';
 
 import '../blocs/on_tap/on_tap_bloc.dart';
 import '../blocs/on_tap_eta/on_tap_eta_bloc.dart';
+import '../pages/map_page/widgets/eta_panel.dart';
 import 'shuttle_point.dart';
 
 class ShuttleStop extends ShuttlePoint {
@@ -66,21 +67,6 @@ class ShuttleStop extends ShuttlePoint {
     return GestureDetector(
       onTap: () {
         animatedMapMove(getLatLng, 15.2);
-
-        /// FLUSHBAR
-        // if (context != null) {
-        //   Flushbar(
-        //     margin: EdgeInsets.only(top: 60),
-        //     maxWidth: MediaQuery.of(context).size.width * 0.95,
-        //     flushbarStyle: FlushbarStyle.FLOATING,
-        //     borderRadius: 8,
-        //     flushbarPosition: FlushbarPosition.TOP,
-        //     message: name,
-        //     isDismissible: true,
-        //     duration: Duration(seconds: 3),
-        //     //animationDuration: Duration(milliseconds: 100),
-        //   )..show(context);
-        // }
         if (bloc != null) {
           bloc.add(MapStopTapped(stopName: name, index: index));
         }
@@ -175,10 +161,25 @@ class ShuttleStop extends ShuttlePoint {
 
     return GestureDetector(
       onTap: () {
-        animatedMapMove(getLatLng, 15.2);
+        animatedMapMove(getLatLng, 14.2);
+        if (context != null) {
+          showBottomSheet(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(25.0),
+                      topRight: Radius.circular(25.0))),
+              context: context,
+              builder: (_) => ETAPanel(
+                    markerName: '$name',
+                  ));
+        }
+        //TODO: CHANGING MARKER FROM NORMAL TO GREEN CAUSES MAP TO REFRESH
+        
+        /*
         if (bloc != null) {
           bloc.add(MainMapStopTapped(name: name, stopEta: eta, index: index));
         }
+        */
       },
       child: Container(
         decoration: BoxDecoration(

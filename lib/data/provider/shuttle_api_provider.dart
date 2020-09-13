@@ -87,8 +87,8 @@ class ShuttleApiProvider {
     );
 
     final value = await Geolocation.lastKnownLocation();
-    // print(permission);
-    // print(value);
+    print(permission);
+    print(value);
 
     if (permission.isSuccessful && value.isSuccessful) {
       lat = value.location.latitude;

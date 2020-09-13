@@ -175,9 +175,11 @@ class ShuttleStop extends ShuttlePoint {
         }
         //TODO: CHANGING MARKER FROM NORMAL TO GREEN CAUSES MAP TO REFRESH
 
-        // if (bloc != null) {
-        //   bloc.add(MainMapStopTapped(name: name, stopEta: eta, index: index));
-        // }
+        /*
+        if (bloc != null) {
+          bloc.add(MainMapStopTapped(name: name, stopEta: eta, index: index));
+        }
+        */
       },
       child: Container(
         decoration: BoxDecoration(

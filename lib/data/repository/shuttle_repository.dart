@@ -1,5 +1,7 @@
+import 'package:flutter/material.dart';
 import 'package:latlong/latlong.dart';
 
+import '../../models/shuttle_image.dart';
 import '../../models/shuttle_route.dart';
 import '../../models/shuttle_stop.dart';
 import '../../models/shuttle_update.dart';
@@ -19,4 +21,31 @@ class ShuttleRepository {
       _shuttleProvider.getUpdates();
   Future<LatLng> get getLocation async => _shuttleProvider.getLocation();
   bool get getIsConnected => _shuttleProvider.getIsConnected;
+
+  Future<AuxiliaryRouteData> getAuxiliaryRouteData() async {
+    var routes = await _shuttleProvider.getRoutes();
+    var ids = <int>[];
+    var legend = <String, ShuttleImage>{};
+    var colors = <int, Color>{};
+
+    for (var route in routes) {
+      if (route.active && route.enabled) {
+        legend[route.name] = ShuttleImage(svgColor: route.color);
+        ids.addAll(route.stopIds);
+        for (var schedule in route.schedules) {
+          colors[schedule.routeId] = route.color;
+        }
+      }
+    }
+
+    return AuxiliaryRouteData(ids: ids, legend: legend, colors: colors);
+  }
+}
+
+class AuxiliaryRouteData {
+  final List<int> ids;
+  final Map<String, ShuttleImage> legend;
+  final Map<int, Color> colors;
+
+  AuxiliaryRouteData({this.ids, this.legend, this.colors});
 }

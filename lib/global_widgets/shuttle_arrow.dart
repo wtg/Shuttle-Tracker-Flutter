@@ -16,9 +16,8 @@ class _ShuttleArrowState extends State<ShuttleArrow> {
         .toRadixString(16)
         .toString()
         .replaceAll('0xff', '');
-    String svgString;
 
-    svgString =
+    var svgString =
         '''<svg width="60px" height="60px" viewBox="0 0 60 60" version="1.1" 
         xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
         <title>shuttle</title>

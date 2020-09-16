@@ -6,7 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../blocs/shuttle/shuttle_bloc.dart';
 import '../../blocs/theme/theme_bloc.dart';
 import '../../global_widgets/loading_state.dart';
-import '../../models/shuttle_image.dart';
+import '../../global_widgets/shuttle_arrow.dart';
 import 'states/loaded_routes.dart';
 
 class RoutesPage extends StatefulWidget {
@@ -17,7 +17,7 @@ class RoutesPage extends StatefulWidget {
 class _RoutesPageState extends State<RoutesPage> {
   ShuttleBloc shuttleBloc;
   bool isSwitched = false;
-  Map<String, ShuttleImage> legend = {};
+  Map<String, ShuttleArrow> legend = {};
   Completer<void> _refreshCompleter;
 
   @override

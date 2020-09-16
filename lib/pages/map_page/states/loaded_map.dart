@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
-import 'package:flutter/widgets.dart';
-
 import 'package:latlong/latlong.dart';
 
 import '../../../blocs/on_tap_eta/on_tap_eta_bloc.dart';
 import '../../../blocs/theme/theme_bloc.dart';
-import '../../../models/shuttle_image.dart';
+import '../../../global_widgets/shuttle_arrow.dart';
 import '../../../models/shuttle_route.dart';
 import '../../../models/shuttle_stop.dart';
 import '../../../models/shuttle_update.dart';
@@ -38,7 +37,7 @@ class _LoadedMapState extends State<LoadedMap> with TickerProviderStateMixin {
   final Map<int, Color> _colors = {};
 
   /// Map of with name of route as key and ShuttleImage as the value
-  final Map<String, ShuttleImage> _legend = {};
+  final Map<String, ShuttleArrow> _legend = {};
 
   /// List of all ids
   final List<int> _ids = [];
@@ -75,12 +74,12 @@ class _LoadedMapState extends State<LoadedMap> with TickerProviderStateMixin {
   }
 
   List<Polyline> _createRoutes(List<ShuttleRoute> routes, List<int> _ids,
-      Map<String, ShuttleImage> _legend, Map<int, Color> _colors) {
+      Map<String, ShuttleArrow> _legend, Map<int, Color> _colors) {
     var polylines = <Polyline>[];
 
     for (var route in routes) {
       if (route.active && route.enabled) {
-        _legend[route.name] = ShuttleImage(svgColor: route.color);
+        _legend[route.name] = ShuttleArrow(svgColor: route.color);
         _ids.addAll(route.stopIds);
         polylines.add(route.getPolyline);
         for (var schedule in route.schedules) {

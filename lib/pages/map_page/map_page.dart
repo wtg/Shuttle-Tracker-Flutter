@@ -20,13 +20,15 @@ class MapPage extends StatefulWidget {
 class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
   final Connectivity connectivity = Connectivity();
   final MapController mapController = MapController();
+
   static const darkLink =
       'https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}@2x.png';
   static const lightLink =
       'http://tile.stamen.com/toner-lite/{z}/{x}/{y}@2x.png';
+
   int i = 0;
 
-  void animatedMapMove(LatLng destLocation, double destZoom) {
+  void _animatedMapMove(LatLng destLocation, double destZoom) {
     final _latTween = Tween<double>(
         begin: mapController.center.latitude, end: destLocation.latitude);
     final _lngTween = Tween<double>(
@@ -87,10 +89,11 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
 
                   return BlocBuilder<MapBloc, MapState>(
                     builder: (context, state) {
-                      // print(state);
+                      print("API Poll $i | State is $state");
+                      i++;
                       if (state is MapInitial) {
                         mapBloc.add(GetMapData(
-                          animatedMapMove: animatedMapMove,
+                          animatedMapMove: _animatedMapMove,
                           context: context,
                         ));
                       } else if (state is MapLoaded) {
@@ -99,12 +102,12 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
                         updates = state.updates;
                         legend = state.legend;
                         mapBloc.add(GetMapData(
-                          animatedMapMove: animatedMapMove,
+                          animatedMapMove: _animatedMapMove,
                           context: context,
                         ));
                       } else if (state is MapError) {
                         mapBloc.add(GetMapData(
-                          animatedMapMove: animatedMapMove,
+                          animatedMapMove: _animatedMapMove,
                           context: context,
                         ));
                       } else {}

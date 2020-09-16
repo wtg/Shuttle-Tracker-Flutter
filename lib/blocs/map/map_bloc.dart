@@ -15,7 +15,6 @@ import '../on_tap_eta/on_tap_eta_bloc.dart';
 part 'map_event.dart';
 part 'map_state.dart';
 
-
 class MapBloc extends Bloc<MapEvent, MapState> {
   final ShuttleRepository repository;
   bool isLoading = false;
@@ -50,7 +49,7 @@ class MapBloc extends Bloc<MapEvent, MapState> {
           animatedMapMove: animatedMapMove,
           context: context,
           bloc: bloc,
-        )); 
+        ));
       }
     }
     //print("Number of stops on map: ${markers.length}");
@@ -111,7 +110,7 @@ class MapBloc extends Bloc<MapEvent, MapState> {
   }
 
   @override
-Stream<MapState> mapEventToState(MapEvent event) async* {
+  Stream<MapState> mapEventToState(MapEvent event) async* {
     var routes = <Polyline>[];
     var stops = <Marker>[];
     var updates = <Marker>[];
@@ -125,48 +124,44 @@ Stream<MapState> mapEventToState(MapEvent event) async* {
     var auxData = await repository.getAuxiliaryRouteData();
     if (event is GetMapData) {
       routes = _createRoutes(
-      routes: repoRoutes,
-    );
+        routes: repoRoutes,
+      );
 
-    stops = _createStops(
-        stops: repoStops,
-        context: event.context,
-        bloc: event.bloc,
-        ids: auxData.ids,
-        animatedMapMove: event.animatedMapMove);
+      stops = _createStops(
+          stops: repoStops,
+          context: event.context,
+          bloc: event.bloc,
+          ids: auxData.ids,
+          animatedMapMove: event.animatedMapMove);
 
-    updates = _createUpdates(
-        updates: repoUpdates, context: event.context, colors: auxData.colors);
+      updates = _createUpdates(
+          updates: repoUpdates, context: event.context, colors: auxData.colors);
 
-    location = _createLocation(coordinates: repoLocation);
+      location = _createLocation(coordinates: repoLocation);
 
-    center = _findAvgLatLong(repoStops);
+      center = _findAvgLatLong(repoStops);
 
-    if (isLoading) {
-      yield MapLoading();
-      isLoading = false;
-    } else {
-      /// Poll every 3ish seconds
+      if (isLoading) {
+        yield MapLoading();
+        isLoading = false;
+      } else {
+        /// Poll every 3ish seconds
+        await Future.delayed(const Duration(seconds: 2));
+      }
+
+      if (repository.getIsConnected) {
+        yield MapLoaded(
+            routes: routes,
+            stops: stops,
+            updates: updates,
+            location: location,
+            center: center,
+            legend: auxData.legend);
+      } else {
+        isLoading = true;
+        yield MapError();
+      }
       await Future.delayed(const Duration(seconds: 2));
     }
-
-    if (repository.getIsConnected) {
-
-      yield MapLoaded(
-          routes: routes,
-          stops: stops,
-          updates: updates,
-          location: location,
-          center: center,
-          legend: auxData.legend);
-    } else {
-      isLoading = true;
-      yield MapError();
-    }
-    await Future.delayed(const Duration(seconds: 2));
-
-    }
-
-    
   }
 }

@@ -99,6 +99,10 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
                           context: context,
                         ));
                       } else if (state is MapError) {
+                        mapBloc.add(GetMapData(
+                          animatedMapMove: animatedMapMove,
+                          context: context,
+                        ));
                       } else {}
                       return Stack(children: <Widget>[
                         Column(

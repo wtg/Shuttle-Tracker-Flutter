@@ -8,7 +8,9 @@ import 'package:latlong/latlong.dart';
 import '../../blocs/map/map_bloc.dart';
 import '../../blocs/theme/theme_bloc.dart';
 import '../../global_widgets/loading_state.dart';
+import '../../global_widgets/shuttle_arrow.dart';
 import 'widgets/attribution.dart';
+import 'widgets/legend.dart';
 
 class MapPage extends StatefulWidget {
   @override
@@ -81,6 +83,7 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
                   var routes = <Polyline>[];
                   var stops = <Marker>[];
                   var updates = <Marker>[];
+                  var legend = <String, ShuttleArrow>{};
 
                   return BlocBuilder<MapBloc, MapState>(
                     builder: (context, state) {
@@ -94,6 +97,7 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
                         routes = state.routes;
                         stops = state.stops;
                         updates = state.updates;
+                        legend = state.legend;
                         mapBloc.add(GetMapData(
                           animatedMapMove: animatedMapMove,
                           context: context,
@@ -140,9 +144,9 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
                         Attribution(
                           theme: theme.getTheme,
                         ),
-                        // Legend(
-                        //   legend: _legend,
-                        // ),
+                        Legend(
+                          legend: legend,
+                        ),
                       ]);
                     },
                   );

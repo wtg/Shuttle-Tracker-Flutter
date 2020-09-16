@@ -17,13 +17,15 @@ class MapLoaded extends MapState {
   final List<Marker> updates;
   final List<Marker> location;
   final LatLng center;
+  final Map<String, ShuttleArrow> legend;
 
   const MapLoaded(
       {@required this.routes,
       @required this.stops,
       @required this.updates,
       @required this.location,
-      @required this.center});
+      @required this.center,
+      @required this.legend});
 
   @override
   List<Object> get props => [routes, stops, updates, location, center];

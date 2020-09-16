@@ -11,13 +11,15 @@ import '../../models/shuttle_stop.dart';
 import '../../models/shuttle_update.dart';
 import '../on_tap_eta/on_tap_eta_bloc.dart';
 
+part 'map_event.dart';
 part 'map_state.dart';
 
-class MapCubit extends Cubit<MapState> {
+
+class MapBloc extends Bloc<MapEvent, MapState> {
   final ShuttleRepository repository;
   bool isLoading = false;
 
-  MapCubit({this.repository}) : super(MapInitial());
+  MapBloc({this.repository}) : super(MapInitial());
 
   List<Polyline> _createRoutes({
     @required List<ShuttleRoute> routes,
@@ -107,10 +109,8 @@ class MapCubit extends Cubit<MapState> {
     return LatLng(lat, long);
   }
 
-  void getMapData(
-      {BuildContext context,
-      dynamic animatedMapMove,
-      OnTapEtaBloc bloc}) async {
+  @override
+Stream<MapState> mapEventToState(MapEvent event) async* {
     var routes = <Polyline>[];
     var stops = <Marker>[];
     var updates = <Marker>[];
@@ -122,27 +122,27 @@ class MapCubit extends Cubit<MapState> {
     var repoUpdates = await repository.getUpdates;
     var repoLocation = await repository.getLocation;
     var auxData = await repository.getAuxiliaryRouteData();
-
-    routes = _createRoutes(
+    if (event is GetMapData) {
+      routes = _createRoutes(
       routes: repoRoutes,
     );
 
     stops = _createStops(
         stops: repoStops,
-        context: context,
-        bloc: bloc,
+        context: event.context,
+        bloc: event.bloc,
         ids: auxData.ids,
-        animatedMapMove: animatedMapMove);
+        animatedMapMove: event.animatedMapMove);
 
     updates = _createUpdates(
-        updates: repoUpdates, context: context, colors: auxData.colors);
+        updates: repoUpdates, context: event.context, colors: auxData.colors);
 
     location = _createLocation(coordinates: repoLocation);
 
     center = _findAvgLatLong(repoStops);
 
     if (isLoading) {
-      emit(MapLoading());
+      yield MapLoading();
       isLoading = false;
     } else {
       /// Poll every 3ish seconds
@@ -150,16 +150,21 @@ class MapCubit extends Cubit<MapState> {
     }
 
     if (repository.getIsConnected) {
-      emit(MapLoaded(
+
+      yield MapLoaded(
           routes: routes,
           stops: stops,
           updates: updates,
           location: location,
-          center: center));
+          center: center);
     } else {
       isLoading = true;
-      emit(MapError());
+      yield MapError();
     }
     await Future.delayed(const Duration(seconds: 2));
+
+    }
+
+    
   }
 }

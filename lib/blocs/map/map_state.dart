@@ -1,4 +1,4 @@
-part of 'map_cubit.dart';
+part of 'map_bloc.dart';
 
 abstract class MapState extends Equatable {
   const MapState();

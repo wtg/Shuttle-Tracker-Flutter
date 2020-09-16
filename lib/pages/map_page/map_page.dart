@@ -5,8 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong/latlong.dart';
 
-import '../../blocs/map/map_cubit.dart';
-import '../../blocs/on_tap/on_tap_bloc.dart';
+import '../../blocs/map/map_bloc.dart';
 import '../../blocs/theme/theme_bloc.dart';
 import '../../global_widgets/loading_state.dart';
 import 'widgets/attribution.dart';
@@ -60,7 +59,7 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     var lat = 42.729;
     var long = -73.6758;
-    var mapCubit = context.bloc<MapCubit>();
+    var mapBloc = context.bloc<MapBloc>();
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -83,23 +82,24 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
                   var stops = <Marker>[];
                   var updates = <Marker>[];
 
-                  return BlocBuilder<MapCubit, MapState>(
+                  return BlocBuilder<MapBloc, MapState>(
                     builder: (context, state) {
                       // print(state);
                       if (state is MapInitial) {
-                        mapCubit.getMapData(
-                          context: context,
+                        mapBloc.add(GetMapData(
                           animatedMapMove: animatedMapMove,
-                        );
+                          context: context,
+                        ));
                       } else if (state is MapLoaded) {
                         routes = state.routes;
                         stops = state.stops;
                         updates = state.updates;
-                        mapCubit.getMapData(
-                          context: context,
+                        mapBloc.add(GetMapData(
                           animatedMapMove: animatedMapMove,
-                        );
-                      } else if (state is MapError) {}
+                          context: context,
+                        ));
+                      } else if (state is MapError) {
+                      } else {}
                       return Stack(children: <Widget>[
                         Column(
                           children: [

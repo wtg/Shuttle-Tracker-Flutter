@@ -8,7 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 
 import 'android_material_app.dart';
-import 'blocs/map/map_cubit.dart';
+import 'blocs/map/map_bloc.dart';
 import 'blocs/on_tap/on_tap_bloc.dart';
 import 'blocs/on_tap_eta/on_tap_eta_bloc.dart';
 import 'blocs/shuttle/shuttle_bloc.dart';
@@ -41,7 +41,7 @@ class MyAppState extends State<MyApp> {
     MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => MapCubit(repository: ShuttleRepository()),
+          create: (context) => MapBloc(repository: ShuttleRepository()),
         ),
         BlocProvider(
           create: (context) => OnTapBloc(),

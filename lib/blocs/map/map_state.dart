@@ -7,9 +7,15 @@ abstract class MapState extends Equatable {
   List<Object> get props => [];
 }
 
-class MapInitial extends MapState {}
+class MapInitial extends MapState {
+  @override
+  List<Object> get props => [];
+}
 
-class MapLoading extends MapState {}
+class MapLoading extends MapState {
+  @override
+  List<Object> get props => [];
+}
 
 class MapLoaded extends MapState {
   final List<Polyline> routes;
@@ -31,4 +37,7 @@ class MapLoaded extends MapState {
   List<Object> get props => [routes, stops, updates, location, center];
 }
 
-class MapError extends MapState {}
+class MapError extends MapState {
+  @override
+  List<Object> get props => [];
+}

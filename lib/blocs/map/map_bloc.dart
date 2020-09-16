@@ -17,7 +17,7 @@ part 'map_state.dart';
 
 class MapBloc extends Bloc<MapEvent, MapState> {
   final ShuttleRepository repository;
-  bool isLoading = false;
+  bool isLoading = true;
 
   MapBloc({this.repository}) : super(MapInitial());
 

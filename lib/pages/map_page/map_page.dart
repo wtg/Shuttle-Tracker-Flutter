@@ -157,7 +157,7 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
               ),
             );
           }
-          return LoadingState();
+          return LoadingScreen();
         },
       ),
     );

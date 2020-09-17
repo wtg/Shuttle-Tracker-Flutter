@@ -6,7 +6,6 @@ import 'package:latlong/latlong.dart';
 import '../../blocs/on_tap/on_tap_bloc.dart';
 import '../../blocs/theme/theme_bloc.dart';
 import '../../models/shuttle_stop.dart';
-import '../map_page/states/loaded_map.dart';
 import 'widgets/panel.dart';
 
 class DetailPage extends StatefulWidget {
@@ -26,6 +25,11 @@ class DetailPage extends StatefulWidget {
 class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
   MapController mapController = MapController();
   final _markers = <Marker>[];
+
+  static const darkLink =
+      'https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}@2x.png';
+  static const lightLink =
+      'http://tile.stamen.com/toner-lite/{z}/{x}/{y}@2x.png';
 
   void animatedMapMove(LatLng destLocation, double destZoom) {
     final _latTween = Tween<double>(
@@ -137,9 +141,7 @@ class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
                       layers: [
                         TileLayerOptions(
                           backgroundColor: theme.getTheme.bottomAppBarColor,
-                          urlTemplate: isDarkMode
-                              ? LoadedMap.darkLink
-                              : LoadedMap.lightLink,
+                          urlTemplate: isDarkMode ? darkLink : lightLink,
                           subdomains: ['a', 'b', 'c'],
                           tileProvider: CachedNetworkTileProvider(),
                         ),

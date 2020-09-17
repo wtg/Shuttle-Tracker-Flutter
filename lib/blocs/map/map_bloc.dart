@@ -135,7 +135,10 @@ class MapBloc extends Bloc<MapEvent, MapState> {
           animatedMapMove: event.animatedMapMove);
 
       updates = _createUpdates(
-          updates: repoUpdates, context: event.context, colors: auxData.colors);
+          updates: repoUpdates,
+          context: event.context,
+          colors: auxData.colors,
+          animatedMapMove: event.animatedMapMove);
 
       location = _createLocation(coordinates: repoLocation);
 

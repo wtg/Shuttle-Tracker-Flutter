@@ -2,8 +2,8 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-import '../../../models/shuttle_route.dart';
-import '../../../models/shuttle_stop.dart';
+import '../../../data/models/shuttle_route.dart';
+import '../../../data/models/shuttle_stop.dart';
 import '../widgets/custom_list_tile.dart';
 import '../widgets/favorite_section.dart';
 import '../widgets/route_section.dart';

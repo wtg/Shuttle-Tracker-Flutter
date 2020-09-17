@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
 
-import '../blocs/on_tap/on_tap_bloc.dart';
-import '../blocs/on_tap_eta/on_tap_eta_bloc.dart';
-import '../pages/map_page/widgets/eta_panel.dart';
+import '../../blocs/on_tap/on_tap_bloc.dart';
+import '../../blocs/on_tap_eta/on_tap_eta_bloc.dart';
+import '../../pages/map_page/widgets/eta_panel.dart';
 import 'shuttle_point.dart';
 
 class ShuttleStop extends ShuttlePoint {

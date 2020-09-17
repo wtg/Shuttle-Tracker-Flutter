@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_map/flutter_map.dart';
-import '../global_widgets/shuttle_arrow.dart';
-import '../pages/map_page/widgets/eta_panel.dart';
+import '../../global_widgets/shuttle_arrow.dart';
+import '../../pages/map_page/widgets/eta_panel.dart';
 
 import 'shuttle_point.dart';
 

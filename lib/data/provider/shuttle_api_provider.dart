@@ -4,9 +4,9 @@ import 'package:geolocation/geolocation.dart';
 import 'package:http/http.dart' as http;
 import 'package:latlong/latlong.dart';
 
-import '../../models/shuttle_route.dart';
-import '../../models/shuttle_stop.dart';
-import '../../models/shuttle_update.dart';
+import '../../data/models/shuttle_route.dart';
+import '../../data/models/shuttle_stop.dart';
+import '../../data/models/shuttle_update.dart';
 
 /// This class contains methods for providing data to Repository
 class ShuttleApiProvider {

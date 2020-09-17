@@ -2,13 +2,12 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-
 import 'package:latlong/latlong.dart';
 
+import '../../data/models/shuttle_route.dart';
+import '../../data/models/shuttle_stop.dart';
+import '../../data/models/shuttle_update.dart';
 import '../../data/repository/shuttle_repository.dart';
-import '../../models/shuttle_route.dart';
-import '../../models/shuttle_stop.dart';
-import '../../models/shuttle_update.dart';
 
 part 'routes_state.dart';
 

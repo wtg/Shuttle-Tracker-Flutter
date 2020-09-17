@@ -5,11 +5,11 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong/latlong.dart';
 
+import '../../data/models/shuttle_route.dart';
+import '../../data/models/shuttle_stop.dart';
+import '../../data/models/shuttle_update.dart';
 import '../../data/repository/shuttle_repository.dart';
 import '../../global_widgets/shuttle_arrow.dart';
-import '../../models/shuttle_route.dart';
-import '../../models/shuttle_stop.dart';
-import '../../models/shuttle_update.dart';
 import '../on_tap_eta/on_tap_eta_bloc.dart';
 
 part 'map_event.dart';

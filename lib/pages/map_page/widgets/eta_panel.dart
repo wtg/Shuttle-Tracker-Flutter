@@ -1,7 +1,8 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_shuttletracker/pages/routes_page/widgets/panel.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import 'package:latlong/latlong.dart';
 
@@ -23,7 +24,11 @@ class _PanelState extends State<ETAPanel> {
   String selectedName;
   ItemScrollController scrollController = ItemScrollController();
 
+  List<Widget> _getStopTileList(ThemeData theme) {
+    var tileList = <Widget>[];
 
+    return tileList;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,17 +61,20 @@ class _PanelState extends State<ETAPanel> {
                     children: [
                       Align(
                         alignment: Alignment.topCenter,
-                        child:  Text(
-                          "$selectedName",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 30,
+                        child: GestureDetector(
+                          onTap: () { log("Close has been tapped"); },
+                          child: Text(
+                            "$selectedName",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 30,
+                            ),
                           ),
                         ),
                       ),
                       Padding(
                         padding: EdgeInsets.symmetric(vertical: 16.0),
-                        child: Text("Get ETA List Here"),
+                        child: Text("No ETAs to Display"),
                       ),
                     ],
                     /**

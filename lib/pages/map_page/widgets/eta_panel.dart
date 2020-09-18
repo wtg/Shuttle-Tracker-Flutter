@@ -1,109 +1,77 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
-import 'package:latlong/latlong.dart';
 
-import '../../../blocs/on_tap_eta/on_tap_eta_bloc.dart';
-import '../../../blocs/theme/theme_bloc.dart';
-import '../../../models/shuttle_stop.dart';
+import '../../../data/fusion/fusion_socket.dart';
 
 class ETAPanel extends StatefulWidget {
+  final String markerName;
 
-  final MapCallback animate;
-  final OnTapEtaBloc bloc;
-  ETAPanel({this.animate, this.bloc});
+  ETAPanel({@required this.markerName});
 
   @override
-  _PanelState createState() => _PanelState();
+  _ETAPanelState createState() => _ETAPanelState();
 }
 
-class _PanelState extends State<ETAPanel> {
-  String selectedName;
-  ItemScrollController scrollController = ItemScrollController();
+class _ETAPanelState extends State<ETAPanel> {
+  final FusionSocket ws = FusionSocket();
 
-  List<Widget> _getStopTileList(ThemeData theme) {
-    var tileList = <Widget>[];
+  @override
+  void initState() {
+    ws.openWS();
+    ws.subscribe("eta");
 
-    return tileList;
+    super.initState();
   }
 
   @override
+  void dispose() {
+    // ws.unsubscribe("eta");
+    ws.closeWS();
+
+    super.dispose();
+  }
+
   Widget build(BuildContext context) {
-    return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, theme){
-      return MediaQuery.removePadding(
-          context: context,
-          removeTop: true,
-          child: NotificationListener<OverscrollIndicatorNotification>(
-            onNotification: (overscroll) {
-              overscroll.disallowGlow();
-              return null;
-            },
-            child: BlocBuilder<OnTapEtaBloc, OnTapEtaState>(
-              cubit: widget.bloc,
-              builder: (context, state) {
-                if (state is MainTappedState){
-                  selectedName = state.stopName;
-                  if (state.index != null && scrollController.isAttached){
-                    scrollController.scrollTo(
-                      index: state.index,
-                      duration: Duration(milliseconds: 250)
-                    );
-                  }
-                }
-                var _arrayList = [Text('hello'),Text('this is a test'),
-                  Text('please work')];
-                return Container(
-                  color: theme.getTheme.backgroundColor,
-                  child: Column(
-                    children: [
-                      Align(
-                        alignment: Alignment.topCenter,
-                        child: GestureDetector(
-                          onTap: () { log("Close has been tapped"); },
-                          child: Text(
-                            "$selectedName",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 30,
-                            ),
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(vertical: 16.0),
-                        child: Text("No ETAs to Display"),
-                      ),
-                    ],
-                    /**
-                    child: Align(
-                      alignment: Alignment.topCenter,
-                      child:  Text(
-                        "$selectedName",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 35,
-                        ),
-                      ),
-                    )**/
-                  ),
-                );
-              }),
+    return Container(
+      height: MediaQuery.of(context).size.height * 0.35,
+      child: Center(
+          child: Column(
+        children: <Widget>[
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: <Widget>[
+              IconButton(
+                icon: Icon(Icons.clear, color: Theme.of(context).hoverColor),
+                onPressed: () => Navigator.pop(context),
+              )
+            ],
           ),
-      );
-    });
+          Text(
+            '${widget.markerName}',
+            style: TextStyle(
+                color: Theme.of(context).hoverColor,
+                fontSize: 20,
+                fontWeight: FontWeight.w700),
+          ),
+          SizedBox(
+            height: 30,
+          ),
+          Text("Add ETA data here"),
+          StreamBuilder(
+            stream: ws.channel.stream,
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(snapshot.data),
+                );
+              }
+              return CircularProgressIndicator();
+            },
+          )
+        ],
+      )),
+    );
   }
-}
-
-typedef MapCallback = void Function(LatLng pos, double zoom);
-
-class ETALists extends StatefulWidget {
-  @override
-  State<StatefulWidget> createState() {
-    // TODO: implement createState
-    throw UnimplementedError();
-  }
-
 }

@@ -9,18 +9,11 @@ import 'package:latlong/latlong.dart';
 import '../../models/shuttle_route.dart';
 import '../../models/shuttle_stop.dart';
 import '../../models/shuttle_update.dart';
-import '../models/fusion_model.dart';
 
 /// This class contains methods for providing data to Repository
 class ShuttleApiProvider {
   /// Boolean to determine if the app is connected to network
   bool isConnected;
-  FusionSocket ws;
-
-  /// Initialize web socket
-  void openSocket() {
-    ws.start();
-  }
 
   /// This function will fetch the data from the JSON API and return a decoded
   Future<http.Response> fetch(String type) async {

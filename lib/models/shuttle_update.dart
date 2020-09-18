@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_map/flutter_map.dart';
+import '../pages/map_page/widgets/eta_panel.dart';
 
-import '../widgets/custom_bottom_sheet.dart';
 import 'shuttle_image.dart';
 import 'shuttle_point.dart';
 
@@ -91,7 +91,7 @@ class ShuttleUpdate extends ShuttlePoint {
                             topLeft: Radius.circular(25.0),
                             topRight: Radius.circular(25.0))),
                     context: context,
-                    builder: (_) => CustomBottomSheet(
+                    builder: (_) => ETAPanel(
                           markerName: 'Bus ${vehicleId.toString()}',
                         ));
               }

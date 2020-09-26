@@ -23,7 +23,7 @@ class ShuttleRepository {
   bool get getIsConnected => _shuttleProvider.getIsConnected;
 
   Future<AuxiliaryRouteData> getAuxiliaryRouteData() async {
-    var routes = await _shuttleProvider.getRoutes();
+    var routes = await getRoutes;
     var ids = <int>[];
     var legend = <String, ShuttleArrow>{};
     var colors = <int, Color>{};

@@ -10,7 +10,7 @@ import '../../data/models/shuttle_stop.dart';
 import '../../data/models/shuttle_update.dart';
 import '../../data/repository/shuttle_repository.dart';
 import '../../global_widgets/shuttle_arrow.dart';
-import '../on_tap_eta/on_tap_eta_bloc.dart';
+import '../on_tap/on_tap_bloc.dart';
 
 part 'map_event.dart';
 part 'map_state.dart';
@@ -38,14 +38,14 @@ class MapBloc extends Bloc<MapEvent, MapState> {
   List<Marker> _createStops(
       {@required List<ShuttleStop> stops,
       @required BuildContext context,
-      @required OnTapEtaBloc bloc,
+      @required OnTapBloc bloc,
       @required List<int> ids,
       @required animatedMapMove}) {
     var markers = <Marker>[];
 
     for (var stop in stops) {
       if (ids.contains(stop.id)) {
-        markers.add(stop.getEtaMarker(
+        markers.add(stop.getMarker(
           animatedMapMove: animatedMapMove,
           context: context,
           bloc: bloc,

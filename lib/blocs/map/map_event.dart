@@ -10,6 +10,6 @@ abstract class MapEvent extends Equatable {
 class GetMapData extends MapEvent {
   final BuildContext context;
   final dynamic animatedMapMove;
-  final OnTapEtaBloc bloc;
+  final OnTapBloc bloc;
   const GetMapData({this.context, this.animatedMapMove, this.bloc});
 }

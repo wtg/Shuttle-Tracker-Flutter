@@ -10,7 +10,6 @@ import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'android_material_app.dart';
 import 'blocs/map/map_bloc.dart';
 import 'blocs/on_tap/on_tap_bloc.dart';
-import 'blocs/on_tap_eta/on_tap_eta_bloc.dart';
 import 'blocs/routes/routes_bloc.dart';
 import 'blocs/theme/theme_bloc.dart';
 import 'data/repository/shuttle_repository.dart';
@@ -37,27 +36,25 @@ class MyApp extends StatefulWidget {
 }
 
 class MyAppState extends State<MyApp> {
-  static ShuttleRepository repo = ShuttleRepository();
+  // static ShuttleRepository repo = ShuttleRepository();
   final _pageOptions = [
     MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => MapBloc(repository: repo),
+          create: (context) => MapBloc(repository: ShuttleRepository()),
         ),
         BlocProvider(
           create: (context) => OnTapBloc(),
-        ),
-        BlocProvider(
-          create: (context) => OnTapEtaBloc(),
         ),
       ],
       child: MapPage(),
     ),
     BlocProvider(
-        create: (context) => RoutesBloc(repository: repo), child: RoutesPage()),
+        create: (context) => RoutesBloc(repository: ShuttleRepository()),
+        child: RoutesPage()),
     SchedulesPage(),
     BlocProvider(
-      create: (context) => RoutesBloc(repository: repo),
+      create: (context) => RoutesBloc(repository: ShuttleRepository()),
       child: SettingsPage(),
     ),
   ];

@@ -15,17 +15,17 @@ class FusionSocket {
   void openWS() {
     channel = IOWebSocketChannel.connect('wss://shuttles.rpi.edu/fusion/');
 
-    // channel.stream.listen((message) {
-    //   // {"type":"server_id","message":"0ad35438-58bd-11ea-a696-0242ac110017"}
-    //   var response = jsonDecode(message);
-    //   if (response['type'] == 'server_id') {
-    //     serverID = response['message'];
-    //     print(serverID);
-    //     return;
-    //   } else if (response['type'] == 'vehicle_location') {
-    //     handleVehicleLocations(message);
-    //   }
-    // });
+    channel.stream.listen((message) {
+      // {"type":"server_id","message":"0ad35438-58bd-11ea-a696-0242ac110017"}
+      var response = jsonDecode(message);
+      if (response['type'] == 'server_id') {
+        serverID = response['message'];
+        print(serverID);
+        return;
+      } else if (response['type'] == 'eta') {
+        handleVehicleLocations(message);
+      }
+    });
   }
 
   void closeWS() {
@@ -47,12 +47,12 @@ class FusionSocket {
   }
 
   void _requestSubscription(String topic) {
-    var data = {'type': 'subscribe', 'message': topic};
+    var data = {'type': 'subscribe', 'message': {'topic': topic}};
     channel.sink.add(jsonEncode(data));
   }
 
   void _requestUnsubscription(String topic) {
-    var data = {'type': 'unsubscribe', 'message': topic};
+    var data = {'type': 'unsubscribe', 'message': {'topic': topic}};
     channel.sink.add(jsonEncode(data));
   }
 
@@ -60,7 +60,7 @@ class FusionSocket {
     var jsonMessage = jsonDecode(message);
     List<ShuttleUpdate> updatesList = jsonMessage != null
         ? json
-            .decode(jsonMessage.body)
+            .decode(jsonMessage)
             .map<ShuttleUpdate>((json) => ShuttleUpdate.fromJson(json))
             .toList()
         : [];

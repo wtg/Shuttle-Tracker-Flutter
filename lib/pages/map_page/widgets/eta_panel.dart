@@ -26,9 +26,7 @@ class _ETAPanelState extends State<ETAPanel> {
 
   @override
   void dispose() {
-    // ws.unsubscribe("eta");
     ws.closeWS();
-
     super.dispose();
   }
 
@@ -58,18 +56,7 @@ class _ETAPanelState extends State<ETAPanel> {
             height: 30,
           ),
           Text("Add ETA data here"),
-          StreamBuilder(
-            stream: ws.channel.stream,
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                return Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(snapshot.data),
-                );
-              }
-              return CircularProgressIndicator();
-            },
-          )
+
         ],
       )),
     );

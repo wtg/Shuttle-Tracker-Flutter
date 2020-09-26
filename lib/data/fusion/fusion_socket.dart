@@ -102,6 +102,12 @@ class FusionSocket {
     var etas = <ShuttleETA>[];
     var data = jsonDecode(message);
     print("fusion data ${data["message"]['stop_etas']}");
+    for (var item in data["message"]['stop_etas']) {
+      var temp = jsonDecode(item);
+      var eta = new ShuttleETA(
+
+      );
+    }
     return null;
   }
 }

@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:web_socket_channel/io.dart';
 
+import '../../models/shuttle_eta.dart';
 import '../../models/shuttle_update.dart';
 
 class FusionSocket {
@@ -22,8 +23,10 @@ class FusionSocket {
         serverID = response['message'];
         print(serverID);
         return;
-      } else if (response['type'] == 'eta') {
+      } else if (response['type'] == 'vehicle_location') {
         handleVehicleLocations(message);
+      } else if (response['type'] == 'eta') {
+        handleEtas(message);
       }
     });
   }
@@ -71,5 +74,30 @@ class FusionSocket {
   void sendToSocket(String message) {
     print("sending $message");
     channel.sink.add(message);
+  }
+
+  /*
+   private handleETAs(message: any) {
+        if (message.type !== 'eta') {
+            return;
+        }
+
+        const etas = new Array<ETA>();
+        for (const stopETA of message.message.stop_etas) {
+            const eta = new ETA(
+                stopETA.stop_id,
+                message.message.vehicle_id,
+                message.message.route_id,
+                new Date(stopETA.eta),
+                stopETA.arriving,
+            );
+            etas.push(eta);
+        }
+        store.commit('updateETAs', { vehicleID: message.message.vehicle_id, etas });
+    }
+   */
+
+  List<ShuttleETA> handleEtas(message) {
+
   }
 }

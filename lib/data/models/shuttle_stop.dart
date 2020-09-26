@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
 
 import '../../blocs/on_tap/on_tap_bloc.dart';
+import '../../pages/map_page/widgets/eta_panel.dart';
 import 'shuttle_point.dart';
 
 class ShuttleStop extends ShuttlePoint {
@@ -67,6 +68,18 @@ class ShuttleStop extends ShuttlePoint {
         animatedMapMove(getLatLng, 15.2);
         if (bloc != null) {
           bloc.add(MapStopTapped(stopName: name, index: index));
+        }
+
+        if (context != null) {
+          showBottomSheet(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(25.0),
+                      topRight: Radius.circular(25.0))),
+              context: context,
+              builder: (_) => ETAPanel(
+                    markerName: '$name',
+                  ));
         }
       },
       child: Container(

@@ -1,45 +1,39 @@
-part of 'shuttle_bloc.dart';
+part of 'routes_bloc.dart';
 
-abstract class ShuttleState extends Equatable {
-  const ShuttleState();
+abstract class RoutesState extends Equatable {
+  const RoutesState();
 }
 
 /// This class represents what user will see intially
-class ShuttleInitial extends ShuttleState {
-  const ShuttleInitial();
+class RoutesInitial extends RoutesState {
+  const RoutesInitial();
   @override
   List<Object> get props => [];
 }
 
 /// This class represents what user will see when fetching data
-class ShuttleLoading extends ShuttleState {
-  const ShuttleLoading();
+class RoutesLoading extends RoutesState {
+  const RoutesLoading();
   @override
   List<Object> get props => [];
 }
 
 /// This class represents what user will see when data is fetched
-class ShuttleLoaded extends ShuttleState {
+class RoutesLoaded extends RoutesState {
   final List<ShuttleRoute> routes;
   final LatLng location;
   final List<ShuttleUpdate> updates;
   final List<ShuttleStop> stops;
 
-  const ShuttleLoaded({this.routes, this.location, this.updates, this.stops});
+  const RoutesLoaded({this.routes, this.location, this.updates, this.stops});
   @override
   List<Object> get props => [routes, location, updates, stops];
 }
 
 // This class represents what user will see when there is an error
-class ShuttleError extends ShuttleState {
+class RoutesError extends RoutesState {
   final String message;
-  const ShuttleError({this.message});
+  const RoutesError({this.message});
   @override
   List<Object> get props => [message];
-}
-
-class ShuttleRepeated extends ShuttleState {
-  const ShuttleRepeated();
-  @override
-  List<Object> get props => [];
 }

@@ -1,6 +1,5 @@
 import 'dart:io';
 
-//import 'package:flutter/foundation.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -9,9 +8,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 
 import 'android_material_app.dart';
+import 'blocs/map/map_bloc.dart';
 import 'blocs/on_tap/on_tap_bloc.dart';
-import 'blocs/on_tap_eta/on_tap_eta_bloc.dart';
-import 'blocs/shuttle/shuttle_bloc.dart';
+import 'blocs/routes/routes_bloc.dart';
 import 'blocs/theme/theme_bloc.dart';
 import 'data/repository/shuttle_repository.dart';
 import 'ios_cupertino_app.dart';
@@ -37,27 +36,25 @@ class MyApp extends StatefulWidget {
 }
 
 class MyAppState extends State<MyApp> {
+  // static ShuttleRepository repo = ShuttleRepository();
   final _pageOptions = [
     MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => ShuttleBloc(repository: ShuttleRepository()),
+          create: (context) => MapBloc(repository: ShuttleRepository()),
         ),
         BlocProvider(
           create: (context) => OnTapBloc(),
-        ),
-        BlocProvider(
-          create: (context) => OnTapEtaBloc(),
         ),
       ],
       child: MapPage(),
     ),
     BlocProvider(
-        create: (context) => ShuttleBloc(repository: ShuttleRepository()),
+        create: (context) => RoutesBloc(repository: ShuttleRepository()),
         child: RoutesPage()),
     SchedulesPage(),
     BlocProvider(
-      create: (context) => ShuttleBloc(repository: ShuttleRepository()),
+      create: (context) => RoutesBloc(repository: ShuttleRepository()),
       child: SettingsPage(),
     ),
   ];

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../blocs/theme/theme_bloc.dart';
-import '../../../models/shuttle_image.dart';
 
+import '../../../blocs/theme/theme_bloc.dart';
+import '../../../global_widgets/shuttle_arrow.dart';
 import 'legend_row.dart';
 
 class Legend extends StatelessWidget {
-  final Map<String, ShuttleImage> legend;
+  final Map<String, ShuttleArrow> legend;
 
   Legend({this.legend});
 
@@ -20,7 +20,7 @@ class Legend extends StatelessWidget {
     ];
     legend.forEach((key, value) {
       legendRows.add(LegendRow(
-        widget: value.getSVG,
+        widget: value,
         text: ' $key',
       ));
     });

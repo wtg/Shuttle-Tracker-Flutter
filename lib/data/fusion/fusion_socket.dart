@@ -2,8 +2,9 @@ import 'dart:convert';
 
 import 'package:web_socket_channel/io.dart';
 
-import '../../models/shuttle_eta.dart';
-import '../../models/shuttle_update.dart';
+import '../models/shuttle_eta.dart';
+import '../models/shuttle_update.dart';
+
 
 class FusionSocket {
   String serverID;

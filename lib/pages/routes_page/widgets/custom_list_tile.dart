@@ -7,8 +7,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
 
 import '../../../blocs/on_tap/on_tap_bloc.dart';
-import '../../../models/shuttle_route.dart';
-import '../../../models/shuttle_stop.dart';
+import '../../../data/models/shuttle_route.dart';
+import '../../../data/models/shuttle_stop.dart';
 import '../detail_page.dart';
 
 class CustomListTile extends StatelessWidget {

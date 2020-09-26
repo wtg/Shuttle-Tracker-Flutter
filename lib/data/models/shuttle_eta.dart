@@ -9,6 +9,12 @@ class ShuttleETA {
       {this.stopId, this.vehicleId, this.routeId, this.eta, this.arriving});
 
   factory ShuttleETA.fromJson(Map<String, dynamic> json) {
-    return ShuttleETA(stopId: json['stopId']);
-  }
+  	return ShuttleETA(
+			stopId: json['stop_id'],
+			vehicleId: json['vehicle_id'],
+			routeId: json['route_id'],
+			eta: DateTime(json['eta']),
+			arriving: json['arriving']
+		);
+	}
 }

@@ -103,5 +103,10 @@ class FusionSocket {
     }
    */
 
-  List<ShuttleETA> handleEtas(message) {}
+  List<ShuttleETA> handleEtas(message) {
+    var etas = <ShuttleETA>[];
+    var data = jsonDecode(message);
+    print("fusion data ${data["message"]['stop_etas']}");
+    return null;
+  }
 }

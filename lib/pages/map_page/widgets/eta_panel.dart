@@ -14,16 +14,7 @@ class ETAPanel extends StatefulWidget {
 class _ETAPanelState extends State<ETAPanel> {
   @override
   void initState() {
-    ws.openWS();
-    ws.subscribe("eta");
-
     super.initState();
-  }
-
-  @override
-  void dispose() {
-    ws.closeWS();
-    super.dispose();
   }
 
   Widget build(BuildContext context) {

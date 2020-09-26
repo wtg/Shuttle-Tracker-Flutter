@@ -9,6 +9,7 @@ class FusionSocket {
   String serverID;
   List<String> subscriptionTopics = [];
   IOWebSocketChannel channel;
+  List<ShuttleETA> etas = [];
 
   /// Start of the Fusion web socket functions
   /// Initialize a connection with the server, check if the server
@@ -65,16 +66,20 @@ class FusionSocket {
     channel.sink.add(jsonEncode(data));
   }
 
+  // Use the data here to force an update to shuttles on the map
   List<ShuttleUpdate> handleVehicleLocations(String message) {
     var jsonMessage = jsonDecode(message);
-    List<ShuttleUpdate> updatesList = jsonMessage != null
-        ? json
-            .decode(jsonMessage)
-            .map<ShuttleUpdate>((json) => ShuttleUpdate.fromJson(json))
-            .toList()
-        : [];
-    print(updatesList);
-    return updatesList;
+    print("fusion data ${jsonMessage['message']}");
+
+    // List<ShuttleUpdate> updatesList = jsonMessage != null
+    //     //     ? json
+    //     //         .decode(jsonMessage)
+    //     //         .map<ShuttleUpdate>((json) => ShuttleUpdate.fromJson(json))
+    //     //         .toList()
+    //     //     : [];
+    //     // print(updatesList);
+    // return updatesList;
+    return null;
   }
 
   void sendToSocket(String message) {
@@ -82,37 +87,35 @@ class FusionSocket {
     channel.sink.add(message);
   }
 
-  /*
-   private handleETAs(message: any) {
-        if (message.type !== 'eta') {
-            return;
-        }
-
-        const etas = new Array<ETA>();
-        for (const stopETA of message.message.stop_etas) {
-            const eta = new ETA(
-                stopETA.stop_id,
-                message.message.vehicle_id,
-                message.message.route_id,
-                new Date(stopETA.eta),
-                stopETA.arriving,
-            );
-            etas.push(eta);
-        }
-        store.commit('updateETAs', { vehicleID: message.message.vehicle_id, etas });
-    }
-   */
-
-  List<ShuttleETA> handleEtas(message) {
-    var etas = <ShuttleETA>[];
+  // Each time a panel is opened, the eta data will come from
+  // a member variable keeping track of all etas.
+  void handleEtas(String message) {
     var data = jsonDecode(message);
-    print("fusion data ${data["message"]['stop_etas']}");
-    for (var item in data["message"]['stop_etas']) {
-      var temp = jsonDecode(item);
-      var eta = new ShuttleETA(
-
+    print("fusion data ${data['message']}");
+    Map<String, dynamic> map = data['message'];
+    List<dynamic> body = map['stop_etas'];
+    print("body $body");
+    for (var item in body) {
+      print(item);
+      print(data['message']['vehicle_id']);
+      var eta = ShuttleETA(
+        stopId: int.parse(item['stop_id']),
+        vehicleId: int.parse(data['message']['vehicle_id']),
+        routeId:int.parse( data['message']['route_id']),
+        eta: DateTime(item['eta']),
+        arriving: item['arriving']
       );
+      etas.add(eta);
+      print("eta $eta");
     }
-    return null;
+    print("etas $etas");
+  }
+
+  // Since dart doesn't really support deep copies of lists, we
+  // have to keep in mind that we can't change the return value
+  // of this function. All copies of the list will contain
+  // references
+  List<ShuttleETA> getETAs() {
+    return etas;
   }
 }

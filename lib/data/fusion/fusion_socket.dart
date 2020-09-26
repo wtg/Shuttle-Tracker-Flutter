@@ -5,7 +5,6 @@ import 'package:web_socket_channel/io.dart';
 import '../models/shuttle_eta.dart';
 import '../models/shuttle_update.dart';
 
-
 class FusionSocket {
   String serverID;
   List<String> subscriptionTopics = [];
@@ -51,12 +50,18 @@ class FusionSocket {
   }
 
   void _requestSubscription(String topic) {
-    var data = {'type': 'subscribe', 'message': {'topic': topic}};
+    var data = {
+      'type': 'subscribe',
+      'message': {'topic': topic}
+    };
     channel.sink.add(jsonEncode(data));
   }
 
   void _requestUnsubscription(String topic) {
-    var data = {'type': 'unsubscribe', 'message': {'topic': topic}};
+    var data = {
+      'type': 'unsubscribe',
+      'message': {'topic': topic}
+    };
     channel.sink.add(jsonEncode(data));
   }
 
@@ -98,7 +103,5 @@ class FusionSocket {
     }
    */
 
-  List<ShuttleETA> handleEtas(message) {
-
-  }
+  List<ShuttleETA> handleEtas(message) {}
 }

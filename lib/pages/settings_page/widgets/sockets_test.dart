@@ -17,15 +17,18 @@ class _SocketTestState extends State<SocketTest> {
   _SocketTestState({this.channel}) {
     channel.stream.listen((event) {
       setState(() {
-        var message = jsonDecode(event);
+        //var message = jsonDecode(event);
         bodyText = Text(event);
-        print("response from server ${message["message"]}");
+        //print("response from server ${message["message"]}");
       });
     });
   }
 
   void connectToSocket() {
-    var data = {"type":"subscribe","message":{"topic":"eta"}};
+    var data = {
+      "type": "subscribe",
+      "message": {"topic": "vehicle_location"}
+    };
     print("connectTOSocket ${jsonEncode(data)}");
     channel.sink.add(jsonEncode(data));
   }

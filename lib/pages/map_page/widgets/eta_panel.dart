@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../data/fusion/fusion_socket.dart';
+import '../../../main.dart';
 
 class ETAPanel extends StatefulWidget {
   final String markerName;
@@ -12,8 +12,6 @@ class ETAPanel extends StatefulWidget {
 }
 
 class _ETAPanelState extends State<ETAPanel> {
-  final FusionSocket ws = FusionSocket();
-
   @override
   void initState() {
     ws.openWS();
@@ -54,7 +52,6 @@ class _ETAPanelState extends State<ETAPanel> {
             height: 30,
           ),
           Text("Add ETA data here"),
-
         ],
       )),
     );

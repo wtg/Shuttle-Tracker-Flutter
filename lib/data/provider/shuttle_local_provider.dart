@@ -12,7 +12,6 @@ class ShuttleLocalProvider extends ShuttleApiProvider {
     http.Response response;
     try {
       response = await client.get('http://10.0.2.2:3001/$type');
-      await createJSONFile('$type', response);
 
       if (response.statusCode == 200) {
         isConnected = true;

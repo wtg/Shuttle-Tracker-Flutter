@@ -2,9 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_map/flutter_map.dart';
-import '../pages/map_page/widgets/eta_panel.dart';
+import '../../global_widgets/shuttle_arrow.dart';
+import '../../pages/map_page/widgets/eta_panel.dart';
 
-import 'shuttle_image.dart';
 import 'shuttle_point.dart';
 
 class ShuttleUpdate extends ShuttlePoint {
@@ -35,8 +35,8 @@ class ShuttleUpdate extends ShuttlePoint {
   /// The color of the shuttle on the map
   Color color;
 
-  /// The SVG image displayed on the map
-  ShuttleImage image;
+  /// The SVG arrow displayed on the map
+  ShuttleArrow arrow;
 
   /// Uses a super constructor to define lat/lng attributes
   ShuttleUpdate(
@@ -56,7 +56,7 @@ class ShuttleUpdate extends ShuttlePoint {
 
   set setColor(Color color) {
     this.color = color;
-    image = ShuttleImage(svgColor: color);
+    arrow = ShuttleArrow(svgColor: color);
   }
 
   factory ShuttleUpdate.fromJson(Map<String, dynamic> json) {
@@ -98,7 +98,7 @@ class ShuttleUpdate extends ShuttlePoint {
             },
             child: RotationTransition(
                 turns: AlwaysStoppedAnimation((heading - 45) / 360),
-                child: image.getSVG),
+                child: arrow),
           );
         });
   }

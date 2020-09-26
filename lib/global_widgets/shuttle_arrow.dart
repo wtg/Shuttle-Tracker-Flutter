@@ -1,17 +1,23 @@
-import 'dart:ui';
-
-import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class ShuttleImage {
-  String svgString;
+class ShuttleArrow extends StatefulWidget {
   final Color svgColor;
 
-  ShuttleImage({this.svgColor}) {
-    var svgInput =
-        svgColor.value.toRadixString(16).toString().replaceAll('0xff', '');
-    svgString =
+  ShuttleArrow({this.svgColor});
+
+  @override
+  _ShuttleArrowState createState() => _ShuttleArrowState();
+}
+
+class _ShuttleArrowState extends State<ShuttleArrow> {
+  _getString() {
+    var svgInput = widget.svgColor.value
+        .toRadixString(16)
+        .toString()
+        .replaceAll('0xff', '');
+
+    var svgString =
         '''<svg width="60px" height="60px" viewBox="0 0 60 60" version="1.1" 
         xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
         <title>shuttle</title>
@@ -34,9 +40,12 @@ class ShuttleImage {
             </g>
         </g>
         </svg>''';
+    return svgString;
   }
 
-  Color get getSVGColor => svgColor;
-
-  Widget get getSVG => SvgPicture.string(svgString);
+  @override
+  Widget build(BuildContext context) {
+    var svgString = _getString();
+    return SvgPicture.string(svgString);
+  }
 }

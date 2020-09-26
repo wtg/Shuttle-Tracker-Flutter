@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:web_socket_channel/io.dart';
 
-import '../../models/shuttle_update.dart';
+import '../../data/models/shuttle_update.dart';
 
 class FusionSocket {
   String serverID;

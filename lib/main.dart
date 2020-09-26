@@ -12,6 +12,7 @@ import 'blocs/map/map_bloc.dart';
 import 'blocs/on_tap/on_tap_bloc.dart';
 import 'blocs/routes/routes_bloc.dart';
 import 'blocs/theme/theme_bloc.dart';
+import 'data/fusion/fusion_socket.dart';
 import 'data/repository/shuttle_repository.dart';
 import 'ios_cupertino_app.dart';
 import 'pages/map_page/map_page.dart';
@@ -30,13 +31,14 @@ void main() async {
   );
 }
 
+final FusionSocket ws = FusionSocket();
+
 class MyApp extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => MyAppState();
 }
 
 class MyAppState extends State<MyApp> {
-  // static ShuttleRepository repo = ShuttleRepository();
   final _pageOptions = [
     MultiBlocProvider(
       providers: [

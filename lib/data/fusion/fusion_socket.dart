@@ -99,12 +99,14 @@ class FusionSocket {
       print(item);
       print(data['message']['vehicle_id']);
       var eta = ShuttleETA(
-        stopId: int.parse(item['stop_id']),
-        vehicleId: int.parse(data['message']['vehicle_id']),
-        routeId:int.parse( data['message']['route_id']),
-        eta: DateTime(item['eta']),
-        arriving: item['arriving']
-      );
+          stopId: int.parse(item['stop_id']),
+          /*TODO: Recieved error here: Unhandled Exception: 
+              type 'int' is not a subtype of type 'String' */
+
+          vehicleId: int.parse(data['message']['vehicle_id']),
+          routeId: int.parse(data['message']['route_id']),
+          eta: DateTime(item['eta']),
+          arriving: item['arriving']);
       etas.add(eta);
       print("eta $eta");
     }

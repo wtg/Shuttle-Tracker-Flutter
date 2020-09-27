@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_map/flutter_map.dart';
 
+import '../../global_widgets/shuttle.dart';
 import '../../global_widgets/shuttle_arrow.dart';
-import '../../global_widgets/stop.dart';
 import 'shuttle_point.dart';
 
 class ShuttleUpdate extends ShuttlePoint {
@@ -80,7 +80,7 @@ class ShuttleUpdate extends ShuttlePoint {
         width: 30.0,
         height: 30.0,
         builder: (ctx) {
-          return Stop(
+          return Shuttle(
             animatedMapMove: animatedMapMove,
             context: context,
             svg: svg,

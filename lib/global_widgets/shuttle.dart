@@ -3,7 +3,7 @@ import 'package:latlong/latlong.dart';
 import '../pages/map_page/widgets/eta_panel.dart';
 import 'shuttle_arrow.dart';
 
-class Stop extends StatelessWidget {
+class Shuttle extends StatelessWidget {
   final dynamic animatedMapMove;
   final BuildContext context;
   final ShuttleSVG svg;
@@ -11,7 +11,7 @@ class Stop extends StatelessWidget {
   final LatLng getLatLng;
   final num heading;
 
-  Stop(
+  Shuttle(
       {@required this.animatedMapMove,
       @required this.context,
       @required this.svg,

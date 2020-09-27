@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
 
 import '../../blocs/on_tap/on_tap_bloc.dart';
-import '../../pages/map_page/widgets/eta_panel.dart';
+import '../../global_widgets/stop.dart';
 import 'shuttle_point.dart';
 
 class ShuttleStop extends ShuttlePoint {
@@ -48,53 +48,6 @@ class ShuttleStop extends ShuttlePoint {
     );
   }
 
-  Widget _getGesture(
-      {dynamic animatedMapMove,
-      bool selected,
-      BuildContext context,
-      ThemeData theme,
-      OnTapBloc bloc,
-      int index}) {
-    var selectedAsset = ColorFiltered(
-      colorFilter: ColorFilter.mode(Colors.green[400], BlendMode.modulate),
-      child: Image.asset(
-        'assets/img/stop.png',
-        width: 20,
-        height: 20,
-      ),
-    );
-    return GestureDetector(
-      onTap: () {
-        animatedMapMove(getLatLng, 14.2);
-        if (bloc != null) {
-          bloc.add(MapStopTapped(stopName: name, index: index));
-        }
-
-        if (context != null) {
-          showBottomSheet(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(25.0),
-                      topRight: Radius.circular(25.0))),
-              context: context,
-              builder: (_) => ETAPanel(
-                    markerName: '$name',
-                  ));
-        }
-      },
-      child: Container(
-        decoration: BoxDecoration(
-            border: Border.all(width: 15, style: BorderStyle.none),
-            shape: BoxShape.circle),
-        child: selected
-            ? selectedAsset
-            : Image.asset(
-                'assets/img/stop.png',
-              ),
-      ),
-    );
-  }
-
   Marker getMarker(
       {@required dynamic animatedMapMove,
       BuildContext context,
@@ -114,13 +67,16 @@ class ShuttleStop extends ShuttlePoint {
                   selected = true;
                 }
               }
-              return _getGesture(
-                  animatedMapMove: animatedMapMove,
-                  selected: selected,
-                  context: context,
-                  theme: theme,
-                  bloc: bloc,
-                  index: index);
+              return Stop(
+                animatedMapMove: animatedMapMove,
+                selected: selected,
+                context: context,
+                name: name,
+                theme: theme,
+                bloc: bloc,
+                getLatLng: getLatLng,
+                index: index,
+              );
             }));
   }
 }

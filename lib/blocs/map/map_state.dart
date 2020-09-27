@@ -23,7 +23,7 @@ class MapLoaded extends MapState {
   final List<Marker> updates;
   final List<Marker> location;
   final LatLng center;
-  final Map<String, ShuttleArrow> legend;
+  final Map<String, ShuttleSVG> legend;
 
   const MapLoaded(
       {@required this.routes,

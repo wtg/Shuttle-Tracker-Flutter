@@ -2,9 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_map/flutter_map.dart';
-import '../../global_widgets/shuttle_arrow.dart';
-import '../../pages/map_page/widgets/eta_panel.dart';
 
+import '../../global_widgets/shuttle_arrow.dart';
+import '../../global_widgets/stop.dart';
 import 'shuttle_point.dart';
 
 class ShuttleUpdate extends ShuttlePoint {
@@ -36,7 +36,7 @@ class ShuttleUpdate extends ShuttlePoint {
   Color color;
 
   /// The SVG arrow displayed on the map
-  ShuttleArrow arrow;
+  ShuttleSVG svg;
 
   /// Uses a super constructor to define lat/lng attributes
   ShuttleUpdate(
@@ -56,7 +56,7 @@ class ShuttleUpdate extends ShuttlePoint {
 
   set setColor(Color color) {
     this.color = color;
-    arrow = ShuttleArrow(svgColor: color);
+    svg = ShuttleSVG(svgColor: color);
   }
 
   factory ShuttleUpdate.fromJson(Map<String, dynamic> json) {
@@ -80,25 +80,13 @@ class ShuttleUpdate extends ShuttlePoint {
         width: 30.0,
         height: 30.0,
         builder: (ctx) {
-          return GestureDetector(
-            onTap: () {
-              animatedMapMove(getLatLng, 14.2);
-              print('Shuttle $vehicleId clicked on');
-              if (context != null) {
-                showBottomSheet(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(25.0),
-                            topRight: Radius.circular(25.0))),
-                    context: context,
-                    builder: (_) => ETAPanel(
-                          markerName: 'Bus ${vehicleId.toString()}',
-                        ));
-              }
-            },
-            child: RotationTransition(
-                turns: AlwaysStoppedAnimation((heading - 45) / 360),
-                child: arrow),
+          return Stop(
+            animatedMapMove: animatedMapMove,
+            context: context,
+            svg: svg,
+            heading: heading,
+            vehicleId: vehicleId,
+            getLatLng: getLatLng,
           );
         });
   }

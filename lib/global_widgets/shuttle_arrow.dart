@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class ShuttleArrow extends StatefulWidget {
+class ShuttleSVG extends StatefulWidget {
   final Color svgColor;
 
-  ShuttleArrow({this.svgColor});
+  ShuttleSVG({this.svgColor});
 
   @override
-  _ShuttleArrowState createState() => _ShuttleArrowState();
+  _ShuttleSVGState createState() => _ShuttleSVGState();
 }
 
-class _ShuttleArrowState extends State<ShuttleArrow> {
+class _ShuttleSVGState extends State<ShuttleSVG> {
   _getString() {
     var svgInput = widget.svgColor.value
         .toRadixString(16)

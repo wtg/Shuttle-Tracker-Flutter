@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-
-import '../../../main.dart';
-
 class ETAPanel extends StatefulWidget {
   final String markerName;
 

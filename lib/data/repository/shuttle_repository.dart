@@ -25,12 +25,12 @@ class ShuttleRepository {
   Future<AuxiliaryRouteData> getAuxiliaryRouteData() async {
     var routes = await getRoutes;
     var ids = <int>[];
-    var legend = <String, ShuttleArrow>{};
+    var legend = <String, ShuttleSVG>{};
     var colors = <int, Color>{};
 
     for (var route in routes) {
       if (route.active && route.enabled) {
-        legend[route.name] = ShuttleArrow(svgColor: route.color);
+        legend[route.name] = ShuttleSVG(svgColor: route.color);
         ids.addAll(route.stopIds);
         for (var schedule in route.schedules) {
           colors[schedule.routeId] = route.color;
@@ -44,7 +44,7 @@ class ShuttleRepository {
 
 class AuxiliaryRouteData {
   final List<int> ids;
-  final Map<String, ShuttleArrow> legend;
+  final Map<String, ShuttleSVG> legend;
   final Map<int, Color> colors;
 
   AuxiliaryRouteData({this.ids, this.legend, this.colors});

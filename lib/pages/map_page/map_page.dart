@@ -101,7 +101,7 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
                   var routes = <Polyline>[];
                   var stops = <Marker>[];
                   var updates = <Marker>[];
-                  var legend = <String, ShuttleArrow>{};
+                  var legend = <String, ShuttleSVG>{};
 
                   return BlocBuilder<MapBloc, MapState>(
                     builder: (context, state) {

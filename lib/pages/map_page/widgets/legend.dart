@@ -6,7 +6,7 @@ import '../../../global_widgets/shuttle_arrow.dart';
 import 'legend_row.dart';
 
 class Legend extends StatelessWidget {
-  final Map<String, ShuttleArrow> legend;
+  final Map<String, ShuttleSVG> legend;
 
   Legend({this.legend});
 

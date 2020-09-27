@@ -17,7 +17,7 @@ class RoutesPage extends StatefulWidget {
 class _RoutesPageState extends State<RoutesPage> {
   RoutesBloc routesBloc;
   bool isSwitched = false;
-  Map<String, ShuttleArrow> legend = {};
+  Map<String, ShuttleSVG> legend = {};
   Completer<void> _refreshCompleter;
 
   @override

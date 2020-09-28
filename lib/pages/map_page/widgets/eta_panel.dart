@@ -34,6 +34,23 @@ class _ETAPanelState extends State<ETAPanel> {
 
   Widget build(BuildContext context) {
     return Container(
+      decoration: BoxDecoration(
+        color: Theme.of(context).backgroundColor,
+        border: Border.all(
+          width: 5,
+          color: Theme.of(context).backgroundColor,
+        ),
+        borderRadius: BorderRadius.only(
+          topLeft: const Radius.circular(25),
+          topRight: const Radius.circular(25),
+        ),
+        boxShadow:
+        Theme.of(context).backgroundColor.toString() == "Color(0xffffffff)"
+          ? [BoxShadow(
+              color: Color(0xffD3D3D3),
+              blurRadius: 5.0,
+        )] : null
+      ),
       height: MediaQuery.of(context).size.height * 0.35,
       child: Center(
           child: Column(
@@ -51,13 +68,12 @@ class _ETAPanelState extends State<ETAPanel> {
             '${widget.markerName}',
             style: TextStyle(
                 color: Theme.of(context).hoverColor,
-                fontSize: 20,
+                fontSize: 27,
                 fontWeight: FontWeight.w700),
           ),
           SizedBox(
             height: 30,
           ),
-          Text("Add ETA data here"),
           StreamBuilder(
             stream: ws.channel.stream,
             builder: (context, snapshot) {

@@ -57,6 +57,10 @@ class _ETAPanelState extends State<ETAPanel> {
           SizedBox(
             height: 30,
           ),
+          Text(
+            'Put ETA data here'
+          ),
+          /*
           StreamBuilder(
             stream: ws.channel.stream,
             builder: (context, snapshot) {
@@ -69,6 +73,7 @@ class _ETAPanelState extends State<ETAPanel> {
               return CircularProgressIndicator();
             },
           )
+           */
         ],
       )),
     );

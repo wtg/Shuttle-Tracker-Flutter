@@ -2,9 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_map/flutter_map.dart';
-import '../pages/map_page/widgets/eta_panel.dart';
 
-import 'shuttle_image.dart';
+import '../../global_widgets/shuttle.dart';
+import '../../global_widgets/shuttle_arrow.dart';
 import 'shuttle_point.dart';
 
 class ShuttleUpdate extends ShuttlePoint {
@@ -35,8 +35,8 @@ class ShuttleUpdate extends ShuttlePoint {
   /// The color of the shuttle on the map
   Color color;
 
-  /// The SVG image displayed on the map
-  ShuttleImage image;
+  /// The SVG arrow displayed on the map
+  ShuttleSVG svg;
 
   /// Uses a super constructor to define lat/lng attributes
   ShuttleUpdate(
@@ -56,7 +56,7 @@ class ShuttleUpdate extends ShuttlePoint {
 
   set setColor(Color color) {
     this.color = color;
-    image = ShuttleImage(svgColor: color);
+    svg = ShuttleSVG(svgColor: color);
   }
 
   factory ShuttleUpdate.fromJson(Map<String, dynamic> json) {
@@ -80,25 +80,13 @@ class ShuttleUpdate extends ShuttlePoint {
         width: 30.0,
         height: 30.0,
         builder: (ctx) {
-          return GestureDetector(
-            onTap: () {
-              animatedMapMove(getLatLng, 14.2);
-              print('Shuttle $vehicleId clicked on');
-              if (context != null) {
-                showBottomSheet(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(25.0),
-                            topRight: Radius.circular(25.0))),
-                    context: context,
-                    builder: (_) => ETAPanel(
-                          markerName: 'Bus ${vehicleId.toString()}',
-                        ));
-              }
-            },
-            child: RotationTransition(
-                turns: AlwaysStoppedAnimation((heading - 45) / 360),
-                child: image.getSVG),
+          return Shuttle(
+            animatedMapMove: animatedMapMove,
+            context: context,
+            svg: svg,
+            heading: heading,
+            vehicleId: vehicleId,
+            getLatLng: getLatLng,
           );
         });
   }

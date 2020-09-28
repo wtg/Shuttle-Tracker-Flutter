@@ -1,8 +1,4 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
-
-import '../../../data/fusion/fusion_socket.dart';
 
 class ETAPanel extends StatefulWidget {
   final String markerName;
@@ -14,22 +10,9 @@ class ETAPanel extends StatefulWidget {
 }
 
 class _ETAPanelState extends State<ETAPanel> {
-  final FusionSocket ws = FusionSocket();
-
   @override
   void initState() {
-    ws.openWS();
-    ws.subscribe("eta");
-
     super.initState();
-  }
-
-  @override
-  void dispose() {
-    // ws.unsubscribe("eta");
-    ws.closeWS();
-
-    super.dispose();
   }
 
   Widget build(BuildContext context) {

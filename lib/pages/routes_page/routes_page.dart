@@ -3,10 +3,10 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../blocs/shuttle/shuttle_bloc.dart';
+import '../../blocs/routes/routes_bloc.dart';
 import '../../blocs/theme/theme_bloc.dart';
 import '../../global_widgets/loading_state.dart';
-import '../../models/shuttle_image.dart';
+import '../../global_widgets/shuttle_arrow.dart';
 import 'states/loaded_routes.dart';
 
 class RoutesPage extends StatefulWidget {
@@ -15,9 +15,9 @@ class RoutesPage extends StatefulWidget {
 }
 
 class _RoutesPageState extends State<RoutesPage> {
-  ShuttleBloc shuttleBloc;
+  RoutesBloc routesBloc;
   bool isSwitched = false;
-  Map<String, ShuttleImage> legend = {};
+  Map<String, ShuttleSVG> legend = {};
   Completer<void> _refreshCompleter;
 
   @override
@@ -37,16 +37,16 @@ class _RoutesPageState extends State<RoutesPage> {
             ),
           ),
           body: Center(child:
-              BlocBuilder<ShuttleBloc, ShuttleState>(builder: (context, state) {
-            shuttleBloc = BlocProvider.of<ShuttleBloc>(context);
-            if (state is ShuttleInitial || state is ShuttleError) {
+              BlocBuilder<RoutesBloc, RoutesState>(builder: (context, state) {
+            routesBloc = BlocProvider.of<RoutesBloc>(context);
+            if (state is RoutesInitial || state is RoutesError) {
               // TODO: MODIFY BLOC ERROR FOR ROUTE EVENT
-              shuttleBloc.add(ShuttleEvent.getRoutesPageData);
-            } else if (state is ShuttleLoaded) {
+              routesBloc.add(RoutesEvent.getRoutesPageData);
+            } else if (state is RoutesLoaded) {
               return RefreshIndicator(
                 backgroundColor: theme.getTheme.appBarTheme.color,
                 onRefresh: () {
-                  shuttleBloc.add(ShuttleEvent.getRoutesPageData);
+                  routesBloc.add(RoutesEvent.getRoutesPageData);
                   return _refreshCompleter.future;
                 },
                 child: LoadedRoutes(
@@ -56,7 +56,7 @@ class _RoutesPageState extends State<RoutesPage> {
                 ),
               );
             }
-            return LoadingState();
+            return LoadingScreen();
           })));
     });
   }

@@ -49,6 +49,7 @@ class MapBloc extends Bloc<MapEvent, MapState> {
           animatedMapMove: animatedMapMove,
           context: context,
           bloc: bloc,
+          isRoutesPage: false,
         ));
       }
     }

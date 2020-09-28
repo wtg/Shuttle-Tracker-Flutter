@@ -13,6 +13,7 @@ class Stop extends StatelessWidget {
   final int index;
   final LatLng getLatLng;
   final String name;
+  final bool isRoutesPage;
 
   final ColorFiltered selectedAsset = ColorFiltered(
     colorFilter: ColorFilter.mode(Colors.green[400], BlendMode.modulate),
@@ -31,18 +32,18 @@ class Stop extends StatelessWidget {
       @required this.bloc,
       @required this.index,
       @required this.getLatLng,
-      @required this.name});
+      @required this.name,
+      @required this.isRoutesPage});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
         animatedMapMove(getLatLng, 14.2);
-        if (bloc != null) {
-          bloc.add(MapStopTapped(stopName: name, index: index));
-        }
 
-        if (context != null) {
+        if (isRoutesPage) {
+          bloc.add(MapStopTapped(stopName: name, index: index));
+        } else {
           showBottomSheet(
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.only(

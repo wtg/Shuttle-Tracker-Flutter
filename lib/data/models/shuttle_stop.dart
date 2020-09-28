@@ -50,6 +50,7 @@ class ShuttleStop extends ShuttlePoint {
 
   Marker getMarker(
       {@required dynamic animatedMapMove,
+      bool isRoutesPage,
       BuildContext context,
       ThemeData theme,
       OnTapBloc bloc,
@@ -76,6 +77,7 @@ class ShuttleStop extends ShuttlePoint {
                 bloc: bloc,
                 getLatLng: getLatLng,
                 index: index,
+                isRoutesPage: isRoutesPage,
               );
             }));
   }

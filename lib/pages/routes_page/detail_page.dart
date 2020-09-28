@@ -67,7 +67,10 @@ class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
     shuttleStops.forEach((key, value) {
       _markers.add(
         value.getMarker(
-            animatedMapMove: animatedMapMove, bloc: widget.bloc, index: index),
+            animatedMapMove: animatedMapMove,
+            bloc: widget.bloc,
+            index: index,
+            isRoutesPage: true),
       );
       index++;
     });

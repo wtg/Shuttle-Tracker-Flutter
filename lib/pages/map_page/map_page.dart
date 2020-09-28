@@ -8,7 +8,7 @@ import 'package:latlong/latlong.dart';
 import '../../blocs/map/map_bloc.dart';
 import '../../blocs/theme/theme_bloc.dart';
 import '../../global_widgets/loading_state.dart';
-import '../../global_widgets/shuttle_arrow.dart';
+import '../../global_widgets/shuttle_svg.dart';
 import '../../main.dart';
 
 import 'widgets/attribution.dart';

@@ -44,6 +44,7 @@ class _ETAPanelState extends State<ETAPanel> {
               IconButton(
                 icon: Icon(Icons.clear, color: Theme.of(context).hoverColor),
                 onPressed: () => Navigator.pop(context),
+                splashRadius: 10,
               )
             ],
           ),

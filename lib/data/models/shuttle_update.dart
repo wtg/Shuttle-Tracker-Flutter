@@ -4,7 +4,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_map/flutter_map.dart';
 
 import '../../global_widgets/shuttle.dart';
-import '../../global_widgets/shuttle_arrow.dart';
+import '../../global_widgets/shuttle_svg.dart';
 import 'shuttle_point.dart';
 
 class ShuttleUpdate extends ShuttlePoint {

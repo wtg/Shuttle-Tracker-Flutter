@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:latlong/latlong.dart';
 import '../pages/map_page/widgets/eta_panel.dart';
-import 'shuttle_arrow.dart';
+import 'shuttle_svg.dart';
 
 class Shuttle extends StatelessWidget {
   final dynamic animatedMapMove;

@@ -9,7 +9,7 @@ import '../../data/models/shuttle_route.dart';
 import '../../data/models/shuttle_stop.dart';
 import '../../data/models/shuttle_update.dart';
 import '../../data/repository/shuttle_repository.dart';
-import '../../global_widgets/shuttle_arrow.dart';
+import '../../global_widgets/shuttle_svg.dart';
 import '../on_tap/on_tap_bloc.dart';
 
 part 'map_event.dart';

@@ -94,18 +94,14 @@ class FusionSocket {
     print("fusion data ${data['message']}");
     Map<String, dynamic> map = data['message'];
     List<dynamic> body = map['stop_etas'];
-    print("body $body");
     for (var item in body) {
-      print(item);
+      print(item['stop_id']);
       print(data['message']['vehicle_id']);
       var eta = ShuttleETA(
-          stopId: int.parse(item['stop_id']),
-          /*TODO: Recieved error here: Unhandled Exception: 
-              type 'int' is not a subtype of type 'String' */
-
-          vehicleId: int.parse(data['message']['vehicle_id']),
-          routeId: int.parse(data['message']['route_id']),
-          eta: DateTime(item['eta']),
+          stopId: item['stop_id'],
+          vehicleId: data['message']['vehicle_id'],
+          routeId: data['message']['route_id'],
+          eta: DateTime.parse(item['eta']),
           arriving: item['arriving']);
       etas.add(eta);
       print("eta $eta");

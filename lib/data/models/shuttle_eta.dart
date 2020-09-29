@@ -16,4 +16,9 @@ class ShuttleETA {
         eta: DateTime(json['eta']),
         arriving: json['arriving']);
   }
+
+  @override
+  String toString() {
+    return "$stopId $vehicleId $routeId $eta $arriving";
+  }
 }

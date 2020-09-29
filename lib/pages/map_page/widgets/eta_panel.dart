@@ -1,4 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_shuttletracker/data/models/shuttle_eta.dart';
+import 'package:http/http.dart';
+
+import '../../../main.dart';
 
 class ETAPanel extends StatefulWidget {
   final String markerName;
@@ -10,6 +16,8 @@ class ETAPanel extends StatefulWidget {
 }
 
 class _ETAPanelState extends State<ETAPanel> {
+  List etaList = [];
+
   @override
   void initState() {
     super.initState();
@@ -18,22 +26,24 @@ class _ETAPanelState extends State<ETAPanel> {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Theme.of(context).backgroundColor,
-        border: Border.all(
-          width: 5,
           color: Theme.of(context).backgroundColor,
-        ),
-        borderRadius: BorderRadius.only(
-          topLeft: const Radius.circular(25),
-          topRight: const Radius.circular(25),
-        ),
-        boxShadow:
-        Theme.of(context).backgroundColor.toString() == "Color(0xffffffff)"
-          ? [BoxShadow(
-              color: Color(0xffD3D3D3),
-              blurRadius: 5.0,
-        )] : null
-      ),
+          border: Border.all(
+            width: 5,
+            color: Theme.of(context).backgroundColor,
+          ),
+          borderRadius: BorderRadius.only(
+            topLeft: const Radius.circular(25),
+            topRight: const Radius.circular(25),
+          ),
+          boxShadow: Theme.of(context).backgroundColor.toString() ==
+                  "Color(0xffffffff)"
+              ? [
+                  BoxShadow(
+                    color: Color(0xffD3D3D3),
+                    blurRadius: 5.0,
+                  )
+                ]
+              : null),
       height: MediaQuery.of(context).size.height * 0.35,
       child: Center(
           child: Column(
@@ -58,23 +68,24 @@ class _ETAPanelState extends State<ETAPanel> {
           SizedBox(
             height: 30,
           ),
-          Text(
-            'Put ETA data here'
-          ),
-          /*
           StreamBuilder(
-            stream: ws.channel.stream,
+            stream: ws.streamController.stream,
             builder: (context, snapshot) {
               if (snapshot.hasData) {
+                var response = jsonDecode(snapshot.data);
+                if (response['type'] == 'eta') {
+                  etaList = ws.handleEtas(snapshot.data);
+                }
+
                 return Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Text(snapshot.data),
+                  child: Text(
+                      etaList.isNotEmpty ? '$etaList' : 'No ETAs calculated'),
                 );
               }
               return CircularProgressIndicator();
             },
           )
-           */
         ],
       )),
     );

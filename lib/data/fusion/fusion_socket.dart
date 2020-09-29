@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
@@ -11,6 +12,7 @@ class FusionSocket {
   String serverID;
   List<String> subscriptionTopics = [];
   IOWebSocketChannel channel;
+  StreamController<String> streamController = StreamController.broadcast();
 
   /// Start of the Fusion web socket functions
   /// Initialize a connection with the server, check if the server
@@ -19,6 +21,7 @@ class FusionSocket {
     channel = IOWebSocketChannel.connect('wss://shuttles.rpi.edu/fusion/');
 
     channel.stream.listen((message) {
+      streamController.add(message);
       // {"type":"server_id","message":"0ad35438-58bd-11ea-a696-0242ac110017"}
       var response = jsonDecode(message);
       if (response['type'] == 'server_id') {
@@ -27,8 +30,6 @@ class FusionSocket {
         return;
       } else if (response['type'] == 'vehicle_location') {
         handleVehicleLocations(message);
-      } else if (response['type'] == 'eta') {
-        handleEtas(message);
       }
     });
   }
@@ -116,9 +117,9 @@ class FusionSocket {
   // a member variable keeping track of all etas.
   // Can probably clean up this code a bit.
   // Clear the old etas from list
-  Future<List<ShuttleETA>> handleEtas(String message) async {
+  List<ShuttleETA> handleEtas(String message) {
     var etas = <ShuttleETA>[];
-    var data = await compute(jsonDecode, message);
+    var data = jsonDecode(message);
     List<dynamic> body = data['message']['stop_etas'];
     for (var item in body) {
       var eta = ShuttleETA(
@@ -132,6 +133,5 @@ class FusionSocket {
     }
     print("etas $etas");
     return etas;
-
   }
 }

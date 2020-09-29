@@ -1,8 +1,6 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_shuttletracker/data/models/shuttle_eta.dart';
-import 'package:http/http.dart';
 
 import '../../../main.dart';
 

@@ -100,7 +100,7 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
                   var isDarkMode = theme.getThemeState;
                   var routes = <Polyline>[];
                   var stops = <Marker>[];
-                  var updates = <Marker>[];
+                  // var updates = <Marker>[];
                   var legend = <String, ShuttleSVG>{};
 
                   return BlocBuilder<MapBloc, MapState>(
@@ -115,12 +115,12 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
                       } else if (state is MapLoaded) {
                         routes = state.routes;
                         stops = state.stops;
-                        updates = state.updates;
+                        // updates = state.updates;
                         legend = state.legend;
-                        mapBloc.add(GetMapData(
-                          animatedMapMove: _animatedMapMove,
-                          context: context,
-                        ));
+                        // mapBloc.add(GetMapData(
+                        //   animatedMapMove: _animatedMapMove,
+                        //   context: context,
+                        // ));
                       } else if (state is MapError) {
                         mapBloc.add(GetMapData(
                           animatedMapMove: _animatedMapMove,
@@ -154,7 +154,7 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
                                   PolylineLayerOptions(polylines: routes),
                                   MarkerLayerOptions(markers: stops),
                                   // MarkerLayerOptions(markers: location),
-                                  MarkerLayerOptions(markers: updates),
+                                  // MarkerLayerOptions(markers: updates),
                                 ],
                               ),
                             ),

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_map/flutter_map.dart';
-import 'package:http/http.dart';
 
 import '../../global_widgets/shuttle.dart';
 import '../../global_widgets/shuttle_svg.dart';

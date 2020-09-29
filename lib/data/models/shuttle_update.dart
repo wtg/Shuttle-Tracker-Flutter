@@ -1,7 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_map/flutter_map.dart';
+import 'package:http/http.dart';
 
 import '../../global_widgets/shuttle.dart';
 import '../../global_widgets/shuttle_svg.dart';
@@ -21,10 +21,10 @@ class ShuttleUpdate extends ShuttlePoint {
   final num speed;
 
   /// Timestamp of when this updated was sent
-  final String time;
+  final DateTime time;
 
   /// Timestamp of when shuttle was recieved
-  final String created;
+  final DateTime created;
 
   /// ID associated with the shuttle
   final int vehicleId;
@@ -65,8 +65,8 @@ class ShuttleUpdate extends ShuttlePoint {
       trackerId: json['tracker_id'],
       heading: (json['heading'] as num).toDouble(),
       speed: json['speed'],
-      time: json['time'],
-      created: json['created'],
+      time: DateTime.parse(json['time']),
+      created: DateTime.parse(json['created']),
       vehicleId: json['vehicle_id'],
       routeId: json['route_id'],
       latitude: json['latitude'],
@@ -89,5 +89,11 @@ class ShuttleUpdate extends ShuttlePoint {
             getLatLng: getLatLng,
           );
         });
+  }
+
+  @override
+  String toString() {
+    // TODO: implement toString
+    return "$trackerId $latitude $longitude $heading $speed $time $created $vehicleId $routeId";
   }
 }

@@ -13,7 +13,7 @@ class ShuttleETA {
         stopId: json['stop_id'],
         vehicleId: json['vehicle_id'],
         routeId: json['route_id'],
-        eta: DateTime(json['eta']),
+        eta: DateTime.parse(json['eta']),
         arriving: json['arriving']);
   }
 

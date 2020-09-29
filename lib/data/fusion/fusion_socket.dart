@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
+
 import 'package:web_socket_channel/io.dart';
 
 import '../models/shuttle_eta.dart';
@@ -9,7 +11,6 @@ class FusionSocket {
   String serverID;
   List<String> subscriptionTopics = [];
   IOWebSocketChannel channel;
-  List<ShuttleETA> etas = [];
 
   /// Start of the Fusion web socket functions
   /// Initialize a connection with the server, check if the server
@@ -67,18 +68,42 @@ class FusionSocket {
   }
 
   // Use the data here to force an update to shuttles on the map
-  List<ShuttleUpdate> handleVehicleLocations(String message) {
-    var jsonMessage = jsonDecode(message);
-    print("fusion data ${jsonMessage['message']}");
+  /*
+    private handleVehicleLocations(message: any) {
+        if (message.type !== 'vehicle_location') {
+            return;
+        }
 
-    // List<ShuttleUpdate> updatesList = jsonMessage != null
-    //     //     ? json
-    //     //         .decode(jsonMessage)
-    //     //         .map<ShuttleUpdate>((json) => ShuttleUpdate.fromJson(json))
-    //     //         .toList()
-    //     //     : [];
-    //     // print(updatesList);
-    // return updatesList;
+        const m = message.message;
+        const location = new Location(
+            m.id,
+            m.vehicle_id,
+            new Date(m.created),
+            new Date(m.time),
+            m.latitude,
+            m.longitude,
+            m.heading,
+            m.speed,
+            m.route_id,
+        );
+        store.commit('updateVehicleLocation', location);
+    }
+
+ {id: 14436992,
+  tracker_id: 4572001071,
+  latitude: 42.66648,
+  longitude: -73.74309,
+  heading: 14,
+  speed: 20.87807273864746,
+  time: 2020-08-28T11:19:15-04:00,
+  created: 2020-09-29T12:31:11.335133-04:00,
+  vehicle_id: 17,
+  route_id: null}
+  */
+  Future<List<ShuttleUpdate>> handleVehicleLocations(String message) async {
+    var data = await compute(jsonDecode, message);
+    var update = ShuttleUpdate.fromJson(data['message']);
+    print("update $update");
     return null;
   }
 
@@ -89,14 +114,13 @@ class FusionSocket {
 
   // Each time a panel is opened, the eta data will come from
   // a member variable keeping track of all etas.
-  void handleEtas(String message) {
-    var data = jsonDecode(message);
-    print("fusion data ${data['message']}");
-    Map<String, dynamic> map = data['message'];
-    List<dynamic> body = map['stop_etas'];
+  // Can probably clean up this code a bit.
+  // Clear the old etas from list
+  Future<List<ShuttleETA>> handleEtas(String message) async {
+    var etas = <ShuttleETA>[];
+    var data = await compute(jsonDecode, message);
+    List<dynamic> body = data['message']['stop_etas'];
     for (var item in body) {
-      print(item['stop_id']);
-      print(data['message']['vehicle_id']);
       var eta = ShuttleETA(
           stopId: item['stop_id'],
           vehicleId: data['message']['vehicle_id'],
@@ -107,13 +131,7 @@ class FusionSocket {
       print("eta $eta");
     }
     print("etas $etas");
-  }
-
-  // Since dart doesn't really support deep copies of lists, we
-  // have to keep in mind that we can't change the return value
-  // of this function. All copies of the list will contain
-  // references
-  List<ShuttleETA> getETAs() {
     return etas;
+
   }
 }

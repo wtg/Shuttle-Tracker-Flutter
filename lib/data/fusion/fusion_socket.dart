@@ -2,9 +2,9 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
-
 import 'package:web_socket_channel/io.dart';
 
+import '../../blocs/shuttles/shuttles_cubit.dart';
 import '../models/shuttle_eta.dart';
 import '../models/shuttle_update.dart';
 
@@ -13,6 +13,9 @@ class FusionSocket {
   List<String> subscriptionTopics = [];
   IOWebSocketChannel channel;
   StreamController<String> streamController = StreamController.broadcast();
+
+  ShuttlesCubit shuttlesCubit;
+
 
   /// Start of the Fusion web socket functions
   /// Initialize a connection with the server, check if the server
@@ -37,6 +40,9 @@ class FusionSocket {
   void closeWS() {
     channel.sink.close();
   }
+
+
+
 
   /// Subscribe to certain socket channels
   /// Tells the server to update this listener

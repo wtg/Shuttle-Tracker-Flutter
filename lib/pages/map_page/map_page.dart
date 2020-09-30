@@ -9,7 +9,6 @@ import '../../blocs/map/map_bloc.dart';
 import '../../blocs/theme/theme_bloc.dart';
 import '../../global_widgets/loading_state.dart';
 import '../../global_widgets/shuttle_svg.dart';
-import '../../main.dart';
 
 import 'widgets/attribution.dart';
 import 'widgets/legend.dart';
@@ -30,19 +29,19 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
 
   int i = 0;
 
-  @override
-  void initState() {
-    super.initState();
-    ws.openWS();
-    ws.subscribe("eta");
-    ws.subscribe("vehicle_location");
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   ws.openWS();
+  //   ws.subscribe("eta");
+  //   ws.subscribe("vehicle_location");
+  // }
 
-  @override
-  void dispose() {
-    ws.closeWS();
-    super.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   ws.closeWS();
+  //   super.dispose();
+  // }
 
   void _animatedMapMove(LatLng destLocation, double destZoom) {
     final _latTween = Tween<double>(

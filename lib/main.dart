@@ -8,10 +8,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 
 import 'android_material_app.dart';
+import 'blocs/fusion/fusion_bloc.dart';
 import 'blocs/map/map_bloc.dart';
 import 'blocs/on_tap/on_tap_bloc.dart';
 import 'blocs/routes/routes_bloc.dart';
-import 'blocs/shuttles/shuttles_cubit.dart';
 import 'blocs/theme/theme_bloc.dart';
 import 'data/fusion/fusion_socket.dart';
 import 'data/repository/shuttle_repository.dart';
@@ -21,19 +21,15 @@ import 'pages/routes_page/routes_page.dart';
 import 'pages/schedules_page/schedules_page.dart';
 import 'pages/settings_page/settings_page.dart';
 
-FusionSocket ws = FusionSocket();
+// FusionSocket ws = FusionSocket();
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   HydratedBloc.storage = await HydratedStorage.build();
   return runApp(
     DevicePreview(
-      enabled: false, //!kReleaseMode,
-      builder: (context) => BlocProvider(
-        create: (context) => ShuttlesCubit(),
-        child: MyApp(),
-      ),
-    ),
+        enabled: false, //!kReleaseMode,
+        builder: (context) => MyApp()),
   );
 }
 
@@ -52,9 +48,9 @@ class MyAppState extends State<MyApp> {
         BlocProvider(
           create: (context) => OnTapBloc(),
         ),
-        // BlocProvider(
-        //   create: (context) => FusionCubit(fusionSocket: FusionSocket()),
-        // )
+        BlocProvider(
+          create: (context) => FusionBloc(fusionSocket: FusionSocket()),
+        )
       ],
       child: MapPage(),
     ),

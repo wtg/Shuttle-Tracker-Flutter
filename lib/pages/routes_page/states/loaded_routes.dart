@@ -51,7 +51,7 @@ class _LoadedRoutes extends State<LoadedRoutes> {
     return tileList;
   }
 
-  List<Widget> _getInactiveRoutes() {
+  List<Widget> _getScheduledRoutes() {
     var tileList = <CustomListTile>[];
     for (var route in widget.routes) {
       var tile = CustomListTile(
@@ -102,8 +102,8 @@ class _LoadedRoutes extends State<LoadedRoutes> {
               NotificationListener<FavoriteNotification>(
                 child: RoutesSection(
                   theme: widget.theme,
-                  routes: _getInactiveRoutes(),
-                  sectionHeader: 'Inactive Routes',
+                  routes: _getScheduledRoutes(),
+                  sectionHeader: 'Scheduled Routes',
                 ),
                 onNotification: (favorited) {
                   log("received notification");

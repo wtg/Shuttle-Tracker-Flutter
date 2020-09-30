@@ -1,8 +1,4 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-
-import '../../../main.dart';
 
 class ETAPanel extends StatefulWidget {
   final String markerName;
@@ -66,24 +62,24 @@ class _ETAPanelState extends State<ETAPanel> {
           SizedBox(
             height: 30,
           ),
-          StreamBuilder(
-            stream: ws.streamController.stream,
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                var response = jsonDecode(snapshot.data);
-                if (response['type'] == 'eta') {
-                  etaList = ws.handleEtas(snapshot.data);
-                }
+          // StreamBuilder(
+          //   stream: ws.streamController.stream,
+          //   builder: (context, snapshot) {
+          //     if (snapshot.hasData) {
+          //       var response = jsonDecode(snapshot.data);
+          //       if (response['type'] == 'eta') {
+          //         etaList = ws.handleEtas(snapshot.data);
+          //       }
 
-                return Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                      etaList.isNotEmpty ? '$etaList' : 'No ETAs calculated'),
-                );
-              }
-              return CircularProgressIndicator();
-            },
-          )
+          //       return Padding(
+          //         padding: const EdgeInsets.all(8.0),
+          //         child: Text(
+          //             etaList.isNotEmpty ? '$etaList' : 'No ETAs calculated'),
+          //       );
+          //     }
+          //     return CircularProgressIndicator();
+          //   },
+          // )
         ],
       )),
     );

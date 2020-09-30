@@ -100,20 +100,20 @@ class CustomListTile extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.end,
           children: <Widget>[
-            //Stack(
-            //  alignment: AlignmentDirectional.center,
-            //  children: <Widget>[
-            //    Container(
-            //      height: 20,
-            //      width: 20,
-            //      decoration: ShapeDecoration(
-            //        color: Colors.white,
-            //        shape: CircleBorder(),
-            //      ),
-            //    ),
-            //    _getIcon(),
-            //  ],
-            //),
+            Stack(
+              alignment: AlignmentDirectional.center,
+              children: <Widget>[
+                Container(
+                  height: 20,
+                  width: 20,
+                  decoration: ShapeDecoration(
+                    color: Colors.white,
+                    shape: CircleBorder(),
+                  ),
+                ),
+                _getIcon(),
+              ],
+            ),
             Icon(
               Platform.isIOS
                   ? CupertinoIcons.right_chevron

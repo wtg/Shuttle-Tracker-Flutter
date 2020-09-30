@@ -2,9 +2,9 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
-
 import 'package:web_socket_channel/io.dart';
 
+import '../../blocs/shuttles/shuttles_cubit.dart';
 import '../models/shuttle_eta.dart';
 import '../models/shuttle_update.dart';
 
@@ -14,24 +14,13 @@ class FusionSocket {
   IOWebSocketChannel channel;
   StreamController<String> streamController = StreamController.broadcast();
 
+  ShuttlesCubit shuttlesCubit;
+
   /// Start of the Fusion web socket functions
   /// Initialize a connection with the server, check if the server
   /// is already running or timed out
   void openWS() {
     channel = IOWebSocketChannel.connect('wss://shuttles.rpi.edu/fusion/');
-
-    channel.stream.listen((message) {
-      streamController.add(message);
-      // {"type":"server_id","message":"0ad35438-58bd-11ea-a696-0242ac110017"}
-      var response = jsonDecode(message);
-      if (response['type'] == 'server_id') {
-        serverID = response['message'];
-        print(serverID);
-        return;
-      } else if (response['type'] == 'vehicle_location') {
-        handleVehicleLocations(message);
-      }
-    });
   }
 
   void closeWS() {

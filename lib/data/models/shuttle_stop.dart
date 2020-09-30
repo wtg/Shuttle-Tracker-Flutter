@@ -6,6 +6,7 @@ import '../../blocs/on_tap/on_tap_bloc.dart';
 import '../../global_widgets/stop.dart';
 import 'shuttle_point.dart';
 
+// ignore: must_be_immutable
 class ShuttleStop extends ShuttlePoint {
   /// ID associated with stop
   final int id;
@@ -47,6 +48,9 @@ class ShuttleStop extends ShuttlePoint {
       description: json['description'],
     );
   }
+
+  @override
+  List<Object> get props => [id, name, created, updated, description];
 
   Marker getMarker(
       {@required dynamic animatedMapMove,

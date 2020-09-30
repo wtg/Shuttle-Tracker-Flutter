@@ -4,31 +4,37 @@ import 'dart:convert';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_map/flutter_map.dart';
+
 import '../../data/fusion/fusion_socket.dart';
+import '../../data/models/shuttle_update.dart';
 
 part 'fusion_event.dart';
 part 'fusion_state.dart';
 
 class FusionBloc extends Bloc<FusionEvent, FusionState> {
   final FusionSocket fusionSocket;
+  Map<ShuttleUpdate, Marker> fusionMap = {};
+
   FusionBloc({@required this.fusionSocket}) : super(FusionInitial()) {
     fusionSocket.openWS();
     fusionSocket.subscribe("eta");
     fusionSocket.subscribe("vehicle_location");
 
-    fusionSocket.channel.stream.listen((message) {
-      fusionSocket.streamController.add(message);
-      // {"type":"server_id","message":"0ad35438-58bd-11ea-a696-0242ac110017"}
-      var response = jsonDecode(message);
-      if (response['type'] == 'server_id') {
-        fusionSocket.serverID = response['message'];
-        print(fusionSocket.serverID);
-        return;
-      } else if (response['type'] == 'vehicle_location') {
-        add(GetFusionData());
-        fusionSocket.handleVehicleLocations(message);
-      }
-    });
+    fusionSocket.channel.stream.listen(
+      (message) {
+        fusionSocket.streamController.add(message);
+
+        var response = jsonDecode(message);
+        if (response['type'] == 'server_id') {
+          fusionSocket.serverID = response['message'];
+          print(fusionSocket.serverID);
+        } else if (response['type'] == 'vehicle_location') {
+          add(GetFusionData(
+              shuttleUpdate: fusionSocket.handleVehicleLocations(message)));
+        }
+      },
+    );
   }
 
   @override
@@ -36,7 +42,18 @@ class FusionBloc extends Bloc<FusionEvent, FusionState> {
     FusionEvent event,
   ) async* {
     if (event is GetFusionData) {
-      yield FusionLoaded();
+      var data = await event.shuttleUpdate;
+      data.setColor = Colors.white;
+
+      if (data.routeId != null) {
+        fusionMap[data] = data.getMarker();
+        print(fusionMap.length);
+      }
+
+      var list = <Marker>[];
+      fusionMap.forEach((k, v) => list.add(v));
+
+      yield FusionLoaded(updates: list);
     }
   }
 

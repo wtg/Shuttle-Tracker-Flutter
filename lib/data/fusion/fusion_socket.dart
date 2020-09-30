@@ -4,7 +4,6 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:web_socket_channel/io.dart';
 
-import '../../blocs/shuttles/shuttles_cubit.dart';
 import '../models/shuttle_eta.dart';
 import '../models/shuttle_update.dart';
 
@@ -13,8 +12,6 @@ class FusionSocket {
   List<String> subscriptionTopics = [];
   IOWebSocketChannel channel;
   StreamController<String> streamController = StreamController.broadcast();
-
-  ShuttlesCubit shuttlesCubit;
 
   /// Start of the Fusion web socket functions
   /// Initialize a connection with the server, check if the server
@@ -90,11 +87,11 @@ class FusionSocket {
   vehicle_id: 17,
   route_id: null}
   */
-  Future<List<ShuttleUpdate>> handleVehicleLocations(String message) async {
+  Future<ShuttleUpdate> handleVehicleLocations(String message) async {
     var data = await compute(jsonDecode, message);
     var update = ShuttleUpdate.fromJson(data['message']);
     print("update $update");
-    return null;
+    return update;
   }
 
   void sendToSocket(String message) {

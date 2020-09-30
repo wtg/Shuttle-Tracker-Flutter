@@ -35,13 +35,9 @@ class FusionBloc extends Bloc<FusionEvent, FusionState> {
   Stream<FusionState> mapEventToState(
     FusionEvent event,
   ) async* {
-  if(event is GetFusionData){
-    print("NEW DATA RECIEVED");
-    yield FusionLoaded();
-  }
-
-
-    // TODO: implement mapEventToState
+    if (event is GetFusionData) {
+      yield FusionLoaded();
+    }
   }
 
   @override

@@ -5,11 +5,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong/latlong.dart';
 
+import '../../blocs/fusion/fusion_bloc.dart';
 import '../../blocs/map/map_bloc.dart';
 import '../../blocs/theme/theme_bloc.dart';
 import '../../global_widgets/loading_state.dart';
 import '../../global_widgets/shuttle_svg.dart';
-
 import 'widgets/attribution.dart';
 import 'widgets/legend.dart';
 
@@ -126,46 +126,51 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
                           context: context,
                         ));
                       } else {}
-                      return Stack(children: <Widget>[
-                        Column(
-                          children: [
-                            /// Map
-                            Flexible(
-                              child: FlutterMap(
-                                mapController: mapController,
-                                options: MapOptions(
-                                  nePanBoundary: LatLng(42.78, -73.63),
-                                  swPanBoundary: LatLng(42.68, -73.71),
-                                  center: LatLng(lat, long),
-                                  zoom: 14,
-                                  maxZoom: 16, // max you can zoom in
-                                  minZoom: 13, // min you can zoom out
-                                ),
-                                layers: [
-                                  TileLayerOptions(
-                                    backgroundColor:
-                                        theme.getTheme.bottomAppBarColor,
-                                    urlTemplate:
-                                        isDarkMode ? darkLink : lightLink,
-                                    subdomains: ['a', 'b', 'c'],
-                                    tileProvider: CachedNetworkTileProvider(),
+                      return BlocBuilder<FusionBloc, FusionState>(
+                        builder: (context, state) {
+                          return Stack(children: <Widget>[
+                            Column(
+                              children: [
+                                /// Map
+                                Flexible(
+                                  child: FlutterMap(
+                                    mapController: mapController,
+                                    options: MapOptions(
+                                      nePanBoundary: LatLng(42.78, -73.63),
+                                      swPanBoundary: LatLng(42.68, -73.71),
+                                      center: LatLng(lat, long),
+                                      zoom: 14,
+                                      maxZoom: 16, // max you can zoom in
+                                      minZoom: 13, // min you can zoom out
+                                    ),
+                                    layers: [
+                                      TileLayerOptions(
+                                        backgroundColor:
+                                            theme.getTheme.bottomAppBarColor,
+                                        urlTemplate:
+                                            isDarkMode ? darkLink : lightLink,
+                                        subdomains: ['a', 'b', 'c'],
+                                        tileProvider:
+                                            CachedNetworkTileProvider(),
+                                      ),
+                                      PolylineLayerOptions(polylines: routes),
+                                      MarkerLayerOptions(markers: stops),
+                                      // MarkerLayerOptions(markers: location),
+                                      // MarkerLayerOptions(markers: updates),
+                                    ],
                                   ),
-                                  PolylineLayerOptions(polylines: routes),
-                                  MarkerLayerOptions(markers: stops),
-                                  // MarkerLayerOptions(markers: location),
-                                  // MarkerLayerOptions(markers: updates),
-                                ],
-                              ),
+                                ),
+                              ],
                             ),
-                          ],
-                        ),
-                        Attribution(
-                          theme: theme.getTheme,
-                        ),
-                        Legend(
-                          legend: legend,
-                        ),
-                      ]);
+                            Attribution(
+                              theme: theme.getTheme,
+                            ),
+                            Legend(
+                              legend: legend,
+                            ),
+                          ]);
+                        },
+                      );
                     },
                   );
                 },

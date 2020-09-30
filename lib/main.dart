@@ -21,8 +21,6 @@ import 'pages/routes_page/routes_page.dart';
 import 'pages/schedules_page/schedules_page.dart';
 import 'pages/settings_page/settings_page.dart';
 
-// FusionSocket ws = FusionSocket();
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   HydratedBloc.storage = await HydratedStorage.build();

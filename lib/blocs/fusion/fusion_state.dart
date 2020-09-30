@@ -9,4 +9,8 @@ abstract class FusionState extends Equatable {
 
 class FusionInitial extends FusionState {}
 
-class FusionLoaded extends FusionState {}
+class FusionLoaded extends FusionState {
+  final ShuttleUpdate shuttleUpdate;
+
+  FusionLoaded({this.shuttleUpdate});
+}

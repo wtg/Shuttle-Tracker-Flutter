@@ -127,7 +127,7 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
                         ));
                       } else {}
                       return BlocBuilder<FusionBloc, FusionState>(
-                        builder: (context, state) {
+                        builder: (context, lol) {
                           return Stack(children: <Widget>[
                             Column(
                               children: [

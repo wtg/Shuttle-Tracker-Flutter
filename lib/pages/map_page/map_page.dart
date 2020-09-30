@@ -99,7 +99,7 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
                   var isDarkMode = theme.getThemeState;
                   var routes = <Polyline>[];
                   var stops = <Marker>[];
-                  // var updates = <Marker>[];
+
                   var legend = <String, ShuttleSVG>{};
 
                   return BlocBuilder<MapBloc, MapState>(
@@ -127,7 +127,12 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
                         ));
                       } else {}
                       return BlocBuilder<FusionBloc, FusionState>(
-                        builder: (context, lol) {
+                        builder: (context, fusionState) {
+                          var updates = <Marker>[];
+                          if (fusionState is FusionInitial) {
+                          } else if (fusionState is FusionLoaded) {
+                            updates = fusionState.updates;
+                          }
                           return Stack(children: <Widget>[
                             Column(
                               children: [
@@ -156,7 +161,7 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
                                       PolylineLayerOptions(polylines: routes),
                                       MarkerLayerOptions(markers: stops),
                                       // MarkerLayerOptions(markers: location),
-                                      // MarkerLayerOptions(markers: updates),
+                                      MarkerLayerOptions(markers: updates),
                                     ],
                                   ),
                                 ),

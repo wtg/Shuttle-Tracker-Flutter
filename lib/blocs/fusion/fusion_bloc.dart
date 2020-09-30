@@ -43,9 +43,17 @@ class FusionBloc extends Bloc<FusionEvent, FusionState> {
   ) async* {
     if (event is GetFusionData) {
       var data = await event.shuttleUpdate;
-      fusionMap[data] = data.getMarker();
-      print(fusionMap.length);
-      yield FusionLoaded();
+      data.setColor = Colors.white;
+
+      if (data.routeId != null) {
+        fusionMap[data] = data.getMarker();
+        print(fusionMap.length);
+      }
+
+      var list = <Marker>[];
+      fusionMap.forEach((k, v) => list.add(v));
+
+      yield FusionLoaded(updates: list);
     }
   }
 

@@ -21,20 +21,21 @@ class FusionBloc extends Bloc<FusionEvent, FusionState> {
     fusionSocket.subscribe("eta");
     fusionSocket.subscribe("vehicle_location");
 
-    fusionSocket.channel.stream.listen(
-      (message) {
-        fusionSocket.streamController.add(message);
+    fusionSocket.channel.stream.listen((message) {
+      fusionSocket.streamController.add(message);
 
-        var response = jsonDecode(message);
-        if (response['type'] == 'server_id') {
-          fusionSocket.serverID = response['message'];
-          print(fusionSocket.serverID);
-        } else if (response['type'] == 'vehicle_location') {
-          add(GetFusionData(
-              shuttleUpdate: fusionSocket.handleVehicleLocations(message)));
-        }
-      },
-    );
+      var response = jsonDecode(message);
+      if (response['type'] == 'server_id') {
+        fusionSocket.serverID = response['message'];
+        print(fusionSocket.serverID);
+      } else if (response['type'] == 'vehicle_location') {
+        add(GetFusionData(
+            shuttleUpdate: fusionSocket.handleVehicleLocations(message)));
+      }
+    }, onError: (error) {
+      print(error);
+      fusionSocket.closeWS();
+    });
   }
 
   @override
@@ -44,8 +45,10 @@ class FusionBloc extends Bloc<FusionEvent, FusionState> {
     if (event is GetFusionData) {
       var data = await event.shuttleUpdate;
       data.setColor = Colors.white;
-
-      if (data.routeId != null) {
+      if (data.routeId != null &&
+          data.time.day == DateTime.now().day &&
+          data.time.month == DateTime.now().month &&
+          data.time.year == DateTime.now().year) {
         fusionMap[data] = data.getMarker();
         print(fusionMap.length);
       }

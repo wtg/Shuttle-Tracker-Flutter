@@ -39,7 +39,7 @@ class Stop extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        animatedMapMove(getLatLng, 14.2);
+        animatedMapMove(getLatLng, 15.2);
 
         if (isRoutesPage) {
           bloc.add(MapStopTapped(stopName: name, index: index));

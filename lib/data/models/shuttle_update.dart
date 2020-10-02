@@ -93,7 +93,6 @@ class ShuttleUpdate extends ShuttlePoint {
 
   @override
   String toString() {
-    // TODO: implement toString
     return "$trackerId $latitude $longitude $heading $speed $time $created $vehicleId $routeId";
   }
 

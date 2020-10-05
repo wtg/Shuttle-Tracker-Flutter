@@ -21,19 +21,11 @@ class RoutesSection extends StatelessWidget {
             overscroll.disallowGlow();
             return null;
           },
-          child: ListView.separated(
+          child: ListView.builder(
             physics: const NeverScrollableScrollPhysics(),
             shrinkWrap: true,
             itemCount: routes.length,
-            itemBuilder: (context, index) => routes[index],
-            separatorBuilder: (context, index) {
-              return Divider(
-                color: Colors.grey[600],
-                height: 4,
-                thickness: 0,
-                indent: 57,
-              );
-            },
+            itemBuilder: (context, index) => Card(child: routes[index], ),
           ),
         )
       ],

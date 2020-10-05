@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_shuttletracker/data/models/shuttle_eta.dart';
@@ -8,8 +9,9 @@ import '../../../main.dart';
 
 class ETAPanel extends StatefulWidget {
   final String markerName;
+  final bool stopMarker;
 
-  ETAPanel({@required this.markerName});
+  ETAPanel({@required this.markerName, this.stopMarker});
 
   @override
   _ETAPanelState createState() => _ETAPanelState();
@@ -61,7 +63,8 @@ class _ETAPanelState extends State<ETAPanel> {
           Text(
             '${widget.markerName}',
             style: TextStyle(
-                color: Theme.of(context).hoverColor,
+                color: widget.stopMarker
+                    ? Theme.of(context).hoverColor : Colors.blue,
                 fontSize: 27,
                 fontWeight: FontWeight.w700),
           ),
@@ -76,7 +79,6 @@ class _ETAPanelState extends State<ETAPanel> {
                 if (response['type'] == 'eta') {
                   etaList = ws.handleEtas(snapshot.data);
                 }
-
                 return Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
@@ -89,5 +91,9 @@ class _ETAPanelState extends State<ETAPanel> {
         ],
       )),
     );
+  }
+  
+  void logThis(String message) {
+    log(message);
   }
 }

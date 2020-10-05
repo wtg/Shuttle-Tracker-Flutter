@@ -34,7 +34,8 @@ class Shuttle extends StatelessWidget {
               context: context,
               builder: (_) => ETAPanel(
                     markerName: 'Bus ${vehicleId.toString()}',
-                  ));
+                    stopMarker: false,
+                  )); // stopType is false if bus, true otherwise
         }
       },
       child: RotationTransition(

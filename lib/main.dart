@@ -8,6 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 
 import 'android_material_app.dart';
+import 'blocs/fusion/fusion_bloc.dart';
 import 'blocs/map/map_bloc.dart';
 import 'blocs/on_tap/on_tap_bloc.dart';
 import 'blocs/routes/routes_bloc.dart';
@@ -25,13 +26,10 @@ void main() async {
   HydratedBloc.storage = await HydratedStorage.build();
   return runApp(
     DevicePreview(
-      enabled: false, //!kReleaseMode,
-      builder: (context) => MyApp(),
-    ),
+        enabled: false, //!kReleaseMode,
+        builder: (context) => MyApp()),
   );
 }
-
-final FusionSocket ws = FusionSocket();
 
 class MyApp extends StatefulWidget {
   @override
@@ -48,6 +46,9 @@ class MyAppState extends State<MyApp> {
         BlocProvider(
           create: (context) => OnTapBloc(),
         ),
+        BlocProvider(
+          create: (context) => FusionBloc(fusionSocket: FusionSocket()),
+        )
       ],
       child: MapPage(),
     ),

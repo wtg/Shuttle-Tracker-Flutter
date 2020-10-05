@@ -150,7 +150,7 @@ class MapBloc extends Bloc<MapEvent, MapState> {
         isLoading = false;
       } else {
         /// Poll every 3ish seconds
-        await Future.delayed(const Duration(seconds: 2));
+        // await Future.delayed(const Duration(seconds: 2));
       }
 
       if (repository.getIsConnected) {
@@ -165,7 +165,7 @@ class MapBloc extends Bloc<MapEvent, MapState> {
         isLoading = true;
         yield MapError();
       }
-      await Future.delayed(const Duration(seconds: 2));
+      // await Future.delayed(const Duration(seconds: 2));
     }
   }
 }

@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
-
 import 'package:web_socket_channel/io.dart';
 
 import '../models/shuttle_eta.dart';
@@ -19,19 +18,6 @@ class FusionSocket {
   /// is already running or timed out
   void openWS() {
     channel = IOWebSocketChannel.connect('wss://shuttles.rpi.edu/fusion/');
-
-    channel.stream.listen((message) {
-      streamController.add(message);
-      // {"type":"server_id","message":"0ad35438-58bd-11ea-a696-0242ac110017"}
-      var response = jsonDecode(message);
-      if (response['type'] == 'server_id') {
-        serverID = response['message'];
-        print(serverID);
-        return;
-      } else if (response['type'] == 'vehicle_location') {
-        handleVehicleLocations(message);
-      }
-    });
   }
 
   void closeWS() {
@@ -101,11 +87,11 @@ class FusionSocket {
   vehicle_id: 17,
   route_id: null}
   */
-  Future<List<ShuttleUpdate>> handleVehicleLocations(String message) async {
+  Future<ShuttleUpdate> handleVehicleLocations(String message) async {
     var data = await compute(jsonDecode, message);
     var update = ShuttleUpdate.fromJson(data['message']);
     print("update $update");
-    return null;
+    return update;
   }
 
   void sendToSocket(String message) {

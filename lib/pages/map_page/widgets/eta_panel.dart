@@ -1,11 +1,4 @@
-import 'dart:convert';
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_shuttletracker/data/models/shuttle_eta.dart';
-import 'package:http/http.dart';
-
-import '../../../main.dart';
 
 class ETAPanel extends StatefulWidget {
   final String markerName;
@@ -92,7 +85,7 @@ class _ETAPanelState extends State<ETAPanel> {
       )),
     );
   }
-  
+
   void logThis(String message) {
     log(message);
   }

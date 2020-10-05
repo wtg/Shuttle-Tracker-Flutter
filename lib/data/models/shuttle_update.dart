@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_map/flutter_map.dart';
-import 'package:http/http.dart';
 
 import '../../global_widgets/shuttle.dart';
 import '../../global_widgets/shuttle_svg.dart';
 import 'shuttle_point.dart';
 
+// ignore: must_be_immutable
 class ShuttleUpdate extends ShuttlePoint {
   /// ID of the update
   final int id;
@@ -74,7 +74,7 @@ class ShuttleUpdate extends ShuttlePoint {
     );
   }
 
-  Marker getMarker(dynamic animatedMapMove, [BuildContext context]) {
+  Marker getMarker([dynamic animatedMapMove, BuildContext context]) {
     return Marker(
         point: getLatLng,
         width: 30.0,
@@ -93,7 +93,9 @@ class ShuttleUpdate extends ShuttlePoint {
 
   @override
   String toString() {
-    // TODO: implement toString
     return "$trackerId $latitude $longitude $heading $speed $time $created $vehicleId $routeId";
   }
+
+  @override
+  List<Object> get props => [trackerId];
 }

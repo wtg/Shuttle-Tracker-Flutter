@@ -137,7 +137,7 @@ class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
                         nePanBoundary: LatLng(42.78, -73.63),
                         swPanBoundary: LatLng(42.68, -73.71),
                         center: mapCenter,
-                        zoom: 13.9,
+                        zoom: 15.2,
                         maxZoom: 16, // max you can zoom in
                         minZoom: 13, // min you can zoom out
                       ),

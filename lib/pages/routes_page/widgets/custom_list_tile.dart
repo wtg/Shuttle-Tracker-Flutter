@@ -22,24 +22,6 @@ class CustomListTile extends StatelessWidget {
   bool get isEnabled => route.enabled;
   bool get isActive => route.active;
 
-  Icon _getIcon() {
-    var icon = isEnabled && isActive
-        ? Icon(
-            Icons.check_circle,
-            color: Colors.green,
-          )
-        : isEnabled && !isActive
-            ? Icon(
-                Icons.error,
-                color: Colors.yellow[700],
-              )
-            : Icon(
-                Icons.error,
-                color: Colors.red,
-              );
-    return icon;
-  }
-
   Map<int, ShuttleStop> _getRouteStops() {
     var stopIds = route.stopIds;
     var routeStops = <int, ShuttleStop>{};
@@ -67,9 +49,9 @@ class CustomListTile extends StatelessWidget {
     var circle = ColorFiltered(
       colorFilter: ColorFilter.mode(color, BlendMode.modulate),
       child: Image.asset(
-        'assets/img/stop_thin.png',
-        width: 25,
-        height: 25,
+        'assets/img/dark_stop.png',
+        width: 12,
+        height: 12,
       ),
     );
 

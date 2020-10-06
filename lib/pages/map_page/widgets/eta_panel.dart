@@ -57,7 +57,8 @@ class _ETAPanelState extends State<ETAPanel> {
             '${widget.markerName}',
             style: TextStyle(
                 color: widget.stopMarker
-                    ? Theme.of(context).hoverColor : Colors.blue,
+                    ? Theme.of(context).hoverColor
+                    : Colors.blue,
                 fontSize: 27,
                 fontWeight: FontWeight.w700),
           ),

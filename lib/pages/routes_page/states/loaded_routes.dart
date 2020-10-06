@@ -1,11 +1,9 @@
-import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 import '../../../data/models/shuttle_route.dart';
 import '../../../data/models/shuttle_stop.dart';
 import '../widgets/custom_list_tile.dart';
-import '../widgets/favorite_section.dart';
 import '../widgets/route_section.dart';
 
 class LoadedRoutes extends StatefulWidget {
@@ -20,7 +18,7 @@ class LoadedRoutes extends StatefulWidget {
 
 class _LoadedRoutes extends State<LoadedRoutes> {
   List<Widget> _getFavoriteRoutes() {
-    var tileList = <CustomListTile>[];
+    var tileList = <Widget>[];
     for (var route in widget.routes) {
       var tile = CustomListTile(
         route: route,
@@ -31,12 +29,12 @@ class _LoadedRoutes extends State<LoadedRoutes> {
         tileList.add(tile);
       }
     }
-    tileList.sort((a, b) => a.route.name.compareTo(b.route.name));
+    // tileList.sort((a, b) => a.route.name.compareTo(b.route.name));
     return tileList;
   }
 
   List<Widget> _getActiveRoutes() {
-    var tileList = <CustomListTile>[];
+    var tileList = <Widget>[];
     for (var route in widget.routes) {
       var tile = CustomListTile(
         route: route,
@@ -47,7 +45,7 @@ class _LoadedRoutes extends State<LoadedRoutes> {
         tileList.add(tile);
       }
     }
-    tileList.sort((a, b) => a.route.name.compareTo(b.route.name));
+    // tileList.sort((a, b) => a.route.name.compareTo(b.route.name));
     return tileList;
   }
 
@@ -76,40 +74,18 @@ class _LoadedRoutes extends State<LoadedRoutes> {
           color: widget.theme.backgroundColor,
           child: ListView(
             children: <Widget>[
-              NotificationListener<FavoriteNotification>(
-                  child: FavoritesSection(
-                    theme: widget.theme,
-                    routes: _getFavoriteRoutes(),
-                    sectionHeader: 'Favorite Routes',
-                  ),
-                  onNotification: (favorited) {
-                    log("received notification");
-                    setState(() {});
-                    return true;
-                  }),
-              NotificationListener<FavoriteNotification>(
-                child: RoutesSection(
-                  theme: widget.theme,
-                  routes: _getActiveRoutes(),
-                  sectionHeader: 'Active Routes',
-                ),
-                onNotification: (favorited) {
-                  log("received notification");
-                  setState(() {});
-                  return true;
-                },
+              SizedBox(
+                height: 10,
               ),
-              NotificationListener<FavoriteNotification>(
-                child: RoutesSection(
-                  theme: widget.theme,
-                  routes: _getInactiveRoutes(),
-                  sectionHeader: 'Inactive Routes',
-                ),
-                onNotification: (favorited) {
-                  log("received notification");
-                  setState(() {});
-                  return true;
-                },
+              RoutesSection(
+                theme: widget.theme,
+                routes: _getActiveRoutes(),
+                sectionHeader: 'Active Routes',
+              ),
+              RoutesSection(
+                theme: widget.theme,
+                routes: _getInactiveRoutes(),
+                sectionHeader: 'Inactive Routes',
               ),
             ],
           )),

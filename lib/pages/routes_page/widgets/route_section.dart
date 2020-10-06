@@ -9,23 +9,24 @@ class RoutesSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        ListTile(
-          dense: true,
-          leading: Text(
-            sectionHeader,
-            style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
-          ),
-        ),
-        NotificationListener<OverscrollIndicatorNotification>(
-          onNotification: (overscroll) {
-            overscroll.disallowGlow();
-            return null;
-          },
-          child: ListView.builder(
-            physics: const NeverScrollableScrollPhysics(),
-            shrinkWrap: true,
-            itemCount: routes.length,
-            itemBuilder: (context, index) => Card(child: routes[index], ),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Card(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: ExpansionTile(
+              initiallyExpanded:
+                  sectionHeader == "Active Routes" ? true : false,
+              title: Text(
+                sectionHeader,
+                style: TextStyle(
+                    color: Colors.red,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 19),
+              ),
+              children: routes,
+            ),
           ),
         )
       ],

@@ -86,7 +86,7 @@ class _ETAPanelState extends State<ETAPanel> {
     );
   }
 
-  void logThis(String message) {
-    log(message);
-  }
+  // void logThis(String message) {
+  //   log(message);
+  // }
 }

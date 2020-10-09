@@ -12,6 +12,8 @@ class RoutesSection extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Card(
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8.0)),
             child: Theme(
               data:
                   Theme.of(context).copyWith(dividerColor: Colors.transparent),

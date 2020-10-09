@@ -30,34 +30,38 @@ class _PanelState extends State<Panel> {
     widget.routeStops.forEach((key, value) {
       var tileSelected = selectedName != null && selectedName == value.name;
       var isDarkTheme = theme.brightness == Brightness.dark;
-      var tileTextColor = isDarkTheme
-          ? Colors.white
-          : Colors.green[600];
+      var tileTextColor = isDarkTheme ? Colors.white : Colors.green[600];
       var tileColor = tileSelected
           ? theme.brightness == Brightness.dark
               ? Colors.white.withOpacity(0.1)
-              : Colors.green.withOpacity(0.1)
+              : theme.backgroundColor
           : theme.backgroundColor;
       var selectedElevation = tileSelected ? 4.0 : 0.0;
       tileList.add(
         IntrinsicHeight(
           child: ListTileTheme(
-              selectedColor: tileTextColor,
-              child: ListTile(
-                dense: true,
-                selected: tileSelected ? true : false,
-                title: Row(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: <Widget>[
-                    ShuttleLine(
-                      routeColor: widget.routeColor,
-                      isSelected: tileSelected,
-                    ),
-                    SizedBox(
-                      width: 20,
-                    ),
-                    Card(
-                      elevation: isDarkTheme ? 0.0 : selectedElevation,
+            selectedColor: tileTextColor,
+            child: ListTile(
+              dense: true,
+              selected: tileSelected ? true : false,
+              title: Row(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
+                  ShuttleLine(
+                    routeColor: widget.routeColor,
+                    isSelected: tileSelected,
+                  ),
+                  SizedBox(
+                    width: 20,
+                  ),
+                  Card(
+                    color: tileColor,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8.0)),
+                    elevation: isDarkTheme ? 0.0 : selectedElevation,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
                       child: Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
@@ -68,15 +72,16 @@ class _PanelState extends State<Panel> {
                         ),
                       ),
                     ),
-                  ],
-                ),
-                onTap: () {
-                  widget.bloc.add(TileStopTapped(stopName: value.name));
-                  widget.animate(value.getLatLng, 15.2);
-                },
+                  ),
+                ],
               ),
+              onTap: () {
+                widget.bloc.add(TileStopTapped(stopName: value.name));
+                widget.animate(value.getLatLng, 15.2);
+              },
             ),
           ),
+        ),
       );
     });
     return tileList;

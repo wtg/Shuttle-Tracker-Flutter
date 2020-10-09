@@ -1,23 +1,32 @@
 import 'package:flutter/material.dart';
 
+/// Class: ETAPanel Widget
+/// Function: Used to create an instance of the ETA Panel
 class ETAPanel extends StatefulWidget {
   final String markerName;
   final bool stopMarker;
 
+  /// Constructor of the ETAPanel Widget
   ETAPanel({@required this.markerName, this.stopMarker});
 
   @override
   _ETAPanelState createState() => _ETAPanelState();
 }
 
+/// Class: _ETAPanelState
+/// Function: Provides the internal state of the ETAPanel Widget, contains
+///           information read synchronously during the lifetime of the widget
 class _ETAPanelState extends State<ETAPanel> {
+  // Contains a list of the ETAs recieved from the server
   List etaList = [];
 
+  /// Standard Initialization function
   @override
   void initState() {
     super.initState();
   }
 
+  /// Builds the internal content of the Widget
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
@@ -38,7 +47,13 @@ class _ETAPanelState extends State<ETAPanel> {
                     blurRadius: 5.0,
                   )
                 ]
-              : null),
+              : [
+                  BoxShadow(
+                    color: Colors.white,
+                    blurRadius: 3.0,
+                  )
+                ],
+      ),
       height: MediaQuery.of(context).size.height * 0.35,
       child: Center(
           child: Column(
@@ -87,6 +102,7 @@ class _ETAPanelState extends State<ETAPanel> {
     );
   }
 
+  /* For Debugging Purposes */
   // void logThis(String message) {
   //   log(message);
   // }

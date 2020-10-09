@@ -25,7 +25,6 @@ class Shuttle extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        log("Shuttle is being tapped");
         animatedMapMove(getLatLng, 14.2);
         print('Shuttle $vehicleId clicked on');
         if (context != null) {

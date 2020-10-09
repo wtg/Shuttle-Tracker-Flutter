@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:latlong/latlong.dart';
 import 'shuttle_svg.dart';

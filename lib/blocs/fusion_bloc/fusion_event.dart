@@ -1,6 +1,5 @@
 part of 'fusion_bloc.dart';
 
-
 abstract class FusionEvent extends Equatable {
   const FusionEvent();
 

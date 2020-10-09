@@ -33,7 +33,7 @@ class ShuttleLine extends StatelessWidget {
                   width: 20,
                 ),
         ),
-        //  
+        //
       ],
     );
   }

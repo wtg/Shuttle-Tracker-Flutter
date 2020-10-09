@@ -16,6 +16,8 @@ part 'fusion_state.dart';
 class FusionBloc extends Bloc<FusionEvent, FusionState> {
   final FusionSocket fusionSocket;
   Map<ShuttleUpdate, Marker> fusionMap = {};
+  dynamic currentVehicleMessage;
+  dynamic currentETAMessage;
 
   FusionBloc({@required this.fusionSocket}) : super(FusionInitial()) {
     fusionSocket.openWS();
@@ -24,7 +26,7 @@ class FusionBloc extends Bloc<FusionEvent, FusionState> {
 
     fusionSocket.channel.stream.listen((message) {
       fusionSocket.streamController.add(message);
-
+// TODO: FIX ISSUE THAT CAUSES SHUTTLES TO POP OUT DUE TO ETA UPDATE
       var response = jsonDecode(message);
       if (response['type'] == 'server_id') {
         fusionSocket.serverID = response['message'];

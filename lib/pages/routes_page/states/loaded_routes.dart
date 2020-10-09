@@ -17,7 +17,6 @@ class LoadedRoutes extends StatefulWidget {
 }
 
 class _LoadedRoutes extends State<LoadedRoutes> {
-
   List<Widget> _getActiveRoutes() {
     var tileList = <Widget>[];
     for (var route in widget.routes) {

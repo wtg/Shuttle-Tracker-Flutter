@@ -3,7 +3,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 import 'package:flutter/foundation.dart';
 
-import '../../../blocs/theme/theme_bloc.dart';
+import '../../../blocs/theme_bloc/theme_bloc.dart';
 import 'faq_detail.dart';
 import 'privacy_detail.dart';
 import 'sockets_test.dart';

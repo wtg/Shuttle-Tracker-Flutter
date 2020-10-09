@@ -72,7 +72,7 @@ class CustomListTile extends StatelessWidget {
                 style: TextStyle(
                   color: theme.hoverColor,
                   fontSize: 16,
-                  fontWeight: FontWeight.w500,
+                  fontWeight: FontWeight.w400,
                 ),
               ),
             ),

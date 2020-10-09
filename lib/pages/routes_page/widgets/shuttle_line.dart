@@ -20,28 +20,20 @@ class ShuttleLine extends StatelessWidget {
       alignment: Alignment.center,
       children: <Widget>[
         Container(
-          width: 9,
+          width: 5,
           height: 50,
           color: routeColor,
         ),
         Container(
-            child: isSelected
-                ? selectedAsset
-                : Image.asset(
-                    'assets/img/stop.png',
-                    height: 20,
-                    width: 20,
-                  )),
-        Positioned(
-          child: Icon(Icons.keyboard_arrow_down,
-              size: 50, color: Theme.of(context).canvasColor),
-          top: 23,
+          child: isSelected
+              ? selectedAsset
+              : Image.asset(
+                  'assets/img/stop.png',
+                  height: 20,
+                  width: 20,
+                ),
         ),
-        Positioned(
-          child: Icon(Icons.keyboard_arrow_down,
-              size: 50, color: Theme.of(context).canvasColor),
-          bottom: 27,
-        ),
+        //  
       ],
     );
   }

@@ -33,11 +33,6 @@ class _PanelState extends State<Panel> {
       var tileTextColor = isDarkTheme
           ? Colors.white
           : Colors.green[600];
-      var tileColor = tileSelected
-          ? theme.brightness == Brightness.dark
-              ? Colors.white.withOpacity(0.1)
-              : Colors.green.withOpacity(0.1)
-          : theme.backgroundColor;
       var selectedElevation = tileSelected ? 4.0 : 0.0;
       tileList.add(
         IntrinsicHeight(

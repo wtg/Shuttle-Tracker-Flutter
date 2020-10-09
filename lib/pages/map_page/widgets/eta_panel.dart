@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../blocs/fusion_bloc/fusion_bloc.dart';
+import '../../../data/models/shuttle_eta.dart';
 
 /// Class: ETAPanel Widget
 /// Function: Used to create an instance of the ETA Panel
@@ -30,29 +33,29 @@ class _ETAPanelState extends State<ETAPanel> {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
+        color: Theme.of(context).backgroundColor,
+        border: Border.all(
+          width: 5,
           color: Theme.of(context).backgroundColor,
-          border: Border.all(
-            width: 5,
-            color: Theme.of(context).backgroundColor,
-          ),
-          borderRadius: BorderRadius.only(
-            topLeft: const Radius.circular(25),
-            topRight: const Radius.circular(25),
-          ),
-          boxShadow: Theme.of(context).backgroundColor.toString() ==
-                  "Color(0xffffffff)"
-              ? [
-                  BoxShadow(
-                    color: Color(0xffD3D3D3),
-                    blurRadius: 5.0,
-                  )
-                ]
-              : [
-                  BoxShadow(
-                    color: Colors.white,
-                    blurRadius: 3.0,
-                  )
-                ],
+        ),
+        borderRadius: BorderRadius.only(
+          topLeft: const Radius.circular(25),
+          topRight: const Radius.circular(25),
+        ),
+        boxShadow:
+            Theme.of(context).backgroundColor.toString() == "Color(0xffffffff)"
+                ? [
+                    BoxShadow(
+                      color: Color(0xffD3D3D3),
+                      blurRadius: 5.0,
+                    )
+                  ]
+                : [
+                    BoxShadow(
+                      color: Colors.white,
+                      blurRadius: 3.0,
+                    )
+                  ],
       ),
       height: MediaQuery.of(context).size.height * 0.35,
       child: Center(
@@ -80,23 +83,19 @@ class _ETAPanelState extends State<ETAPanel> {
           SizedBox(
             height: 30,
           ),
-          //StreamBuilder(
-          //  stream: ws.streamController.stream,
-          //  builder: (context, snapshot) {
-          //    if (snapshot.hasData) {
-          //      var response = jsonDecode(snapshot.data);
-          //      if (response['type'] == 'eta') {
-          //        etaList = ws.handleEtas(snapshot.data);
-          //      }
-          //      return Padding(
-          //        padding: const EdgeInsets.all(8.0),
-          //        child: Text(
-          //            etaList.isNotEmpty ? '$etaList' : 'No ETAs calculated'),
-          //      );
-          //    }
-          //    return CircularProgressIndicator();
-          //  },
-          //)
+          BlocBuilder<FusionBloc, FusionState>(
+            builder: (context, state) {
+              var etaList = <ShuttleETA>[];
+              if (state is FusionETALoaded) {
+                etaList = state.etas;
+              }
+              return Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                    etaList.isNotEmpty ? '$etaList' : 'No ETAs calculated'),
+              );
+            },
+          )
         ],
       )),
     );

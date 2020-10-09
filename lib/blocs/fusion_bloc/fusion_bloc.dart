@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 
 import '../../data/fusion/fusion_socket.dart';
+import '../../data/models/shuttle_eta.dart';
 import '../../data/models/shuttle_update.dart';
 
 part 'fusion_event.dart';
@@ -29,8 +30,10 @@ class FusionBloc extends Bloc<FusionEvent, FusionState> {
         fusionSocket.serverID = response['message'];
         print(fusionSocket.serverID);
       } else if (response['type'] == 'vehicle_location') {
-        add(GetFusionData(
+        add(GetFusionVehicleData(
             shuttleUpdate: fusionSocket.handleVehicleLocations(message)));
+      } else if (response['type'] == 'eta') {
+        add(GetFusionETAData(shuttleETAs: fusionSocket.handleEtas(message)));
       }
     }, onError: (error) {
       print(error);
@@ -42,7 +45,7 @@ class FusionBloc extends Bloc<FusionEvent, FusionState> {
   Stream<FusionState> mapEventToState(
     FusionEvent event,
   ) async* {
-    if (event is GetFusionData) {
+    if (event is GetFusionVehicleData) {
       var data = await event.shuttleUpdate;
       data.setColor = Colors.white;
       if (data.routeId != null &&
@@ -56,7 +59,10 @@ class FusionBloc extends Bloc<FusionEvent, FusionState> {
       var list = <Marker>[];
       fusionMap.forEach((k, v) => list.add(v));
 
-      yield FusionLoaded(updates: list);
+      yield FusionVehicleLoaded(updates: list);
+    } else if (event is GetFusionETAData) {
+      var data = await event.shuttleETAs;
+      yield FusionETALoaded(etas: data);
     }
   }
 

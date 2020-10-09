@@ -5,9 +5,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong/latlong.dart';
 
-import '../../blocs/fusion/fusion_bloc.dart';
-import '../../blocs/map/map_bloc.dart';
-import '../../blocs/theme/theme_bloc.dart';
+import '../../blocs/fusion_bloc/fusion_bloc.dart';
+import '../../blocs/map_bloc/map_bloc.dart';
+import '../../blocs/theme_bloc/theme_bloc.dart';
 import '../../global_widgets/loading_state.dart';
 import '../../global_widgets/shuttle_svg.dart';
 import 'widgets/attribution.dart';

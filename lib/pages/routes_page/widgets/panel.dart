@@ -4,8 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import 'package:latlong/latlong.dart';
 
-import '../../../blocs/on_tap/on_tap_bloc.dart';
-import '../../../blocs/theme/theme_bloc.dart';
+import '../../../blocs/on_tap_bloc/on_tap_bloc.dart';
+import '../../../blocs/theme_bloc/theme_bloc.dart';
 import '../../../data/models/shuttle_stop.dart';
 import 'shuttle_line.dart';
 
@@ -29,7 +29,8 @@ class _PanelState extends State<Panel> {
 
     widget.routeStops.forEach((key, value) {
       var tileSelected = selectedName != null && selectedName == value.name;
-      var tileTextColor = theme.brightness == Brightness.dark
+      var isDarkTheme = theme.brightness == Brightness.dark;
+      var tileTextColor = isDarkTheme
           ? Colors.white
           : Colors.green[600];
       var tileColor = tileSelected
@@ -37,31 +38,26 @@ class _PanelState extends State<Panel> {
               ? Colors.white.withOpacity(0.1)
               : Colors.green.withOpacity(0.1)
           : theme.backgroundColor;
+      var selectedElevation = tileSelected ? 4.0 : 0.0;
       tileList.add(
         IntrinsicHeight(
           child: ListTileTheme(
-            selectedColor: tileTextColor,
-            child: ListTile(
-              dense: true,
-              selected: tileSelected ? true : false,
-              title: Row(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: <Widget>[
-                  ShuttleLine(
-                    routeColor: widget.routeColor,
-                    isSelected: tileSelected,
-                  ),
-                  SizedBox(
-                    width: 20,
-                  ),
-                  Expanded(
-                    child: Container(
-                      padding: const EdgeInsets.all(8.0),
-                      decoration: BoxDecoration(
-                        color: tileColor,
-                        borderRadius: BorderRadius.circular(16.0),
-                        shape: BoxShape.rectangle,
-                      ),
+              selectedColor: tileTextColor,
+              child: ListTile(
+                dense: true,
+                selected: tileSelected ? true : false,
+                title: Row(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: <Widget>[
+                    ShuttleLine(
+                      routeColor: widget.routeColor,
+                      isSelected: tileSelected,
+                    ),
+                    SizedBox(
+                      width: 20,
+                    ),
+                    Card(
+                      elevation: isDarkTheme ? 0.0 : selectedElevation,
                       child: Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
@@ -72,16 +68,15 @@ class _PanelState extends State<Panel> {
                         ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
+                onTap: () {
+                  widget.bloc.add(TileStopTapped(stopName: value.name));
+                  widget.animate(value.getLatLng, 15.2);
+                },
               ),
-              onTap: () {
-                widget.bloc.add(TileStopTapped(stopName: value.name));
-                widget.animate(value.getLatLng, 15.2);
-              },
             ),
           ),
-        ),
       );
     });
     return tileList;
@@ -115,7 +110,7 @@ class _PanelState extends State<Panel> {
                   color: theme.getTheme.backgroundColor,
                   child: _stopTileList.isNotEmpty
                       ? Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 8.0),
+                          padding: const EdgeInsets.symmetric(vertical: 0.0),
                           child: ScrollablePositionedList.builder(
                             physics: ClampingScrollPhysics(),
                             itemScrollController: scrollController,

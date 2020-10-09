@@ -12,20 +12,21 @@ class RoutesSection extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Card(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: ExpansionTile(
-              initiallyExpanded:
-                  sectionHeader == "Active Routes" ? true : false,
-              title: Text(
-                sectionHeader,
-                style: TextStyle(
-                    color: Colors.red,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 19),
+            child: Theme(
+              data:
+                  Theme.of(context).copyWith(dividerColor: Colors.transparent),
+              child: ExpansionTile(
+                initiallyExpanded:
+                    sectionHeader == "Active Routes" ? true : false,
+                title: Text(
+                  sectionHeader,
+                  style: TextStyle(
+                      color: Colors.red,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 19),
+                ),
+                children: routes,
               ),
-              children: routes,
             ),
           ),
         )

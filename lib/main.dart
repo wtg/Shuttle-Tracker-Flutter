@@ -8,11 +8,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 
 import 'android_material_app.dart';
-import 'blocs/fusion/fusion_bloc.dart';
-import 'blocs/map/map_bloc.dart';
-import 'blocs/on_tap/on_tap_bloc.dart';
-import 'blocs/routes/routes_bloc.dart';
-import 'blocs/theme/theme_bloc.dart';
+import 'blocs/fusion_bloc/fusion_bloc.dart';
+import 'blocs/map_bloc/map_bloc.dart';
+import 'blocs/on_tap_bloc/on_tap_bloc.dart';
+import 'blocs/routes_bloc/routes_bloc.dart';
+import 'blocs/theme_bloc/theme_bloc.dart';
 import 'data/fusion/fusion_socket.dart';
 import 'data/repository/shuttle_repository.dart';
 import 'ios_cupertino_app.dart';

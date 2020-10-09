@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../blocs/theme/theme_bloc.dart';
+import '../../../blocs/theme_bloc/theme_bloc.dart';
 
 class FeedbackSettings extends StatelessWidget {
   final ThemeState theme;

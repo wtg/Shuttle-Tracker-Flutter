@@ -28,12 +28,13 @@ class _ETAPanelState extends State<ETAPanel> {
 
   /// Builds the internal content of the Widget
   Widget build(BuildContext context) {
+    var panelColor = Theme.of(context).cardColor;
     return Container(
       decoration: BoxDecoration(
-          color: Theme.of(context).backgroundColor,
+          color: panelColor,
           border: Border.all(
             width: 5,
-            color: Theme.of(context).backgroundColor,
+            color: panelColor,
           ),
           borderRadius: BorderRadius.only(
             topLeft: const Radius.circular(25),
@@ -47,12 +48,14 @@ class _ETAPanelState extends State<ETAPanel> {
                     blurRadius: 5.0,
                   )
                 ]
-              : [
-                  BoxShadow(
-                    color: Colors.white,
-                    blurRadius: 3.0,
-                  )
-                ],
+              :
+                  null
+//                [
+//                  BoxShadow(
+//                    color: Colors.blueGrey,
+//                    blurRadius: 1.0,
+//                  )
+//                ],
       ),
       height: MediaQuery.of(context).size.height * 0.35,
       child: Center(

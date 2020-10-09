@@ -67,7 +67,12 @@ class _PanelState extends State<Panel> {
                         child: Text(
                           value.name,
                           style: TextStyle(
-                            fontWeight: FontWeight.bold,
+                            fontWeight: tileSelected
+                                ? FontWeight.bold
+                                : FontWeight.w400,
+                            fontSize: tileSelected
+                                ? 16
+                                : 14,
                           ),
                         ),
                       ),

@@ -31,31 +31,34 @@ class _ETAPanelState extends State<ETAPanel> {
 
   /// Builds the internal content of the Widget
   Widget build(BuildContext context) {
+    var panelColor = Theme.of(context).cardColor;
     return Container(
       decoration: BoxDecoration(
-        color: Theme.of(context).backgroundColor,
-        border: Border.all(
-          width: 5,
-          color: Theme.of(context).backgroundColor,
-        ),
-        borderRadius: BorderRadius.only(
-          topLeft: const Radius.circular(25),
-          topRight: const Radius.circular(25),
-        ),
-        boxShadow:
-            Theme.of(context).backgroundColor.toString() == "Color(0xffffffff)"
-                ? [
-                    BoxShadow(
-                      color: Color(0xffD3D3D3),
-                      blurRadius: 5.0,
-                    )
-                  ]
-                : [
-                    BoxShadow(
-                      color: Colors.white,
-                      blurRadius: 3.0,
-                    )
-                  ],
+          color: panelColor,
+          border: Border.all(
+            width: 5,
+            color: panelColor,
+          ),
+          borderRadius: BorderRadius.only(
+            topLeft: const Radius.circular(25),
+            topRight: const Radius.circular(25),
+          ),
+          boxShadow: Theme.of(context).backgroundColor.toString() ==
+                  "Color(0xffffffff)"
+              ? [
+                  BoxShadow(
+                    color: Color(0xffD3D3D3),
+                    blurRadius: 5.0,
+                  )
+                ]
+              :
+                  null
+//                [
+//                  BoxShadow(
+//                    color: Colors.blueGrey,
+//                    blurRadius: 1.0,
+//                  )
+//                ],
       ),
       height: MediaQuery.of(context).size.height * 0.35,
       child: Center(

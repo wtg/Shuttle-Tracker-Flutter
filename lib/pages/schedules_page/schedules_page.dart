@@ -40,6 +40,8 @@ class _SchedulesPageState extends State<SchedulesPage> {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Card(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8.0)),
                       shadowColor: theme.getTheme.hoverColor,
                       color: theme.getTheme.cardColor,
                       elevation: theme.getThemeState ? 0 : 2,
@@ -100,6 +102,8 @@ Monday–Friday 7am – 7pm
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Card(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8.0)),
                       shadowColor: theme.getTheme.hoverColor,
                       color: theme.getTheme.cardColor,
                       elevation: theme.getThemeState ? 0 : 2,

@@ -40,7 +40,7 @@ class Legend extends StatelessWidget {
                 width: 5,
                 color: theme.getTheme.backgroundColor,
               ),
-              borderRadius: BorderRadius.circular(5),
+              borderRadius: BorderRadius.circular(8),
               boxShadow: theme.getThemeState
                   ? null
                   : [

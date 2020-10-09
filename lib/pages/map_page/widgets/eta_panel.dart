@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../blocs/fusion_bloc/fusion_bloc.dart';
+import '../../../data/models/shuttle_eta.dart';
 
 /// Class: ETAPanel Widget
 /// Function: Used to create an instance of the ETA Panel
@@ -83,23 +86,19 @@ class _ETAPanelState extends State<ETAPanel> {
           SizedBox(
             height: 30,
           ),
-          //StreamBuilder(
-          //  stream: ws.streamController.stream,
-          //  builder: (context, snapshot) {
-          //    if (snapshot.hasData) {
-          //      var response = jsonDecode(snapshot.data);
-          //      if (response['type'] == 'eta') {
-          //        etaList = ws.handleEtas(snapshot.data);
-          //      }
-          //      return Padding(
-          //        padding: const EdgeInsets.all(8.0),
-          //        child: Text(
-          //            etaList.isNotEmpty ? '$etaList' : 'No ETAs calculated'),
-          //      );
-          //    }
-          //    return CircularProgressIndicator();
-          //  },
-          //)
+          BlocBuilder<FusionBloc, FusionState>(
+            builder: (context, state) {
+              var etaList = <ShuttleETA>[];
+              if (state is FusionETALoaded) {
+                etaList = state.etas;
+              }
+              return Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                    etaList.isNotEmpty ? '$etaList' : 'No ETAs calculated'),
+              );
+            },
+          )
         ],
       )),
     );

@@ -17,21 +17,6 @@ class LoadedRoutes extends StatefulWidget {
 }
 
 class _LoadedRoutes extends State<LoadedRoutes> {
-  List<Widget> _getFavoriteRoutes() {
-    var tileList = <Widget>[];
-    for (var route in widget.routes) {
-      var tile = CustomListTile(
-        route: route,
-        stops: widget.stops,
-        theme: widget.theme,
-      );
-      if (tile.isEnabled && route.favorite) {
-        tileList.add(tile);
-      }
-    }
-    // tileList.sort((a, b) => a.route.name.compareTo(b.route.name));
-    return tileList;
-  }
 
   List<Widget> _getActiveRoutes() {
     var tileList = <Widget>[];

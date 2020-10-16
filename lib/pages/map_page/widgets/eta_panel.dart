@@ -32,6 +32,7 @@ class _ETAPanelState extends State<ETAPanel> {
   /// Builds the internal content of the Widget
   Widget build(BuildContext context) {
     var panelColor = Theme.of(context).cardColor;
+    var etaList = <ShuttleETA>[];
     return Container(
       decoration: BoxDecoration(
           color: panelColor,
@@ -87,7 +88,6 @@ class _ETAPanelState extends State<ETAPanel> {
           ),
           BlocBuilder<FusionBloc, FusionState>(
             builder: (context, state) {
-              var etaList = <ShuttleETA>[];
               if (state is FusionETALoaded) {
                 etaList = state.etas;
               }

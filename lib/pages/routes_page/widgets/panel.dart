@@ -70,9 +70,7 @@ class _PanelState extends State<Panel> {
                             fontWeight: tileSelected
                                 ? FontWeight.bold
                                 : FontWeight.w400,
-                            fontSize: tileSelected
-                                ? 16
-                                : 14,
+                            fontSize: tileSelected ? 16 : 14,
                           ),
                         ),
                       ),

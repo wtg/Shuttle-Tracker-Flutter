@@ -29,20 +29,6 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
 
   int i = 0;
 
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   ws.openWS();
-  //   ws.subscribe("eta");
-  //   ws.subscribe("vehicle_location");
-  // }
-
-  // @override
-  // void dispose() {
-  //   ws.closeWS();
-  //   super.dispose();
-  // }
-
   void _animatedMapMove(LatLng destLocation, double destZoom) {
     final _latTween = Tween<double>(
         begin: mapController.center.latitude, end: destLocation.latitude);
@@ -99,7 +85,7 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
                   var isDarkMode = theme.getThemeState;
                   var routes = <Polyline>[];
                   var stops = <Marker>[];
-
+                  var updates = <Marker>[];
                   var legend = <String, ShuttleSVG>{};
 
                   return BlocBuilder<MapBloc, MapState>(
@@ -128,7 +114,6 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
                       } else {}
                       return BlocBuilder<FusionBloc, FusionState>(
                         builder: (context, fusionState) {
-                          var updates = <Marker>[];
                           if (fusionState is FusionInitial) {
                           } else if (fusionState is FusionVehicleLoaded) {
                             updates = fusionState.updates;

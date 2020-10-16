@@ -26,7 +26,7 @@ class FusionBloc extends Bloc<FusionEvent, FusionState> {
 
     fusionSocket.channel.stream.listen((message) {
       fusionSocket.streamController.add(message);
-// TODO: FIX ISSUE THAT CAUSES SHUTTLES TO POP OUT DUE TO ETA UPDATE
+
       var response = jsonDecode(message);
       if (response['type'] == 'server_id') {
         fusionSocket.serverID = response['message'];
@@ -34,10 +34,9 @@ class FusionBloc extends Bloc<FusionEvent, FusionState> {
       } else if (response['type'] == 'vehicle_location') {
         add(GetFusionVehicleData(
             shuttleUpdate: fusionSocket.handleVehicleLocations(message)));
-      } 
-      // else if (response['type'] == 'eta') {
-      //   add(GetFusionETAData(shuttleETAs: fusionSocket.handleEtas(message)));
-      // }
+      } else if (response['type'] == 'eta') {
+        add(GetFusionETAData(shuttleETAs: fusionSocket.handleEtas(message)));
+      }
     }, onError: (error) {
       print(error);
       fusionSocket.closeWS();

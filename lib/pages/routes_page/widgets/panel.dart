@@ -26,17 +26,11 @@ class _PanelState extends State<Panel> {
 
   List<Widget> _getStopTileList(ThemeData theme) {
     var tileList = <Widget>[];
-
+    var i = 0;
     widget.routeStops.forEach((key, value) {
       var tileSelected = selectedName != null && selectedName == value.name;
       var isDarkTheme = theme.brightness == Brightness.dark;
-      var tileTextColor = isDarkTheme ? Colors.white : Colors.green[600];
-      var tileColor = tileSelected
-          ? theme.brightness == Brightness.dark
-              ? Colors.white.withOpacity(0.1)
-              : theme.backgroundColor
-          : theme.backgroundColor;
-      var selectedElevation = tileSelected ? 4.0 : 0.0;
+      var tileTextColor = isDarkTheme ? Colors.white : Colors.black;
       tileList.add(
         IntrinsicHeight(
           child: ListTileTheme(
@@ -51,27 +45,24 @@ class _PanelState extends State<Panel> {
                   ShuttleLine(
                     routeColor: widget.routeColor,
                     isSelected: tileSelected,
+                    isStart: (i == 0),
+                    isEnd: (i == widget.routeStops.length-1),
+                    isDarkTheme: isDarkTheme,
                   ),
                   SizedBox(
                     width: 20,
                   ),
-                  Card(
-                    color: tileColor,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8.0)),
-                    elevation: isDarkTheme ? 0.0 : selectedElevation,
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          value.name,
-                          style: TextStyle(
-                            fontWeight: tileSelected
-                                ? FontWeight.bold
-                                : FontWeight.w400,
-                            fontSize: tileSelected ? 16 : 14,
-                          ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        value.name,
+                        style: TextStyle(
+                          fontWeight: tileSelected
+                              ? FontWeight.w900
+                              : FontWeight.w400,
+                          fontSize: tileSelected ? 20 : 14,
                         ),
                       ),
                     ),
@@ -86,6 +77,7 @@ class _PanelState extends State<Panel> {
           ),
         ),
       );
+      i++;
     });
     return tileList;
   }

@@ -20,6 +20,10 @@ class FusionBloc extends Bloc<FusionEvent, FusionState> {
   dynamic currentETAMessage;
 
   FusionBloc({@required this.fusionSocket}) : super(FusionInitial()) {
+    connect(fusionSocket: fusionSocket);
+  }
+
+  void connect({@required FusionSocket fusionSocket}) {
     fusionSocket.openWS();
     fusionSocket.subscribe("eta");
     fusionSocket.subscribe("vehicle_location");
@@ -40,6 +44,11 @@ class FusionBloc extends Bloc<FusionEvent, FusionState> {
     }, onError: (error) {
       print(error);
       fusionSocket.closeWS();
+    }, onDone: () async {
+      print("WS is done");
+      await Future.delayed(Duration(
+          seconds: 3)); // Check every 3 seconds to reestablish the connection
+      connect(fusionSocket: fusionSocket);
     });
   }
 

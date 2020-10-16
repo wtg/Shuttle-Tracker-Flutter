@@ -39,7 +39,10 @@ class FusionBloc extends Bloc<FusionEvent, FusionState> {
         add(GetFusionVehicleData(
             shuttleUpdate: fusionSocket.handleVehicleLocations(message)));
       } else if (response['type'] == 'eta') {
-        add(GetFusionETAData(shuttleETAs: fusionSocket.handleEtas(message)));
+        List<dynamic> body = response['message']['stop_etas'];
+        if (body.isNotEmpty) {
+          add(GetFusionETAData(shuttleETAs: fusionSocket.handleEtas(message)));
+        }
       }
     }, onError: (error) {
       print(error);

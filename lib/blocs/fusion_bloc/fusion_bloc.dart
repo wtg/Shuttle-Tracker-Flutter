@@ -41,6 +41,7 @@ class FusionBloc extends Bloc<FusionEvent, FusionState> {
       } else if (response['type'] == 'eta') {
         List<dynamic> body = response['message']['stop_etas'];
         if (body.isNotEmpty) {
+          currentETAMessage = message;
           add(GetFusionETAData(shuttleETAs: fusionSocket.handleEtas(message)));
         }
       }

@@ -21,7 +21,7 @@ class ETAPanel extends StatefulWidget {
 ///           information read synchronously during the lifetime of the widget
 class _ETAPanelState extends State<ETAPanel> {
   // Contains a list of the ETAs recieved from the server
-  List etaList = [];
+  List<ShuttleETA> etaList = [];
 
   /// Standard Initialization function
   @override
@@ -32,7 +32,6 @@ class _ETAPanelState extends State<ETAPanel> {
   /// Builds the internal content of the Widget
   Widget build(BuildContext context) {
     var panelColor = Theme.of(context).cardColor;
-    var etaList = <ShuttleETA>[];
     return Container(
       decoration: BoxDecoration(
           color: panelColor,
@@ -102,9 +101,4 @@ class _ETAPanelState extends State<ETAPanel> {
       )),
     );
   }
-
-  /* For Debugging Purposes */
-  // void logThis(String message) {
-  //   log(message);
-  // }
 }

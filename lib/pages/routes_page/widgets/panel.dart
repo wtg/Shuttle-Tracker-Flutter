@@ -46,7 +46,7 @@ class _PanelState extends State<Panel> {
                     routeColor: widget.routeColor,
                     isSelected: tileSelected,
                     isStart: (i == 0),
-                    isEnd: (i == widget.routeStops.length-1),
+                    isEnd: (i == widget.routeStops.length - 1),
                     isDarkTheme: isDarkTheme,
                   ),
                   SizedBox(
@@ -61,10 +61,9 @@ class _PanelState extends State<Panel> {
                         style: TextStyle(
                           color: tileSelected
                               ? widget.routeColor
-                              : Colors.black,
-                          fontWeight: tileSelected
-                              ? FontWeight.w900
-                              : FontWeight.w400,
+                              : (isDarkTheme ? Colors.white : Colors.black),
+                          fontWeight:
+                              tileSelected ? FontWeight.w900 : FontWeight.w400,
                           fontSize: tileSelected ? 20 : 14,
                         ),
                       ),

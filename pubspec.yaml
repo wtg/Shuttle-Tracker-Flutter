@@ -25,7 +25,7 @@ dependencies:
   equatable: ^1.2.3
   responsive_framework: ^0.0.8
   http: ^0.12.2
-  flutter_map: ^0.8.2 #DO NOT UPDATE PAST 0.8.2, LATER VERSIONS AFFECT DARK MODE FUNCTIONALITY!!
+  flutter_map: ^0.10.1  #DO NOT UPDATE PAST 0.8.2, LATER VERSIONS AFFECT DARK MODE FUNCTIONALITY!!
   geolocation: ^1.1.2
   loading: ^1.0.2
   web_socket_channel: ^1.1.0

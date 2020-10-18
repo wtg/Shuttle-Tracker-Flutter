@@ -16,53 +16,51 @@ class ShuttleLine extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var selectedAsset = ColorFiltered(
-      colorFilter: ColorFilter.mode(Colors.green[400], BlendMode.modulate),
+      colorFilter: ColorFilter.mode(routeColor, BlendMode.modulate),
       child: Image.asset(
-        isDarkTheme ? 'assets/img/dark_stop.png' : 'assets/img/stop.png',
-        width: 20,
-        height: 20,
+        'assets/img/stop_thin.png',
+        width: 15,
+        height: 15,
       ),
     );
 
-    // We can probably do this a little cleaner
-    var line = Container(
-      width: 5,
-      height: 50,
+    var stopIcon = ColorFiltered(
+      colorFilter: ColorFilter.mode(routeColor, BlendMode.modulate),
+      child: Image.asset(
+        'assets/img/dark_stop.png',
+        width: 15,
+        height: 15,
+      ),
+    );
+
+    var lineHeight = 21.0;
+    var lineWidth = 3.0;
+
+    // We have two separate lines, one before the icon, one after
+    var topLine = Container(
+      margin: EdgeInsets.only(bottom: 35),
+      width: lineWidth,
+      height: lineHeight,
       color: routeColor,
     );
 
-    if (isStart) {
-      line = Container(
-        margin: EdgeInsets.only(top: 24),
-        width: 5,
-        height: 25,
-        color: routeColor,
-      );
-    }
-
-    if (isEnd) {
-      line = Container(
-        margin: EdgeInsets.only(bottom: 24),
-        width: 5,
-        height: 25,
-        color: routeColor,
-      );
-    }
+    var bottomLine = Container(
+      margin: EdgeInsets.only(top: 35),
+      width: lineWidth,
+      height: lineHeight,
+      color: routeColor,
+    );
 
     return Stack(
       alignment: Alignment.center,
       children: <Widget>[
-        line,
+        isStart ? Container() : topLine,
+        isEnd ? Container() : bottomLine,
         Container(
           child: isSelected
               ? selectedAsset
-              : Image.asset(
-                  isDarkTheme ? 'assets/img/dark_stop.png' : 'assets/img/stop.png',
-                  height: 20,
-                  width: 20,
-                ),
+              : stopIcon
         ),
-        //
       ],
     );
   }

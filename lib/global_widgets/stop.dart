@@ -15,8 +15,19 @@ class Stop extends StatelessWidget {
   final String name;
   final bool isRoutesPage;
 
+  Stop(
+      {@required this.animatedMapMove,
+        @required this.selected,
+        @required this.context,
+        @required this.theme,
+        @required this.bloc,
+        @required this.index,
+        @required this.getLatLng,
+        @required this.name,
+        @required this.isRoutesPage});
+
   final ColorFiltered selectedAsset = ColorFiltered(
-    colorFilter: ColorFilter.mode(Colors.green[400], BlendMode.modulate),
+    colorFilter: ColorFilter.mode(Colors.black, BlendMode.modulate),
     child: Image.asset(
       'assets/img/stop.png',
       width: 20,
@@ -24,23 +35,13 @@ class Stop extends StatelessWidget {
     ),
   );
 
-  Stop(
-      {@required this.animatedMapMove,
-      @required this.selected,
-      @required this.context,
-      @required this.theme,
-      @required this.bloc,
-      @required this.index,
-      @required this.getLatLng,
-      @required this.name,
-      @required this.isRoutesPage});
+
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
         animatedMapMove(getLatLng, 15.2);
-
         if (isRoutesPage) {
           bloc.add(MapStopTapped(stopName: name, index: index));
         } else {

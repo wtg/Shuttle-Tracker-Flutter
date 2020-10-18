@@ -50,7 +50,7 @@ class _PanelState extends State<Panel> {
                     isDarkTheme: isDarkTheme,
                   ),
                   SizedBox(
-                    width: 20,
+                    width: 15,
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -59,6 +59,9 @@ class _PanelState extends State<Panel> {
                       child: Text(
                         value.name,
                         style: TextStyle(
+                          color: tileSelected
+                              ? widget.routeColor
+                              : Colors.black,
                           fontWeight: tileSelected
                               ? FontWeight.w900
                               : FontWeight.w400,

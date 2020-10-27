@@ -70,7 +70,8 @@ class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
             animatedMapMove: animatedMapMove,
             bloc: widget.bloc,
             index: index,
-            isRoutesPage: true),
+            isRoutesPage: true,
+            routeColor: widget.routeColor),
       );
       index++;
     });

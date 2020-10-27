@@ -7,6 +7,7 @@ import '../pages/map_page/widgets/eta_panel.dart';
 class Stop extends StatelessWidget {
   final dynamic animatedMapMove;
   final bool selected;
+  final Color selectedColor;
   final BuildContext context;
   final ThemeData theme;
   final OnTapBloc bloc;
@@ -17,25 +18,28 @@ class Stop extends StatelessWidget {
 
   Stop(
       {@required this.animatedMapMove,
-        @required this.selected,
-        @required this.context,
-        @required this.theme,
-        @required this.bloc,
-        @required this.index,
-        @required this.getLatLng,
-        @required this.name,
-        @required this.isRoutesPage});
+      @required this.selected,
+      @required this.context,
+      @required this.theme,
+      @required this.bloc,
+      @required this.index,
+      @required this.getLatLng,
+      @required this.name,
+      @required this.isRoutesPage,
+      @required this.selectedColor});
 
-  final ColorFiltered selectedAsset = ColorFiltered(
-    colorFilter: ColorFilter.mode(Colors.black, BlendMode.modulate),
-    child: Image.asset(
-      'assets/img/stop.png',
-      width: 20,
-      height: 20,
-    ),
-  );
+  Widget getSelectedAsset() {
+    final selectedAsset = ColorFiltered(
+      colorFilter: ColorFilter.mode(selectedColor, BlendMode.modulate),
+      child: Image.asset(
+        'assets/img/stop.png',
+        width: 20,
+        height: 20,
+      ),
+    );
 
-
+    return selectedAsset;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +66,7 @@ class Stop extends StatelessWidget {
             border: Border.all(width: 15, style: BorderStyle.none),
             shape: BoxShape.circle),
         child: selected
-            ? selectedAsset
+            ? getSelectedAsset()
             : Image.asset(
                 'assets/img/stop.png',
               ),

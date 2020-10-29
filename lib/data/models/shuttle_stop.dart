@@ -58,7 +58,8 @@ class ShuttleStop extends ShuttlePoint {
       BuildContext context,
       ThemeData theme,
       OnTapBloc bloc,
-      int index}) {
+      int index,
+      Color routeColor}) {
     var selected = false;
     return Marker(
         width: 44.0,
@@ -82,6 +83,7 @@ class ShuttleStop extends ShuttlePoint {
                 getLatLng: getLatLng,
                 index: index,
                 isRoutesPage: isRoutesPage,
+                selectedColor: routeColor,
               );
             }));
   }

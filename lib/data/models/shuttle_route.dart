@@ -1,6 +1,8 @@
 import 'dart:core';
+import 'dart:math';
 import 'dart:ui';
 
+import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong/latlong.dart';
 
@@ -22,6 +24,9 @@ class ShuttleRoute {
 
   /// Hex color of route
   final Color color;
+
+  /// Dark theme color of route
+  final Color darkColor;
 
   /// Width of route outline on map
   final num width;
@@ -60,16 +65,20 @@ class ShuttleRoute {
       this.points,
       this.active,
       this.schedules,
-      this.favorite});
+      this.favorite,
+      this.darkColor});
 
   factory ShuttleRoute.fromJson(Map<String, dynamic> json) {
+    var routeColor =
+        Color(int.parse(json['color'].toString().replaceAll('#', '0xff')));
+    var darkRouteColor = shadeColor(routeColor, 0.6);
     return ShuttleRoute(
         id: json['id'],
         name: json['name'].toString(),
         desc: json['description'].toString(),
         enabled: json['enabled'],
-        color:
-            Color(int.parse(json['color'].toString().replaceAll('#', '0xff'))),
+        color: routeColor,
+        darkColor: darkRouteColor,
         width: (json['width'] as num).toDouble() * 0.7,
         stopIds: List<int>.from(json['stop_ids'] as List),
         created: json['created'],
@@ -89,4 +98,16 @@ class ShuttleRoute {
         strokeWidth: width,
         color: color,
       );
+
+  Polyline get getDarkPolyline =>
+      Polyline(points: points, strokeWidth: width, color: darkColor);
+
+  static int shadeValue(int value, double factor) =>
+      max(0, min(value - (value * factor).round(), 255));
+
+  static Color shadeColor(Color color, double factor) => Color.fromRGBO(
+      shadeValue(color.red, factor),
+      shadeValue(color.green, factor),
+      shadeValue(color.blue, factor),
+      1);
 }

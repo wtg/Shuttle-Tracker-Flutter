@@ -22,16 +22,20 @@ class MapBloc extends Bloc<MapEvent, MapState> {
   MapBloc({this.repository}) : super(MapInitial());
 
   List<Polyline> _createRoutes({
+    @required BuildContext context,
     @required List<ShuttleRoute> routes,
   }) {
     var polylines = <Polyline>[];
 
     for (var route in routes) {
       if (route.active && route.enabled) {
-        polylines.add(route.getPolyline);
+        if (Theme.of(context).brightness == Brightness.dark) {
+          polylines.add(route.getDarkPolyline);
+        } else {
+          polylines.add(route.getPolyline);
+        }
       }
     }
-    //print("Number of routes on map: ${polylines.length}");
     return polylines;
   }
 
@@ -125,6 +129,7 @@ class MapBloc extends Bloc<MapEvent, MapState> {
     var auxData = await repository.getAuxiliaryRouteData();
     if (event is GetMapData) {
       routes = _createRoutes(
+        context: event.context,
         routes: repoRoutes,
       );
 

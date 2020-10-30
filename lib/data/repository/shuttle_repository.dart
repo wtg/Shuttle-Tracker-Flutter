@@ -29,7 +29,7 @@ class ShuttleRepository {
     var ret = <ShuttleRoute>[];
 
     for (var route in routes) {
-      var darkRoute = route.getDarkRoute(shadeColor(route.color, 0.5));
+      var darkRoute = route.getDarkRoute(shadeColor(route.color, 0.4));
       ret.add(darkRoute);
     }
     return ret;
@@ -71,7 +71,7 @@ class ShuttleRepository {
 
     for (var route in routes) {
       if (route.active && route.enabled) {
-        legend[route.name] = ShuttleSVG(svgColor: shadeColor(route.color, 0.5));
+        legend[route.name] = ShuttleSVG(svgColor: shadeColor(route.color, 0.4));
         ids.addAll(route.stopIds);
         for (var schedule in route.schedules) {
           colors[schedule.routeId] = route.color;

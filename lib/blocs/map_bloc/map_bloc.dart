@@ -42,9 +42,8 @@ class MapBloc extends Bloc<MapEvent, MapState> {
         var width = route.strokeWidth;
         var points = route.routePoints;
         var color = route.routeColor;
-
         var darkPolyline = Polyline(
-            points: points, strokeWidth: width, color: shadeColor(color, 0.5));
+            points: points, strokeWidth: width, color: shadeColor(color, 0.4));
 
         polylines.add(darkPolyline);
       }

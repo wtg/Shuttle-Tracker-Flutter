@@ -88,6 +88,7 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
                   var stops = <Marker>[];
                   var updates = <Marker>[];
                   var legend = <String, ShuttleSVG>{};
+                  var darkLegend = <String, ShuttleSVG>{};
 
                   return BlocBuilder<MapBloc, MapState>(
                     builder: (context, state) {
@@ -104,6 +105,7 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
                         stops = state.stops;
                         // updates = state.updates;
                         legend = state.legend;
+                        darkLegend = state.darkLegend;
                         // mapBloc.add(GetMapData(
                         //   animatedMapMove: _animatedMapMove,
                         //   context: context,
@@ -160,7 +162,7 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
                               theme: theme.getTheme,
                             ),
                             Legend(
-                              legend: legend,
+                              legend: isDarkMode ? darkLegend : legend,
                             ),
                           ]);
                         },

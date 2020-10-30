@@ -25,6 +25,7 @@ class MapLoaded extends MapState {
   final List<Marker> location;
   final LatLng center;
   final Map<String, ShuttleSVG> legend;
+  final Map<String, ShuttleSVG> darkLegend;
   final Map<int, Color> routeColors;
   //TODO: FINISH ROUTECOLORS
   const MapLoaded(
@@ -35,7 +36,7 @@ class MapLoaded extends MapState {
       @required this.center,
       @required this.legend,
       this.routeColors,
-      this.darkRoutes});
+      this.darkRoutes, this.darkLegend});
 
   @override
   List<Object> get props =>

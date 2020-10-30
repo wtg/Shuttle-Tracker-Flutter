@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:latlong/latlong.dart';
 
@@ -28,13 +30,37 @@ class Stop extends StatelessWidget {
       @required this.isRoutesPage,
       @required this.selectedColor});
 
+  int tintValue(int value, double factor) =>
+      max(0, min((value + ((255 - value) * factor)).round(), 255));
+
+  Color tintColor(Color color, double factor) => Color.fromRGBO(
+      tintValue(color.red, factor),
+      tintValue(color.green, factor),
+      tintValue(color.blue, factor),
+      1);
+
   Widget getSelectedAsset() {
     final selectedAsset = ColorFiltered(
-      colorFilter: ColorFilter.mode(selectedColor, BlendMode.modulate),
+      colorFilter:
+          ColorFilter.mode(tintColor(selectedColor, 0.5), BlendMode.modulate),
+      child: Image.asset(
+        'assets/img/stop_thin.png',
+        width: 40,
+        height: 40,
+      ),
+    );
+
+    return selectedAsset;
+  }
+
+  Widget getDeselectedAsset() {
+    final selectedAsset = ColorFiltered(
+      colorFilter:
+          ColorFilter.mode(Colors.white, BlendMode.modulate),
       child: Image.asset(
         'assets/img/stop.png',
-        width: 20,
-        height: 20,
+        width: 25,
+        height: 25,
       ),
     );
 
@@ -62,15 +88,16 @@ class Stop extends StatelessWidget {
         }
       },
       child: Container(
-        decoration: BoxDecoration(
-            border: Border.all(width: 15, style: BorderStyle.none),
-            shape: BoxShape.circle),
-        child: selected
-            ? getSelectedAsset()
-            : Image.asset(
-                'assets/img/stop.png',
-              ),
-      ),
+          decoration: BoxDecoration(
+              border: Border.all(width: 15, style: BorderStyle.none),
+              shape: BoxShape.circle),
+          child: selected
+              ? getSelectedAsset()
+              : getDeselectedAsset() ?? Image.asset(
+                  'assets/img/stop.png',
+                  width: 25,
+                  height: 25,
+                )),
     );
   }
 }

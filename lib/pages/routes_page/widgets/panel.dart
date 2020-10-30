@@ -60,8 +60,8 @@ class _PanelState extends State<Panel> {
                         value.name,
                         style: TextStyle(
                           color: tileSelected
-                              ? widget.routeColor
-                              : (isDarkTheme ? Colors.white : Colors.black),
+                              ? (isDarkTheme ? Colors.white : widget.routeColor)
+                              : (isDarkTheme ? Colors.grey[400] : Colors.black),
                           fontWeight:
                               tileSelected ? FontWeight.w900 : FontWeight.w400,
                           fontSize: tileSelected ? 18 : 12,

@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
@@ -21,19 +23,47 @@ class MapBloc extends Bloc<MapEvent, MapState> {
 
   MapBloc({this.repository}) : super(MapInitial());
 
+  static int shadeValue(int value, double factor) =>
+      max(0, min(value - (value * factor).round(), 255));
+
+  static Color shadeColor(Color color, double factor) => Color.fromRGBO(
+      shadeValue(color.red, factor),
+      shadeValue(color.green, factor),
+      shadeValue(color.blue, factor),
+      1);
+
+  List<Polyline> _createDarkRoutes({
+  @required routes,
+}) {
+    var polylines = <Polyline>[];
+
+    for (var route in routes) {
+      if (route.active && route.enabled) {
+        var width = route.strokeWidth;
+        var points = route.routePoints;
+        var color = route.routeColor;
+
+        var darkPolyline = Polyline(
+            points: points,
+            strokeWidth: width,
+            color: shadeColor(color, 0.6)
+        );
+
+        polylines.add(darkPolyline);
+      }
+    }
+
+    return polylines;
+  }
+
   List<Polyline> _createRoutes({
-    @required BuildContext context,
     @required List<ShuttleRoute> routes,
   }) {
     var polylines = <Polyline>[];
 
     for (var route in routes) {
       if (route.active && route.enabled) {
-        if (Theme.of(context).brightness == Brightness.dark) {
-          polylines.add(route.getDarkPolyline);
-        } else {
           polylines.add(route.getPolyline);
-        }
       }
     }
     return polylines;
@@ -117,6 +147,7 @@ class MapBloc extends Bloc<MapEvent, MapState> {
   @override
   Stream<MapState> mapEventToState(MapEvent event) async* {
     var routes = <Polyline>[];
+    var darkRoutes = <Polyline>[];
     var stops = <Marker>[];
     var updates = <Marker>[];
     var location = <Marker>[];
@@ -129,7 +160,10 @@ class MapBloc extends Bloc<MapEvent, MapState> {
     var auxData = await repository.getAuxiliaryRouteData();
     if (event is GetMapData) {
       routes = _createRoutes(
-        context: event.context,
+        routes: repoRoutes,
+      );
+
+      darkRoutes = _createDarkRoutes(
         routes: repoRoutes,
       );
 
@@ -161,6 +195,7 @@ class MapBloc extends Bloc<MapEvent, MapState> {
       if (repository.getIsConnected) {
         yield MapLoaded(
             routes: routes,
+            darkRoutes: darkRoutes,
             stops: stops,
             updates: updates,
             location: location,

@@ -19,6 +19,7 @@ class MapLoading extends MapState {
 
 class MapLoaded extends MapState {
   final List<Polyline> routes;
+  final List<Polyline> darkRoutes;
   final List<Marker> stops;
   final List<Marker> updates;
   final List<Marker> location;
@@ -32,10 +33,13 @@ class MapLoaded extends MapState {
       @required this.updates,
       @required this.location,
       @required this.center,
-      @required this.legend, this.routeColors});
+      @required this.legend,
+      this.routeColors,
+      this.darkRoutes});
 
   @override
-  List<Object> get props => [routes, stops, updates, location, center];
+  List<Object> get props =>
+      [routes, darkRoutes, stops, updates, location, center];
 }
 
 class MapError extends MapState {

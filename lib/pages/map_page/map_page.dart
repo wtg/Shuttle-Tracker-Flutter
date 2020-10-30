@@ -84,6 +84,7 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
                 builder: (context, theme) {
                   var isDarkMode = theme.getThemeState;
                   var routes = <Polyline>[];
+                  var darkRoutes = <Polyline>[];
                   var stops = <Marker>[];
                   var updates = <Marker>[];
                   var legend = <String, ShuttleSVG>{};
@@ -99,6 +100,7 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
                         ));
                       } else if (state is MapLoaded) {
                         routes = state.routes;
+                        darkRoutes = state.darkRoutes;
                         stops = state.stops;
                         // updates = state.updates;
                         legend = state.legend;
@@ -143,7 +145,9 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
                                         tileProvider:
                                             CachedNetworkTileProvider(),
                                       ),
-                                      PolylineLayerOptions(polylines: routes),
+                                      PolylineLayerOptions(
+                                          polylines:
+                                              isDarkMode ? darkRoutes : routes),
                                       MarkerLayerOptions(markers: stops),
                                       // MarkerLayerOptions(markers: location),
                                       MarkerLayerOptions(markers: updates),

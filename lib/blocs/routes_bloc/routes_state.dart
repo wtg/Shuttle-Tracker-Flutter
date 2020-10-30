@@ -21,11 +21,13 @@ class RoutesLoading extends RoutesState {
 /// This class represents what user will see when data is fetched
 class RoutesLoaded extends RoutesState {
   final List<ShuttleRoute> routes;
+  final List<ShuttleRoute> darkRoutes;
   final LatLng location;
   final List<ShuttleUpdate> updates;
   final List<ShuttleStop> stops;
 
-  const RoutesLoaded({this.routes, this.location, this.updates, this.stops});
+  const RoutesLoaded(
+      {this.routes, this.darkRoutes, this.location, this.updates, this.stops});
   @override
   List<Object> get props => [routes, location, updates, stops];
 }

@@ -18,6 +18,7 @@ class RoutesBloc extends Bloc<RoutesEvent, RoutesState> {
   /// Initialization of repository class
   final ShuttleRepository repository;
   List<ShuttleRoute> routes = [];
+  List<ShuttleRoute> darkRoutes = [];
   List<ShuttleStop> stops = [];
   List<ShuttleUpdate> updates = [];
   LatLng location = LatLng(0, 0);
@@ -35,11 +36,16 @@ class RoutesBloc extends Bloc<RoutesEvent, RoutesState> {
 
         location = await repository.getLocation;
         routes = await repository.getRoutes;
+        darkRoutes = await repository.getDarkRoutes();
         stops = await repository.getStops;
         updates = await repository.getUpdates;
 
         yield RoutesLoaded(
-            routes: routes, location: location, updates: updates, stops: stops);
+            routes: routes,
+            darkRoutes: darkRoutes,
+            location: location,
+            updates: updates,
+            stops: stops);
         break;
     }
   }

@@ -24,6 +24,17 @@ class ShuttleRepository {
   Future<LatLng> get getLocation async => _shuttleProvider.getLocation();
   bool get getIsConnected => _shuttleProvider.getIsConnected;
 
+  Future<List<ShuttleRoute>> getDarkRoutes() async {
+    var routes = await _shuttleProvider.getRoutes();
+    var ret = <ShuttleRoute>[];
+
+    for (var route in routes) {
+      var darkRoute = route.getDarkRoute(shadeColor(route.color, 0.5));
+      ret.add(darkRoute);
+    }
+    return ret;
+  }
+
   Future<AuxiliaryRouteData> getAuxiliaryRouteData() async {
     var routes = await getRoutes;
     var ids = <int>[];

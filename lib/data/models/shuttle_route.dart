@@ -94,6 +94,24 @@ class ShuttleRoute {
         color: color,
       );
 
+  ShuttleRoute getDarkRoute(Color darkColor) {
+    return ShuttleRoute(
+        id: id,
+        name: name,
+        desc: desc,
+        enabled: enabled,
+        color: darkColor,
+        width: width,
+        stopIds: stopIds,
+        created: created,
+        updated: updated,
+        points: points,
+        active: active,
+        schedules: schedules,
+        favorite: favorite
+    );
+  }
+
   List get routePoints => points;
   num get strokeWidth => width;
   Color get routeColor => color;

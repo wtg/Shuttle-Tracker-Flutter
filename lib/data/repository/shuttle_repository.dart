@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:latlong/latlong.dart';
 
@@ -22,6 +24,17 @@ class ShuttleRepository {
   Future<LatLng> get getLocation async => _shuttleProvider.getLocation();
   bool get getIsConnected => _shuttleProvider.getIsConnected;
 
+  Future<List<ShuttleRoute>> getDarkRoutes() async {
+    var routes = await _shuttleProvider.getRoutes();
+    var ret = <ShuttleRoute>[];
+
+    for (var route in routes) {
+      var darkRoute = route.getDarkRoute(shadeColor(route.color, 0.35));
+      ret.add(darkRoute);
+    }
+    return ret;
+  }
+
   Future<AuxiliaryRouteData> getAuxiliaryRouteData() async {
     var routes = await getRoutes;
     var ids = <int>[];
@@ -31,6 +44,35 @@ class ShuttleRepository {
     for (var route in routes) {
       if (route.active && route.enabled) {
         legend[route.name] = ShuttleSVG(svgColor: route.color);
+        ids.addAll(route.stopIds);
+        for (var schedule in route.schedules) {
+          colors[schedule.routeId] = route.color;
+        }
+      }
+    }
+
+    return AuxiliaryRouteData(ids: ids, legend: legend, colors: colors);
+  }
+
+  static int shadeValue(int value, double factor) =>
+      max(0, min(value - (value * factor).round(), 255));
+
+  static Color shadeColor(Color color, double factor) => Color.fromRGBO(
+      shadeValue(color.red, factor),
+      shadeValue(color.green, factor),
+      shadeValue(color.blue, factor),
+      1);
+
+  Future<AuxiliaryRouteData> getAuxiliaryDarkRouteData() async {
+    var routes = await getRoutes;
+    var ids = <int>[];
+    var legend = <String, ShuttleSVG>{};
+    var colors = <int, Color>{};
+
+    for (var route in routes) {
+      if (route.active && route.enabled) {
+        legend[route.name] =
+            ShuttleSVG(svgColor: shadeColor(route.color, 0.35));
         ids.addAll(route.stopIds);
         for (var schedule in route.schedules) {
           colors[schedule.routeId] = route.color;

@@ -9,11 +9,20 @@ abstract class FusionState extends Equatable {
 
 class FusionInitial extends FusionState {}
 
-class FusionLoaded extends FusionState {
+class FusionVehicleLoaded extends FusionState {
   final List<Marker> updates;
 
-  FusionLoaded({@required this.updates});
+  FusionVehicleLoaded({@required this.updates});
 
   @override
   List<Object> get props => [updates];
+}
+
+class FusionETALoaded extends FusionState {
+  final List<ShuttleETA> etas;
+
+  FusionETALoaded({@required this.etas});
+
+  @override
+  List<Object> get props => [etas];
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_shuttletracker/global_widgets/shuttle.dart';
 
 import '../../../data/models/shuttle_route.dart';
 import '../../../data/models/shuttle_stop.dart';
@@ -8,34 +9,22 @@ import '../widgets/route_section.dart';
 
 class LoadedRoutes extends StatefulWidget {
   final List<ShuttleRoute> routes;
+  final List<ShuttleRoute> darkRoutes;
   final List<ShuttleStop> stops;
   final ThemeData theme;
 
-  LoadedRoutes({this.routes, this.stops, this.theme});
+  LoadedRoutes({this.routes, this.darkRoutes, this.stops, this.theme});
   @override
   _LoadedRoutes createState() => _LoadedRoutes();
 }
 
 class _LoadedRoutes extends State<LoadedRoutes> {
-  List<Widget> _getFavoriteRoutes() {
+  List<Widget> _getActiveRoutes(ThemeData theme) {
     var tileList = <Widget>[];
-    for (var route in widget.routes) {
-      var tile = CustomListTile(
-        route: route,
-        stops: widget.stops,
-        theme: widget.theme,
-      );
-      if (tile.isEnabled && route.favorite) {
-        tileList.add(tile);
-      }
-    }
-    // tileList.sort((a, b) => a.route.name.compareTo(b.route.name));
-    return tileList;
-  }
-
-  List<Widget> _getActiveRoutes() {
-    var tileList = <Widget>[];
-    for (var route in widget.routes) {
+    var currRoutes = (theme.brightness == Brightness.dark)
+        ? widget.darkRoutes
+        : widget.routes;
+    for (var route in currRoutes) {
       var tile = CustomListTile(
         route: route,
         stops: widget.stops,
@@ -49,9 +38,12 @@ class _LoadedRoutes extends State<LoadedRoutes> {
     return tileList;
   }
 
-  List<Widget> _getInactiveRoutes() {
+  List<Widget> _getInactiveRoutes(ThemeData theme) {
     var tileList = <CustomListTile>[];
-    for (var route in widget.routes) {
+    var currRoutes = (theme.brightness == Brightness.dark)
+        ? widget.darkRoutes
+        : widget.routes;
+    for (var route in currRoutes) {
       var tile = CustomListTile(
           route: route, stops: widget.stops, theme: widget.theme);
       if (tile.isEnabled && !tile.isActive && !route.favorite) {
@@ -79,12 +71,12 @@ class _LoadedRoutes extends State<LoadedRoutes> {
               ),
               RoutesSection(
                 theme: widget.theme,
-                routes: _getActiveRoutes(),
+                routes: _getActiveRoutes(widget.theme),
                 sectionHeader: 'Active Routes',
               ),
               RoutesSection(
                 theme: widget.theme,
-                routes: _getInactiveRoutes(),
+                routes: _getInactiveRoutes(widget.theme),
                 sectionHeader: 'Inactive Routes',
               ),
             ],

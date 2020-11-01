@@ -93,6 +93,7 @@ class ShuttleUpdate extends ShuttlePoint {
 
   @override
   String toString() {
+    // ignore: lines_longer_than_80_chars
     return "$trackerId $latitude $longitude $heading $speed $time $created $vehicleId $routeId";
   }
 

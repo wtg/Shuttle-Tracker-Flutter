@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
@@ -21,6 +23,35 @@ class MapBloc extends Bloc<MapEvent, MapState> {
 
   MapBloc({this.repository}) : super(MapInitial());
 
+  static int shadeValue(int value, double factor) =>
+      max(0, min(value - (value * factor).round(), 255));
+
+  static Color shadeColor(Color color, double factor) => Color.fromRGBO(
+      shadeValue(color.red, factor),
+      shadeValue(color.green, factor),
+      shadeValue(color.blue, factor),
+      1);
+
+  List<Polyline> _createDarkRoutes({
+    @required routes,
+  }) {
+    var polylines = <Polyline>[];
+
+    for (var route in routes) {
+      if (route.active && route.enabled) {
+        var width = route.strokeWidth;
+        var points = route.routePoints;
+        var color = route.routeColor;
+        var darkPolyline = Polyline(
+            points: points, strokeWidth: width, color: shadeColor(color, 0.35));
+
+        polylines.add(darkPolyline);
+      }
+    }
+
+    return polylines;
+  }
+
   List<Polyline> _createRoutes({
     @required List<ShuttleRoute> routes,
   }) {
@@ -31,7 +62,6 @@ class MapBloc extends Bloc<MapEvent, MapState> {
         polylines.add(route.getPolyline);
       }
     }
-    //print("Number of routes on map: ${polylines.length}");
     return polylines;
   }
 
@@ -113,6 +143,7 @@ class MapBloc extends Bloc<MapEvent, MapState> {
   @override
   Stream<MapState> mapEventToState(MapEvent event) async* {
     var routes = <Polyline>[];
+    var darkRoutes = <Polyline>[];
     var stops = <Marker>[];
     var updates = <Marker>[];
     var location = <Marker>[];
@@ -123,8 +154,19 @@ class MapBloc extends Bloc<MapEvent, MapState> {
     var repoUpdates = await repository.getUpdates;
     var repoLocation = await repository.getLocation;
     var auxData = await repository.getAuxiliaryRouteData();
+
+    // Probably a janky implementation since we create two instances of
+    // everything. Instead of figuring out whether the theme changes
+    // in the bloc, we choose the appropriate theme in the map page itself
+    // based off of the bloc updates from the theme bloc
+    // The same method is used for dark routes
+    var darkAuxData = await repository.getAuxiliaryDarkRouteData();
     if (event is GetMapData) {
       routes = _createRoutes(
+        routes: repoRoutes,
+      );
+
+      darkRoutes = _createDarkRoutes(
         routes: repoRoutes,
       );
 
@@ -156,11 +198,13 @@ class MapBloc extends Bloc<MapEvent, MapState> {
       if (repository.getIsConnected) {
         yield MapLoaded(
             routes: routes,
+            darkRoutes: darkRoutes,
             stops: stops,
             updates: updates,
             location: location,
             center: center,
-            legend: auxData.legend);
+            legend: auxData.legend,
+            darkLegend: darkAuxData.legend);
       } else {
         isLoading = true;
         yield MapError();

@@ -7,10 +7,18 @@ abstract class FusionEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class GetFusionData extends FusionEvent {
+class GetFusionVehicleData extends FusionEvent {
   final Future<ShuttleUpdate> shuttleUpdate;
-  GetFusionData({@required this.shuttleUpdate});
+  GetFusionVehicleData({@required this.shuttleUpdate});
 
   @override
   List<Object> get props => [shuttleUpdate];
+}
+
+class GetFusionETAData extends FusionEvent {
+  final List<ShuttleETA> shuttleETAs;
+  GetFusionETAData({@required this.shuttleETAs});
+
+  @override
+  List<Object> get props => [shuttleETAs];
 }

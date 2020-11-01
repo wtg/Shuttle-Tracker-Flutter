@@ -3,37 +3,64 @@ import 'package:flutter/material.dart';
 class ShuttleLine extends StatelessWidget {
   final Color routeColor;
   final bool isSelected;
-  ShuttleLine({this.routeColor, this.isSelected});
+  final bool isStart;
+  final bool isEnd;
+  final bool isDarkTheme;
+  ShuttleLine(
+      {this.routeColor,
+      this.isSelected,
+      this.isStart,
+      this.isEnd,
+      this.isDarkTheme});
 
   @override
   Widget build(BuildContext context) {
     var selectedAsset = ColorFiltered(
-      colorFilter: ColorFilter.mode(Colors.green[400], BlendMode.modulate),
+      colorFilter: ColorFilter.mode(routeColor, BlendMode.modulate),
       child: Image.asset(
-        'assets/img/stop.png',
-        width: 20,
-        height: 20,
+        'assets/img/stop_thin.png',
+        width: 15,
+        height: 15,
       ),
+    );
+
+    var stopIcon = ColorFiltered(
+      colorFilter: ColorFilter.mode(routeColor, BlendMode.modulate),
+      child: Image.asset(
+        'assets/img/dark_stop.png',
+        width: 15,
+        height: 15,
+      ),
+    );
+
+    var lineHeight = 21.0;
+    var lineWidth = 3.0;
+
+    // We have two separate lines, one before the icon, one after
+    var topLine = Container(
+      margin: EdgeInsets.only(bottom: 35),
+      width: lineWidth,
+      height: lineHeight,
+      color: routeColor,
+    );
+
+    var bottomLine = Container(
+      margin: EdgeInsets.only(top: 35),
+      width: lineWidth,
+      height: lineHeight,
+      color: routeColor,
     );
 
     return Stack(
       alignment: Alignment.center,
       children: <Widget>[
-        Container(
-          width: 5,
-          height: 50,
-          color: routeColor,
-        ),
+        isStart ? Container() : topLine,
+        isEnd ? Container() : bottomLine,
         Container(
           child: isSelected
               ? selectedAsset
-              : Image.asset(
-                  'assets/img/stop.png',
-                  height: 20,
-                  width: 20,
-                ),
+              : stopIcon
         ),
-        //  
       ],
     );
   }

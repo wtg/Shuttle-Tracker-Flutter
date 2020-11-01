@@ -49,7 +49,7 @@ class CustomListTile extends StatelessWidget {
     var circle = ColorFiltered(
       colorFilter: ColorFilter.mode(color, BlendMode.modulate),
       child: Image.asset(
-        'assets/img/dark_stop.png',
+        'assets/img/stop_thin.png',
         width: 12,
         height: 12,
       ),

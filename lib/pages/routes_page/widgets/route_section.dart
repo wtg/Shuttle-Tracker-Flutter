@@ -19,7 +19,7 @@ class RoutesSection extends StatelessWidget {
                   Theme.of(context).copyWith(dividerColor: Colors.transparent),
               child: ExpansionTile(
                 initiallyExpanded:
-                    sectionHeader == "Active Routes" ? true : false,
+                    sectionHeader == "Active Routes" ,
                 title: Text(
                   sectionHeader,
                   style: TextStyle(

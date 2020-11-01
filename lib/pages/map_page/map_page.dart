@@ -29,20 +29,6 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
 
   int i = 0;
 
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   ws.openWS();
-  //   ws.subscribe("eta");
-  //   ws.subscribe("vehicle_location");
-  // }
-
-  // @override
-  // void dispose() {
-  //   ws.closeWS();
-  //   super.dispose();
-  // }
-
   void _animatedMapMove(LatLng destLocation, double destZoom) {
     final _latTween = Tween<double>(
         begin: mapController.center.latitude, end: destLocation.latitude);
@@ -98,9 +84,11 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
                 builder: (context, theme) {
                   var isDarkMode = theme.getThemeState;
                   var routes = <Polyline>[];
+                  var darkRoutes = <Polyline>[];
                   var stops = <Marker>[];
-
+                  var updates = <Marker>[];
                   var legend = <String, ShuttleSVG>{};
+                  var darkLegend = <String, ShuttleSVG>{};
 
                   return BlocBuilder<MapBloc, MapState>(
                     builder: (context, state) {
@@ -113,9 +101,11 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
                         ));
                       } else if (state is MapLoaded) {
                         routes = state.routes;
+                        darkRoutes = state.darkRoutes;
                         stops = state.stops;
                         // updates = state.updates;
                         legend = state.legend;
+                        darkLegend = state.darkLegend;
                         // mapBloc.add(GetMapData(
                         //   animatedMapMove: _animatedMapMove,
                         //   context: context,
@@ -128,9 +118,8 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
                       } else {}
                       return BlocBuilder<FusionBloc, FusionState>(
                         builder: (context, fusionState) {
-                          var updates = <Marker>[];
                           if (fusionState is FusionInitial) {
-                          } else if (fusionState is FusionLoaded) {
+                          } else if (fusionState is FusionVehicleLoaded) {
                             updates = fusionState.updates;
                           }
                           return Stack(children: <Widget>[
@@ -158,7 +147,9 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
                                         tileProvider:
                                             CachedNetworkTileProvider(),
                                       ),
-                                      PolylineLayerOptions(polylines: routes),
+                                      PolylineLayerOptions(
+                                          polylines:
+                                              isDarkMode ? darkRoutes : routes),
                                       MarkerLayerOptions(markers: stops),
                                       // MarkerLayerOptions(markers: location),
                                       MarkerLayerOptions(markers: updates),
@@ -171,7 +162,7 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
                               theme: theme.getTheme,
                             ),
                             Legend(
-                              legend: legend,
+                              legend: isDarkMode ? darkLegend : legend,
                             ),
                           ]);
                         },

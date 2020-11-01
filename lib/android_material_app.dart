@@ -18,19 +18,19 @@ class _AndroidMaterialAppState extends State<AndroidMaterialApp> {
   final _items = [
     BottomNavigationBarItem(
       icon: Icon(Icons.near_me),
-      title: Text('Map'),
+      label: 'Map',
     ),
     BottomNavigationBarItem(
       icon: Icon(ShuttleIcon.logo),
-      title: Text('Routes'),
+      label: 'Routes',
     ),
     BottomNavigationBarItem(
       icon: Icon(Icons.access_time),
-      title: Text('Schedules'),
+      label: 'Schedules',
     ),
     BottomNavigationBarItem(
       icon: Icon(Icons.settings),
-      title: Text('Settings'),
+      label: 'Settings',
     )
   ];
   @override

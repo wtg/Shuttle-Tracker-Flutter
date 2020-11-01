@@ -15,6 +15,5 @@ class ShuttlePoint extends Equatable {
   }
 
   @override
-  // TODO: implement props
   List<Object> get props => [latitude, longitude];
 }

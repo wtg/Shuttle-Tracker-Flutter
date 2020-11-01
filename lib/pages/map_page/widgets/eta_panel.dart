@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../blocs/fusion_bloc/fusion_bloc.dart';
+import '../../../data/models/shuttle_eta.dart';
 
 /// Class: ETAPanel Widget
 /// Function: Used to create an instance of the ETA Panel
@@ -18,7 +21,7 @@ class ETAPanel extends StatefulWidget {
 ///           information read synchronously during the lifetime of the widget
 class _ETAPanelState extends State<ETAPanel> {
   // Contains a list of the ETAs recieved from the server
-  List etaList = [];
+  List<ShuttleETA> etaList = [];
 
   /// Standard Initialization function
   @override
@@ -48,9 +51,14 @@ class _ETAPanelState extends State<ETAPanel> {
                     blurRadius: 5.0,
                   )
                 ]
-              :
-                  null
-      ),
+              : null
+//                [
+//                  BoxShadow(
+//                    color: Colors.blueGrey,
+//                    blurRadius: 1.0,
+//                  )
+//                ],
+          ),
       height: MediaQuery.of(context).size.height * 0.35,
       child: Center(
           child: Column(
@@ -77,30 +85,20 @@ class _ETAPanelState extends State<ETAPanel> {
           SizedBox(
             height: 30,
           ),
-          //StreamBuilder(
-          //  stream: ws.streamController.stream,
-          //  builder: (context, snapshot) {
-          //    if (snapshot.hasData) {
-          //      var response = jsonDecode(snapshot.data);
-          //      if (response['type'] == 'eta') {
-          //        etaList = ws.handleEtas(snapshot.data);
-          //      }
-          //      return Padding(
-          //        padding: const EdgeInsets.all(8.0),
-          //        child: Text(
-          //            etaList.isNotEmpty ? '$etaList' : 'No ETAs calculated'),
-          //      );
-          //    }
-          //    return CircularProgressIndicator();
-          //  },
-          //)
+          BlocBuilder<FusionBloc, FusionState>(
+            builder: (context, state) {
+              if (state is FusionETALoaded) {
+                etaList = state.etas;
+              }
+              return Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                    etaList.isNotEmpty ? '$etaList' : 'No ETAs calculated'),
+              );
+            },
+          )
         ],
       )),
     );
   }
-
-  /* For Debugging Purposes */
-  // void logThis(String message) {
-  //   log(message);
-  // }
 }

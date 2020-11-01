@@ -1,6 +1,9 @@
 import 'dart:core';
+import 'dart:ffi';
+import 'dart:math';
 import 'dart:ui';
 
+import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong/latlong.dart';
 
@@ -62,6 +65,7 @@ class ShuttleRoute {
       this.schedules,
       this.favorite});
 
+  // Store 2 different versions of a route
   factory ShuttleRoute.fromJson(Map<String, dynamic> json) {
     return ShuttleRoute(
         id: json['id'],
@@ -89,4 +93,26 @@ class ShuttleRoute {
         strokeWidth: width,
         color: color,
       );
+
+  ShuttleRoute getDarkRoute(Color darkColor) {
+    return ShuttleRoute(
+        id: id,
+        name: name,
+        desc: desc,
+        enabled: enabled,
+        color: darkColor,
+        width: width,
+        stopIds: stopIds,
+        created: created,
+        updated: updated,
+        points: points,
+        active: active,
+        schedules: schedules,
+        favorite: favorite
+    );
+  }
+
+  List get routePoints => points;
+  num get strokeWidth => width;
+  Color get routeColor => color;
 }

@@ -50,12 +50,6 @@ class _ETAPanelState extends State<ETAPanel> {
                 ]
               :
                   null
-//                [
-//                  BoxShadow(
-//                    color: Colors.blueGrey,
-//                    blurRadius: 1.0,
-//                  )
-//                ],
       ),
       height: MediaQuery.of(context).size.height * 0.35,
       child: Center(

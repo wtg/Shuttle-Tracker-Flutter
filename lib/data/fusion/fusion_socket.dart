@@ -38,6 +38,7 @@ class FusionSocket {
     _requestUnsubscription(topic);
   }
 
+  /// Used to request the socket to provide subscription
   void _requestSubscription(String topic) {
     var data = {
       'type': 'subscribe',
@@ -46,6 +47,7 @@ class FusionSocket {
     channel.sink.add(jsonEncode(data));
   }
 
+  /// Used to request the socket to unsubscribe
   void _requestUnsubscription(String topic) {
     var data = {
       'type': 'unsubscribe',
@@ -87,6 +89,7 @@ class FusionSocket {
   vehicle_id: 17,
   route_id: null}
   */
+  /// Prints and returns updates on Vehicle Locations
   Future<ShuttleUpdate> handleVehicleLocations(String message) async {
     var data = await compute(jsonDecode, message);
     var update = ShuttleUpdate.fromJson(data['message']);
@@ -94,6 +97,7 @@ class FusionSocket {
     return update;
   }
 
+  /// Sends a String message to socket and prints message
   void sendToSocket(String message) {
     print("sending $message");
     channel.sink.add(message);
@@ -103,6 +107,7 @@ class FusionSocket {
   // a member variable keeping track of all etas.
   // Can probably clean up this code a bit.
   // Clear the old etas from list
+  /// Decodes and returns a list of etas from input message
   List<ShuttleETA> handleEtas(String message) {
     var etas = <ShuttleETA>[];
     var data = jsonDecode(message);

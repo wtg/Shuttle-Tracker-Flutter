@@ -13,11 +13,16 @@ import '../../global_widgets/shuttle_svg.dart';
 import 'widgets/attribution.dart';
 import 'widgets/legend.dart';
 
+/// Class: MapPage Widget
+/// Function: Creates an instance of the MapPage widget
 class MapPage extends StatefulWidget {
   @override
   _MapPageState createState() => _MapPageState();
 }
 
+/// Class: _MapPageState
+/// Function: Provides the internal state of the MapPage widget, contains
+///           information read during the widget's lifetime
 class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
   final Connectivity connectivity = Connectivity();
   final MapController mapController = MapController();
@@ -28,7 +33,7 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
       'http://tile.stamen.com/toner-lite/{z}/{x}/{y}@2x.png';
 
   int i = 0;
-
+  /// Animation for moving along the map to a specified location and zoom
   void _animatedMapMove(LatLng destLocation, double destZoom) {
     final _latTween = Tween<double>(
         begin: mapController.center.latitude, end: destLocation.latitude);
@@ -60,6 +65,7 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
     controller.forward();
   }
 
+  /// Standard build function for MapPage widget state
   @override
   Widget build(BuildContext context) {
     var lat = 42.729;
@@ -94,12 +100,12 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
                     builder: (context, state) {
                       print("API Poll $i | State is $state");
                       i++;
-                      if (state is MapInitial) {
+                      if (state is MapInitial) {     // Initial State of MapPage
                         mapBloc.add(GetMapData(
                           animatedMapMove: _animatedMapMove,
                           context: context,
                         ));
-                      } else if (state is MapLoaded) {
+                      } else if (state is MapLoaded) {    // MapPage is loaded
                         routes = state.routes;
                         darkRoutes = state.darkRoutes;
                         stops = state.stops;
@@ -110,7 +116,8 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
                         //   animatedMapMove: _animatedMapMove,
                         //   context: context,
                         // ));
-                      } else if (state is MapError) {
+                      } else if (state is MapError) {   // MapPage encountered
+                                                        // error
                         mapBloc.add(GetMapData(
                           animatedMapMove: _animatedMapMove,
                           context: context,
@@ -127,7 +134,7 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
                               children: [
                                 /// Map
                                 Flexible(
-                                  child: FlutterMap(
+                                  child: FlutterMap(               // Map Widget
                                     mapController: mapController,
                                     options: MapOptions(
                                       nePanBoundary: LatLng(42.78, -73.63),
@@ -161,7 +168,7 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
                             Attribution(
                               theme: theme.getTheme,
                             ),
-                            Legend(
+                            Legend(                     // Legend Widget
                               legend: isDarkMode ? darkLegend : legend,
                             ),
                           ]);
@@ -173,7 +180,7 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
               ),
             );
           }
-          return LoadingScreen();
+          return LoadingScreen();                  // MapPage has not Loaded yet
         },
       ),
     );

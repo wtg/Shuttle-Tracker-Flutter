@@ -4,7 +4,7 @@ description: Flutter ShuttleTracker is a cross-platform port of ShuttleTracker t
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.5.2 <3.0.0"
+  sdk: ">=2.8.0 <3.0.0"
 
 dependencies:
   flutter:

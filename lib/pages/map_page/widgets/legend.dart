@@ -5,11 +5,15 @@ import '../../../blocs/theme_bloc/theme_bloc.dart';
 import '../../../global_widgets/shuttle_svg.dart';
 import 'legend_row.dart';
 
+/// Class: Legend Widget
+/// Function: Creates an instance of the Legend widget, an example can be seen
+///           in the corner of the map page on the application
 class Legend extends StatelessWidget {
   final Map<String, ShuttleSVG> legend;
 
   Legend({this.legend});
 
+  /// Standard build function
   @override
   Widget build(BuildContext context) {
     var legendRows = <Widget>[
@@ -30,7 +34,7 @@ class Legend extends StatelessWidget {
     ));
     //print("Number of rows in legend: ${legendRows.length}\n\n");
     return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, theme) {
-      return Positioned(
+      return Positioned(             // Position of widget at bottom left corner
         bottom: 15,
         left: 10,
         child: Container(

@@ -30,6 +30,7 @@ class Stop extends StatelessWidget {
       @required this.isRoutesPage,
       @required this.selectedColor});
 
+  // can probably move these functions to a class or something
   int tintValue(int value, double factor) =>
       max(0, min((value + ((255 - value) * factor)).round(), 255));
 
@@ -39,10 +40,21 @@ class Stop extends StatelessWidget {
       tintValue(color.blue, factor),
       1);
 
-  Widget getSelectedAsset() {
+  static int shadeValue(int value, double factor) =>
+      max(0, min(value - (value * factor).round(), 255));
+
+  static Color shadeColor(Color color, double factor) => Color.fromRGBO(
+      shadeValue(color.red, factor),
+      shadeValue(color.green, factor),
+      shadeValue(color.blue, factor),
+      1);
+
+  Widget getSelectedAsset(BuildContext context) {
+    var color = (Theme.of(context).brightness == Brightness.dark)
+        ? tintColor(selectedColor, 0.4)
+        : shadeColor(selectedColor, 0.6);
     final selectedAsset = ColorFiltered(
-      colorFilter:
-          ColorFilter.mode(tintColor(selectedColor, 0.5), BlendMode.modulate),
+      colorFilter: ColorFilter.mode(color, BlendMode.modulate),
       child: Image.asset(
         'assets/img/stop_thin.png',
         width: 40,
@@ -55,8 +67,7 @@ class Stop extends StatelessWidget {
 
   Widget getDeselectedAsset() {
     final selectedAsset = ColorFiltered(
-      colorFilter:
-          ColorFilter.mode(Colors.white, BlendMode.modulate),
+      colorFilter: ColorFilter.mode(Colors.white, BlendMode.modulate),
       child: Image.asset(
         'assets/img/stop.png',
         width: 25,
@@ -92,12 +103,13 @@ class Stop extends StatelessWidget {
               border: Border.all(width: 15, style: BorderStyle.none),
               shape: BoxShape.circle),
           child: selected
-              ? getSelectedAsset()
-              : getDeselectedAsset() ?? Image.asset(
-                  'assets/img/stop.png',
-                  width: 25,
-                  height: 25,
-                )),
+              ? getSelectedAsset(context)
+              : getDeselectedAsset() ??
+                  Image.asset(
+                    'assets/img/stop.png',
+                    width: 25,
+                    height: 25,
+                  )),
     );
   }
 }

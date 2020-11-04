@@ -24,6 +24,7 @@ class FusionBloc extends Bloc<FusionEvent, FusionState> {
   }
 
   void connect({@required FusionSocket fusionSocket}) {
+    print("WS is connected");
     fusionSocket.openWS();
     fusionSocket.subscribe("eta");
     fusionSocket.subscribe("vehicle_location");

@@ -20,7 +20,7 @@ class LegendRow extends StatelessWidget {
         ),
         Text(
           text,
-          style: Theme.of(context).textTheme.bodyText1,
+          style: Theme.of(context).textTheme.bodyText2,
         ),
       ],
     );

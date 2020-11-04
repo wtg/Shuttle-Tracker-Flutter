@@ -223,8 +223,8 @@ class FaqPage extends StatelessWidget {
         ),
       ),
     ];
-    return PlatformScaffold(
-      appBar: PlatformAppBar(
+    return Scaffold(
+      appBar: AppBar(
         leading: Container(
           color: theme.getTheme.appBarTheme.color,
           child: IconButton(

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_shuttletracker/global_widgets/shuttle.dart';
 
 import '../../../data/models/shuttle_route.dart';
 import '../../../data/models/shuttle_stop.dart';

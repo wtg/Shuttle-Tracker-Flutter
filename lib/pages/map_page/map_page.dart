@@ -43,7 +43,7 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
 
     // Create a animation controller that has a duration and a TickerProvider.
     var controller = AnimationController(
-        duration: const Duration(milliseconds: 500), vsync: this);
+        duration: const Duration(milliseconds: 500), value: this);
 
     Animation<double> animation =
         CurvedAnimation(parent: controller, curve: Curves.fastOutSlowIn);

@@ -28,7 +28,7 @@ class Hyperlink extends StatelessWidget {
         style: TextStyle(
             color: Colors.blue, fontSize: theme.textTheme.subtitle1.fontSize),
       ),
-      onTap: _launchURL,             // When link is tapped, redirect to the URL
+      onTap: _launchURL, // When link is tapped, redirect to the URL
     );
   }
 }

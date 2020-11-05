@@ -52,19 +52,29 @@ class _PanelState extends State<Panel> {
                   SizedBox(
                     width: 10,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        value.name,
-                        style: TextStyle(
-                          color: tileSelected
-                              ? (isDarkTheme ? Colors.white : widget.routeColor)
-                              : (isDarkTheme ? Colors.grey[400] : Colors.black),
-                          fontWeight:
-                              tileSelected ? FontWeight.w900 : FontWeight.w400,
-                          fontSize: tileSelected ? 18 : 12,
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: FittedBox(
+                          fit: BoxFit.fitWidth,
+                          child: Text(
+                            value.name,
+                            style: TextStyle(
+                              color: tileSelected
+                                  ? (isDarkTheme
+                                      ? Colors.white
+                                      : widget.routeColor)
+                                  : (isDarkTheme
+                                      ? Colors.grey[400]
+                                      : Colors.black),
+                              fontWeight: tileSelected
+                                  ? FontWeight.w900
+                                  : FontWeight.w400,
+                              fontSize: tileSelected ? 18 : 12,
+                            ),
+                          ),
                         ),
                       ),
                     ),
@@ -112,7 +122,9 @@ class _PanelState extends State<Panel> {
                   color: theme.getTheme.backgroundColor,
                   child: _stopTileList.isNotEmpty
                       ? Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 0.0),
+                          padding: EdgeInsets.only(
+                              bottom:
+                                  MediaQuery.of(context).size.height * 0.0),
                           child: ScrollablePositionedList.builder(
                             physics: ClampingScrollPhysics(),
                             itemScrollController: scrollController,

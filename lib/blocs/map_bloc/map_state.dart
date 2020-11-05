@@ -36,7 +36,8 @@ class MapLoaded extends MapState {
       @required this.center,
       @required this.legend,
       this.routeColors,
-      this.darkRoutes, this.darkLegend});
+      this.darkRoutes,
+      this.darkLegend});
 
   @override
   List<Object> get props =>

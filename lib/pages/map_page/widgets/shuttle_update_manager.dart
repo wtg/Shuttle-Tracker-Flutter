@@ -19,6 +19,6 @@ class _ShuttleUpdateManagerState extends State<ShuttleUpdateManager> {
   /// Standard build function
   @override
   Widget build(BuildContext context) {
-    throw UnimplementedError();                    //Function is not implemented
-  }                                                //yet so it throws an error
+    throw UnimplementedError(); //Function is not implemented
+  } //yet so it throws an error
 }

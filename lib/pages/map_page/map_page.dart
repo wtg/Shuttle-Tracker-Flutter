@@ -33,6 +33,7 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
       'http://tile.stamen.com/toner-lite/{z}/{x}/{y}@2x.png';
 
   int i = 0;
+
   /// Animation for moving along the map to a specified location and zoom
   void _animatedMapMove(LatLng destLocation, double destZoom) {
     final _latTween = Tween<double>(
@@ -43,7 +44,7 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
 
     // Create a animation controller that has a duration and a TickerProvider.
     var controller = AnimationController(
-        duration: const Duration(milliseconds: 500), value: this);
+        duration: const Duration(milliseconds: 500), vsync: this);
 
     Animation<double> animation =
         CurvedAnimation(parent: controller, curve: Curves.fastOutSlowIn);
@@ -100,12 +101,14 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
                     builder: (context, state) {
                       print("API Poll $i | State is $state");
                       i++;
-                      if (state is MapInitial) {     // Initial State of MapPage
+                      if (state is MapInitial) {
+                        // Initial State of MapPage
                         mapBloc.add(GetMapData(
                           animatedMapMove: _animatedMapMove,
                           context: context,
                         ));
-                      } else if (state is MapLoaded) {    // MapPage is loaded
+                      } else if (state is MapLoaded) {
+                        // MapPage is loaded
                         routes = state.routes;
                         darkRoutes = state.darkRoutes;
                         stops = state.stops;
@@ -116,8 +119,9 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
                         //   animatedMapMove: _animatedMapMove,
                         //   context: context,
                         // ));
-                      } else if (state is MapError) {   // MapPage encountered
-                                                        // error
+                      } else if (state is MapError) {
+                        // MapPage encountered
+                        // error
                         mapBloc.add(GetMapData(
                           animatedMapMove: _animatedMapMove,
                           context: context,
@@ -134,7 +138,8 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
                               children: [
                                 /// Map
                                 Flexible(
-                                  child: FlutterMap(               // Map Widget
+                                  child: FlutterMap(
+                                    // Map Widget
                                     mapController: mapController,
                                     options: MapOptions(
                                       nePanBoundary: LatLng(42.78, -73.63),
@@ -168,7 +173,8 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
                             Attribution(
                               theme: theme.getTheme,
                             ),
-                            Legend(                     // Legend Widget
+                            Legend(
+                              // Legend Widget
                               legend: isDarkMode ? darkLegend : legend,
                             ),
                           ]);
@@ -180,7 +186,7 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
               ),
             );
           }
-          return LoadingScreen();                  // MapPage has not Loaded yet
+          return LoadingScreen(); // MapPage has not Loaded yet
         },
       ),
     );

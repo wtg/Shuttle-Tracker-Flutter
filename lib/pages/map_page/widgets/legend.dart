@@ -34,7 +34,8 @@ class Legend extends StatelessWidget {
     ));
     //print("Number of rows in legend: ${legendRows.length}\n\n");
     return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, theme) {
-      return Positioned(             // Position of widget at bottom left corner
+      return Positioned(
+        // Position of widget at bottom left corner
         bottom: 15,
         left: 10,
         child: Container(

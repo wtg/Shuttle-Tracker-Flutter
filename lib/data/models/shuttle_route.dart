@@ -106,8 +106,7 @@ class ShuttleRoute {
         points: points,
         active: active,
         schedules: schedules,
-        favorite: favorite
-    );
+        favorite: favorite);
   }
 
   List get routePoints => points;

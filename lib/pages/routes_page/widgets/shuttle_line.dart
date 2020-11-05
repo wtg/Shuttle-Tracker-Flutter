@@ -56,11 +56,7 @@ class ShuttleLine extends StatelessWidget {
       children: <Widget>[
         isStart ? Container() : topLine,
         isEnd ? Container() : bottomLine,
-        Container(
-          child: isSelected
-              ? selectedAsset
-              : stopIcon
-        ),
+        Container(child: isSelected ? selectedAsset : stopIcon),
       ],
     );
   }

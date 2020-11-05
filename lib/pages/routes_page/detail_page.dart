@@ -40,7 +40,7 @@ class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
 
     // Create a animation controller that has a duration and a TickerProvider.
     var controller = AnimationController(
-        duration: const Duration(milliseconds: 500), value: this);
+        duration: const Duration(milliseconds: 500), vsync: this);
 
     Animation<double> animation =
         CurvedAnimation(parent: controller, curve: Curves.fastOutSlowIn);
@@ -168,7 +168,6 @@ class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
                       bloc: widget.bloc,
                     ),
                   ),
-                  SizedBox(height: MediaQuery.of(context).size.height * 0.03,)
                 ],
               );
             }),

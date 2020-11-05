@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong/latlong.dart';
 
+import '../../theme/helpers.dart';
 import 'shuttle_point.dart';
 import 'shuttle_schedule.dart';
 
@@ -92,13 +93,13 @@ class ShuttleRoute {
         color: color,
       );
 
-  ShuttleRoute getDarkRoute(Color darkColor) {
+  ShuttleRoute getDarkRoute() {
     return ShuttleRoute(
         id: id,
         name: name,
         desc: desc,
         enabled: enabled,
-        color: darkColor,
+        color: shadeColor(color, 0.35),
         width: width,
         stopIds: stopIds,
         created: created,

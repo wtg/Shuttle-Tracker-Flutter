@@ -1,4 +1,3 @@
-import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:latlong/latlong.dart';
@@ -7,6 +6,7 @@ import '../../data/models/shuttle_route.dart';
 import '../../data/models/shuttle_stop.dart';
 import '../../data/models/shuttle_update.dart';
 import '../../global_widgets/shuttle_svg.dart';
+import '../../theme/helpers.dart';
 import '../provider/shuttle_api_provider.dart';
 //import '../provider/shuttle_local_provider.dart';
 
@@ -29,7 +29,7 @@ class ShuttleRepository {
     var ret = <ShuttleRoute>[];
 
     for (var route in routes) {
-      var darkRoute = route.getDarkRoute(shadeColor(route.color, 0.35));
+      var darkRoute = route.getDarkRoute();
       ret.add(darkRoute);
     }
     return ret;
@@ -39,11 +39,15 @@ class ShuttleRepository {
     var routes = await getRoutes;
     var ids = <int>[];
     var legend = <String, ShuttleSVG>{};
+    var darkLegend = <String, ShuttleSVG>{};
     var colors = <int, Color>{};
+    var darkColors = <int, Color>{};
 
     for (var route in routes) {
       if (route.active && route.enabled) {
         legend[route.name] = ShuttleSVG(svgColor: route.color);
+        darkLegend[route.name] =
+            ShuttleSVG(svgColor: shadeColor(route.color, 0.35));
         ids.addAll(route.stopIds);
         for (var schedule in route.schedules) {
           colors[schedule.routeId] = route.color;
@@ -54,14 +58,8 @@ class ShuttleRepository {
     return AuxiliaryRouteData(ids: ids, legend: legend, colors: colors);
   }
 
-  static int shadeValue(int value, double factor) =>
-      max(0, min(value - (value * factor).round(), 255));
 
-  static Color shadeColor(Color color, double factor) => Color.fromRGBO(
-      shadeValue(color.red, factor),
-      shadeValue(color.green, factor),
-      shadeValue(color.blue, factor),
-      1);
+
 
   Future<AuxiliaryRouteData> getAuxiliaryDarkRouteData() async {
     var routes = await getRoutes;
@@ -88,6 +86,9 @@ class AuxiliaryRouteData {
   final List<int> ids;
   final Map<String, ShuttleSVG> legend;
   final Map<int, Color> colors;
+  final Map<String, ShuttleSVG> darkLegend;
+  final Map<int, Color> darkColors;
 
-  AuxiliaryRouteData({this.ids, this.legend, this.colors});
+  AuxiliaryRouteData(
+      {this.ids, this.legend, this.colors, this.darkLegend, this.darkColors});
 }

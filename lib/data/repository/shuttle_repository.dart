@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:latlong/latlong.dart';
 
@@ -41,7 +40,6 @@ class ShuttleRepository {
     var legend = <String, ShuttleSVG>{};
     var darkLegend = <String, ShuttleSVG>{};
     var colors = <int, Color>{};
-    var darkColors = <int, Color>{};
 
     for (var route in routes) {
       if (route.active && route.enabled) {
@@ -55,30 +53,8 @@ class ShuttleRepository {
       }
     }
 
-    return AuxiliaryRouteData(ids: ids, legend: legend, colors: colors);
-  }
-
-
-
-
-  Future<AuxiliaryRouteData> getAuxiliaryDarkRouteData() async {
-    var routes = await getRoutes;
-    var ids = <int>[];
-    var legend = <String, ShuttleSVG>{};
-    var colors = <int, Color>{};
-
-    for (var route in routes) {
-      if (route.active && route.enabled) {
-        legend[route.name] =
-            ShuttleSVG(svgColor: shadeColor(route.color, 0.35));
-        ids.addAll(route.stopIds);
-        for (var schedule in route.schedules) {
-          colors[schedule.routeId] = route.color;
-        }
-      }
-    }
-
-    return AuxiliaryRouteData(ids: ids, legend: legend, colors: colors);
+    return AuxiliaryRouteData(
+        ids: ids, legend: legend, colors: colors, darkLegend: darkLegend);
   }
 }
 
@@ -87,8 +63,11 @@ class AuxiliaryRouteData {
   final Map<String, ShuttleSVG> legend;
   final Map<int, Color> colors;
   final Map<String, ShuttleSVG> darkLegend;
-  final Map<int, Color> darkColors;
 
-  AuxiliaryRouteData(
-      {this.ids, this.legend, this.colors, this.darkLegend, this.darkColors});
+  AuxiliaryRouteData({
+    this.ids,
+    this.legend,
+    this.colors,
+    this.darkLegend,
+  });
 }

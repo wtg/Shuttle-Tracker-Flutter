@@ -64,7 +64,7 @@ class MapBloc extends Bloc<MapEvent, MapState> {
         polylines.add(route.getPolyline);
       }
     }
-polylines.sort((a, b) => b.strokeWidth.compareTo(a.strokeWidth));
+    polylines.sort((a, b) => b.strokeWidth.compareTo(a.strokeWidth));
 
     return polylines;
   }
@@ -164,7 +164,6 @@ polylines.sort((a, b) => b.strokeWidth.compareTo(a.strokeWidth));
     // in the bloc, we choose the appropriate theme in the map page itself
     // based off of the bloc updates from the theme bloc
     // The same method is used for dark routes
-    var darkAuxData = await repository.getAuxiliaryDarkRouteData();
     if (event is GetMapData) {
       routes = _createRoutes(
         routes: repoRoutes,
@@ -208,7 +207,7 @@ polylines.sort((a, b) => b.strokeWidth.compareTo(a.strokeWidth));
             location: location,
             center: center,
             legend: auxData.legend,
-            darkLegend: darkAuxData.legend);
+            darkLegend: auxData.darkLegend);
       } else {
         isLoading = true;
         yield MapError();
@@ -222,4 +221,3 @@ polylines.sort((a, b) => b.strokeWidth.compareTo(a.strokeWidth));
 //   final List<Polyline> polylines;
 //   finl
 // }
-

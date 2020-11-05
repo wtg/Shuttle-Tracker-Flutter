@@ -64,6 +64,8 @@ class MapBloc extends Bloc<MapEvent, MapState> {
         polylines.add(route.getPolyline);
       }
     }
+polylines.sort((a, b) => b.strokeWidth.compareTo(a.strokeWidth));
+
     return polylines;
   }
 

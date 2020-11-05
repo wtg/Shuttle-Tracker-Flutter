@@ -123,8 +123,7 @@ class _PanelState extends State<Panel> {
                   child: _stopTileList.isNotEmpty
                       ? Padding(
                           padding: EdgeInsets.only(
-                              bottom:
-                                  MediaQuery.of(context).size.height * 0.0),
+                              bottom: MediaQuery.of(context).size.height * 0.0),
                           child: ScrollablePositionedList.builder(
                             physics: ClampingScrollPhysics(),
                             itemScrollController: scrollController,

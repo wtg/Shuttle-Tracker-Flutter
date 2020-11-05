@@ -87,12 +87,6 @@ class ShuttleRoute {
         favorite: false);
   }
 
-  Polyline get getPolyline => Polyline(
-        points: points,
-        strokeWidth: width,
-        color: color,
-      );
-
   ShuttleRoute getDarkRoute() {
     return ShuttleRoute(
         id: id,
@@ -110,7 +104,15 @@ class ShuttleRoute {
         favorite: favorite);
   }
 
-  List get routePoints => points;
-  num get strokeWidth => width;
-  Color get routeColor => color;
+  Polyline get getPolyline => Polyline(
+        points: points,
+        strokeWidth: width,
+        color: color,
+      );
+
+  Polyline get getDarkPolyline => Polyline(
+        points: points,
+        strokeWidth: width,
+        color: shadeColor(color, 0.35),
+      );
 }

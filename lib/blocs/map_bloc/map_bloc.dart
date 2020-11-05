@@ -1,4 +1,3 @@
-import 'dart:math';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
@@ -23,50 +22,24 @@ class MapBloc extends Bloc<MapEvent, MapState> {
 
   MapBloc({this.repository}) : super(MapInitial());
 
-  static int shadeValue(int value, double factor) =>
-      max(0, min(value - (value * factor).round(), 255));
 
-  static Color shadeColor(Color color, double factor) => Color.fromRGBO(
-      shadeValue(color.red, factor),
-      shadeValue(color.green, factor),
-      shadeValue(color.blue, factor),
-      1);
 
-  List<Polyline> _createDarkRoutes({
-    @required routes,
-  }) {
-    var polylines = <Polyline>[];
-
-    for (var route in routes) {
-      if (route.active && route.enabled) {
-        var width = route.strokeWidth;
-        var points = route.routePoints;
-        var color = route.routeColor;
-        var darkPolyline = Polyline(
-            points: points, strokeWidth: width, color: shadeColor(color, 0.35));
-
-        polylines.add(darkPolyline);
-      }
-    }
-
-    polylines.sort((a, b) => b.strokeWidth.compareTo(a.strokeWidth));
-
-    return polylines;
-  }
-
-  List<Polyline> _createRoutes({
+  MapRoutes _createRoutes({
     @required List<ShuttleRoute> routes,
   }) {
     var polylines = <Polyline>[];
+    var darkPolylines = <Polyline>[];
 
     for (var route in routes) {
       if (route.active && route.enabled) {
         polylines.add(route.getPolyline);
+        darkPolylines.add(route.getDarkPolyline);
       }
     }
     polylines.sort((a, b) => b.strokeWidth.compareTo(a.strokeWidth));
+    darkPolylines.sort((a, b) => b.strokeWidth.compareTo(a.strokeWidth));
 
-    return polylines;
+    return MapRoutes(polylines: polylines, darkPolylines: darkPolylines);
   }
 
   List<Marker> _createStops(
@@ -146,6 +119,7 @@ class MapBloc extends Bloc<MapEvent, MapState> {
 
   @override
   Stream<MapState> mapEventToState(MapEvent event) async* {
+    MapRoutes mapRoutes;
     var routes = <Polyline>[];
     var darkRoutes = <Polyline>[];
     var stops = <Marker>[];
@@ -165,20 +139,23 @@ class MapBloc extends Bloc<MapEvent, MapState> {
     // based off of the bloc updates from the theme bloc
     // The same method is used for dark routes
     if (event is GetMapData) {
-      routes = _createRoutes(
+      mapRoutes = _createRoutes(
         routes: repoRoutes,
       );
 
-      darkRoutes = _createDarkRoutes(
-        routes: repoRoutes,
-      );
+      routes = mapRoutes.polylines;
+      darkRoutes = mapRoutes.darkPolylines;
 
-      stops = _createStops(
-          stops: repoStops,
-          context: event.context,
-          bloc: event.bloc,
-          ids: auxData.ids,
-          animatedMapMove: event.animatedMapMove);
+          // darkRoutes = _createDarkRoutes(
+          //   routes: repoRoutes,
+          // );
+
+          stops = _createStops(
+              stops: repoStops,
+              context: event.context,
+              bloc: event.bloc,
+              ids: auxData.ids,
+              animatedMapMove: event.animatedMapMove);
 
       updates = _createUpdates(
           updates: repoUpdates,
@@ -217,7 +194,10 @@ class MapBloc extends Bloc<MapEvent, MapState> {
   }
 }
 
-// class MapRoutes{
-//   final List<Polyline> polylines;
-//   finl
-// }
+class MapRoutes {
+  final List<Polyline> polylines;
+  final List<Polyline> darkPolylines;
+
+  MapRoutes({this.polylines, this.darkPolylines});
+  //finish/pls
+}

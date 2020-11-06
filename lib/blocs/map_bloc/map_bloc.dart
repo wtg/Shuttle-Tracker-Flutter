@@ -1,4 +1,3 @@
-
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
@@ -21,8 +20,6 @@ class MapBloc extends Bloc<MapEvent, MapState> {
   bool isLoading = true;
 
   MapBloc({this.repository}) : super(MapInitial());
-
-
 
   MapRoutes _createRoutes({
     @required List<ShuttleRoute> routes,
@@ -146,16 +143,16 @@ class MapBloc extends Bloc<MapEvent, MapState> {
       routes = mapRoutes.polylines;
       darkRoutes = mapRoutes.darkPolylines;
 
-          // darkRoutes = _createDarkRoutes(
-          //   routes: repoRoutes,
-          // );
+      // darkRoutes = _createDarkRoutes(
+      //   routes: repoRoutes,
+      // );
 
-          stops = _createStops(
-              stops: repoStops,
-              context: event.context,
-              bloc: event.bloc,
-              ids: auxData.ids,
-              animatedMapMove: event.animatedMapMove);
+      stops = _createStops(
+          stops: repoStops,
+          context: event.context,
+          bloc: event.bloc,
+          ids: auxData.ids,
+          animatedMapMove: event.animatedMapMove);
 
       updates = _createUpdates(
           updates: repoUpdates,
@@ -187,6 +184,7 @@ class MapBloc extends Bloc<MapEvent, MapState> {
             darkLegend: auxData.darkLegend);
       } else {
         isLoading = true;
+        await Future.delayed(const Duration(seconds: 3));
         yield MapError();
       }
       // await Future.delayed(const Duration(seconds: 2));

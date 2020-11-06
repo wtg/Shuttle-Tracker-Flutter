@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
 
 import '../../data/fusion/fusion_socket.dart';
@@ -16,6 +17,7 @@ part 'fusion_state.dart';
 class FusionBloc extends Bloc<FusionEvent, FusionState> {
   final FusionSocket fusionSocket;
   Map<ShuttleUpdate, Marker> fusionMap = {};
+  Map<int, Color> shuttleColors = {};
   dynamic currentVehicleMessage;
   dynamic currentETAMessage;
 
@@ -57,13 +59,21 @@ class FusionBloc extends Bloc<FusionEvent, FusionState> {
     });
   }
 
+  set setShuttleColors(Map<int, Color> colors) => shuttleColors = colors;
+
   @override
   Stream<FusionState> mapEventToState(
     FusionEvent event,
   ) async* {
     if (event is GetFusionVehicleData) {
+      // print(shuttleColors);
+      
       var data = await event.shuttleUpdate;
-      data.setColor = Colors.white;
+      if (shuttleColors[data.routeId] != null) {
+        data.setColor = shuttleColors[data.routeId];
+      } else {
+        data.setColor = Colors.white;
+      }
       if (data.routeId != null &&
           data.time.day == DateTime.now().day &&
           data.time.month == DateTime.now().month &&
@@ -79,7 +89,7 @@ class FusionBloc extends Bloc<FusionEvent, FusionState> {
     } else if (event is GetFusionETAData) {
       var data = await event.shuttleETAs;
       yield FusionETALoaded(etas: data);
-    } else if (event is GetShuttleColorData) {}
+    }
   }
 
   @override

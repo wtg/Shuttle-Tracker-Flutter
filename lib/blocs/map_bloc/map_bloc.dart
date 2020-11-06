@@ -143,7 +143,6 @@ class MapBloc extends Bloc<MapEvent, MapState> {
       routes = mapRoutes.polylines;
       darkRoutes = mapRoutes.darkPolylines;
 
-
       stops = _createStops(
           stops: repoStops,
           context: event.context,
@@ -178,7 +177,8 @@ class MapBloc extends Bloc<MapEvent, MapState> {
             location: location,
             center: center,
             legend: auxData.legend,
-            darkLegend: auxData.darkLegend);
+            darkLegend: auxData.darkLegend,
+            routeColors: auxData.colors);
       } else {
         isLoading = true;
         await Future.delayed(const Duration(seconds: 3));

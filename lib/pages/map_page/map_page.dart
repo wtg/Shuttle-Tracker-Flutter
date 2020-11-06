@@ -72,6 +72,7 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
     var lat = 42.729;
     var long = -73.6758;
     var mapBloc = context.bloc<MapBloc>();
+    var fusionBloc = context.bloc<FusionBloc>();
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -112,13 +113,9 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
                         routes = state.routes;
                         darkRoutes = state.darkRoutes;
                         stops = state.stops;
-                        // updates = state.updates;
                         legend = state.legend;
                         darkLegend = state.darkLegend;
-                        // mapBloc.add(GetMapData(
-                        //   animatedMapMove: _animatedMapMove,
-                        //   context: context,
-                        // ));
+                        fusionBloc.shuttleColors = state.routeColors;
                       } else if (state is MapError) {
                         // MapPage encountered
                         // error

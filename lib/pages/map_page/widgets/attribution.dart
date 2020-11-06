@@ -70,7 +70,7 @@ class Attribution extends StatelessWidget {
                     ]),
           padding: const EdgeInsets.all(5.0),
           child: FittedBox(
-                      child: Column(
+            child: Column(
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,

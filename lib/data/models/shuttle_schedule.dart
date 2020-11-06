@@ -1,5 +1,5 @@
 class ShuttleSchedule {
-  /// Not sure what this is for
+  /// ID for shuttle
   final int id;
 
   /// ID for the route

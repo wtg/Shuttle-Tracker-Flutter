@@ -56,7 +56,7 @@ class Attribution extends StatelessWidget {
         bottom: 15,
         right: 5,
         child: Container(
-          width: MediaQuery.of(context).size.width * 0.5,
+          width: MediaQuery.of(context).size.width * 0.55,
           decoration: BoxDecoration(
               color: theme.backgroundColor,
               borderRadius: BorderRadius.circular(8.0),

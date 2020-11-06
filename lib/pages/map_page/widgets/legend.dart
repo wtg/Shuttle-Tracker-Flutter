@@ -39,7 +39,7 @@ class Legend extends StatelessWidget {
         bottom: 15,
         left: 10,
         child: Container(
-          width: MediaQuery.of(context).size.width * 0.3,
+          width: MediaQuery.of(context).size.width * 0.33,
           decoration: BoxDecoration(
               color: theme.getTheme.backgroundColor,
               border: Border.all(

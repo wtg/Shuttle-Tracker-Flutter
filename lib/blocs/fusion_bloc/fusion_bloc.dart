@@ -79,7 +79,7 @@ class FusionBloc extends Bloc<FusionEvent, FusionState> {
     } else if (event is GetFusionETAData) {
       var data = await event.shuttleETAs;
       yield FusionETALoaded(etas: data);
-    }
+    } else if (event is GetShuttleColorData) {}
   }
 
   @override

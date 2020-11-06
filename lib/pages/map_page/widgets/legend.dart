@@ -39,6 +39,7 @@ class Legend extends StatelessWidget {
         bottom: 15,
         left: 10,
         child: Container(
+          width: MediaQuery.of(context).size.width * 0.3,
           decoration: BoxDecoration(
               color: theme.getTheme.backgroundColor,
               border: Border.all(
@@ -54,9 +55,11 @@ class Legend extends StatelessWidget {
                           blurRadius: 1.0,
                           offset: Offset(0.0, 0.5))
                     ]),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: legendRows,
+          child: FittedBox(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: legendRows,
+            ),
           ),
         ),
       );

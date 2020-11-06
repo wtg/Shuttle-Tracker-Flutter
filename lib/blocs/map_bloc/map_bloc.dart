@@ -143,9 +143,6 @@ class MapBloc extends Bloc<MapEvent, MapState> {
       routes = mapRoutes.polylines;
       darkRoutes = mapRoutes.darkPolylines;
 
-      // darkRoutes = _createDarkRoutes(
-      //   routes: repoRoutes,
-      // );
 
       stops = _createStops(
           stops: repoStops,
@@ -197,5 +194,4 @@ class MapRoutes {
   final List<Polyline> darkPolylines;
 
   MapRoutes({this.polylines, this.darkPolylines});
-  //finish/pls
 }

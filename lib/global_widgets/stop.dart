@@ -52,7 +52,7 @@ class Stop extends StatelessWidget {
   Widget getSelectedAsset(BuildContext context) {
     var color = (Theme.of(context).brightness == Brightness.dark)
         ? tintColor(selectedColor, 0.4)
-        : shadeColor(selectedColor, 0.6);
+        : shadeColor(selectedColor, 0.9);
     final selectedAsset = ColorFiltered(
       colorFilter: ColorFilter.mode(color, BlendMode.modulate),
       child: Image.asset(

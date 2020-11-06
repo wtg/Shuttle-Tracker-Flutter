@@ -246,7 +246,7 @@ class FaqPage extends StatelessWidget {
 //            itemCount: faqList.length,
 //            itemBuilder: (context, index) => faqList[index])
 
-      body: ListView.separated(
+      body: ListView.builder(
 //        physics: const NeverScrollableScrollPhysics(),
         shrinkWrap: true,
         itemCount: faqList.length,
@@ -254,12 +254,12 @@ class FaqPage extends StatelessWidget {
           padding: const EdgeInsets.all(8.0),
           child: faqList[index],
         ),
-        separatorBuilder: (context, index) {
-          return Divider(
-            color: Colors.grey[700],
-            height: 4,
-          );
-        },
+        // separatorBuilder: (context, index) {
+        //   return Divider(
+        //     color: Colors.grey[700],
+        //     height: 4,
+        //   );
+        // },
       ),
     );
   }

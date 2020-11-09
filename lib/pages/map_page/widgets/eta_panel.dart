@@ -43,8 +43,7 @@ class _ETAPanelState extends State<ETAPanel> {
             topLeft: const Radius.circular(25),
             topRight: const Radius.circular(25),
           ),
-          boxShadow: Theme.of(context).backgroundColor.toString() ==
-                  "Color(0xffffffff)"
+          boxShadow: Theme.of(context).backgroundColor == Color(0xffffffff)
               ? [
                   BoxShadow(
                     color: Color(0xffD3D3D3),
@@ -75,14 +74,16 @@ class _ETAPanelState extends State<ETAPanel> {
               )
             ],
           ),
-          Text(
-            '${widget.markerName}',
-            style: TextStyle(
-                color: widget.stopMarker
-                    ? Theme.of(context).hoverColor
-                    : Colors.blue,
-                fontSize: 27,
-                fontWeight: FontWeight.w700),
+          FittedBox(
+            child: Text(
+              '${widget.markerName}',
+              style: TextStyle(
+                  color: widget.stopMarker
+                      ? Theme.of(context).hoverColor
+                      : Colors.blue,
+                  fontSize: 24,
+                  fontWeight: FontWeight.w700),
+            ),
           ),
           SizedBox(
             height: 30,

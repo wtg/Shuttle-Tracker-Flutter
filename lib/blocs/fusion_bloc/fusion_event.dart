@@ -23,10 +23,7 @@ class GetFusionETAData extends FusionEvent {
   List<Object> get props => [shuttleETAs];
 }
 
-class GetShuttleColorData extends FusionEvent {
-  final Map<int, Color> shuttleColors;
-  GetShuttleColorData({@required this.shuttleColors});
-
+class FusionError extends FusionEvent {
   @override
-  List<Object> get props => [shuttleColors];
+  List<Object> get props => [];
 }

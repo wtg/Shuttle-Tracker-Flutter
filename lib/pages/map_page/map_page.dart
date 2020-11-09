@@ -94,7 +94,7 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
                   var routes = <Polyline>[];
                   var darkRoutes = <Polyline>[];
                   var stops = <Marker>[];
-                  var updates = <Marker>[];
+
                   var legend = <String, ShuttleSVG>{};
                   var darkLegend = <String, ShuttleSVG>{};
 
@@ -126,10 +126,12 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
                       } else {}
                       return BlocBuilder<FusionBloc, FusionState>(
                         builder: (context, fusionState) {
+                          var updates = <Marker>[];
                           if (fusionState is FusionInitial) {
                           } else if (fusionState is FusionVehicleLoaded) {
                             updates = fusionState.updates;
                           }
+
                           return Stack(children: <Widget>[
                             Column(
                               children: [

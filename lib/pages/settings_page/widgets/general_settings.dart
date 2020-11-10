@@ -9,7 +9,7 @@ class GeneralSettings extends StatelessWidget {
   GeneralSettings({this.theme});
 
   Widget build(BuildContext context) {
-    var themeBloc = context.bloc<ThemeBloc>();
+    var themeBloc = context.watch<ThemeBloc>();
     var isSwitched = theme.isDarkMode;
     return Column(children: <Widget>[
       ListTile(

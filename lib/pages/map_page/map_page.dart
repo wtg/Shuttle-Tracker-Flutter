@@ -71,8 +71,8 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     var lat = 42.729;
     var long = -73.6758;
-    var mapBloc = context.bloc<MapBloc>();
-    var fusionBloc = context.bloc<FusionBloc>();
+    var mapBloc = context.watch<MapBloc>();
+    var fusionBloc = context.watch<FusionBloc>();
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -131,8 +131,7 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
                           } else if (fusionState is FusionVehicleLoaded) {
                             updates = fusionState.updates;
                             print("Num of updates: ${updates.length}");
-                          }
-                          else if(fusionState is FusionETALoaded){
+                          } else if (fusionState is FusionETALoaded) {
                             updates = fusionState.updates;
                           }
 

@@ -16,7 +16,7 @@ class IOSSettings extends StatefulWidget {
 class _IOSSettingsState extends State<IOSSettings> {
   @override
   Widget build(BuildContext context) {
-    var themeBloc = context.bloc<ThemeBloc>();
+    var themeBloc = context.watch<ThemeBloc>();
     var isSwitched = widget.theme.isDarkMode;
     return CupertinoSettings(items: <Widget>[
       const CSHeader('General'),

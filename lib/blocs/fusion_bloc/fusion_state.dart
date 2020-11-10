@@ -20,7 +20,7 @@ class FusionVehicleLoaded extends FusionState {
 
 class FusionETALoaded extends FusionState {
   final List<ShuttleETA> etas;
-    final List<Marker> updates;
+  final List<Marker> updates;
   FusionETALoaded({@required this.etas, this.updates});
 
   @override

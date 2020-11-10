@@ -130,6 +130,10 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
                           if (fusionState is FusionInitial) {
                           } else if (fusionState is FusionVehicleLoaded) {
                             updates = fusionState.updates;
+                            print("Num of updates: ${updates.length}");
+                          }
+                          else if(fusionState is FusionETALoaded){
+                            updates = fusionState.updates;
                           }
 
                           return Stack(children: <Widget>[

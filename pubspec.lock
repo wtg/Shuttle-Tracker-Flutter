@@ -201,7 +201,7 @@ packages:
       name: flutter_bloc
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "6.0.6"
+    version: "6.1.0"
   flutter_blurhash:
     dependency: transitive
     description:
@@ -237,6 +237,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.7.5"
+  flutter_layout_grid:
+    dependency: transitive
+    description:
+      name: flutter_layout_grid
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.10.2"
   flutter_localizations:
     dependency: transitive
     description: flutter
@@ -262,14 +269,14 @@ packages:
       name: flutter_platform_widgets
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.60.2"
+    version: "0.70.2"
   flutter_svg:
     dependency: "direct main"
     description:
       name: flutter_svg
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.18.1"
+    version: "0.19.1"
   flutter_web_plugins:
     dependency: transitive
     description: flutter
@@ -281,14 +288,14 @@ packages:
       name: flutter_widget_from_html
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.4.3"
+    version: "0.5.1+4"
   flutter_widget_from_html_core:
     dependency: transitive
     description:
       name: flutter_widget_from_html_core
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.4.3"
+    version: "0.5.1+4"
   font_awesome_flutter:
     dependency: transitive
     description:
@@ -589,7 +596,7 @@ packages:
       name: shared_preferences
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.5.12+2"
+    version: "0.5.12+4"
   shared_preferences_linux:
     dependency: transitive
     description:

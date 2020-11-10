@@ -10,20 +10,20 @@ dependencies:
   flutter:
     sdk: flutter
   
-  device_preview: ^0.4.7
+  device_preview: ^0.4.8
   connectivity: ^2.0.1
   flutter_cupertino_settings: ^0.3.1
-  scrollable_positioned_list: ^0.1.7
-  hydrated_bloc: ^6.0.1
-  shared_preferences: ^0.5.8
+  scrollable_positioned_list: ^0.1.8
+  hydrated_bloc: ^6.0.3
+  shared_preferences: ^0.5.12+4
   flutter_native_splash: ^0.1.9
-  flutter_platform_widgets: ^0.60.1
-  flutter_widget_from_html: ^0.4.3
+  flutter_platform_widgets: ^0.70.2
+  flutter_widget_from_html: ^0.5.1+4
   observable: ^0.22.2
-  flutter_svg: ^0.18.0
-  flutter_bloc: ^6.0.1
-  equatable: ^1.2.3
-  responsive_framework: ^0.0.8
+  flutter_svg: ^0.19.1
+  flutter_bloc: ^6.1.0
+  equatable: ^1.2.5
+  responsive_framework: ^0.0.11
   http: ^0.12.2
   flutter_map: ^0.10.1  
   geolocation: ^1.1.2

@@ -18,6 +18,7 @@ class FusionBloc extends Bloc<FusionEvent, FusionState> {
   final FusionSocket fusionSocket;
   Map<ShuttleUpdate, Marker> fusionMap = {};
   Map<int, Color> shuttleColors = {};
+  List<Marker> currentShuttles = [];
   dynamic currentVehicleMessage;
   dynamic currentETAMessage;
 
@@ -67,7 +68,7 @@ class FusionBloc extends Bloc<FusionEvent, FusionState> {
   ) async* {
     if (event is GetFusionVehicleData) {
       // print(shuttleColors);
-      
+
       var data = await event.shuttleUpdate;
       if (shuttleColors[data.routeId] != null) {
         data.setColor = shuttleColors[data.routeId];
@@ -85,10 +86,12 @@ class FusionBloc extends Bloc<FusionEvent, FusionState> {
       var list = <Marker>[];
       fusionMap.forEach((k, v) => list.add(v));
 
-      yield FusionVehicleLoaded(updates: list);
+      currentShuttles = list;
+
+      yield FusionVehicleLoaded(updates: currentShuttles);
     } else if (event is GetFusionETAData) {
       var data = await event.shuttleETAs;
-      yield FusionETALoaded(etas: data);
+      yield FusionETALoaded(etas: data, updates: currentShuttles);
     }
   }
 

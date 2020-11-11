@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../blocs/theme/theme_bloc.dart';
+import '../../blocs/theme_bloc/theme_bloc.dart';
 
 class SchedulesPage extends StatefulWidget {
   @override
@@ -40,6 +40,8 @@ class _SchedulesPageState extends State<SchedulesPage> {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Card(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8.0)),
                       shadowColor: theme.getTheme.hoverColor,
                       color: theme.getTheme.cardColor,
                       elevation: theme.getThemeState ? 0 : 2,
@@ -100,6 +102,8 @@ Monday–Friday 7am – 7pm
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Card(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8.0)),
                       shadowColor: theme.getTheme.hoverColor,
                       color: theme.getTheme.cardColor,
                       elevation: theme.getThemeState ? 0 : 2,

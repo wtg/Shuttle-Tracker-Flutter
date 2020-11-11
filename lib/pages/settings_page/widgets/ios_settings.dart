@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_cupertino_settings/flutter_cupertino_settings.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../blocs/theme/theme_bloc.dart';
+import '../../../blocs/theme_bloc/theme_bloc.dart';
 
 class IOSSettings extends StatefulWidget {
   final ThemeState theme;
@@ -16,7 +16,7 @@ class IOSSettings extends StatefulWidget {
 class _IOSSettingsState extends State<IOSSettings> {
   @override
   Widget build(BuildContext context) {
-    var themeBloc = context.bloc<ThemeBloc>();
+    var themeBloc = context.watch<ThemeBloc>();
     var isSwitched = widget.theme.isDarkMode;
     return CupertinoSettings(items: <Widget>[
       const CSHeader('General'),

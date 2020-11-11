@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../blocs/theme/theme_bloc.dart';
+import '../../../blocs/theme_bloc/theme_bloc.dart';
 
 class GeneralSettings extends StatelessWidget {
   final ThemeState theme;
   GeneralSettings({this.theme});
 
   Widget build(BuildContext context) {
-    var themeBloc = context.bloc<ThemeBloc>();
+    var themeBloc = context.watch<ThemeBloc>();
     var isSwitched = theme.isDarkMode;
     return Column(children: <Widget>[
       ListTile(

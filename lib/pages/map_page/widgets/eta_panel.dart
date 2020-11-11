@@ -1,11 +1,65 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../blocs/fusion_bloc/fusion_bloc.dart';
+import '../../../data/models/shuttle_eta.dart';
 
-class ETAPanel extends StatelessWidget {
+/// Class: ETAPanel Widget
+/// Function: Used to create an instance of the ETA Panel
+class ETAPanel extends StatefulWidget {
   final String markerName;
-  ETAPanel({this.markerName});
+  final bool stopMarker;
 
+  /// Constructor of the ETAPanel Widget
+  ETAPanel({@required this.markerName, this.stopMarker});
+
+  @override
+  _ETAPanelState createState() => _ETAPanelState();
+}
+
+/// Class: _ETAPanelState
+/// Function: Provides the internal state of the ETAPanel Widget, contains
+///           information read synchronously during the lifetime of the widget
+class _ETAPanelState extends State<ETAPanel> {
+  // Contains a list of the ETAs recieved from the server
+  List<ShuttleETA> etaList = [];
+
+  /// Standard Initialization function
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  /// Builds the internal content of the Widget
   Widget build(BuildContext context) {
+    var panelColor = Theme.of(context).cardColor;
     return Container(
+      decoration: BoxDecoration(
+          color: panelColor,
+          border: Border.all(
+            width: 5,
+            color: panelColor,
+          ),
+          borderRadius: BorderRadius.only(
+            topLeft: const Radius.circular(25),
+            topRight: const Radius.circular(25),
+          ),
+          boxShadow: Theme.of(context).backgroundColor == Color(0xffffffff)
+              ? [
+                  BoxShadow(
+                    color: Color(0xffD3D3D3),
+                    blurRadius: 5.0,
+                  )
+                ]
+              : null
+          /*
+                [
+                  BoxShadow(
+                    color: Colors.blueGrey,
+                    blurRadius: 1.0,
+                  )
+                ],
+           */
+          ),
       height: MediaQuery.of(context).size.height * 0.35,
       child: Center(
           child: Column(
@@ -16,20 +70,36 @@ class ETAPanel extends StatelessWidget {
               IconButton(
                 icon: Icon(Icons.clear, color: Theme.of(context).hoverColor),
                 onPressed: () => Navigator.pop(context),
+                splashRadius: 10,
               )
             ],
           ),
-          Text(
-            '$markerName',
-            style: TextStyle(
-                color: Theme.of(context).hoverColor,
-                fontSize: 20,
-                fontWeight: FontWeight.w700),
+          FittedBox(
+            child: Text(
+              '${widget.markerName}',
+              style: TextStyle(
+                  color: widget.stopMarker
+                      ? Theme.of(context).hoverColor
+                      : Colors.blue,
+                  fontSize: 24,
+                  fontWeight: FontWeight.w700),
+            ),
           ),
           SizedBox(
             height: 30,
           ),
-          Text("Add ETA data here")
+          BlocBuilder<FusionBloc, FusionState>(
+            builder: (context, state) {
+              if (state is FusionETALoaded) {
+                etaList = state.etas;
+              }
+              return Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                    etaList.isNotEmpty ? '$etaList' : 'No ETAs calculated'),
+              );
+            },
+          )
         ],
       )),
     );

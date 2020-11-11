@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../blocs/theme/theme_bloc.dart';
+import '../../../blocs/theme_bloc/theme_bloc.dart';
 import 'hyperlink.dart';
 
 class Attribution extends StatelessWidget {
@@ -56,6 +56,7 @@ class Attribution extends StatelessWidget {
         bottom: 15,
         right: 5,
         child: Container(
+          width: MediaQuery.of(context).size.width * 0.55,
           decoration: BoxDecoration(
               color: theme.backgroundColor,
               borderRadius: BorderRadius.circular(8.0),
@@ -68,22 +69,24 @@ class Attribution extends StatelessWidget {
                           offset: Offset(0.0, 0.5))
                     ]),
           padding: const EdgeInsets.all(5.0),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Row(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: attribution1,
-              ),
-              Row(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: attribution2,
-              ),
-            ],
+          child: FittedBox(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: attribution1,
+                ),
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: attribution2,
+                ),
+              ],
+            ),
           ),
         ),
       );

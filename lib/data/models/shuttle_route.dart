@@ -1,9 +1,11 @@
 import 'dart:core';
 import 'dart:ui';
 
+import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong/latlong.dart';
 
+import '../../theme/helpers.dart';
 import 'shuttle_point.dart';
 import 'shuttle_schedule.dart';
 
@@ -62,6 +64,7 @@ class ShuttleRoute {
       this.schedules,
       this.favorite});
 
+  // Store 2 different versions of a route
   factory ShuttleRoute.fromJson(Map<String, dynamic> json) {
     return ShuttleRoute(
         id: json['id'],
@@ -84,9 +87,32 @@ class ShuttleRoute {
         favorite: false);
   }
 
+  ShuttleRoute getDarkRoute() {
+    return ShuttleRoute(
+        id: id,
+        name: name,
+        desc: desc,
+        enabled: enabled,
+        color: shadeColor(color, 0.35),
+        width: width,
+        stopIds: stopIds,
+        created: created,
+        updated: updated,
+        points: points,
+        active: active,
+        schedules: schedules,
+        favorite: favorite);
+  }
+
   Polyline get getPolyline => Polyline(
         points: points,
         strokeWidth: width,
         color: color,
+      );
+
+  Polyline get getDarkPolyline => Polyline(
+        points: points,
+        strokeWidth: width,
+        color: shadeColor(color, 0.35),
       );
 }

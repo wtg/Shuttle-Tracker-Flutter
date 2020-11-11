@@ -4,9 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import 'package:latlong/latlong.dart';
 
-import '../../../blocs/on_tap/on_tap_bloc.dart';
-import '../../../blocs/theme/theme_bloc.dart';
-import '../../../models/shuttle_stop.dart';
+import '../../../blocs/on_tap_bloc/on_tap_bloc.dart';
+import '../../../blocs/theme_bloc/theme_bloc.dart';
+import '../../../data/models/shuttle_stop.dart';
 import 'shuttle_line.dart';
 
 class Panel extends StatefulWidget {
@@ -26,17 +26,11 @@ class _PanelState extends State<Panel> {
 
   List<Widget> _getStopTileList(ThemeData theme) {
     var tileList = <Widget>[];
-
+    var i = 0;
     widget.routeStops.forEach((key, value) {
       var tileSelected = selectedName != null && selectedName == value.name;
-      var tileTextColor = theme.brightness == Brightness.dark
-          ? Colors.white
-          : Colors.green[600];
-      var tileColor = tileSelected
-          ? theme.brightness == Brightness.dark
-              ? Colors.white.withOpacity(0.1)
-              : Colors.green.withOpacity(0.1)
-          : theme.backgroundColor;
+      var isDarkTheme = theme.brightness == Brightness.dark;
+      var tileTextColor = isDarkTheme ? Colors.white : Colors.black;
       tileList.add(
         IntrinsicHeight(
           child: ListTileTheme(
@@ -46,28 +40,40 @@ class _PanelState extends State<Panel> {
               selected: tileSelected ? true : false,
               title: Row(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
                   ShuttleLine(
                     routeColor: widget.routeColor,
                     isSelected: tileSelected,
+                    isStart: (i == 0),
+                    isEnd: (i == widget.routeStops.length - 1),
+                    isDarkTheme: isDarkTheme,
                   ),
                   SizedBox(
-                    width: 20,
+                    width: 10,
                   ),
                   Expanded(
-                    child: Container(
+                    child: Padding(
                       padding: const EdgeInsets.all(8.0),
-                      decoration: BoxDecoration(
-                        color: tileColor,
-                        borderRadius: BorderRadius.circular(16.0),
-                        shape: BoxShape.rectangle,
-                      ),
                       child: Align(
                         alignment: Alignment.centerLeft,
-                        child: Text(
-                          value.name,
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
+                        child: FittedBox(
+                          fit: BoxFit.fitWidth,
+                          child: Text(
+                            value.name,
+                            style: TextStyle(
+                              color: tileSelected
+                                  ? (isDarkTheme
+                                      ? Colors.white
+                                      : widget.routeColor)
+                                  : (isDarkTheme
+                                      ? Colors.grey[400]
+                                      : Colors.black),
+                              fontWeight: tileSelected
+                                  ? FontWeight.w900
+                                  : FontWeight.w400,
+                              fontSize: tileSelected ? 18 : 12,
+                            ),
                           ),
                         ),
                       ),
@@ -83,6 +89,7 @@ class _PanelState extends State<Panel> {
           ),
         ),
       );
+      i++;
     });
     return tileList;
   }
@@ -115,7 +122,8 @@ class _PanelState extends State<Panel> {
                   color: theme.getTheme.backgroundColor,
                   child: _stopTileList.isNotEmpty
                       ? Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 8.0),
+                          padding: EdgeInsets.only(
+                              bottom: MediaQuery.of(context).size.height * 0.0),
                           child: ScrollablePositionedList.builder(
                             physics: ClampingScrollPhysics(),
                             itemScrollController: scrollController,

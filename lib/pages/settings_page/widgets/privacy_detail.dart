@@ -1,10 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../../../blocs/theme/theme_bloc.dart';
+import '../../../blocs/theme_bloc/theme_bloc.dart';
 
 class PrivacyPolicyPage extends StatelessWidget {
   final ThemeState theme;
@@ -37,8 +36,8 @@ class PrivacyPolicyPage extends StatelessWidget {
       color: theme.getTheme.hoverColor,
     );
 
-    return PlatformScaffold(
-      appBar: PlatformAppBar(
+    return Scaffold(
+      appBar: AppBar(
         leading: Container(
           color: theme.getTheme.appBarTheme.color,
           child: IconButton(

@@ -6,9 +6,9 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
 
-import '../../../blocs/on_tap/on_tap_bloc.dart';
-import '../../../models/shuttle_route.dart';
-import '../../../models/shuttle_stop.dart';
+import '../../../blocs/on_tap_bloc/on_tap_bloc.dart';
+import '../../../data/models/shuttle_route.dart';
+import '../../../data/models/shuttle_stop.dart';
 import '../detail_page.dart';
 
 class CustomListTile extends StatelessWidget {
@@ -21,24 +21,6 @@ class CustomListTile extends StatelessWidget {
 
   bool get isEnabled => route.enabled;
   bool get isActive => route.active;
-
-  Icon _getIcon() {
-    var icon = isEnabled && isActive
-        ? Icon(
-            Icons.check_circle,
-            color: Colors.green,
-          )
-        : isEnabled && !isActive
-            ? Icon(
-                Icons.error,
-                color: Colors.yellow[700],
-              )
-            : Icon(
-                Icons.error,
-                color: Colors.red,
-              );
-    return icon;
-  }
 
   Map<int, ShuttleStop> _getRouteStops() {
     var stopIds = route.stopIds;
@@ -68,8 +50,8 @@ class CustomListTile extends StatelessWidget {
       colorFilter: ColorFilter.mode(color, BlendMode.modulate),
       child: Image.asset(
         'assets/img/stop_thin.png',
-        width: 25,
-        height: 25,
+        width: 12,
+        height: 12,
       ),
     );
 
@@ -90,7 +72,7 @@ class CustomListTile extends StatelessWidget {
                 style: TextStyle(
                   color: theme.hoverColor,
                   fontSize: 16,
-                  fontWeight: FontWeight.w500,
+                  fontWeight: FontWeight.w400,
                 ),
               ),
             ),
@@ -100,20 +82,20 @@ class CustomListTile extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.end,
           children: <Widget>[
-            Stack(
-              alignment: AlignmentDirectional.center,
-              children: <Widget>[
-                Container(
-                  height: 20,
-                  width: 20,
-                  decoration: ShapeDecoration(
-                    color: Colors.white,
-                    shape: CircleBorder(),
-                  ),
-                ),
-                _getIcon(),
-              ],
-            ),
+            //Stack(
+            //  alignment: AlignmentDirectional.center,
+            //  children: <Widget>[
+            //    Container(
+            //      height: 20,
+            //      width: 20,
+            //      decoration: ShapeDecoration(
+            //        color: Colors.white,
+            //        shape: CircleBorder(),
+            //      ),
+            //    ),
+            //    _getIcon(),
+            //  ],
+            //),
             Icon(
               Platform.isIOS
                   ? CupertinoIcons.right_chevron

@@ -1,10 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../../../blocs/theme/theme_bloc.dart';
+import '../../../blocs/theme_bloc/theme_bloc.dart';
 
 class FaqPage extends StatelessWidget {
   final ThemeState theme;
@@ -223,8 +222,8 @@ class FaqPage extends StatelessWidget {
         ),
       ),
     ];
-    return PlatformScaffold(
-      appBar: PlatformAppBar(
+    return Scaffold(
+      appBar: AppBar(
         leading: Container(
           color: theme.getTheme.appBarTheme.color,
           child: IconButton(
@@ -247,7 +246,7 @@ class FaqPage extends StatelessWidget {
 //            itemCount: faqList.length,
 //            itemBuilder: (context, index) => faqList[index])
 
-      body: ListView.separated(
+      body: ListView.builder(
 //        physics: const NeverScrollableScrollPhysics(),
         shrinkWrap: true,
         itemCount: faqList.length,
@@ -255,12 +254,12 @@ class FaqPage extends StatelessWidget {
           padding: const EdgeInsets.all(8.0),
           child: faqList[index],
         ),
-        separatorBuilder: (context, index) {
-          return Divider(
-            color: Colors.grey[700],
-            height: 4,
-          );
-        },
+        // separatorBuilder: (context, index) {
+        //   return Divider(
+        //     color: Colors.grey[700],
+        //     height: 4,
+        //   );
+        // },
       ),
     );
   }

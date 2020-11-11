@@ -1,12 +1,12 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_map/flutter_map.dart';
-import '../pages/map_page/widgets/eta_panel.dart';
 
-import 'shuttle_image.dart';
+import '../../global_widgets/shuttle.dart';
+import '../../global_widgets/shuttle_svg.dart';
 import 'shuttle_point.dart';
 
+// ignore: must_be_immutable
 class ShuttleUpdate extends ShuttlePoint {
   /// ID of the update
   final int id;
@@ -21,10 +21,10 @@ class ShuttleUpdate extends ShuttlePoint {
   final num speed;
 
   /// Timestamp of when this updated was sent
-  final String time;
+  final DateTime time;
 
   /// Timestamp of when shuttle was recieved
-  final String created;
+  final DateTime created;
 
   /// ID associated with the shuttle
   final int vehicleId;
@@ -35,8 +35,8 @@ class ShuttleUpdate extends ShuttlePoint {
   /// The color of the shuttle on the map
   Color color;
 
-  /// The SVG image displayed on the map
-  ShuttleImage image;
+  /// The SVG arrow displayed on the map
+  ShuttleSVG svg;
 
   /// Uses a super constructor to define lat/lng attributes
   ShuttleUpdate(
@@ -56,7 +56,7 @@ class ShuttleUpdate extends ShuttlePoint {
 
   set setColor(Color color) {
     this.color = color;
-    image = ShuttleImage(svgColor: color);
+    svg = ShuttleSVG(svgColor: color);
   }
 
   factory ShuttleUpdate.fromJson(Map<String, dynamic> json) {
@@ -65,8 +65,8 @@ class ShuttleUpdate extends ShuttlePoint {
       trackerId: json['tracker_id'],
       heading: (json['heading'] as num).toDouble(),
       speed: json['speed'],
-      time: json['time'],
-      created: json['created'],
+      time: DateTime.parse(json['time']),
+      created: DateTime.parse(json['created']),
       vehicleId: json['vehicle_id'],
       routeId: json['route_id'],
       latitude: json['latitude'],
@@ -74,32 +74,29 @@ class ShuttleUpdate extends ShuttlePoint {
     );
   }
 
-  Marker getMarker(dynamic animatedMapMove, [BuildContext context]) {
+  Marker getMarker([dynamic animatedMapMove, BuildContext context]) {
     return Marker(
         point: getLatLng,
         width: 30.0,
         height: 30.0,
         builder: (ctx) {
-          return GestureDetector(
-            onTap: () {
-              animatedMapMove(getLatLng, 14.2);
-              print('Shuttle $vehicleId clicked on');
-              if (context != null) {
-                showBottomSheet(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(25.0),
-                            topRight: Radius.circular(25.0))),
-                    context: context,
-                    builder: (_) => ETAPanel(
-                          markerName: 'Bus ${vehicleId.toString()}',
-                        ));
-              }
-            },
-            child: RotationTransition(
-                turns: AlwaysStoppedAnimation((heading - 45) / 360),
-                child: image.getSVG),
+          return Shuttle(
+            animatedMapMove: animatedMapMove,
+            context: context,
+            svg: svg,
+            heading: heading,
+            vehicleId: vehicleId,
+            getLatLng: getLatLng,
           );
         });
   }
+
+  @override
+  String toString() {
+    // ignore: lines_longer_than_80_chars
+    return "$trackerId $latitude $longitude $heading $speed $time $created $vehicleId $routeId";
+  }
+
+  @override
+  List<Object> get props => [trackerId];
 }

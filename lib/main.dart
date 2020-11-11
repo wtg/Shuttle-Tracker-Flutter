@@ -1,6 +1,5 @@
 import 'dart:io';
 
-//import 'package:flutter/foundation.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -9,10 +8,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 
 import 'android_material_app.dart';
-import 'blocs/on_tap/on_tap_bloc.dart';
-import 'blocs/on_tap_eta/on_tap_eta_bloc.dart';
-import 'blocs/shuttle/shuttle_bloc.dart';
-import 'blocs/theme/theme_bloc.dart';
+import 'blocs/fusion_bloc/fusion_bloc.dart';
+import 'blocs/map_bloc/map_bloc.dart';
+import 'blocs/on_tap_bloc/on_tap_bloc.dart';
+import 'blocs/routes_bloc/routes_bloc.dart';
+import 'blocs/theme_bloc/theme_bloc.dart';
+import 'data/fusion/fusion_socket.dart';
 import 'data/repository/shuttle_repository.dart';
 import 'ios_cupertino_app.dart';
 import 'pages/map_page/map_page.dart';
@@ -25,9 +26,8 @@ void main() async {
   HydratedBloc.storage = await HydratedStorage.build();
   return runApp(
     DevicePreview(
-      enabled: false, //!kReleaseMode,
-      builder: (context) => MyApp(),
-    ),
+        enabled: false, //!kReleaseMode,
+        builder: (context) => MyApp()),
   );
 }
 
@@ -41,23 +41,23 @@ class MyAppState extends State<MyApp> {
     MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => ShuttleBloc(repository: ShuttleRepository()),
+          create: (context) => MapBloc(repository: ShuttleRepository()),
         ),
         BlocProvider(
           create: (context) => OnTapBloc(),
         ),
         BlocProvider(
-          create: (context) => OnTapEtaBloc(),
-        ),
+          create: (context) => FusionBloc(fusionSocket: FusionSocket()),
+        )
       ],
       child: MapPage(),
     ),
     BlocProvider(
-        create: (context) => ShuttleBloc(repository: ShuttleRepository()),
+        create: (context) => RoutesBloc(repository: ShuttleRepository()),
         child: RoutesPage()),
     SchedulesPage(),
     BlocProvider(
-      create: (context) => ShuttleBloc(repository: ShuttleRepository()),
+      create: (context) => RoutesBloc(repository: ShuttleRepository()),
       child: SettingsPage(),
     ),
   ];

@@ -83,11 +83,11 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
           width: 40,
         ),
       ),
-      body: StreamBuilder(
-        stream: connectivity.onConnectivityChanged,
-        builder: (context, snapshot) {
-          if (snapshot.data != ConnectivityResult.none) {
-            return Center(
+      // body: StreamBuilder(
+      //   stream: connectivity.onConnectivityChanged,
+      //   builder: (context, snapshot) {
+      //     if (snapshot.data != ConnectivityResult.none) {
+            body: Center(
               child: BlocBuilder<ThemeBloc, ThemeState>(
                 builder: (context, theme) {
                   var isDarkMode = theme.getThemeState;
@@ -115,7 +115,7 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
                         stops = state.stops;
                         legend = state.legend;
                         darkLegend = state.darkLegend;
-                        fusionBloc.shuttleColors = state.routeColors;
+                        // fusionBloc.shuttleColors = state.routeColors;
                       } else if (state is MapError) {
                         // MapPage encountered
                         // error
@@ -186,11 +186,11 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
                   );
                 },
               ),
-            );
-          }
-          return LoadingScreen(); // MapPage has not Loaded yet
-        },
-      ),
+            )
+      //     }
+      //     return LoadingScreen(); // MapPage has not Loaded yet
+      //   },
+      // ),
     );
   }
 }

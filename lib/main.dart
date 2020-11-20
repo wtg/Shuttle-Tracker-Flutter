@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:device_preview/device_preview.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' as services;
@@ -25,9 +24,10 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   HydratedBloc.storage = await HydratedStorage.build();
   return runApp(
-    DevicePreview(
-        enabled: false, //!kReleaseMode,
-        builder: (context) => MyApp()),
+    MyApp()
+    // DevicePreview(
+    //     enabled: false, //!kReleaseMode,
+    //     builder: (context) => MyApp()),
   );
 }
 

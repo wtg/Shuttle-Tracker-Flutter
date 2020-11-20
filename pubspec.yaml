@@ -9,7 +9,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  
+
   device_preview: ^0.4.8
   connectivity: ^2.0.1
   flutter_cupertino_settings: ^0.3.1
@@ -25,7 +25,7 @@ dependencies:
   equatable: ^1.2.5
   responsive_framework: ^0.0.11
   http: ^0.12.2
-  flutter_map: ^0.10.1  
+  flutter_map: ^0.10.1
   geolocation: ^1.1.2
   loading: ^1.0.2
   web_socket_channel: ^1.1.0
@@ -40,7 +40,7 @@ dev_dependencies:
   #   sdk: flutter
 
 flutter_icons:
-  android: "launcher_icon" 
+  android: "launcher_icon"
   ios: true
   image_path: "assets/img/app_icon.png"
 
@@ -48,9 +48,7 @@ flutter_native_splash:
   image: "assets/img/logo.png"
   color: "ffffff"
 
-
 flutter:
-
   uses-material-design: true
 
   assets:
@@ -66,8 +64,8 @@ flutter:
     - assets/json_test/routes.json
     - assets/json_test/stops.json
     - assets/json_test/updates.json
-  
+
   fonts:
     - family: CustomIcons
       fonts:
-          - asset: assets/fonts/shuttle_icon.ttf
+        - asset: assets/fonts/shuttle_icon.ttf

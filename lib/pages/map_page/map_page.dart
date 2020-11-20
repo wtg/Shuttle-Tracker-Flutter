@@ -66,13 +66,18 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
     controller.forward();
   }
 
+  @override
+  void dispose() {
+    connectivity.onConnectivityChanged.listen((_) {}).cancel();
+    super.dispose();
+  }
+
   /// Standard build function for MapPage widget state
   @override
   Widget build(BuildContext context) {
     var lat = 42.729;
     var long = -73.6758;
     var mapBloc = context.watch<MapBloc>();
-    var fusionBloc = context.watch<FusionBloc>();
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -83,11 +88,11 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
           width: 40,
         ),
       ),
-      // body: StreamBuilder(
-      //   stream: connectivity.onConnectivityChanged,
-      //   builder: (context, snapshot) {
-      //     if (snapshot.data != ConnectivityResult.none) {
-            body: Center(
+      body: StreamBuilder(
+        stream: connectivity.onConnectivityChanged,
+        builder: (context, snapshot) {
+          if (snapshot.data != ConnectivityResult.none) {
+            return Center(
               child: BlocBuilder<ThemeBloc, ThemeState>(
                 builder: (context, theme) {
                   var isDarkMode = theme.getThemeState;
@@ -100,8 +105,7 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
 
                   return BlocBuilder<MapBloc, MapState>(
                     builder: (context, state) {
-                      print("API Poll $i | State is $state");
-                      i++;
+                      print("State is $state");
                       if (state is MapInitial) {
                         // Initial State of MapPage
                         mapBloc.add(GetMapData(
@@ -186,11 +190,11 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
                   );
                 },
               ),
-            )
-      //     }
-      //     return LoadingScreen(); // MapPage has not Loaded yet
-      //   },
-      // ),
+            );
+          }
+          return LoadingScreen(); // MapPage has not Loaded yet
+        },
+      ),
     );
   }
 }

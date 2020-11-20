@@ -1,5 +1,9 @@
+import 'dart:developer';
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import '../../../blocs/fusion_bloc/fusion_bloc.dart';
 import '../../../data/models/shuttle_eta.dart';
 
@@ -92,11 +96,50 @@ class _ETAPanelState extends State<ETAPanel> {
             builder: (context, state) {
               if (state is FusionETALoaded) {
                 etaList = state.etas;
+                var eta = etaList[0];
+                var now = new DateTime.now().toUtc();
+                log('HERE: $eta');
+                log('TIME NOW IS: $now');
               }
-              return Padding(
+              return Expanded( child: ListView.builder(
+                scrollDirection: Axis.vertical,
+                shrinkWrap: true,
                 padding: const EdgeInsets.all(8.0),
-                child: Text(
-                    etaList.isNotEmpty ? '$etaList' : 'No ETAs calculated'),
+                itemCount: 3,
+                itemBuilder: (context, index) {
+                  return Text(
+                    "Testing",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        fontSize: 25
+                    ),
+                  );
+                },
+                /*
+                children:
+                    !etaList.isNotEmpty
+                        ? <Widget>[
+                              Text(
+                                  "Testing",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    fontSize: 25
+                                  ),
+                              ),
+                              Text(
+                                "Testing",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontSize: 25
+                                ),),
+                              Text("Testing",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontSize: 25
+                                ),),
+                            ]
+                        : <Widget>[Text('No ETAs calculated')], */
+              ),
               );
             },
           )

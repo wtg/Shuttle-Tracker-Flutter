@@ -28,13 +28,12 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
   final Connectivity connectivity = Connectivity();
   final MapController mapController = MapController();
   final Stream<Position> positionStream = Geolocator.getPositionStream();
+  List<Marker> location = [];
 
   static const darkLink =
       'https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}@2x.png';
   static const lightLink =
       'http://tile.stamen.com/toner-lite/{z}/{x}/{y}@2x.png';
-
-  int i = 0;
 
   /// Animation for moving along the map to a specified location and zoom
   void _animatedMapMove(LatLng destLocation, double destZoom) {
@@ -145,15 +144,20 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
                               stream: positionStream,
                               builder: (context, position) {
                                 var data = position.data;
-                                var location = <Marker>[];
                                 if (position.connectionState ==
                                     ConnectionState.active) {
                                   if (data.latitude != null &&
                                       data.longitude != null) {
                                     location = <Marker>[
                                       Marker(
+                                          height: 15,
+                                          width: 15,
                                           builder: (ctx) => Container(
-                                                child: FlutterLogo(),
+                                                child: Image.asset(
+                                                  'assets/img/user.png',
+                                                  height: 25,
+                                                  width: 25,
+                                                ),
                                               ),
                                           point: LatLng(
                                               data.latitude, data.longitude))
@@ -194,9 +198,9 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
                                                 polylines: isDarkMode
                                                     ? darkRoutes
                                                     : routes),
-                                            MarkerLayerOptions(markers: stops),
                                             MarkerLayerOptions(
                                                 markers: location),
+                                            MarkerLayerOptions(markers: stops),
                                             MarkerLayerOptions(
                                                 markers: updates),
                                           ],

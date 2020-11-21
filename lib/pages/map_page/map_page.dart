@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong/latlong.dart';
+import 'package:geolocator/geolocator.dart';
 
 import '../../blocs/fusion_bloc/fusion_bloc.dart';
 import '../../blocs/map_bloc/map_bloc.dart';
@@ -26,6 +27,7 @@ class MapPage extends StatefulWidget {
 class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
   final Connectivity connectivity = Connectivity();
   final MapController mapController = MapController();
+  final Stream<Position> positionStream = Geolocator.getPositionStream();
 
   static const darkLink =
       'https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}@2x.png';
@@ -139,51 +141,78 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
                             updates = fusionState.updates;
                           }
 
-                          return Stack(children: <Widget>[
-                            Column(
-                              children: [
-                                /// Map
-                                Flexible(
-                                  child: FlutterMap(
-                                    // Map Widget
-                                    mapController: mapController,
-                                    options: MapOptions(
-                                      nePanBoundary: LatLng(42.78, -73.63),
-                                      swPanBoundary: LatLng(42.68, -73.71),
-                                      center: LatLng(lat, long),
-                                      zoom: 14,
-                                      maxZoom: 16, // max you can zoom in
-                                      minZoom: 13, // min you can zoom out
-                                    ),
-                                    layers: [
-                                      TileLayerOptions(
-                                        backgroundColor:
-                                            theme.getTheme.bottomAppBarColor,
-                                        urlTemplate:
-                                            isDarkMode ? darkLink : lightLink,
-                                        subdomains: ['a', 'b', 'c'],
-                                        tileProvider:
-                                            CachedNetworkTileProvider(),
+                          return StreamBuilder<Position>(
+                              stream: positionStream,
+                              builder: (context, position) {
+                                var data = position.data;
+                                var location = <Marker>[];
+                                if (position.connectionState ==
+                                    ConnectionState.active) {
+                                  if (data.latitude != null &&
+                                      data.longitude != null) {
+                                    location = <Marker>[
+                                      Marker(
+                                          builder: (ctx) => Container(
+                                                child: FlutterLogo(),
+                                              ),
+                                          point: LatLng(
+                                              data.latitude, data.longitude))
+                                    ];
+                                  }
+                                }
+
+                                return Stack(children: <Widget>[
+                                  Column(
+                                    children: [
+                                      /// Map
+                                      Flexible(
+                                        child: FlutterMap(
+                                          // Map Widget
+                                          mapController: mapController,
+                                          options: MapOptions(
+                                            nePanBoundary:
+                                                LatLng(42.78, -73.63),
+                                            swPanBoundary:
+                                                LatLng(42.68, -73.71),
+                                            center: LatLng(lat, long),
+                                            zoom: 14,
+                                            maxZoom: 16, // max you can zoom in
+                                            minZoom: 13, // min you can zoom out
+                                          ),
+                                          layers: [
+                                            TileLayerOptions(
+                                              backgroundColor: theme
+                                                  .getTheme.bottomAppBarColor,
+                                              urlTemplate: isDarkMode
+                                                  ? darkLink
+                                                  : lightLink,
+                                              subdomains: ['a', 'b', 'c'],
+                                              tileProvider:
+                                                  CachedNetworkTileProvider(),
+                                            ),
+                                            PolylineLayerOptions(
+                                                polylines: isDarkMode
+                                                    ? darkRoutes
+                                                    : routes),
+                                            MarkerLayerOptions(markers: stops),
+                                            MarkerLayerOptions(
+                                                markers: location),
+                                            MarkerLayerOptions(
+                                                markers: updates),
+                                          ],
+                                        ),
                                       ),
-                                      PolylineLayerOptions(
-                                          polylines:
-                                              isDarkMode ? darkRoutes : routes),
-                                      MarkerLayerOptions(markers: stops),
-                                      // MarkerLayerOptions(markers: location),
-                                      MarkerLayerOptions(markers: updates),
                                     ],
                                   ),
-                                ),
-                              ],
-                            ),
-                            Attribution(
-                              theme: theme.getTheme,
-                            ),
-                            Legend(
-                              // Legend Widget
-                              legend: isDarkMode ? darkLegend : legend,
-                            ),
-                          ]);
+                                  Attribution(
+                                    theme: theme.getTheme,
+                                  ),
+                                  Legend(
+                                    // Legend Widget
+                                    legend: isDarkMode ? darkLegend : legend,
+                                  ),
+                                ]);
+                              });
                         },
                       );
                     },

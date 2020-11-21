@@ -23,12 +23,11 @@ import 'pages/settings_page/settings_page.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   HydratedBloc.storage = await HydratedStorage.build();
-  return runApp(
-    MyApp()
-    // DevicePreview(
-    //     enabled: false, //!kReleaseMode,
-    //     builder: (context) => MyApp()),
-  );
+  return runApp(MyApp()
+      // DevicePreview(
+      //     enabled: false, //!kReleaseMode,
+      //     builder: (context) => MyApp()),
+      );
 }
 
 class MyApp extends StatefulWidget {

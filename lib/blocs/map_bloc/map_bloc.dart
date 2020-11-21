@@ -81,17 +81,6 @@ class MapBloc extends Bloc<MapEvent, MapState> {
     return markers;
   }
 
-  List<Marker> _createLocation({LatLng coordinates}) {
-    var location = <Marker>[
-      Marker(
-          point: coordinates,
-          width: 12.0,
-          height: 12.0,
-          builder: (ctx) => Image.asset('assets/img/user.png'))
-    ];
-
-    return location;
-  }
 
   LatLng _findAvgLatLong(List<ShuttleStop> shuttleStops) {
     var lat = 42.729;
@@ -127,7 +116,6 @@ class MapBloc extends Bloc<MapEvent, MapState> {
     var repoRoutes = await repository.getRoutes;
     var repoStops = await repository.getStops;
     var repoUpdates = await repository.getUpdates;
-    var repoLocation = await repository.getLocation;
     var auxData = await repository.getAuxiliaryRouteData();
 
     // Probably a janky implementation since we create two instances of
@@ -155,8 +143,6 @@ class MapBloc extends Bloc<MapEvent, MapState> {
           context: event.context,
           colors: auxData.colors,
           animatedMapMove: event.animatedMapMove);
-
-      location = _createLocation(coordinates: repoLocation);
 
       center = _findAvgLatLong(repoStops);
 

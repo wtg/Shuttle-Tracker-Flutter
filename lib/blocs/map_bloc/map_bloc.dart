@@ -81,7 +81,6 @@ class MapBloc extends Bloc<MapEvent, MapState> {
     return markers;
   }
 
-
   LatLng _findAvgLatLong(List<ShuttleStop> shuttleStops) {
     var lat = 42.729;
     var long = -73.6758;

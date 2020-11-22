@@ -13,9 +13,10 @@ import '../../../data/models/shuttle_eta.dart';
 class ETAPanel extends StatefulWidget {
   final String markerName;
   final bool stopMarker;
+  final int stopID;
 
   /// Constructor of the ETAPanel Widget
-  ETAPanel({@required this.markerName, this.stopMarker});
+  ETAPanel({@required this.markerName, this.stopMarker, this.stopID});
 
   @override
   _ETAPanelState createState() => _ETAPanelState();
@@ -97,10 +98,17 @@ class _ETAPanelState extends State<ETAPanel> {
             builder: (context, state) {
               if (state is FusionETALoaded) {
                 etaList = state.etas;
-                var eta = etaList[0];
+                for(var i = 0; i < state.etas.length; i++){
+                  if (state.etas[i].arriving &&
+                      state.etas[i].stopId == widget.stopID){
+                    etaList.add(state.etas[i]);
+                  }
+                }
                 var now = new DateTime.now().toUtc();
                 log('TIME NOW IS: $now');
               }
+              var something = widget.stopID;
+              log("$something");
               return Expanded(
                 child: !etaList.isNotEmpty ? ListView.builder(
                     scrollDirection: Axis.vertical,
@@ -142,7 +150,6 @@ class _ETAPanelState extends State<ETAPanel> {
   }
 
   Widget createTiles(BuildContext context, int index){
-    var eta;
     return ListTile(
       dense: true,
       title:

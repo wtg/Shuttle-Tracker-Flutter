@@ -1,9 +1,10 @@
 import 'dart:developer';
+//import 'dart:html';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
+//import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import '../../../blocs/fusion_bloc/fusion_bloc.dart';
 import '../../../data/models/shuttle_eta.dart';
 
@@ -98,23 +99,15 @@ class _ETAPanelState extends State<ETAPanel> {
                 etaList = state.etas;
                 var eta = etaList[0];
                 var now = new DateTime.now().toUtc();
-                log('HERE: $eta');
                 log('TIME NOW IS: $now');
               }
-              return Expanded( child: ListView.builder(
-                scrollDirection: Axis.vertical,
-                shrinkWrap: true,
-                padding: const EdgeInsets.all(8.0),
-                itemCount: 3,
-                itemBuilder: (context, index) {
-                  return Text(
-                    "Testing",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        fontSize: 25
-                    ),
-                  );
-                },
+              return Expanded(
+                child: !etaList.isNotEmpty ? ListView.builder(
+                    scrollDirection: Axis.vertical,
+                    shrinkWrap: true,
+                    padding: const EdgeInsets.all(8.0),
+                    itemCount: 3,
+                    itemBuilder: createTiles,
                 /*
                 children:
                     !etaList.isNotEmpty
@@ -139,12 +132,28 @@ class _ETAPanelState extends State<ETAPanel> {
                                 ),),
                             ]
                         : <Widget>[Text('No ETAs calculated')], */
-              ),
+                  ) : Text('No ETAs calculated')
               );
             },
           )
         ],
       )),
+    );
+  }
+
+  Widget createTiles(BuildContext context, int index){
+    var eta;
+    return ListTile(
+      dense: true,
+      title:
+          Text(
+            "This is a test to see if there is any overflow with the text and "
+                "if it wraps around",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+                fontSize: 20
+            ),
+          )
     );
   }
 }

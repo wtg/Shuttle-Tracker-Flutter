@@ -95,7 +95,6 @@ class Stop extends StatelessWidget {
               builder: (_) => ETAPanel(
                     markerName: '$name',
                     stopMarker: true,
-                    stopID: index
                   ));
         }
       },

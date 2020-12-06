@@ -11,17 +11,22 @@ import '../../../data/models/shuttle_route.dart';
 import '../../../data/models/shuttle_stop.dart';
 import '../detail_page.dart';
 
+/// Class: CustomListTile Widget
+/// Function: Widget that functions similar to a ListTile with functionality
+///           specific to Shuttle widgets and the OnTapBloc
 class CustomListTile extends StatelessWidget {
   final ShuttleRoute route;
   final List<ShuttleStop> stops;
   final ThemeData theme;
   final OnTapBloc bloc = OnTapBloc();
 
+  /// Constructor of the CustomListTile Widget
   CustomListTile({this.route, this.stops, this.theme});
 
   bool get isEnabled => route.enabled;
   bool get isActive => route.active;
 
+  /// Returns a mapping of ShuttleStops with their id number
   Map<int, ShuttleStop> _getRouteStops() {
     var stopIds = route.stopIds;
     var routeStops = <int, ShuttleStop>{};
@@ -39,6 +44,7 @@ class CustomListTile extends StatelessWidget {
     return routeStops;
   }
 
+  /// Standard build function for the CustomListTile widget
   @override
   Widget build(BuildContext context) {
     var polyline = <Polyline>[route.getPolyline];
@@ -135,6 +141,7 @@ class CustomListTile extends StatelessWidget {
   }
 }
 
+/// Notification when a route is marked as a Favorite Route (not used for now)
 class FavoriteNotification extends Notification {
   final bool favorites;
 

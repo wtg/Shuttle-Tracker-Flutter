@@ -141,10 +141,10 @@ class _ETAPanelState extends State<ETAPanel> {
                 var now = new DateTime.now().toUtc();
                 log('TIME NOW IS: $now');
               }
-              var something = widget.markerName;
+              var something = etaList.length;
               log("$something");
               return Expanded(
-                child: !etaList.isNotEmpty ? ListView.builder(
+                child: etaList.isNotEmpty ? ListView.builder(
                     scrollDirection: Axis.vertical,
                     shrinkWrap: true,
                     padding: const EdgeInsets.all(8.0),
@@ -174,7 +174,13 @@ class _ETAPanelState extends State<ETAPanel> {
                                 ),),
                             ]
                         : <Widget>[Text('No ETAs calculated')], */
-                  ) : Text('No ETAs calculated')
+                  ) : Text(
+                          'No Shuttles Arriving',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                          fontSize: 15
+                      )
+                  )
               );
             },
           )
@@ -183,6 +189,7 @@ class _ETAPanelState extends State<ETAPanel> {
     );
   }
 
+  /// Builds a tile for the ETA Panel based on index
   Widget createTiles(BuildContext context, int index){
     return ListTile(
       dense: true,
@@ -192,7 +199,7 @@ class _ETAPanelState extends State<ETAPanel> {
                 "if it wraps around",
             textAlign: TextAlign.center,
             style: TextStyle(
-                fontSize: 20
+                fontSize: 15
             ),
           )
     );

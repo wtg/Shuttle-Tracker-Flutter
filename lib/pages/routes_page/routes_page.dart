@@ -9,17 +9,22 @@ import '../../global_widgets/loading_state.dart';
 import '../../global_widgets/shuttle_svg.dart';
 import 'states/loaded_routes.dart';
 
+/// Class: RoutesPage
+/// Function: Widget that represents the main RoutesPage
 class RoutesPage extends StatefulWidget {
   @override
   _RoutesPageState createState() => _RoutesPageState();
 }
 
+/// Class: _RoutesPageState
+/// Function: Returns the state of the RoutesPage
 class _RoutesPageState extends State<RoutesPage> {
   RoutesBloc routesBloc;
   bool isSwitched = false;
   Map<String, ShuttleSVG> legend = {};
   Completer<void> _refreshCompleter;
 
+  /// Standard build function for the state of the widget
   @override
   Widget build(BuildContext context) {
     _refreshCompleter = Completer<void>();

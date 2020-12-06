@@ -3,12 +3,18 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../blocs/theme_bloc/theme_bloc.dart';
 
+/// Class: SchedulesPage
+/// Function: Widget representing the Schedules Page
 class SchedulesPage extends StatefulWidget {
   @override
   _SchedulesPageState createState() => _SchedulesPageState();
 }
 
+/// Class: _SchedulesPageState
+/// Function: Returns the state of the SchedulesPage widget
 class _SchedulesPageState extends State<SchedulesPage> {
+
+  /// Standard build function of the Schedules Page
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, theme) {

@@ -8,6 +8,8 @@ import 'faq_detail.dart';
 import 'privacy_detail.dart';
 import 'sockets_test.dart';
 
+/// Class: AboutSettings
+/// Function: Represents the About section of the Settings Page
 class AboutSettings extends StatefulWidget {
   final ThemeState theme;
   AboutSettings({this.theme});
@@ -16,9 +18,12 @@ class AboutSettings extends StatefulWidget {
   _AboutSettingsState createState() => _AboutSettingsState();
 }
 
+/// Class: _AboutSettingsState
+/// Function: Returns the state of the AboutSettings widget
 class _AboutSettingsState extends State<AboutSettings> {
 //  int devSettings = 0;
 
+  /// Standard build function for the widget
   @override
   Widget build(BuildContext context) {
     var aboutSettingsList = <Widget>[

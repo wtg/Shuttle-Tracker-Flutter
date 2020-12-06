@@ -5,6 +5,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../blocs/theme_bloc/theme_bloc.dart';
 
+/// Class: IOSSettings
+/// Function: Returns the Settings Page layout for IOS software
 class IOSSettings extends StatefulWidget {
   final ThemeState theme;
   IOSSettings({this.theme});
@@ -13,7 +15,11 @@ class IOSSettings extends StatefulWidget {
   _IOSSettingsState createState() => _IOSSettingsState();
 }
 
+/// Class: _IOSSettingsState
+/// Function: Returns the state of the IOSSettings widget
 class _IOSSettingsState extends State<IOSSettings> {
+
+  /// Standard build function for the widget
   @override
   Widget build(BuildContext context) {
     var themeBloc = context.watch<ThemeBloc>();

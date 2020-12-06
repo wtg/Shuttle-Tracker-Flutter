@@ -2,10 +2,13 @@ import 'package:flutter/material.dart';
 
 import '../../../blocs/theme_bloc/theme_bloc.dart';
 
+/// Class: FeedbackSettings
+/// Function: Represents the Feedback section of the Settings Page
 class FeedbackSettings extends StatelessWidget {
   final ThemeState theme;
   FeedbackSettings({this.theme});
 
+  /// Standard build function for the FeedbackSettings widget
   Widget build(BuildContext context) {
     var feedbackSettingsList = <Widget>[
       ListTile(

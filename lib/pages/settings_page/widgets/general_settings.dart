@@ -4,10 +4,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../blocs/theme_bloc/theme_bloc.dart';
 
+/// Class: GeneralSettings
+/// Function: Represents the General settings section of the Settings Page
 class GeneralSettings extends StatelessWidget {
   final ThemeState theme;
   GeneralSettings({this.theme});
 
+  /// Standard build function for the GeneralSettings widget
   Widget build(BuildContext context) {
     var themeBloc = context.watch<ThemeBloc>();
     var isSwitched = theme.isDarkMode;

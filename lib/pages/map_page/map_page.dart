@@ -191,8 +191,6 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
                                                   ? darkLink
                                                   : lightLink,
                                               subdomains: ['a', 'b', 'c'],
-                                              tileProvider:
-                                                  CachedNetworkTileProvider(),
                                             ),
                                             PolylineLayerOptions(
                                                 polylines: isDarkMode

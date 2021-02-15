@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:device_preview/device_preview.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' as services;
@@ -18,17 +17,16 @@ import 'data/repository/shuttle_repository.dart';
 import 'ios_cupertino_app.dart';
 import 'pages/map_page/map_page.dart';
 import 'pages/routes_page/routes_page.dart';
-import 'pages/schedules_page/schedules_page.dart';
 import 'pages/settings_page/settings_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   HydratedBloc.storage = await HydratedStorage.build();
-  return runApp(
-    DevicePreview(
-        enabled: false, //!kReleaseMode,
-        builder: (context) => MyApp()),
-  );
+  return runApp(MyApp()
+      // DevicePreview(
+      //     enabled: false, //!kReleaseMode,
+      //     builder: (context) => MyApp()),
+      );
 }
 
 class MyApp extends StatefulWidget {
@@ -55,7 +53,6 @@ class MyAppState extends State<MyApp> {
     BlocProvider(
         create: (context) => RoutesBloc(repository: ShuttleRepository()),
         child: RoutesPage()),
-    SchedulesPage(),
     BlocProvider(
       create: (context) => RoutesBloc(repository: ShuttleRepository()),
       child: SettingsPage(),

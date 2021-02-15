@@ -34,7 +34,6 @@ class RoutesBloc extends Bloc<RoutesEvent, RoutesState> {
       case RoutesEvent.getRoutesPageData:
         yield RoutesLoading();
 
-        location = await repository.getLocation;
         routes = await repository.getRoutes;
         darkRoutes = await repository.getDarkRoutes();
         stops = await repository.getStops;

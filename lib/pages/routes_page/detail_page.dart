@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
+import 'package:flutter_map/plugin_api.dart';
 import 'package:latlong/latlong.dart';
 
 import '../../blocs/on_tap_bloc/on_tap_bloc.dart';
@@ -147,7 +148,6 @@ class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
                           backgroundColor: theme.getTheme.bottomAppBarColor,
                           urlTemplate: isDarkMode ? darkLink : lightLink,
                           subdomains: ['a', 'b', 'c'],
-                          tileProvider: CachedNetworkTileProvider(),
                         ),
                         PolylineLayerOptions(polylines: widget.polyline),
                         MarkerLayerOptions(

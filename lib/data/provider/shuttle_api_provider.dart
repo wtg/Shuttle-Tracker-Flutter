@@ -1,8 +1,6 @@
 import 'dart:convert';
 
-import 'package:geolocation/geolocation.dart';
 import 'package:http/http.dart' as http;
-import 'package:latlong/latlong.dart';
 
 import '../../data/models/shuttle_route.dart';
 import '../../data/models/shuttle_stop.dart';
@@ -36,6 +34,7 @@ class ShuttleApiProvider {
   /// Getter method to retrieve the list of routes
   Future<List<ShuttleRoute>> getRoutes() async {
     var response = await fetch('routes');
+    print("ROUTES DATA FETCHED");
     List<ShuttleRoute> routeList = response != null
         ? json
             .decode(response.body)
@@ -68,29 +67,5 @@ class ShuttleApiProvider {
             .toList()
         : [];
     return updatesList;
-  }
-
-  /// Getter method to retrieved location of user
-  Future<LatLng> getLocation() async {
-    var lat = 0.00;
-    var lng = 0.00;
-
-    final permission = await Geolocation.requestLocationPermission(
-      permission: const LocationPermission(
-          android: LocationPermissionAndroid.fine,
-          ios: LocationPermissionIOS.always),
-      openSettingsIfDenied: true,
-    );
-
-    final value = await Geolocation.lastKnownLocation();
-
-    if (permission.isSuccessful && value.isSuccessful) {
-      lat = value.location.latitude;
-      lng = value.location.longitude;
-    }
-
-    var location = LatLng(lat, lng);
-
-    return location;
   }
 }

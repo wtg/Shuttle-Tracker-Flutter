@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:latlong/latlong.dart';
 
 import '../../data/models/shuttle_route.dart';
 import '../../data/models/shuttle_stop.dart';
@@ -20,7 +19,6 @@ class ShuttleRepository {
   Future<List<ShuttleStop>> get getStops async => _shuttleProvider.getStops();
   Future<List<ShuttleUpdate>> get getUpdates async =>
       _shuttleProvider.getUpdates();
-  Future<LatLng> get getLocation async => _shuttleProvider.getLocation();
   bool get getIsConnected => _shuttleProvider.getIsConnected;
 
   Future<List<ShuttleRoute>> getDarkRoutes() async {

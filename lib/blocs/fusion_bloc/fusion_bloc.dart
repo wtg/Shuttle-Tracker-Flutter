@@ -73,10 +73,11 @@ class FusionBloc extends Bloc<FusionEvent, FusionState> {
       } else {
         data.setColor = Colors.white;
       }
+
+      // Only include shuttles that are within 5 minutes of the current time
+      var currentTime = DateTime.now().toUtc();
       if (data.routeId != null &&
-          data.time.day == DateTime.now().day &&
-          data.time.month == DateTime.now().month &&
-          data.time.year == DateTime.now().year) {
+          currentTime.difference(data.time).inMinutes < 5) {
         fusionMap[data] = data.getMarker();
         print(fusionMap.length);
       }

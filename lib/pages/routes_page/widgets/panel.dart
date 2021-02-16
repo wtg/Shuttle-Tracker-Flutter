@@ -9,21 +9,29 @@ import '../../../blocs/theme_bloc/theme_bloc.dart';
 import '../../../data/models/shuttle_stop.dart';
 import 'shuttle_line.dart';
 
+/// Class: Panel Widget
+/// Function: Widget that represents a panel on the details page of a route
+///           (Holds the stops in order of how they appear on the route)
 class Panel extends StatefulWidget {
   final Color routeColor;
   final Map<int, ShuttleStop> routeStops;
   final MapCallback animate;
   final OnTapBloc bloc;
+
+  /// Constructor of the Panel widget
   Panel({this.routeColor, this.routeStops, this.animate, this.bloc});
 
   @override
   _PanelState createState() => _PanelState();
 }
 
+/// Class: _PanelState Widget
+/// Function: Widget that represents the state of the Panel widget
 class _PanelState extends State<Panel> {
   String selectedName;
   ItemScrollController scrollController = ItemScrollController();
 
+  /// Returns a list of ListTiles that display the shuttle stop name
   List<Widget> _getStopTileList(ThemeData theme) {
     var tileList = <Widget>[];
     var i = 0;
@@ -94,6 +102,7 @@ class _PanelState extends State<Panel> {
     return tileList;
   }
 
+  /// Standard function that builds the state of the Panel widget
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, theme) {

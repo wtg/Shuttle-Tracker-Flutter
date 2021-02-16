@@ -3,6 +3,8 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:web_socket_channel/io.dart';
 
+/// Class: SocketTest
+/// Function: returns a widget to test the web socket
 class SocketTest extends StatefulWidget {
   final IOWebSocketChannel channel =
       IOWebSocketChannel.connect('wss://shuttles.rpi.edu/fusion/');
@@ -10,10 +12,13 @@ class SocketTest extends StatefulWidget {
   State<StatefulWidget> createState() => _SocketTestState(channel: channel);
 }
 
+/// Class: _SocketTestState
+/// Function: Represents the state of the socket test widget
 class _SocketTestState extends State<SocketTest> {
   final IOWebSocketChannel channel;
   Text bodyText = Text("Empty");
 
+  /// Constructor of the socket test state
   _SocketTestState({this.channel}) {
     channel.stream.listen((event) {
       setState(() {
@@ -24,6 +29,7 @@ class _SocketTestState extends State<SocketTest> {
     });
   }
 
+  /// Connects to web socket
   void connectToSocket() {
     var data = {
       "type": "subscribe",
@@ -34,6 +40,7 @@ class _SocketTestState extends State<SocketTest> {
   }
 
   // bus button
+  /// Sends data to the web socket (specifically bus button)
   void sendToSocket() {
     var send = {
       'type': 'bus_button',
@@ -48,12 +55,14 @@ class _SocketTestState extends State<SocketTest> {
     //channel.stream.listen(print);
   }
 
+  /// initiates web socket connection
   @override
   void initState() {
     super.initState();
     connectToSocket();
   }
 
+  /// closes web socket connection
   @override
   void dispose() {
     // var data = {'type': 'unsubscribe', 'message': 'eta'};
@@ -63,6 +72,7 @@ class _SocketTestState extends State<SocketTest> {
     super.dispose();
   }
 
+  /// Standard build function of the socket test widget
   @override
   Widget build(BuildContext context) {
     return Scaffold(

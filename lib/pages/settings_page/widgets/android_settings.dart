@@ -5,6 +5,8 @@ import 'about_settings.dart';
 import 'feedback_settings.dart';
 import 'general_settings.dart';
 
+/// Class: AndroidSettings
+/// Function: Returns the Settings Page layout for Android software
 class AndroidSettings extends StatefulWidget {
   final ThemeState theme;
   AndroidSettings({this.theme});
@@ -13,6 +15,8 @@ class AndroidSettings extends StatefulWidget {
   _AndroidSettingsState createState() => _AndroidSettingsState();
 }
 
+/// Class: _AndroidSettingsState
+/// Function: Returns the state of the widget/layout
 class _AndroidSettingsState extends State<AndroidSettings> {
   @override
   Widget build(BuildContext context) {

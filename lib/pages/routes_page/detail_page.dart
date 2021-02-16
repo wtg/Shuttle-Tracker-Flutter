@@ -9,6 +9,9 @@ import '../../blocs/theme_bloc/theme_bloc.dart';
 import '../../data/models/shuttle_stop.dart';
 import 'widgets/panel.dart';
 
+/// Class: DetailPage
+/// Function: Widget that represents the specific detail page of a route from
+///           the Routes Page
 class DetailPage extends StatefulWidget {
   final String title;
   final List<Polyline> polyline;
@@ -16,6 +19,7 @@ class DetailPage extends StatefulWidget {
   final Color routeColor;
   final OnTapBloc bloc;
 
+  /// Constructor of the DetailPage widget
   DetailPage(
       {this.title, this.polyline, this.routeStops, this.routeColor, this.bloc});
 
@@ -23,6 +27,8 @@ class DetailPage extends StatefulWidget {
   _DetailPageState createState() => _DetailPageState();
 }
 
+/// Class: _DetailPageState
+/// Function: Represents the state of the DetailPage widget
 class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
   MapController mapController = MapController();
   final _markers = <Marker>[];
@@ -32,6 +38,8 @@ class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
   static const lightLink =
       'http://tile.stamen.com/toner-lite/{z}/{x}/{y}@2x.png';
 
+  /// Represents the animation for moving the map to a specific stop
+  /// based on location and zoom
   void animatedMapMove(LatLng destLocation, double destZoom) {
     final _latTween = Tween<double>(
         begin: mapController.center.latitude, end: destLocation.latitude);
@@ -63,6 +71,7 @@ class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
     controller.forward();
   }
 
+  /// Creates the stop markers based on a mapping of ShuttleStops
   void _createStops(Map<int, ShuttleStop> shuttleStops) {
     var index = 0;
     shuttleStops.forEach((key, value) {
@@ -80,6 +89,7 @@ class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
 //    return markers;
   }
 
+  /// Returns the center point of the route from a mapping of ShuttleStops
   LatLng findAvgLatLong(Map<int, ShuttleStop> shuttleStops) {
     var lat = 42.729;
     var long = -73.6758;
@@ -101,6 +111,7 @@ class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
     return LatLng(lat, long);
   }
 
+  /// Standard build function that creates the state of the DetailPage
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, theme) {

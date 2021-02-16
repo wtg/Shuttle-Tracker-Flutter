@@ -5,10 +5,13 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../../../blocs/theme_bloc/theme_bloc.dart';
 
+/// Class: PrivacyPolicyPage
+/// Function: Represents the Privacy Policy page
 class PrivacyPolicyPage extends StatelessWidget {
   final ThemeState theme;
   PrivacyPolicyPage({this.theme});
 
+  /// Launches the given url
   void _launch(String url) async {
     if (await canLaunch(url)) {
       await launch(url);
@@ -17,6 +20,7 @@ class PrivacyPolicyPage extends StatelessWidget {
     }
   }
 
+  /// Builds the hyperlink based on the given link and text
   TextSpan buildHyperlink(String link, String placeholder) {
     return TextSpan(
       text: placeholder,
@@ -30,6 +34,7 @@ class PrivacyPolicyPage extends StatelessWidget {
     );
   }
 
+  /// Standard build function for the Privacy Policy page
   @override
   Widget build(BuildContext context) {
     var _subHeader = TextStyle(

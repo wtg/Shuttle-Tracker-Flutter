@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 
+/// Class: ShuttleLine
+/// Function: A widget that displays a line on the side of the details page that
+///           resembles that particular route
 class ShuttleLine extends StatelessWidget {
   final Color routeColor;
   final bool isSelected;
   final bool isStart;
   final bool isEnd;
   final bool isDarkTheme;
+
+  /// Constructor for the ShuttleLine widget
   ShuttleLine(
       {this.routeColor,
       this.isSelected,
@@ -13,6 +18,7 @@ class ShuttleLine extends StatelessWidget {
       this.isEnd,
       this.isDarkTheme});
 
+  /// Standard build function that builds that widget
   @override
   Widget build(BuildContext context) {
     var selectedAsset = ColorFiltered(

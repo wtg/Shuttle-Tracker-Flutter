@@ -5,10 +5,13 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../../../blocs/theme_bloc/theme_bloc.dart';
 
+/// Class: FaqPage
+/// Function: Represents the FAQ section of the Settings Page
 class FaqPage extends StatelessWidget {
   final ThemeState theme;
   FaqPage({this.theme});
 
+  /// Launches the given url
   void _launch(String url) async {
     if (await canLaunch(url)) {
       await launch(url);
@@ -17,6 +20,7 @@ class FaqPage extends StatelessWidget {
     }
   }
 
+  /// Creates a hyperlink given a link and text
   TextSpan buildHyperlink(String link, String placeholder) {
     return TextSpan(
       text: placeholder,
@@ -28,6 +32,7 @@ class FaqPage extends StatelessWidget {
     );
   }
 
+  /// Creates a single entry or question for the FAQ page
   Widget buildEntry(String head, RichText body) {
     var _mainHeader = TextStyle(
       color: theme.getTheme.accentColor,
@@ -57,6 +62,7 @@ class FaqPage extends StatelessWidget {
     );
   }
 
+  /// Standard build function for FAQPage widget
   @override
   Widget build(BuildContext context) {
     var _subHeader = TextStyle(

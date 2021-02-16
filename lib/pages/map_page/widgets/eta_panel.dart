@@ -1,46 +1,44 @@
 import 'dart:developer';
-//import 'dart:html';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-//import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import '../../../blocs/fusion_bloc/fusion_bloc.dart';
 import '../../../data/models/shuttle_eta.dart';
 
-
-Map<int, String> stopIDs = {1 : "Student Union",
-                            8 : "Blitman Residence Commons",
-                            12 : "15th and College Ave.",
-                            13 : "13th and Peoples Ave.",
-                            14 : "Colonie Apartments",
-                            15 : "Brinsmade Terrace",
-                            11 : "Polytechnic Residence Commons",
-                            10 : "6th Ave. and City Station",
-                            18 : "BARH",
-                            20 : "Winslow",
-                            21 : "E Lot",
-                            22 : "Tibbits Ave.",
-                            23 : "LXA",
-                            24 : "Sunset Terrace 1",
-                            17 : "Sunset Terrace 2",
-                            25 : "Sage Ave.",
-                            26 : "Troy Building Crosswalk",
-                            27 : "West Hall",
-                            28 : "9th and Sage",
-                            29 : "Ricketts Transfer",
-                            30 : "Colonie Apartments",
-                            31 : "Beman Park",
-                            32 : "LXA Transfer",
-                            33 : "Tibbets and Orchard",
-                            34 : "Polytech Residence Commons",
-                            36 : "Academy Hall Lot",
-                            37 : "City Station",
-                            38 : "Blitman Residence Commons",
-                            35 : "CBIS Transfer",
-                            39 : "Georgian",
-                            40 : "North",
-                            41 : "Armory Recreation Center",
+Map<int, String> stopIDs = {
+  1: "Student Union",
+  8: "Blitman Residence Commons",
+  12: "15th and College Ave.",
+  13: "13th and Peoples Ave.",
+  14: "Colonie Apartments",
+  15: "Brinsmade Terrace",
+  11: "Polytechnic Residence Commons",
+  10: "6th Ave. and City Station",
+  18: "BARH",
+  20: "Winslow",
+  21: "E Lot",
+  22: "Tibbits Ave.",
+  23: "LXA",
+  24: "Sunset Terrace 1",
+  17: "Sunset Terrace 2",
+  25: "Sage Ave.",
+  26: "Troy Building Crosswalk",
+  27: "West Hall",
+  28: "9th and Sage",
+  29: "Ricketts Transfer",
+  30: "Colonie Apartments",
+  31: "Beman Park",
+  32: "LXA Transfer",
+  33: "Tibbets and Orchard",
+  34: "Polytech Residence Commons",
+  36: "Academy Hall Lot",
+  37: "City Station",
+  38: "Blitman Residence Commons",
+  35: "CBIS Transfer",
+  39: "Georgian",
+  40: "North",
+  41: "Armory Recreation Center",
 };
 
 /// Class: ETAPanel Widget
@@ -132,56 +130,34 @@ class _ETAPanelState extends State<ETAPanel> {
             builder: (context, state) {
               if (state is FusionETALoaded) {
                 etaList = state.etas;
-                for(var i = 0; i < state.etas.length; i++){
+                for (var i = 0; i < state.etas.length; i++) {
                   if (state.etas[i].arriving &&
-                      stopIDs[state.etas[i].stopId] == widget.markerName){
+                      stopIDs[state.etas[i].stopId] == widget.markerName) {
                     etaList.add(state.etas[i]);
                   }
                 }
-                var now = new DateTime.now().toUtc();
+                var now = DateTime.now().toUtc();
                 log('TIME NOW IS: $now');
               }
               var something = etaList.length;
               log("$something");
-              return Expanded(
-                child: etaList.isNotEmpty ? ListView.builder(
-                    scrollDirection: Axis.vertical,
-                    shrinkWrap: true,
-                    padding: const EdgeInsets.all(8.0),
-                    itemCount: 3,
-                    itemBuilder: createTiles,
-                /*
-                children:
-                    !etaList.isNotEmpty
-                        ? <Widget>[
-                              Text(
-                                  "Testing",
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    fontSize: 25
-                                  ),
-                              ),
-                              Text(
-                                "Testing",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    fontSize: 25
-                                ),),
-                              Text("Testing",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    fontSize: 25
-                                ),),
-                            ]
-                        : <Widget>[Text('No ETAs calculated')], */
-                  ) : Text(
-                          'No Shuttles Arriving',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                          fontSize: 15
-                      )
-                  )
-              );
+              return Text('No Shuttles Arriving',
+                  textAlign: TextAlign.center, style: TextStyle(fontSize: 15));
+              // return Expanded(
+              //   child: etaList.isNotEmpty ? ListView.builder(
+              //       scrollDirection: Axis.vertical,
+              //       shrinkWrap: true,
+              //       padding: const EdgeInsets.all(8.0),
+              //       itemCount: 3,
+              //       itemBuilder: createTiles,
+              //     ) : Text(
+              //             'No Shuttles Arriving',
+              //             textAlign: TextAlign.center,
+              //             style: TextStyle(
+              //             fontSize: 15
+              //         )
+              //     )
+              // );
             },
           )
         ],
@@ -190,18 +166,14 @@ class _ETAPanelState extends State<ETAPanel> {
   }
 
   /// Builds a tile for the ETA Panel based on index
-  Widget createTiles(BuildContext context, int index){
+  Widget createTiles(BuildContext context, int index) {
     return ListTile(
-      dense: true,
-      title:
-          Text(
-            "This is a test to see if there is any overflow with the text and "
-                "if it wraps around",
-            textAlign: TextAlign.center,
-            style: TextStyle(
-                fontSize: 15
-            ),
-          )
-    );
+        dense: true,
+        title: Text(
+          "This is a test to see if there is any overflow with the text and "
+          "if it wraps around",
+          textAlign: TextAlign.center,
+          style: TextStyle(fontSize: 15),
+        ));
   }
 }

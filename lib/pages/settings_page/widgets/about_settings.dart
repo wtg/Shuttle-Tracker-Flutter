@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
-
-import 'package:flutter/foundation.dart';
-
 import '../../../blocs/theme_bloc/theme_bloc.dart';
 import 'faq_detail.dart';
 import 'privacy_detail.dart';
-import 'sockets_test.dart';
 
 /// Class: AboutSettings
 /// Function: Represents the About section of the Settings Page
@@ -109,31 +105,6 @@ class _AboutSettingsState extends State<AboutSettings> {
             ),
           ],
         ),
-        onTap: () {
-          if (kDebugMode) {
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => SocketTest()));
-          }
-
-          // This was just to play around with some stuff, can add more later
-//          setState(() {
-//            devSettings++;
-//            if (devSettings < 10) {
-//              Toast.show(
-//                "You are ${10 - devSettings} "
-//                    "steps away from being a developer!",
-//                context,
-//                duration: Toast.LENGTH_LONG,
-//                gravity: Toast.BOTTOM,
-//              );
-//            }
-//
-//          });
-//          if (devSettings >= 10) {
-//            Navigator.push(
-//              context, MaterialPageRoute(builder: (context) => SocketTest()));
-//          }
-        },
       ),
     ];
     return Column(

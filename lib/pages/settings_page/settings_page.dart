@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../blocs/theme_bloc/theme_bloc.dart';
-import 'widgets/android_settings.dart';
+import 'widgets/about_settings.dart';
+import 'widgets/feedback_settings.dart';
+import 'widgets/general_settings.dart';
 
 /// Class: SettingsPage
 /// Function: Widget representing the Settings Page
@@ -37,10 +39,13 @@ class _SettingsPageState extends State<SettingsPage> {
               overscroll.disallowGlow();
               return null;
             },
-            child: AndroidSettings(theme: theme),
-//              child: Platform.isIOS
-//                  ? IOSSettings(theme: theme)
-//                  : AndroidSettings(theme: theme),
+            child: ListView(
+              children: [
+                GeneralSettings(theme: theme),
+                FeedbackSettings(theme: theme),
+                AboutSettings(theme: theme)
+              ],
+            ),
           ),
         ),
       );

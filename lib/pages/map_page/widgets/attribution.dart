@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../../../blocs/theme_bloc/theme_bloc.dart';
-import 'hyperlink.dart';
+import '../../../global_widgets/hyperlink.dart';
+
 
 class Attribution extends StatelessWidget {
   final ThemeData theme;

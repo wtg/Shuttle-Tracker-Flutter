@@ -5,10 +5,9 @@ import 'package:url_launcher/url_launcher.dart';
 class Hyperlink extends StatelessWidget {
   final String url;
   final String text;
-  final Color color;
   final ThemeData theme;
 
-  Hyperlink({this.url, this.text, this.theme, this.color});
+  Hyperlink({this.url, this.text, this.theme});
 
   void _launchURL() async {
     if (await canLaunch(url)) {
@@ -30,7 +29,7 @@ class Hyperlink extends StatelessWidget {
     return RichText(
       text: TextSpan(
           text: text,
-          style: TextStyle(color: color),
+          style: TextStyle(color: Colors.blue),
           recognizer: TapGestureRecognizer()..onTap = _launchURL),
     );
   }

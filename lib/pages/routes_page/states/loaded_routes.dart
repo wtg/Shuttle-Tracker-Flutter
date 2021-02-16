@@ -24,7 +24,6 @@ class LoadedRoutes extends StatefulWidget {
 /// Class: _LoadedRoutes Widget
 /// Function: Returns the state of the LoadedRoutes widget
 class _LoadedRoutes extends State<LoadedRoutes> {
-
   /// Returns a list of CustomListTiles for all Active Shuttle Routes
   List<Widget> _getActiveRoutes(ThemeData theme) {
     var tileList = <Widget>[];

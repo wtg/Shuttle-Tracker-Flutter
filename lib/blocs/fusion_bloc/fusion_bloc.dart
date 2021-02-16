@@ -60,8 +60,6 @@ class FusionBloc extends Bloc<FusionEvent, FusionState> {
     });
   }
 
-  set setShuttleColors(Map<int, Color> colors) => shuttleColors = colors;
-
   @override
   Stream<FusionState> mapEventToState(
     FusionEvent event,
@@ -94,6 +92,8 @@ class FusionBloc extends Bloc<FusionEvent, FusionState> {
       yield FusionETALoaded(etas: data, updates: currentShuttles);
     }
   }
+
+  set setShuttleColors(Map<int, Color> colors) => shuttleColors = colors;
 
   @override
   Future<void> close() {

@@ -13,7 +13,6 @@ class SchedulesPage extends StatefulWidget {
 /// Class: _SchedulesPageState
 /// Function: Returns the state of the SchedulesPage widget
 class _SchedulesPageState extends State<SchedulesPage> {
-
   /// Standard build function of the Schedules Page
   @override
   Widget build(BuildContext context) {

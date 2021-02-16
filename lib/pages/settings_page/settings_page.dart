@@ -15,7 +15,6 @@ class SettingsPage extends StatefulWidget {
 /// Class: _SettingsPageState
 /// Function: Returns the state of the SettingsPage widget
 class _SettingsPageState extends State<SettingsPage> {
-
   /// Standard build function for the state of the SettingsPage widget
   @override
   Widget build(BuildContext context) {

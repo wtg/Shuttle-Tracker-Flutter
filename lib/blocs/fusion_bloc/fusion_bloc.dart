@@ -74,13 +74,8 @@ class FusionBloc extends Bloc<FusionEvent, FusionState> {
         data.setColor = Colors.white;
       }
 
-      // Only include shuttles that are within 5 minutes of the current time
-      var currentTime = DateTime.now().toUtc();
-      if (data.routeId != null &&
-          currentTime.difference(data.time).inMinutes < 5) {
-        fusionMap[data] = data.getMarker();
-        print(fusionMap.length);
-      }
+      addShuttle(shuttle: data);
+      removeOldShuttles();
 
       var list = <Marker>[];
       fusionMap.forEach((k, v) => list.add(v));
@@ -95,6 +90,23 @@ class FusionBloc extends Bloc<FusionEvent, FusionState> {
   }
 
   set setShuttleColors(Map<int, Color> colors) => shuttleColors = colors;
+
+  void addShuttle({ShuttleUpdate shuttle}) {
+    // Only include shuttles that are within 5 minutes of the current time
+    var currentTime = DateTime.now().toUtc();
+    if (currentTime.difference(shuttle.time).inMinutes < 5) {
+      fusionMap[shuttle] = shuttle.getMarker();
+      print(fusionMap.length);
+    }
+  }
+
+  void removeOldShuttles() {
+    // - Loop through fusionMap
+    // - Check if shuttle in fusionMap is too old and remove it
+    var currentTime = DateTime.now().toUtc();
+    fusionMap.removeWhere(
+        (key, value) => currentTime.difference(key.time).inMinutes >= 10);
+  }
 
   @override
   Future<void> close() {

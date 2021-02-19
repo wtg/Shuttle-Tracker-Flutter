@@ -136,8 +136,7 @@ class _ETAPanelState extends State<ETAPanel> {
                     etaList.add(state.etas[i]);
                   }
                 }
-                var now = DateTime.now().toUtc();
-                log('TIME NOW IS: $now');
+                // log('TIME NOW IS: $now');
               }
               var something = etaList.length;
               log("$something");

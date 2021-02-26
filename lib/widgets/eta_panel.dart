@@ -3,8 +3,8 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../blocs/fusion_bloc/fusion_bloc.dart';
-import '../../../data/models/shuttle_eta.dart';
+import '../blocs/fusion_bloc/fusion_bloc.dart';
+import '../data/models/shuttle_eta.dart';
 
 Map<int, String> stopIDs = {
   1: "Student Union",

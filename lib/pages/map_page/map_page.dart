@@ -3,16 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
-import 'package:latlong/latlong.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:latlong/latlong.dart';
 
 import '../../blocs/fusion_bloc/fusion_bloc.dart';
 import '../../blocs/map_bloc/map_bloc.dart';
 import '../../blocs/theme_bloc/theme_bloc.dart';
-import '../../global_widgets/loading_state.dart';
-import '../../global_widgets/shuttle_svg.dart';
-import 'widgets/attribution.dart';
-import 'widgets/legend.dart';
+import '../../widgets/attribution.dart';
+import '../../widgets/legend.dart';
+import '../../widgets/loading_state.dart';
+import '../../widgets/shuttle_svg.dart';
 
 /// Class: MapPage Widget
 /// Function: Creates an instance of the MapPage widget

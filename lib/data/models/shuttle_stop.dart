@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
 
 import '../../blocs/on_tap_bloc/on_tap_bloc.dart';
-import '../../global_widgets/stop.dart';
+import '../../widgets/stop.dart';
 import 'shuttle_point.dart';
 
 // ignore: must_be_immutable

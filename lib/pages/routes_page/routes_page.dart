@@ -5,8 +5,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../blocs/routes_bloc/routes_bloc.dart';
 import '../../blocs/theme_bloc/theme_bloc.dart';
-import '../../global_widgets/loading_state.dart';
-import '../../global_widgets/shuttle_svg.dart';
+import '../../widgets/loading_state.dart';
+import '../../widgets/shuttle_svg.dart';
 import 'states/loaded_routes.dart';
 
 /// Class: RoutesPage

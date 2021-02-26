@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_map/flutter_map.dart';
 
-import '../../global_widgets/shuttle.dart';
-import '../../global_widgets/shuttle_svg.dart';
+import '../../widgets/shuttle.dart';
+import '../../widgets/shuttle_svg.dart';
 import 'shuttle_point.dart';
 
 // ignore: must_be_immutable

@@ -6,7 +6,6 @@ import 'package:flutter/services.dart' as services;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 
-import 'android_material_app.dart';
 import 'blocs/fusion_bloc/fusion_bloc.dart';
 import 'blocs/map_bloc/map_bloc.dart';
 import 'blocs/on_tap_bloc/on_tap_bloc.dart';
@@ -14,10 +13,11 @@ import 'blocs/routes_bloc/routes_bloc.dart';
 import 'blocs/theme_bloc/theme_bloc.dart';
 import 'data/fusion/fusion_socket.dart';
 import 'data/repository/shuttle_repository.dart';
-import 'ios_cupertino_app.dart';
 import 'pages/map_page/map_page.dart';
 import 'pages/routes_page/routes_page.dart';
 import 'pages/settings_page/settings_page.dart';
+import 'widgets/android_material_app.dart';
+import 'widgets/ios_cupertino_app.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

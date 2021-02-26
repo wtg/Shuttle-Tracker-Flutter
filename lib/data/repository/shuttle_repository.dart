@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import '../../data/models/shuttle_route.dart';
 import '../../data/models/shuttle_stop.dart';
 import '../../data/models/shuttle_update.dart';
-import '../../global_widgets/shuttle_svg.dart';
 import '../../theme/helpers.dart';
+import '../../widgets/shuttle_svg.dart';
 import '../provider/shuttle_api_provider.dart';
 //import '../provider/shuttle_local_provider.dart';
 

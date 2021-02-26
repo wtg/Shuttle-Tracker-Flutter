@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import 'package:latlong/latlong.dart';
+import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
-import '../../../blocs/on_tap_bloc/on_tap_bloc.dart';
-import '../../../blocs/theme_bloc/theme_bloc.dart';
-import '../../../data/models/shuttle_stop.dart';
+import '../blocs/on_tap_bloc/on_tap_bloc.dart';
+import '../blocs/theme_bloc/theme_bloc.dart';
+import '../data/models/shuttle_stop.dart';
 import 'shuttle_line.dart';
 
 /// Class: Panel Widget

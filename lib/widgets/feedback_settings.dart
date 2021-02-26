@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../blocs/theme_bloc/theme_bloc.dart';
+import '../blocs/theme_bloc/theme_bloc.dart';
 
 /// Class: FeedbackSettings
 /// Function: Represents the Feedback section of the Settings Page

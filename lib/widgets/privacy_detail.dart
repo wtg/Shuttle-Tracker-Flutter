@@ -3,7 +3,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../../../blocs/theme_bloc/theme_bloc.dart';
+import '../blocs/theme_bloc/theme_bloc.dart';
 
 /// Class: PrivacyPolicyPage
 /// Function: Represents the Privacy Policy page

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:latlong/latlong.dart';
 
 import '../blocs/on_tap_bloc/on_tap_bloc.dart';
-import '../pages/map_page/widgets/eta_panel.dart';
+import 'eta_panel.dart';
 
 class Stop extends StatelessWidget {
   final dynamic animatedMapMove;

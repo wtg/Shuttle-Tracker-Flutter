@@ -7,7 +7,7 @@ import 'package:latlong/latlong.dart';
 import '../../blocs/on_tap_bloc/on_tap_bloc.dart';
 import '../../blocs/theme_bloc/theme_bloc.dart';
 import '../../data/models/shuttle_stop.dart';
-import 'widgets/panel.dart';
+import '../../widgets/panel.dart';
 
 /// Class: DetailPage
 /// Function: Widget that represents the specific detail page of a route from

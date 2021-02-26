@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
-import '../../../blocs/theme_bloc/theme_bloc.dart';
-import 'faq_detail.dart';
-import 'privacy_detail.dart';
+import '../blocs/theme_bloc/theme_bloc.dart';
+import '../pages/settings_page/widgets/../../../widgets/faq_detail.dart';
+import '../pages/settings_page/widgets/../../../widgets/privacy_detail.dart';
 
 /// Class: AboutSettings
 /// Function: Represents the About section of the Settings Page

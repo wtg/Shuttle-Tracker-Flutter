@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../blocs/theme_bloc/theme_bloc.dart';
 
-import '../../../blocs/theme_bloc/theme_bloc.dart';
-import '../../../global_widgets/shuttle_svg.dart';
 import 'legend_row.dart';
+import 'shuttle_svg.dart';
 
 /// Class: Legend Widget
 /// Function: Creates an instance of the Legend widget, an example can be seen

@@ -6,10 +6,10 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
 
-import '../../../blocs/on_tap_bloc/on_tap_bloc.dart';
-import '../../../data/models/shuttle_route.dart';
-import '../../../data/models/shuttle_stop.dart';
-import '../detail_page.dart';
+import '../blocs/on_tap_bloc/on_tap_bloc.dart';
+import '../data/models/shuttle_route.dart';
+import '../data/models/shuttle_stop.dart';
+import '../pages/routes_page/detail_page.dart';
 
 /// Class: CustomListTile Widget
 /// Function: Widget that functions similar to a ListTile with functionality

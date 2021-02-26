@@ -102,12 +102,12 @@ class FusionBloc extends Bloc<FusionEvent, FusionState> {
 
   void removeOldShuttles() {
     // - Loop through fusionMap
-    // - Check if shuttle in fusionMap is too old and remove it
+    // - Check if any shuttle in fusionMap is too old and remove it
     var currentTime = DateTime.now().toUtc();
     fusionMap.removeWhere((key, value) {
       bool isRemoved;
-      isRemoved = currentTime.difference(key.time).inMinutes >= 10 ?? false;
-      if (isRemoved){
+      isRemoved = currentTime.difference(key.time).inMinutes >= 5 ?? false;
+      if (isRemoved) {
         print('Removed $key');
       }
       return isRemoved;

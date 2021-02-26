@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
@@ -128,18 +127,18 @@ class _ETAPanelState extends State<ETAPanel> {
           ),
           BlocBuilder<FusionBloc, FusionState>(
             builder: (context, state) {
-              if (state is FusionETALoaded) {
-                etaList = state.etas;
-                for (var i = 0; i < state.etas.length; i++) {
-                  if (state.etas[i].arriving &&
-                      stopIDs[state.etas[i].stopId] == widget.markerName) {
-                    etaList.add(state.etas[i]);
-                  }
-                }
-                // log('TIME NOW IS: $now');
-              }
-              var something = etaList.length;
-              log("$something");
+              // if (state is FusionETALoaded) {
+              //   etaList = state.etas;
+              //   for (var i = 0; i < state.etas.length; i++) {
+              //     if (state.etas[i].arriving &&
+              //         stopIDs[state.etas[i].stopId] == widget.markerName) {
+              //       etaList.add(state.etas[i]);
+              //     }
+              //   }
+              //   // log('TIME NOW IS: $now');
+              // }
+              // var something = etaList.length;
+              // log("$something");
               return Text('No Shuttles Arriving',
                   textAlign: TextAlign.center, style: TextStyle(fontSize: 15));
               // return Expanded(

@@ -151,13 +151,13 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
                                       data.longitude != null) {
                                     location = <Marker>[
                                       Marker(
-                                          height: 15,
-                                          width: 15,
+                                          height: 12,
+                                          width: 12,
                                           builder: (ctx) => Container(
                                                 child: Image.asset(
                                                   'assets/img/user.png',
-                                                  height: 25,
-                                                  width: 25,
+                                                  height: 20,
+                                                  width: 20,
                                                 ),
                                               ),
                                           point: LatLng(

@@ -11,6 +11,7 @@ class RoutesSection extends StatelessWidget {
   RoutesSection({this.theme, this.routes, this.sectionHeader});
 
   /// Standard build function for the widget
+  @override
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
@@ -23,7 +24,7 @@ class RoutesSection extends StatelessWidget {
               data:
                   Theme.of(context).copyWith(dividerColor: Colors.transparent),
               child: ExpansionTile(
-                initiallyExpanded: sectionHeader == "Active Routes",
+                initiallyExpanded: sectionHeader == 'Active Routes',
                 title: Text(
                   sectionHeader,
                   style: TextStyle(

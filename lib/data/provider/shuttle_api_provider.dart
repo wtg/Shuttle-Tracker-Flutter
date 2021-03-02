@@ -34,7 +34,7 @@ class ShuttleApiProvider {
   /// Getter method to retrieve the list of routes
   Future<List<ShuttleRoute>> getRoutes() async {
     var response = await fetch('routes');
-    print("ROUTES DATA FETCHED");
+    print('ROUTES DATA FETCHED');
     List<ShuttleRoute> routeList = response != null
         ? json
             .decode(response.body)

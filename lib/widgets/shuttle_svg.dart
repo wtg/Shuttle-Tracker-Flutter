@@ -11,7 +11,7 @@ class ShuttleSVG extends StatefulWidget {
 }
 
 class _ShuttleSVGState extends State<ShuttleSVG> {
-  _getString() {
+  String _getString() {
     var svgInput = widget.svgColor.value
         .toRadixString(16)
         .toString()

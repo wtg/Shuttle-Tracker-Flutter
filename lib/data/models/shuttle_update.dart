@@ -96,7 +96,7 @@ class ShuttleUpdate extends ShuttlePoint {
     // ignore: lines_longer_than_80_chars
     //return "$trackerId $latitude $longitude $heading $speed $time $created $vehicleId $routeId";
     // ignore: lines_longer_than_80_chars
-    return "routeId: $routeId vehicleId: $vehicleId created: $created time: $time";
+    return 'routeId: $routeId vehicleId: $vehicleId created: $created time: $time';
   }
 
   @override

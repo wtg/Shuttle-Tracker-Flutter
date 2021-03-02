@@ -11,6 +11,7 @@ class GeneralSettings extends StatelessWidget {
   GeneralSettings({this.theme});
 
   /// Standard build function for the GeneralSettings widget
+  @override
   Widget build(BuildContext context) {
     var themeBloc = context.watch<ThemeBloc>();
     var isSwitched = theme.isDarkMode;

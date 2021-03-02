@@ -9,6 +9,7 @@ class FeedbackSettings extends StatelessWidget {
   FeedbackSettings({this.theme});
 
   /// Standard build function for the FeedbackSettings widget
+  @override
   Widget build(BuildContext context) {
     var feedbackSettingsList = <Widget>[
       ListTile(

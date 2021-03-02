@@ -6,38 +6,38 @@ import '../blocs/fusion_bloc/fusion_bloc.dart';
 import '../data/models/shuttle_eta.dart';
 
 Map<int, String> stopIDs = {
-  1: "Student Union",
-  8: "Blitman Residence Commons",
-  12: "15th and College Ave.",
-  13: "13th and Peoples Ave.",
-  14: "Colonie Apartments",
-  15: "Brinsmade Terrace",
-  11: "Polytechnic Residence Commons",
-  10: "6th Ave. and City Station",
-  18: "BARH",
-  20: "Winslow",
-  21: "E Lot",
-  22: "Tibbits Ave.",
-  23: "LXA",
-  24: "Sunset Terrace 1",
-  17: "Sunset Terrace 2",
-  25: "Sage Ave.",
-  26: "Troy Building Crosswalk",
-  27: "West Hall",
-  28: "9th and Sage",
-  29: "Ricketts Transfer",
-  30: "Colonie Apartments",
-  31: "Beman Park",
-  32: "LXA Transfer",
-  33: "Tibbets and Orchard",
-  34: "Polytech Residence Commons",
-  36: "Academy Hall Lot",
-  37: "City Station",
-  38: "Blitman Residence Commons",
-  35: "CBIS Transfer",
-  39: "Georgian",
-  40: "North",
-  41: "Armory Recreation Center",
+  1: 'Student Union',
+  8: 'Blitman Residence Commons',
+  12: '15th and College Ave.',
+  13: '13th and Peoples Ave.',
+  14: 'Colonie Apartments',
+  15: 'Brinsmade Terrace',
+  11: 'Polytechnic Residence Commons',
+  10: '6th Ave. and City Station',
+  18: 'BARH',
+  20: 'Winslow',
+  21: 'E Lot',
+  22: 'Tibbits Ave.',
+  23: 'LXA',
+  24: 'Sunset Terrace 1',
+  17: 'Sunset Terrace 2',
+  25: 'Sage Ave.',
+  26: 'Troy Building Crosswalk',
+  27: 'West Hall',
+  28: '9th and Sage',
+  29: 'Ricketts Transfer',
+  30: 'Colonie Apartments',
+  31: 'Beman Park',
+  32: 'LXA Transfer',
+  33: 'Tibbets and Orchard',
+  34: 'Polytech Residence Commons',
+  36: 'Academy Hall Lot',
+  37: 'City Station',
+  38: 'Blitman Residence Commons',
+  35: 'CBIS Transfer',
+  39: 'Georgian',
+  40: 'North',
+  41: 'Armory Recreation Center',
 };
 
 /// Class: ETAPanel Widget
@@ -67,6 +67,7 @@ class _ETAPanelState extends State<ETAPanel> {
   }
 
   /// Builds the internal content of the Widget
+  @override
   Widget build(BuildContext context) {
     var panelColor = Theme.of(context).cardColor;
     return Container(
@@ -168,8 +169,8 @@ class _ETAPanelState extends State<ETAPanel> {
     return ListTile(
         dense: true,
         title: Text(
-          "This is a test to see if there is any overflow with the text and "
-          "if it wraps around",
+          'This is a test to see if there is any overflow with the text and '
+          'if it wraps around',
           textAlign: TextAlign.center,
           style: TextStyle(fontSize: 15),
         ));

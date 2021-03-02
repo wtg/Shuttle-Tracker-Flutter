@@ -8,6 +8,7 @@ class Attribution extends StatelessWidget {
   final ThemeData theme;
   Attribution({this.theme});
 
+  @override
   Widget build(BuildContext context) {
     var attribution1 = <Widget>[
       Text(

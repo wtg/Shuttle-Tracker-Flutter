@@ -27,10 +27,10 @@ class FusionBloc extends Bloc<FusionEvent, FusionState> {
   }
 
   void connect({@required FusionSocket fusionSocket}) {
-    print("WS is connected");
+    print('WS is connected');
     fusionSocket.openWS();
-    fusionSocket.subscribe("eta");
-    fusionSocket.subscribe("vehicle_location");
+    fusionSocket.subscribe('eta');
+    fusionSocket.subscribe('vehicle_location');
 
     fusionSocket.channel.stream.listen((message) {
       fusionSocket.streamController.add(message);
@@ -53,7 +53,7 @@ class FusionBloc extends Bloc<FusionEvent, FusionState> {
       print(error);
       fusionSocket.closeWS();
     }, onDone: () async {
-      print("WS is done");
+      print('WS is done');
       await Future.delayed(Duration(
           seconds: 3)); // Check every 3 seconds to reestablish the connection
       connect(fusionSocket: fusionSocket);

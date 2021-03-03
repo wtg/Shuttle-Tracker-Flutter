@@ -8,8 +8,6 @@ import '../pages/settings_page/widgets/../../../widgets/privacy_detail.dart';
 /// Class: AboutSettings
 /// Function: Represents the About section of the Settings Page
 class AboutSettings extends StatefulWidget {
-
-
   @override
   _AboutSettingsState createState() => _AboutSettingsState();
 }
@@ -23,7 +21,7 @@ class _AboutSettingsState extends State<AboutSettings> {
   @override
   Widget build(BuildContext context) {
     var themeBloc = context.watch<ThemeBloc>();
-        var theme = themeBloc.state.getTheme;
+    var theme = themeBloc.state.getTheme;
     var aboutSettingsList = <Widget>[
       ListTile(
         leading: Column(
@@ -32,8 +30,7 @@ class _AboutSettingsState extends State<AboutSettings> {
           children: <Widget>[
             Text(
               'FAQ',
-              style: TextStyle(
-                  color: theme.hoverColor, fontSize: 16),
+              style: TextStyle(color: theme.hoverColor, fontSize: 16),
             ),
             Text(
               'View frequently asked questions',
@@ -57,8 +54,7 @@ class _AboutSettingsState extends State<AboutSettings> {
           children: <Widget>[
             Text(
               'GitHub Repo',
-              style: TextStyle(
-                  color: theme.hoverColor, fontSize: 16),
+              style: TextStyle(color: theme.hoverColor, fontSize: 16),
             ),
             Text(
               'Interested in contributing?',
@@ -79,8 +75,7 @@ class _AboutSettingsState extends State<AboutSettings> {
         dense: true,
         leading: Text(
           'Privacy Policy',
-          style:
-              TextStyle(color: theme.hoverColor, fontSize: 16),
+          style: TextStyle(color: theme.hoverColor, fontSize: 16),
         ),
         onTap: () {
           Navigator.push(
@@ -98,8 +93,7 @@ class _AboutSettingsState extends State<AboutSettings> {
           children: <Widget>[
             Text(
               'Version',
-              style: TextStyle(
-                  color: theme.hoverColor, fontSize: 16),
+              style: TextStyle(color: theme.hoverColor, fontSize: 16),
             ),
             Text(
               '1.0.0',

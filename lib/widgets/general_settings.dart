@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_shuttletracker/widgets/platform_switch.dart';
 
 import '../blocs/theme_bloc/theme_bloc.dart';
 
@@ -12,6 +11,7 @@ class GeneralSettings extends StatelessWidget {
   Widget build(BuildContext context) {
     var themeBloc = context.watch<ThemeBloc>();
     var theme = themeBloc.state.getTheme;
+    var isSwitched = themeBloc.state.isDarkMode;
     return Column(children: <Widget>[
       ListTile(
         dense: true,
@@ -27,10 +27,17 @@ class GeneralSettings extends StatelessWidget {
             color: theme.hoverColor,
           ),
           title: Text('Dark Mode',
-              style: TextStyle(
-                  color: theme.hoverColor, fontSize: 16)),
+              style: TextStyle(color: theme.hoverColor, fontSize: 16)),
           //TODO: Add cupertino switch
-          trailing: PlatformSwitch()),
+          trailing: Switch(
+            value: isSwitched,
+            onChanged: (value) {
+              isSwitched = value;
+              themeBloc.add(ThemeEvent.toggle);
+            },
+            activeColor: Colors.white,
+            activeTrackColor: Colors.green,
+          )),
     ]);
   }
 }

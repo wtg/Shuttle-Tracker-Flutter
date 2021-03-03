@@ -41,9 +41,9 @@ class _SettingsPageState extends State<SettingsPage> {
             },
             child: ListView(
               children: [
-                GeneralSettings(theme: theme),
-                FeedbackSettings(theme: theme),
-                AboutSettings(theme: theme)
+                GeneralSettings(),
+                FeedbackSettings(),
+                AboutSettings()
               ],
             ),
           ),

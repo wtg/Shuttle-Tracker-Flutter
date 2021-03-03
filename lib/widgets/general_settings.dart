@@ -1,19 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_shuttletracker/widgets/platform_switch.dart';
 
 import '../blocs/theme_bloc/theme_bloc.dart';
 
 /// Class: GeneralSettings
 /// Function: Represents the General settings section of the Settings Page
 class GeneralSettings extends StatelessWidget {
-  final ThemeState theme;
-  GeneralSettings({this.theme});
-
   /// Standard build function for the GeneralSettings widget
   @override
   Widget build(BuildContext context) {
     var themeBloc = context.watch<ThemeBloc>();
-    var isSwitched = theme.isDarkMode;
+    var theme = themeBloc.state.getTheme;
     return Column(children: <Widget>[
       ListTile(
         dense: true,
@@ -23,25 +21,16 @@ class GeneralSettings extends StatelessWidget {
         ),
       ),
       ListTile(
-        dense: true,
-        leading: Icon(
-          Icons.brightness_medium,
-          color: theme.getTheme.hoverColor,
-        ),
-        title: Text('Dark Mode',
-            style: TextStyle(color: theme.getTheme.hoverColor, fontSize: 16)),
-        //TODO: Add cupertino switch
-        trailing: Switch(
-          value: isSwitched,
-          onChanged: (value) {
-            isSwitched = value;
-            themeBloc.add(ThemeEvent.toggle);
-
-          },
-          activeColor: Colors.white,
-        ),
-      
-      ),
+          dense: true,
+          leading: Icon(
+            Icons.brightness_medium,
+            color: theme.hoverColor,
+          ),
+          title: Text('Dark Mode',
+              style: TextStyle(
+                  color: theme.hoverColor, fontSize: 16)),
+          //TODO: Add cupertino switch
+          trailing: PlatformSwitch()),
     ]);
   }
 }

@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../blocs/theme_bloc/theme_bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../pages/settings_page/widgets/../../../widgets/faq_detail.dart';
 import '../pages/settings_page/widgets/../../../widgets/privacy_detail.dart';
 
 /// Class: AboutSettings
 /// Function: Represents the About section of the Settings Page
 class AboutSettings extends StatefulWidget {
-  final ThemeState theme;
-  AboutSettings({this.theme});
+
 
   @override
   _AboutSettingsState createState() => _AboutSettingsState();
@@ -22,6 +22,8 @@ class _AboutSettingsState extends State<AboutSettings> {
   /// Standard build function for the widget
   @override
   Widget build(BuildContext context) {
+    var themeBloc = context.watch<ThemeBloc>();
+        var theme = themeBloc.state.getTheme;
     var aboutSettingsList = <Widget>[
       ListTile(
         leading: Column(
@@ -31,7 +33,7 @@ class _AboutSettingsState extends State<AboutSettings> {
             Text(
               'FAQ',
               style: TextStyle(
-                  color: widget.theme.getTheme.hoverColor, fontSize: 16),
+                  color: theme.hoverColor, fontSize: 16),
             ),
             Text(
               'View frequently asked questions',
@@ -44,7 +46,7 @@ class _AboutSettingsState extends State<AboutSettings> {
               context,
               MaterialPageRoute(
                   builder: (context) => FaqPage(
-                        theme: widget.theme,
+                        theme: themeBloc.state,
                       )));
         },
       ),
@@ -56,7 +58,7 @@ class _AboutSettingsState extends State<AboutSettings> {
             Text(
               'GitHub Repo',
               style: TextStyle(
-                  color: widget.theme.getTheme.hoverColor, fontSize: 16),
+                  color: theme.hoverColor, fontSize: 16),
             ),
             Text(
               'Interested in contributing?',
@@ -78,14 +80,14 @@ class _AboutSettingsState extends State<AboutSettings> {
         leading: Text(
           'Privacy Policy',
           style:
-              TextStyle(color: widget.theme.getTheme.hoverColor, fontSize: 16),
+              TextStyle(color: theme.hoverColor, fontSize: 16),
         ),
         onTap: () {
           Navigator.push(
               context,
               MaterialPageRoute(
                   builder: (context) => PrivacyPolicyPage(
-                        theme: widget.theme,
+                        theme: themeBloc.state,
                       )));
         },
       ),
@@ -97,7 +99,7 @@ class _AboutSettingsState extends State<AboutSettings> {
             Text(
               'Version',
               style: TextStyle(
-                  color: widget.theme.getTheme.hoverColor, fontSize: 16),
+                  color: theme.hoverColor, fontSize: 16),
             ),
             Text(
               '1.0.0',

@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../blocs/theme_bloc/theme_bloc.dart';
 
 /// Class: FeedbackSettings
 /// Function: Represents the Feedback section of the Settings Page
 class FeedbackSettings extends StatelessWidget {
-  final ThemeState theme;
-  FeedbackSettings({this.theme});
-
   /// Standard build function for the FeedbackSettings widget
   @override
   Widget build(BuildContext context) {
+    var themeBloc = context.watch<ThemeBloc>();
+    var theme = themeBloc.state.getTheme;
     var feedbackSettingsList = <Widget>[
       ListTile(
         leading: Column(
@@ -19,7 +19,7 @@ class FeedbackSettings extends StatelessWidget {
           children: <Widget>[
             Text(
               'Send Feedback',
-              style: TextStyle(color: theme.getTheme.hoverColor, fontSize: 16),
+              style: TextStyle(color: theme.hoverColor, fontSize: 16),
             ),
             Text(
               'Any comments? Send them here!',
@@ -32,7 +32,7 @@ class FeedbackSettings extends StatelessWidget {
         dense: true,
         leading: Text(
           'Rate this app',
-          style: TextStyle(color: theme.getTheme.hoverColor, fontSize: 16),
+          style: TextStyle(color: theme.hoverColor, fontSize: 16),
         ),
       ),
     ];

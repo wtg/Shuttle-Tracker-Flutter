@@ -16,10 +16,8 @@ dependencies:
   hydrated_bloc: ^6.1.0
   shared_preferences: ^0.5.12+4
   flutter_native_splash: ^0.3.0
-  flutter_platform_widgets: ^0.72.0
   flutter_widget_from_html: ^0.5.2
-  observable: ^0.22.2
-  flutter_svg: ^0.19.1
+  flutter_svg: ^0.19.3
   flutter_bloc: ^6.1.2
   equatable: ^1.2.6
   responsive_framework: ^0.0.14

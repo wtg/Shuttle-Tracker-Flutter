@@ -6,7 +6,7 @@ PODS:
   - FMDB (2.7.5):
     - FMDB/standard (= 2.7.5)
   - FMDB/standard (2.7.5)
-  - "geolocator (6.0.0+4)":
+  - geolocator (6.2.0):
     - Flutter
   - path_provider (0.0.1):
     - Flutter
@@ -66,9 +66,9 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   connectivity: c4130b2985d4ef6fd26f9702e886bd5260681467
-  Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
+  Flutter: 434fef37c0980e73bb6479ef766c45957d4b510c
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
-  geolocator: 1ae40084cc6c1586ce5ad12cfc3fd38c64d05f2f
+  geolocator: f5e3de65e241caba7ce3e8a618803387bda73384
   path_provider: abfe2b5c733d04e238b0d8691db0cfd63a27a93c
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
   shared_preferences: af6bfa751691cdc24be3045c43ec037377ada40d
@@ -80,4 +80,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: adb00cec7b0eabb3be819164c29b992d03802cb4
 
-COCOAPODS: 1.9.1
+COCOAPODS: 1.10.1

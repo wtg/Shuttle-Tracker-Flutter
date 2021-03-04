@@ -28,7 +28,6 @@ class GeneralSettings extends StatelessWidget {
           ),
           title: Text('Dark Mode',
               style: TextStyle(color: theme.hoverColor, fontSize: 16)),
-          //TODO: Add cupertino switch
           trailing: Switch(
             value: isSwitched,
             onChanged: (value) {

@@ -53,10 +53,7 @@ class MyAppState extends State<MyApp> {
     BlocProvider(
         create: (context) => RoutesBloc(repository: ShuttleRepository()),
         child: RoutesPage()),
-    BlocProvider(
-      create: (context) => RoutesBloc(repository: ShuttleRepository()),
-      child: SettingsPage(),
-    ),
+    SettingsPage(),
   ];
 
   @override

@@ -76,7 +76,7 @@ class CustomListTile extends StatelessWidget {
               child: Text(
                 route.name,
                 style: TextStyle(
-                  color: theme.hoverColor,
+                  color: theme.primaryColor,
                   fontSize: 16,
                   fontWeight: FontWeight.w400,
                 ),
@@ -106,7 +106,7 @@ class CustomListTile extends StatelessWidget {
               Platform.isIOS
                   ? CupertinoIcons.right_chevron
                   : Icons.keyboard_arrow_right,
-              color: theme.hoverColor,
+              color: theme.primaryColor,
             ),
           ],
         ),

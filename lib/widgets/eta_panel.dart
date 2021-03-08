@@ -106,7 +106,7 @@ class _ETAPanelState extends State<ETAPanel> {
             mainAxisAlignment: MainAxisAlignment.end,
             children: <Widget>[
               IconButton(
-                icon: Icon(Icons.clear, color: Theme.of(context).hoverColor),
+                icon: Icon(Icons.clear, color: Theme.of(context).primaryColor),
                 onPressed: () => Navigator.pop(context),
                 splashRadius: 10,
               )
@@ -117,7 +117,7 @@ class _ETAPanelState extends State<ETAPanel> {
               '${widget.markerName}',
               style: TextStyle(
                   color: widget.stopMarker
-                      ? Theme.of(context).hoverColor
+                      ? Theme.of(context).primaryColor
                       : Colors.blue,
                   fontSize: 24,
                   fontWeight: FontWeight.w700),

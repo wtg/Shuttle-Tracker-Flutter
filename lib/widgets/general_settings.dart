@@ -24,10 +24,10 @@ class GeneralSettings extends StatelessWidget {
           dense: true,
           leading: Icon(
             Icons.brightness_medium,
-            color: theme.hoverColor,
+            color: theme.primaryColor,
           ),
           title: Text('Dark Mode',
-              style: TextStyle(color: theme.hoverColor, fontSize: 16)),
+              style: TextStyle(color: theme.primaryColor, fontSize: 16)),
           trailing: Switch(
             value: isSwitched,
             onChanged: (value) {

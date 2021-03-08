@@ -11,7 +11,7 @@ class CustomAppBar extends StatelessWidget {
       title: Text(
         pageName,
         style: TextStyle(
-            color: Theme.of(context).hoverColor,
+            color: Theme.of(context).primaryColor,
             fontSize: 15,
             fontWeight: FontWeight.w600),
       ),

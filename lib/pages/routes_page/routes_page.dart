@@ -35,7 +35,7 @@ class _RoutesPageState extends State<RoutesPage> {
             title: Text(
               'Routes',
               style: TextStyle(
-                color: theme.getTheme.hoverColor,
+                color: theme.getTheme.primaryColor,
                 fontWeight: FontWeight.bold,
               ),
             ),

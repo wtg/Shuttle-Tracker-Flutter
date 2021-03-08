@@ -28,7 +28,6 @@ final ThemeData darkMode = ThemeData(
   cardColor: Color(0xFF242424),
   bottomAppBarColor: Colors.black,
   brightness: Brightness.dark,
-  canvasColor: Color(0xFF181818),
   primaryColor: Colors.white,
   textTheme: TextTheme(
     bodyText1: TextStyle(

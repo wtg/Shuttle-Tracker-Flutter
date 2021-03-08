@@ -1,4 +1,3 @@
-import 'dart:io';
 
 import 'package:flutter/material.dart';
 
@@ -15,11 +14,11 @@ final ThemeData lightMode = ThemeData(
   textTheme: TextTheme(
     bodyText1: TextStyle(
         color: Colors.black,
-        fontSize: Platform.isIOS ? 12.0 : 14.0,
+        fontSize: 14.0,
         fontStyle: FontStyle.normal),
     subtitle1: TextStyle(
         color: Colors.black,
-        fontSize: Platform.isIOS ? 10.0 : 12.0,
+        fontSize: 14.0,
         fontStyle: FontStyle.normal),
   ),
 );
@@ -41,11 +40,11 @@ final ThemeData darkMode = ThemeData(
   textTheme: TextTheme(
     bodyText1: TextStyle(
         color: Colors.white,
-        fontSize: Platform.isIOS ? 12.0 : 14.0,
+        fontSize: 14.0,
         fontStyle: FontStyle.normal),
     subtitle1: TextStyle(
         color: Colors.white,
-        fontSize: Platform.isIOS ? 10.0 : 12.0,
+        fontSize: 14.0,
         fontStyle: FontStyle.normal),
   ),
 );

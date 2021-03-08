@@ -17,13 +17,6 @@ class Hyperlink extends StatelessWidget {
     }
   }
 
-//  TextSpan buildHyperlinks(BuildContext context) {
-//    return TextSpan(
-//        text: text,
-//        style: TextStyle(color: color),
-//        recognizer: TapGestureRecognizer()..onTap = _launchURL);
-//  }
-//
   @override
   Widget build(BuildContext context) {
     return RichText(

@@ -29,7 +29,6 @@ class _SettingsPageState extends State<SettingsPage> {
             style: TextStyle(
               color: theme.getTheme.hoverColor,
               fontWeight: FontWeight.bold,
-              fontSize: 30,
             ),
           ),
         ),

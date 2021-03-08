@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -136,7 +138,7 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
                           if (fusionState is FusionInitial) {
                           } else if (fusionState is FusionVehicleLoaded) {
                             updates = fusionState.updates;
-                            print('Num of updates: ${updates.length}');
+                            print('Num of shuttles on map: ${updates.length}');
                           } else if (fusionState is FusionETALoaded) {
                             updates = fusionState.updates;
                           }
@@ -192,6 +194,9 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
                                                   ? darkLink
                                                   : lightLink,
                                               subdomains: ['a', 'b', 'c'],
+                                              errorTileCallback: (tile, dynamic) => {
+                                                log('TILE ERROR!!')
+                                              }
                                             ),
                                             PolylineLayerOptions(
                                                 polylines: isDarkMode

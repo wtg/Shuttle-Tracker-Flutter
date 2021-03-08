@@ -32,7 +32,6 @@ class Legend extends StatelessWidget {
       widget: Image.asset('assets/img/stop.png'),
       text: ' Shuttle Stop',
     ));
-    //print("Number of rows in legend: ${legendRows.length}\n\n");
     return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, theme) {
       return Positioned(
         // Position of widget at bottom left corner

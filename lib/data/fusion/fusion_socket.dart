@@ -93,7 +93,7 @@ class FusionSocket {
   Future<ShuttleUpdate> handleVehicleLocations(String message) async {
     var data = await compute(jsonDecode, message);
     var update = ShuttleUpdate.fromJson(data['message']);
-    print('update $update');
+    //print('update $update');
     return update;
   }
 
@@ -120,9 +120,9 @@ class FusionSocket {
           eta: DateTime.parse(item['eta']),
           arriving: item['arriving']);
       etas.add(eta);
-      print('eta $eta');
+      //print('eta $eta');
     }
-    print('etas $etas');
+    //print('etas $etas');
     return etas;
   }
 }

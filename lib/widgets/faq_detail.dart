@@ -243,7 +243,7 @@ class FaqPage extends StatelessWidget {
           style: TextStyle(
             color: theme.getTheme.hoverColor,
             fontWeight: FontWeight.bold,
-            fontSize: 30,
+            fontSize: 25,
           ),
         ),
         backgroundColor: theme.getTheme.appBarTheme.color,

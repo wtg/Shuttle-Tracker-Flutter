@@ -65,7 +65,6 @@ class FusionBloc extends Bloc<FusionEvent, FusionState> {
     FusionEvent event,
   ) async* {
     if (event is GetFusionVehicleData) {
-      // print(shuttleColors);
 
       var data = await event.shuttleUpdate;
       if (shuttleColors[data.routeId] != null) {
@@ -96,7 +95,6 @@ class FusionBloc extends Bloc<FusionEvent, FusionState> {
     var currentTime = DateTime.now().toUtc();
     if (currentTime.difference(shuttle.time).inMinutes < 5) {
       fusionMap[shuttle] = shuttle.getMarker();
-      print(fusionMap.length);
     }
   }
 

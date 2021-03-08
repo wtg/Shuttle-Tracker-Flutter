@@ -57,7 +57,6 @@ class MapBloc extends Bloc<MapEvent, MapState> {
         ));
       }
     }
-    //print("Number of stops on map: ${markers.length}");
     return markers;
   }
 
@@ -77,7 +76,6 @@ class MapBloc extends Bloc<MapEvent, MapState> {
 
       markers.add(update.getMarker(animatedMapMove, context));
     }
-    //print("Number of shuttles on map: ${markers.length}");
     return markers;
   }
 

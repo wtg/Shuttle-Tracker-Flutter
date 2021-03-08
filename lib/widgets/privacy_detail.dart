@@ -56,7 +56,6 @@ class PrivacyPolicyPage extends StatelessWidget {
           style: TextStyle(
             color: theme.getTheme.hoverColor,
             fontWeight: FontWeight.bold,
-            fontSize: 25,
           ),
         ),
         backgroundColor: theme.getTheme.appBarTheme.color,

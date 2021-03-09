@@ -27,7 +27,7 @@ class _SettingsPageState extends State<SettingsPage> {
           title: Text(
             'Settings',
             style: TextStyle(
-              color: theme.getTheme.hoverColor,
+              color: theme.getTheme.primaryColor,
               fontWeight: FontWeight.bold,
             ),
           ),

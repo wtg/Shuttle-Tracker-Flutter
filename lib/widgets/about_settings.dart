@@ -30,7 +30,7 @@ class _AboutSettingsState extends State<AboutSettings> {
           children: <Widget>[
             Text(
               'FAQ',
-              style: TextStyle(color: theme.hoverColor, fontSize: 16),
+              style: TextStyle(color: theme.primaryColor, fontSize: 16),
             ),
             Text(
               'View frequently asked questions',
@@ -54,7 +54,7 @@ class _AboutSettingsState extends State<AboutSettings> {
           children: <Widget>[
             Text(
               'GitHub Repo',
-              style: TextStyle(color: theme.hoverColor, fontSize: 16),
+              style: TextStyle(color: theme.primaryColor, fontSize: 16),
             ),
             Text(
               'Interested in contributing?',
@@ -75,7 +75,7 @@ class _AboutSettingsState extends State<AboutSettings> {
         dense: true,
         leading: Text(
           'Privacy Policy',
-          style: TextStyle(color: theme.hoverColor, fontSize: 16),
+          style: TextStyle(color: theme.primaryColor, fontSize: 16),
         ),
         onTap: () {
           Navigator.push(
@@ -93,7 +93,7 @@ class _AboutSettingsState extends State<AboutSettings> {
           children: <Widget>[
             Text(
               'Version',
-              style: TextStyle(color: theme.hoverColor, fontSize: 16),
+              style: TextStyle(color: theme.primaryColor, fontSize: 16),
             ),
             Text(
               '1.0.0',

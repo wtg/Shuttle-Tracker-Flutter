@@ -124,14 +124,14 @@ class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
             color: theme.getTheme.appBarTheme.color,
             child: IconButton(
               icon: Icon(Icons.arrow_back),
-              color: theme.getTheme.hoverColor,
+              color: theme.getTheme.primaryColor,
               onPressed: () => Navigator.pop(context, false),
             ),
           ),
           title: Text(
             widget.title,
             style: TextStyle(
-              color: theme.getTheme.hoverColor,
+              color: theme.getTheme.primaryColor,
               fontWeight: FontWeight.bold,
             ),
           ),

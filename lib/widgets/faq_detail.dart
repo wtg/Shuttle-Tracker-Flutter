@@ -66,7 +66,7 @@ class FaqPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var _subHeader = TextStyle(
-      color: theme.getTheme.hoverColor,
+      color: theme.getTheme.primaryColor,
     );
 
     var faqList = <Widget>[
@@ -234,14 +234,14 @@ class FaqPage extends StatelessWidget {
           color: theme.getTheme.appBarTheme.color,
           child: IconButton(
             icon: Icon(Icons.arrow_back),
-            color: theme.getTheme.hoverColor,
+            color: theme.getTheme.primaryColor,
             onPressed: () => Navigator.pop(context, false),
           ),
         ),
         title: Text(
           'FAQ',
           style: TextStyle(
-            color: theme.getTheme.hoverColor,
+            color: theme.getTheme.primaryColor,
             fontWeight: FontWeight.bold,
           ),
         ),

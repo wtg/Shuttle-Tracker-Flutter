@@ -19,7 +19,7 @@ class FeedbackSettings extends StatelessWidget {
           children: <Widget>[
             Text(
               'Send Feedback',
-              style: TextStyle(color: theme.hoverColor, fontSize: 16),
+              style: TextStyle(color: theme.primaryColor, fontSize: 16),
             ),
             Text(
               'Any comments? Send them here!',
@@ -32,7 +32,7 @@ class FeedbackSettings extends StatelessWidget {
         dense: true,
         leading: Text(
           'Rate this app',
-          style: TextStyle(color: theme.hoverColor, fontSize: 16),
+          style: TextStyle(color: theme.primaryColor, fontSize: 16),
         ),
       ),
     ];

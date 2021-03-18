@@ -38,12 +38,15 @@ class _SettingsPageState extends State<SettingsPage> {
               overscroll.disallowGlow();
               return null;
             },
-            child: ListView(
-              children: [
-                GeneralSettings(),
-                FeedbackSettings(),
-                AboutSettings()
-              ],
+            child: Container(
+              color: theme.getTheme.backgroundColor,
+              child: ListView(
+                children: [
+                  GeneralSettings(),
+                  FeedbackSettings(),
+                  AboutSettings()
+                ],
+              ),
             ),
           ),
         ),

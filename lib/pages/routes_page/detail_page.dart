@@ -168,6 +168,7 @@ class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
                     ),
                   ),
                   Divider(
+                    height: 2,
                     color: widget.routeColor,
                     thickness: 4,
                   ),

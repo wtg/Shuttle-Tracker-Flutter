@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:flutter_shuttletracker/data/models/shuttle_route.dart';
+import 'package:flutter_shuttletracker/data/models/shuttle_point.dart';
 
 void main() {
   group(
-    'Route test',
+    'Route tests',
     () {
       test('Route test', () {
         final json = {
@@ -35,6 +36,21 @@ void main() {
         expect(route.points, []);
         expect(route.active, true);
         expect(route.schedules, []);
+      });
+    },
+  );
+
+  group(
+    'Point tests',
+    () {
+      test('Union test', () {
+        final json = {
+          'latitude': 42.73029109316892,
+          'longitude': -73.67655873298646
+        };
+        final point = ShuttlePoint.fromJson(json);
+        expect(point.latitude, 42.73029109316892);
+        expect(point.longitude, -73.67655873298646);
       });
     },
   );

@@ -1,0 +1,41 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_test/flutter_test.dart';
+
+import 'package:flutter_shuttletracker/data/models/shuttle_route.dart';
+
+void main() {
+  group(
+    'Route test',
+    () {
+      test('Route test', () {
+        final json = {
+          'id': 1,
+          'name': 'West Campus',
+          'description': 'Shuttle route for West Campus',
+          'enabled': true,
+          'color': '#ff0000',
+          'width': 10,
+          'stop_ids': [1, 2, 3],
+          'created': '2018-09-14T13:04:49.250185-04:00',
+          'updated': '2019-11-04T11:04:22.731589-05:00',
+          'points': [], // Route point tested separately
+          'active': true,
+          'schedule': [] // Shuttle schedule tested separately
+        };
+        final route = ShuttleRoute.fromJson(json);
+        expect(route.id, 1);
+        expect(route.name, 'West Campus');
+        expect(route.desc, 'Shuttle route for West Campus');
+        expect(route.enabled, true);
+        expect(route.color, Color(int.parse('0xffff0000')));
+        expect(route.width, 7);
+        expect(route.stopIds, [1, 2, 3]);
+        expect(route.created, '2018-09-14T13:04:49.250185-04:00');
+        expect(route.updated, '2019-11-04T11:04:22.731589-05:00');
+        expect(route.points, []);
+        expect(route.active, true);
+        expect(route.schedules, []);
+      });
+    },
+  );
+}

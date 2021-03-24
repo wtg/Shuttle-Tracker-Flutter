@@ -1,30 +1,35 @@
-// // This is a basic Flutter widget test.
-// //
-// // To perform an interaction with a widget in your test, use the WidgetTester
-// // utility that Flutter provides. For example, you can send tap and scroll
-// // gestures. You can also use WidgetTester to find child widgets in the widget
-// // tree, read text, and verify that the values of widget properties are correct.
+// This is a basic Flutter widget test.
+//
+// To perform an interaction with a widget in your test, use the WidgetTester
+// utility that Flutter provides. For example, you can send tap and scroll
+// gestures. You can also use WidgetTester to find child widgets in the widget
+// tree, read text, and verify that the values of widget properties are correct.
 
-// import 'package:flutter/material.dart';
-// import 'package:flutter_test/flutter_test.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_shuttletracker/pages/settings_page/settings_page.dart';
+import 'package:flutter_test/flutter_test.dart';
 
-// import 'package:flutter_shuttletracker/main.dart';
+void main() {
+  testWidgets('Switch toggles mode', (tester) async {
+    // Build our app and trigger a frame.
+    await tester.pumpWidget(SettingsPage());
 
-// void main() {
-//   testWidgets('Counter increments smoke test', (tester) async {
-//     // Build our app and trigger a frame.
-//     await tester.pumpWidget(App());
+    // Find widget to test
+    final addSwitch = find.byKey(ValueKey('themeSwitch'));
 
-//     // Verify that our counter starts at 0.
-//     expect(find.text('0'), findsOneWidget);
-//     expect(find.text('1'), findsNothing);
+    await tester.tap(addSwitch);
 
-//     // Tap the '+' icon and trigger a frame.
-//     await tester.tap(find.byIcon(Icons.add));
-//     await tester.pump();
 
-//     // Verify that our counter has incremented.
-//     expect(find.text('0'), findsNothing);
-//     expect(find.text('1'), findsOneWidget);
-//   });
-// }
+    // // Verify that our counter starts at 0.
+    // expect(find.text('0'), findsOneWidget);
+    // expect(find.text('1'), findsNothing);
+
+    // // Tap the '+' icon and trigger a frame.
+    // await tester.tap(find.byIcon(Icons.add));
+    // await tester.pump();
+
+    // // Verify that our counter has incremented.
+    // expect(find.text('0'), findsNothing);
+    // expect(find.text('1'), findsOneWidget);
+  });
+}

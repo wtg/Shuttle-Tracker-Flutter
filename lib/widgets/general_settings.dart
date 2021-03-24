@@ -29,6 +29,7 @@ class GeneralSettings extends StatelessWidget {
           title: Text('Dark Mode',
               style: TextStyle(color: theme.primaryColor, fontSize: 16)),
           trailing: Switch(
+            key: Key('themeSwitch'),
             value: isSwitched,
             onChanged: (value) {
               isSwitched = value;

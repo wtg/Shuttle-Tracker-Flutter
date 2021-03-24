@@ -59,7 +59,6 @@ class ShuttleApiProvider {
   /// Getter method to retrieve the list of updated shuttles
   Future<List<ShuttleUpdate>> getUpdates() async {
     var response = await fetch('updates');
-
     List<ShuttleUpdate> updatesList = response != null
         ? json
             .decode(response.body)

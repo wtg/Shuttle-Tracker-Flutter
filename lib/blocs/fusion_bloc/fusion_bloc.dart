@@ -83,7 +83,7 @@ class FusionBloc extends Bloc<FusionEvent, FusionState> {
 
       yield FusionVehicleLoaded(updates: currentShuttles);
     } else if (event is GetFusionETAData) {
-      var data = await event.shuttleETAs;
+      var data = event.shuttleETAs;
       yield FusionETALoaded(etas: data, updates: currentShuttles);
     }
   }

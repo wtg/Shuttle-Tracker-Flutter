@@ -103,9 +103,7 @@ class CustomListTile extends StatelessWidget {
             //  ],
             //),
             Icon(
-              Platform.isIOS
-                  ? CupertinoIcons.right_chevron
-                  : Icons.keyboard_arrow_right,
+              Icons.keyboard_arrow_right,
               color: theme.primaryColor,
             ),
           ],

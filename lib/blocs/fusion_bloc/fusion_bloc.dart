@@ -65,7 +65,6 @@ class FusionBloc extends Bloc<FusionEvent, FusionState> {
     FusionEvent event,
   ) async* {
     if (event is GetFusionVehicleData) {
-
       var data = await event.shuttleUpdate;
       if (shuttleColors[data.routeId] != null) {
         data.setColor = shuttleColors[data.routeId];

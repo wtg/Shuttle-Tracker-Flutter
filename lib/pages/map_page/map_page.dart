@@ -109,7 +109,7 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
 
                   return BlocBuilder<MapBloc, MapState>(
                     builder: (context, state) {
-                      print('State is $state');
+                      //print('State is $state');
                       if (state is MapInitial) {
                         // Initial State of MapPage
                         mapBloc.add(GetMapData(
@@ -188,16 +188,15 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
                                           ),
                                           layers: [
                                             TileLayerOptions(
-                                              backgroundColor: theme
-                                                  .getTheme.bottomAppBarColor,
-                                              urlTemplate: isDarkMode
-                                                  ? darkLink
-                                                  : lightLink,
-                                              subdomains: ['a', 'b', 'c'],
-                                              errorTileCallback: (tile, dynamic) => {
-                                                log('TILE ERROR!!')
-                                              }
-                                            ),
+                                                backgroundColor: theme
+                                                    .getTheme.bottomAppBarColor,
+                                                urlTemplate: isDarkMode
+                                                    ? darkLink
+                                                    : lightLink,
+                                                subdomains: ['a', 'b', 'c'],
+                                                errorTileCallback:
+                                                    (tile, dynamic) =>
+                                                        {log('TILE ERROR!!')}),
                                             PolylineLayerOptions(
                                                 polylines: isDarkMode
                                                     ? darkRoutes

@@ -138,7 +138,7 @@ class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
           backgroundColor: theme.getTheme.appBarTheme.color,
         ),
         body: BlocBuilder<OnTapBloc, OnTapState>(
-            cubit: widget.bloc,
+            bloc: widget.bloc,
             builder: (context, state) {
               _createStops(widget.routeStops);
               return Column(

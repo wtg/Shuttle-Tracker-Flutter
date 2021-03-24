@@ -16,7 +16,7 @@ class ShuttleApiProvider {
     var client = http.Client();
     http.Response response;
     try {
-      response = await client.get('https://shuttles.rpi.edu/$type');
+      response = await client.get(Uri.https('shuttles.rpi.edu', type));
 
       if (response.statusCode == 200) {
         isConnected = true;

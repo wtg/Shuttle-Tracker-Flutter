@@ -21,8 +21,7 @@ class Shuttle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-      },
+      onTap: () {},
       child: RotationTransition(
           turns: AlwaysStoppedAnimation((heading - 45) / 360), child: svg),
     );

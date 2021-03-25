@@ -4,6 +4,9 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_shuttletracker/data/models/shuttle_route.dart';
 import 'package:flutter_shuttletracker/data/models/shuttle_point.dart';
 import 'package:flutter_shuttletracker/data/models/shuttle_schedule.dart';
+import 'package:flutter_shuttletracker/data/models/shuttle_stop.dart';
+import 'package:flutter_shuttletracker/data/models/shuttle_eta.dart';
+import 'package:flutter_shuttletracker/data/models/shuttle_update.dart';
 
 import 'package:latlong/latlong.dart';
 
@@ -113,6 +116,83 @@ void main() {
         expect(schedule.startTime, '0000-01-01T04:00:00-05:00');
         expect(schedule.endDay, 6);
         expect(schedule.endTime, '0000-01-01T17:00:00-05:00');
+      });
+    },
+  );
+
+  group(
+    'Stop tests',
+    () {
+      test('Union Stop test', () {
+        final json = {
+          'id': 1,
+          'latitude': 42.73029109316892,
+          'longitude': -73.67655873298646,
+          'name': 'Student Union',
+          'created': '2018-09-14T14:06:36.80459-04:00',
+          'updated': '2018-09-14T14:06:36.80459-04:00',
+          'description': 'Shuttle stop in front of the Student Union'
+        };
+        final stop = ShuttleStop.fromJson(json);
+        expect(stop.id, 1);
+        expect(stop.latitude, 42.73029109316892);
+        expect(stop.longitude, -73.67655873298646);
+        expect(stop.name, 'Student Union');
+        expect(stop.created, '2018-09-14T14:06:36.80459-04:00');
+        expect(stop.updated, '2018-09-14T14:06:36.80459-04:00');
+        expect(stop.description, 'Shuttle stop in front of the Student Union');
+      });
+    },
+  );
+
+  group(
+    'ETA tests',
+    () {
+      test('ETA test', () {
+        final json = {
+          'stop_id': 1,
+          'vehicle_id': 2,
+          'route_id': 3,
+          'eta': '2021-03-25T15:41:47.498879-04:00',
+          'arriving': false
+        };
+        final eta = ShuttleETA.fromJson(json);
+        expect(eta.stopId, 1);
+        expect(eta.vehicleId, 2);
+        expect(eta.routeId, 3);
+        expect(eta.eta, DateTime.parse('2021-03-25T15:41:47.498879-04:00'));
+        expect(eta.arriving, false);
+      });
+    },
+  );
+
+  group(
+    'Update tests',
+    () {
+      test('Update test', () {
+        final json = {
+          'id': 15156694,
+          'tracker_id': '1831394611',
+          'latitude': 42.72733,
+          'longitude': -73.68729,
+          'heading': 37,
+          'speed': 8.76,
+          'time': '2021-03-25T15:41:46-04:00',
+          'created': '2021-03-25T15:41:47.49-04:00',
+          'vehicle_id': 2,
+          'route_id': 3
+        };
+        final update = ShuttleUpdate.fromJson(json);
+        expect(update.id, 15156694);
+        expect(update.trackerId, '1831394611');
+        expect(update.latitude, 42.72733);
+        expect(update.longitude, -73.68729);
+        expect(update.heading, 37);
+        expect(update.speed, 8.76);
+        expect(update.time, DateTime.parse('2021-03-25T15:41:46-04:00'));
+        expect(update.created, DateTime.parse('2021-03-25T15:41:47.49-04:00'));
+        expect(update.vehicleId, 2);
+        expect(update.routeId, 3);
       });
     },
   );

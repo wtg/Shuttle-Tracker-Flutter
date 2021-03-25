@@ -148,7 +148,7 @@ void main() {
   group(
     'ETA tests',
     () {
-      test('ETA test', () {
+      test('Past ETA test', () {
         final json = {
           'stop_id': 1,
           'vehicle_id': 2,
@@ -161,6 +161,22 @@ void main() {
         expect(eta.vehicleId, 2);
         expect(eta.routeId, 3);
         expect(eta.eta, DateTime.parse('2021-03-25T15:41:47.498879-04:00'));
+        expect(eta.arriving, false);
+      });
+
+      test('Future ETA test', () {
+        final json = {
+          'stop_id': 1,
+          'vehicle_id': 2,
+          'route_id': 3,
+          'eta': '2023-03-25T15:41:47.498879-04:00',
+          'arriving': false
+        };
+        final eta = ShuttleETA.fromJson(json);
+        expect(eta.stopId, 1);
+        expect(eta.vehicleId, 2);
+        expect(eta.routeId, 3);
+        expect(eta.eta, DateTime.parse('2023-03-25T15:41:47.498879-04:00'));
         expect(eta.arriving, false);
       });
     },

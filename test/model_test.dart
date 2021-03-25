@@ -3,6 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 
 import 'package:flutter_shuttletracker/data/models/shuttle_route.dart';
 import 'package:flutter_shuttletracker/data/models/shuttle_point.dart';
+import 'package:flutter_shuttletracker/data/models/shuttle_schedule.dart';
 
 import 'package:latlong/latlong.dart';
 
@@ -89,6 +90,29 @@ void main() {
         final point = ShuttlePoint.fromJson(json);
         expect(point.latitude, 42.73029109316892);
         expect(point.longitude, -73.67655873298646);
+      });
+    },
+  );
+
+  group(
+    'Schedule tests',
+    () {
+      test('Schedule test', () {
+        final json = {
+          'id': 4,
+          'route_id': 1,
+          'start_day': 6,
+          'start_time': '0000-01-01T04:00:00-05:00',
+          'end_day': 6,
+          'end_time': '0000-01-01T17:00:00-05:00'
+        };
+        final schedule = ShuttleSchedule.fromJson(json);
+        expect(schedule.id, 4);
+        expect(schedule.routeId, 1);
+        expect(schedule.startDay, 6);
+        expect(schedule.startTime, '0000-01-01T04:00:00-05:00');
+        expect(schedule.endDay, 6);
+        expect(schedule.endTime, '0000-01-01T17:00:00-05:00');
       });
     },
   );

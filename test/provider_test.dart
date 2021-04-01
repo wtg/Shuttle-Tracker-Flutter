@@ -10,6 +10,11 @@ void main() {
   group(
     'Provider tests',
     () {
+      // Can't test much here except that nothing is null and the types are
+      // what they should be, as we don't know how many routes, stops, or
+      // updates we'll be receiving from the datafeed, if any, or anything
+      // about them
+
       test('Routes test', () async {
         final routes = await provider.getRoutes();
         expect(routes, isNotNull);

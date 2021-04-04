@@ -29,6 +29,10 @@ class _IOSCupertinoAppState extends State<IOSCupertinoApp> {
       label: 'Routes',
     ),
     BottomNavigationBarItem(
+      icon: Icon(Icons.access_time),
+      label: 'Schedules',
+    ),
+    BottomNavigationBarItem(
       icon: Icon(Icons.settings),
       label: 'Settings',
     )

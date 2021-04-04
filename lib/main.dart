@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' as services;
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_shuttletracker/pages/schedules_page.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -52,6 +53,7 @@ class AppState extends State<App> {
     BlocProvider(
         create: (context) => RoutesBloc(repository: ShuttleRepository()),
         child: RoutesPage()),
+    SchedulesPage(),
     SettingsPage(),
   ];
 

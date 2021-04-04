@@ -24,6 +24,10 @@ class _AndroidMaterialAppState extends State<AndroidMaterialApp> {
       label: 'Routes',
     ),
     BottomNavigationBarItem(
+      icon: Icon(Icons.access_time),
+      label: 'Schedules',
+    ),
+    BottomNavigationBarItem(
       icon: Icon(Icons.settings),
       label: 'Settings',
     )

@@ -92,7 +92,7 @@ class FusionBloc extends Bloc<FusionEvent, FusionState> {
   void addShuttle({ShuttleUpdate shuttle}) {
     // Only include shuttles that are within 5 minutes of the current time
     var currentTime = DateTime.now().toUtc();
-    if (currentTime.difference(shuttle.time).inMinutes < 5) {
+    if (currentTime.difference(shuttle.time).inMinutes < 7) {
       fusionMap[shuttle] = shuttle.getMarker();
     }
   }
@@ -103,7 +103,7 @@ class FusionBloc extends Bloc<FusionEvent, FusionState> {
     var currentTime = DateTime.now().toUtc();
     fusionMap.removeWhere((key, value) {
       bool isRemoved;
-      isRemoved = currentTime.difference(key.time).inMinutes >= 5 ?? false;
+      isRemoved = currentTime.difference(key.time).inMinutes >= 7 ?? false;
       if (isRemoved) {
         print('Removed $key');
       }

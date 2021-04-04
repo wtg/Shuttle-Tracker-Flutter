@@ -78,7 +78,6 @@ class ShuttleStop extends ShuttlePoint {
                 selected: selected,
                 context: context,
                 name: name,
-                theme: theme,
                 bloc: bloc,
                 getLatLng: getLatLng,
                 index: index,

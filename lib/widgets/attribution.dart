@@ -5,24 +5,23 @@ import '../blocs/theme_bloc/theme_bloc.dart';
 import 'hyperlink.dart';
 
 class Attribution extends StatelessWidget {
-  final ThemeData theme;
-  Attribution({this.theme});
+  Attribution();
 
   @override
   Widget build(BuildContext context) {
+    var themeBloc = context.watch<ThemeBloc>();
+    var theme = themeBloc.state.getTheme;
     var attribution1 = <Widget>[
       Text(
         'Map tiles: ',
         style: theme.textTheme.subtitle1,
       ),
-      Hyperlink(
-          theme: theme, url: 'https://stamen.com/', text: 'Stamen Design '),
+      Hyperlink(url: 'https://stamen.com/', text: 'Stamen Design '),
       Text(
         '(',
         style: theme.textTheme.subtitle1,
       ),
       Hyperlink(
-          theme: theme,
           url: 'https://creativecommons.org/licenses/by/3.0/',
           text: 'CC BY 3.0'),
       Text(
@@ -36,18 +35,12 @@ class Attribution extends StatelessWidget {
         'Data: ',
         style: theme.textTheme.subtitle1,
       ),
-      Hyperlink(
-          theme: theme,
-          url: 'https://www.openstreetmap.org/',
-          text: 'OpenStreetMap '),
+      Hyperlink(url: 'https://www.openstreetmap.org/', text: 'OpenStreetMap '),
       Text(
         '(',
         style: theme.textTheme.subtitle1,
       ),
-      Hyperlink(
-          theme: theme,
-          url: 'https://www.openstreetmap.org/copyright',
-          text: 'ODbL'),
+      Hyperlink(url: 'https://www.openstreetmap.org/copyright', text: 'ODbL'),
       Text(
         ')',
         style: theme.textTheme.subtitle1,

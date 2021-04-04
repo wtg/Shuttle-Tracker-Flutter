@@ -214,9 +214,7 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
                                       ),
                                     ],
                                   ),
-                                  Attribution(
-                                    theme: theme.getTheme,
-                                  ),
+                                  Attribution(),
                                   Legend(
                                     // Legend Widget
                                     legend: isDarkMode ? darkLegend : legend,

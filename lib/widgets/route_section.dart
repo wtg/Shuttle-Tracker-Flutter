@@ -3,12 +3,11 @@ import 'package:flutter/material.dart';
 /// Class: RoutesSection
 /// Function: Returns a widget that holds the heading of the Routes Section
 class RoutesSection extends StatelessWidget {
-  final ThemeData theme;
   final List<Widget> routes;
   final String sectionHeader;
 
   /// Constructor for the RoutesSection widget
-  RoutesSection({this.theme, this.routes, this.sectionHeader});
+  RoutesSection({this.routes, this.sectionHeader});
 
   /// Standard build function for the widget
   @override

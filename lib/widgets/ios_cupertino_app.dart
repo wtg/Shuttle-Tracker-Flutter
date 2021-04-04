@@ -1,15 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_shuttletracker/blocs/theme_bloc/theme_bloc.dart';
 import 'package:responsive_framework/responsive_framework.dart';
-
+import 'package:provider/provider.dart';
 import '../icons/shuttle_icon.dart';
 
 class IOSCupertinoApp extends StatefulWidget {
-  final ThemeData theme;
-
   final List<Widget> pageOptions;
 
-  IOSCupertinoApp({this.theme, this.pageOptions});
+  IOSCupertinoApp({this.pageOptions});
 
   @override
   _IOSCupertinoAppState createState() => _IOSCupertinoAppState();
@@ -37,11 +36,13 @@ class _IOSCupertinoAppState extends State<IOSCupertinoApp> {
 
   @override
   Widget build(BuildContext context) {
+    var themeBloc = context.watch<ThemeBloc>();
+    var theme = themeBloc.state.getTheme;
     return Theme(
-      data: widget.theme,
+      data: theme,
       child: CupertinoApp(
         theme: CupertinoThemeData(
-          brightness: widget.theme.brightness,
+          brightness: theme.brightness,
         ),
         localizationsDelegates: [
           DefaultMaterialLocalizations.delegate,
@@ -59,7 +60,7 @@ class _IOSCupertinoAppState extends State<IOSCupertinoApp> {
           tabBar: CupertinoTabBar(
             iconSize: 25.0,
             activeColor: Colors.red,
-            backgroundColor: widget.theme.appBarTheme.color,
+            backgroundColor: theme.appBarTheme.color,
             items: _items,
             currentIndex: _selectedTab,
             onTap: (index) {

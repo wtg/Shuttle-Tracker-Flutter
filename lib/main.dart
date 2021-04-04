@@ -72,10 +72,8 @@ class AppState extends State<App> {
             services.DeviceOrientation.portraitUp,
           ]);
           return Platform.isIOS
-              ? IOSCupertinoApp(
-                  theme: theme.getTheme, pageOptions: _pageOptions)
-              : AndroidMaterialApp(
-                  theme: theme.getTheme, pageOptions: _pageOptions);
+              ? IOSCupertinoApp(pageOptions: _pageOptions)
+              : AndroidMaterialApp(pageOptions: _pageOptions);
         }));
   }
 }

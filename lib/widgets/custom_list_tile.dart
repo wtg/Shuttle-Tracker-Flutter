@@ -1,9 +1,9 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
+import 'package:flutter_shuttletracker/blocs/theme_bloc/theme_bloc.dart';
 
 import '../blocs/on_tap_bloc/on_tap_bloc.dart';
 import '../data/models/shuttle_route.dart';
@@ -16,11 +16,10 @@ import '../pages/detail_page.dart';
 class CustomListTile extends StatelessWidget {
   final ShuttleRoute route;
   final List<ShuttleStop> stops;
-  final ThemeData theme;
   final OnTapBloc bloc = OnTapBloc();
 
   /// Constructor of the CustomListTile Widget
-  CustomListTile({this.route, this.stops, this.theme});
+  CustomListTile({this.route, this.stops});
 
   bool get isEnabled => route.enabled;
   bool get isActive => route.active;
@@ -46,11 +45,10 @@ class CustomListTile extends StatelessWidget {
   /// Standard build function for the CustomListTile widget
   @override
   Widget build(BuildContext context) {
+    var themeBloc = context.watch<ThemeBloc>();
+    var theme = themeBloc.state.getTheme;
     var polyline = <Polyline>[route.getPolyline];
-
-//    var image = ShuttleImage(svgColor: route.color);
     var color = route.color;
-
     var circle = ColorFiltered(
       colorFilter: ColorFilter.mode(color, BlendMode.modulate),
       child: Image.asset(
@@ -87,20 +85,6 @@ class CustomListTile extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.end,
           children: <Widget>[
-            //Stack(
-            //  alignment: AlignmentDirectional.center,
-            //  children: <Widget>[
-            //    Container(
-            //      height: 20,
-            //      width: 20,
-            //      decoration: ShapeDecoration(
-            //        color: Colors.white,
-            //        shape: CircleBorder(),
-            //      ),
-            //    ),
-            //    _getIcon(),
-            //  ],
-            //),
             Icon(
               Icons.keyboard_arrow_right,
               color: theme.primaryColor,

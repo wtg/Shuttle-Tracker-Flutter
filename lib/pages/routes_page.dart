@@ -57,7 +57,6 @@ class _RoutesPageState extends State<RoutesPage> {
                   routes: state.routes,
                   darkRoutes: state.darkRoutes,
                   stops: state.stops,
-                  theme: theme.getTheme,
                 ),
               );
             }

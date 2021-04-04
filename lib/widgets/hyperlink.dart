@@ -5,9 +5,8 @@ import 'package:url_launcher/url_launcher.dart';
 class Hyperlink extends StatelessWidget {
   final String url;
   final String text;
-  final ThemeData theme;
 
-  Hyperlink({this.url, this.text, this.theme});
+  Hyperlink({this.url, this.text});
 
   void _launchURL() async {
     if (await canLaunch(url)) {

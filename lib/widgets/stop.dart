@@ -11,7 +11,7 @@ class Stop extends StatelessWidget {
   final bool selected;
   final Color selectedColor;
   final BuildContext context;
-  final ThemeData theme;
+
   final OnTapBloc bloc;
   final int index;
   final LatLng getLatLng;
@@ -22,7 +22,6 @@ class Stop extends StatelessWidget {
       {@required this.animatedMapMove,
       @required this.selected,
       @required this.context,
-      @required this.theme,
       @required this.bloc,
       @required this.index,
       @required this.getLatLng,

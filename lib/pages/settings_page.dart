@@ -2,10 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../blocs/theme_bloc/theme_bloc.dart';
-import '../../widgets/about_settings.dart';
-import '../../widgets/feedback_settings.dart';
-import '../../widgets/general_settings.dart';
+import '../blocs/theme_bloc/theme_bloc.dart';
+import '../widgets/about_settings.dart';
+import '../widgets/feedback_settings.dart';
+import '../widgets/general_settings.dart';
 
 /// Class: SettingsPage
 /// Function: Widget representing the Settings Page

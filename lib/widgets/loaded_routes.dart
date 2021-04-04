@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-import '../../../data/models/shuttle_route.dart';
-import '../../../data/models/shuttle_stop.dart';
-import '../../../widgets/custom_list_tile.dart';
-import '../../../widgets/route_section.dart';
+import '../data/models/shuttle_route.dart';
+import '../data/models/shuttle_stop.dart';
+import 'custom_list_tile.dart';
+import 'route_section.dart';
 
 /// Class: LoadedRoutes Widget
 /// Function: Widget that represents the state of the content on the Routes Page

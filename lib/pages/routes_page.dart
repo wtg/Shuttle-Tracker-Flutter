@@ -3,11 +3,11 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../blocs/routes_bloc/routes_bloc.dart';
-import '../../blocs/theme_bloc/theme_bloc.dart';
-import '../../widgets/loading_state.dart';
-import '../../widgets/shuttle_svg.dart';
-import 'states/loaded_routes.dart';
+import '../blocs/routes_bloc/routes_bloc.dart';
+import '../blocs/theme_bloc/theme_bloc.dart';
+import '../widgets/loading_state.dart';
+import '../widgets/shuttle_svg.dart';
+import '../widgets/loaded_routes.dart';
 
 /// Class: RoutesPage
 /// Function: Widget that represents the main RoutesPage

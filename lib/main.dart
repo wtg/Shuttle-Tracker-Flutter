@@ -14,9 +14,9 @@ import 'blocs/routes_bloc/routes_bloc.dart';
 import 'blocs/theme_bloc/theme_bloc.dart';
 import 'data/fusion/fusion_socket.dart';
 import 'data/repository/shuttle_repository.dart';
-import 'pages/map_page/map_page.dart';
-import 'pages/routes_page/routes_page.dart';
-import 'pages/settings_page/settings_page.dart';
+import 'pages/map_page.dart';
+import 'pages/routes_page.dart';
+import 'pages/settings_page.dart';
 import 'widgets/android_material_app.dart';
 import 'widgets/ios_cupertino_app.dart';
 

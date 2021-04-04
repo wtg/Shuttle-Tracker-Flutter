@@ -177,6 +177,10 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
                                           // Map Widget
                                           mapController: mapController,
                                           options: MapOptions(
+                                            interactiveFlags:
+                                                InteractiveFlag.all &
+                                                    ~InteractiveFlag.rotate,
+                                            pinchMoveThreshold: 0,
                                             nePanBoundary:
                                                 LatLng(42.78, -73.63),
                                             swPanBoundary:

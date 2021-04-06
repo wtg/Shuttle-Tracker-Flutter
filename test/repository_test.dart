@@ -3,10 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:flutter_shuttletracker/data/models/shuttle_route.dart';
-import 'package:flutter_shuttletracker/data/models/shuttle_stop.dart';
-import 'package:flutter_shuttletracker/data/models/shuttle_update.dart';
 import 'package:flutter_shuttletracker/data/repository/shuttle_repository.dart';
 import 'package:flutter_shuttletracker/global_widgets/shuttle_svg.dart';
+import 'package:flutter_shuttletracker/theme/helpers.dart';
 
 void main() {
   final repository = ShuttleRepository();
@@ -36,12 +35,20 @@ void main() {
 
       test('Dark routes test', () async {
         final darkRoutes = await repository.getDarkRoutes();
+        final lightRoutes = await repository.getRoutes;
         expect(darkRoutes, isNotNull);
         expect(darkRoutes, isA<List>());
         darkRoutes.forEach((darkRoute) {
           expect(darkRoute, isNotNull);
           expect(darkRoute, isA<ShuttleRoute>());
-          // TODO: ensure color is correct for dark route
+          // Find corresponding light route for color comparison
+          var lightRouteColor;
+          for (final lightRoute in lightRoutes) {
+            if (lightRoute.name == darkRoute.name) {
+              lightRouteColor = lightRoute.color;
+            }
+          }
+          expect(darkRoute.color, shadeColor(lightRouteColor, 0.35));
         });
       });
 
@@ -60,9 +67,9 @@ void main() {
         });
 
         expect(data.legend, isNotNull);
-        data.legend.forEach((id, svg) {
-          expect(id, isNotNull);
-          expect(id, isA<int>());
+        data.legend.forEach((routeName, svg) {
+          expect(routeName, isNotNull);
+          expect(routeName, isA<String>());
           expect(svg, isNotNull);
           expect(svg, isA<ShuttleSVG>());
         });
@@ -81,7 +88,8 @@ void main() {
           expect(routeName, isA<String>());
           expect(svg, isNotNull);
           expect(svg, isA<ShuttleSVG>());
-          // TODO: ensure SVG color is correct for dark mode
+          expect(
+              svg.svgColor, shadeColor(data.legend[routeName].svgColor, 0.35));
         });
       });
     },

@@ -33,7 +33,22 @@ void main() {
         expect(updates, isA<List>());
       });
 
-      test('Dark routes test', () async {
+      test('Dark routes match test', () async {
+        final darkRoutes = await repository.getDarkRoutes();
+        final lightRoutes = await repository.getRoutes;
+        darkRoutes.forEach((darkRoute) {
+          var foundMatch = false;
+          for (final lightRoute in lightRoutes) {
+            if (lightRoute.name == darkRoute.name) {
+              foundMatch = true;
+              break;
+            }
+          }
+          expect(foundMatch, true);
+        });
+      });
+
+      test('Dark routes color test', () async {
         final darkRoutes = await repository.getDarkRoutes();
         final lightRoutes = await repository.getRoutes;
         expect(darkRoutes, isNotNull);
@@ -46,6 +61,7 @@ void main() {
           for (final lightRoute in lightRoutes) {
             if (lightRoute.name == darkRoute.name) {
               lightRouteColor = lightRoute.color;
+              break;
             }
           }
           expect(darkRoute.color, shadeColor(lightRouteColor, 0.35));
@@ -90,6 +106,7 @@ void main() {
           expect(svg, isA<ShuttleSVG>());
           expect(
               svg.svgColor, shadeColor(data.legend[routeName].svgColor, 0.35));
+          expect(data.legend.containsKey(routeName), true);
         });
       });
     },

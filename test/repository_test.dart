@@ -14,21 +14,21 @@ void main() {
     () {
       test('Routes test', () async {
         // More rigorous testing occurs in the provider tests
-        final routes = repository.getRoutes;
+        final routes = await repository.getRoutes;
         expect(routes, isNotNull);
         expect(routes, isA<List>());
       });
 
       test('Stops test', () async {
         // More rigorous testing occurs in the provider tests
-        final stops = repository.getStops;
+        final stops = await repository.getStops;
         expect(stops, isNotNull);
         expect(stops, isA<List>());
       });
 
       test('Updates test', () async {
         // More rigorous testing occurs in the provider tests
-        final updates = repository.getRoutes;
+        final updates = await repository.getRoutes;
         expect(updates, isNotNull);
         expect(updates, isA<List>());
       });

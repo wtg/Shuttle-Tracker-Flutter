@@ -108,23 +108,23 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
                   var darkLegend = <String, ShuttleSVG>{};
 
                   return BlocBuilder<MapBloc, MapState>(
-                    builder: (context, state) {
+                    builder: (context, mapState) {
                       //print('State is $state');
-                      if (state is MapInitial) {
+                      if (mapState is MapInitial) {
                         // Initial State of MapPage
                         mapBloc.add(GetMapData(
                           animatedMapMove: _animatedMapMove,
                           context: context,
                         ));
-                      } else if (state is MapLoaded) {
+                      } else if (mapState is MapLoaded) {
                         // MapPage is loaded
-                        routes = state.routes;
-                        darkRoutes = state.darkRoutes;
-                        stops = state.stops;
-                        legend = state.legend;
-                        darkLegend = state.darkLegend;
-                        fusionBloc.setShuttleColors = state.routeColors;
-                      } else if (state is MapError) {
+                        routes = mapState.routes;
+                        darkRoutes = mapState.darkRoutes;
+                        stops = mapState.stops;
+                        legend = mapState.legend;
+                        darkLegend = mapState.darkLegend;
+                        fusionBloc.setShuttleColors = mapState.routeColors;
+                      } else if (mapState is MapError) {
                         // MapPage encountered
                         // error
                         mapBloc.add(GetMapData(
@@ -138,6 +138,7 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
                           if (fusionState is FusionInitial) {
                           } else if (fusionState is FusionVehicleLoaded) {
                             updates = fusionState.updates;
+
                             print('Num of shuttles on map: ${updates.length}');
                           } else if (fusionState is FusionETALoaded) {
                             updates = fusionState.updates;

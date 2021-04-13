@@ -8,7 +8,7 @@ void main() {
   group(
     'Helper tests',
     () {
-      test('Luma test', () {
+      test('Shade color test', () {
         final lightColor = shadeColor(Color(int.parse('0xff0000ff')), 0.35);
         final darkColor = shadeColor(Color(int.parse('0xff0000ff')), 0.70);
         // Coefficients from Rec. 709
@@ -19,6 +19,13 @@ void main() {
             0.7152 * darkColor.green +
             0.0722 * darkColor.blue;
         expect(darkLuma, lessThan(lightLuma));
+      });
+
+      test('Shade value test', () {
+        final color = Color(int.parse('0xff0000ff'));
+        final lightValue = shadeValue(color.blue, 0.70);
+        final darkValue = shadeValue(color.blue, 0.35);
+        expect(lightValue, lessThan(darkValue));
       });
     },
   );

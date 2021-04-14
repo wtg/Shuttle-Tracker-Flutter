@@ -226,6 +226,32 @@ void main() {
         update.setColor = Colors.red;
         expect(update.getColor, Colors.red);
       });
+
+      test('Update equality test', () {
+        final update1 = ShuttleUpdate(
+            id: 15156694,
+            trackerId: '1831394611',
+            latitude: 42.72733,
+            longitude: -73.68729,
+            heading: 37,
+            speed: 8.76,
+            time: DateTime.parse('2021-03-25T15:41:46-04:00'),
+            created: DateTime.parse('2021-03-25T15:41:47.49-04:00'),
+            vehicleId: 2,
+            routeId: 3);
+        final update2 = ShuttleUpdate(
+            id: 15201188,
+            trackerId: '1831394611',
+            latitude: 42.73095,
+            longitude: -73.6777,
+            heading: 104,
+            speed: 16.52,
+            time: DateTime.parse('2021-03-25T15:43:51-04:00'),
+            created: DateTime.parse('2021-03-25T15:41:52.2-04:00'),
+            vehicleId: 3,
+            routeId: 4);
+        expect(update1, equals(update2));
+      });
     },
   );
 }

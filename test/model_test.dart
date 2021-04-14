@@ -185,7 +185,7 @@ void main() {
   group(
     'Update tests',
     () {
-      test('Update test', () {
+      test('Update creation test', () {
         final json = {
           'id': 15156694,
           'tracker_id': '1831394611',
@@ -209,6 +209,22 @@ void main() {
         expect(update.created, DateTime.parse('2021-03-25T15:41:47.49-04:00'));
         expect(update.vehicleId, 2);
         expect(update.routeId, 3);
+      });
+
+      test('Update color test', () {
+        final update = ShuttleUpdate(
+            id: 15156694,
+            trackerId: '1831394611',
+            latitude: 42.72733,
+            longitude: -73.68729,
+            heading: 37,
+            speed: 8.76,
+            time: DateTime.parse('2021-03-25T15:41:46-04:00'),
+            created: DateTime.parse('2021-03-25T15:41:47.49-04:00'),
+            vehicleId: 2,
+            routeId: 3);
+        update.setColor = Colors.red;
+        expect(update.getColor, Colors.red);
       });
     },
   );

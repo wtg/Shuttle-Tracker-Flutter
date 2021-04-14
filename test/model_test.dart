@@ -85,7 +85,7 @@ void main() {
   group(
     'Point tests',
     () {
-      test('Union test', () {
+      test('Point creation test', () {
         final json = {
           'latitude': 42.73029109316892,
           'longitude': -73.67655873298646
@@ -93,6 +93,17 @@ void main() {
         final point = ShuttlePoint.fromJson(json);
         expect(point.latitude, 42.73029109316892);
         expect(point.longitude, -73.67655873298646);
+      });
+
+      test('Point equality test', () {
+        final point1 = ShuttlePoint(
+            latitude: 42.73029109316892, longitude: -73.67655873298646);
+        final point2 = ShuttlePoint(
+            latitude: 42.73029109316892, longitude: -73.67655873298646);
+        final point3 = ShuttlePoint(
+            latitude: 42.73154808884768, longitude: -73.68611276149751);
+        expect(point1, equals(point2));
+        expect(point1, isNot(equals(point3)));
       });
     },
   );
@@ -123,7 +134,7 @@ void main() {
   group(
     'Stop tests',
     () {
-      test('Union Stop test', () {
+      test('Stop creation test', () {
         final json = {
           'id': 1,
           'latitude': 42.73029109316892,
@@ -141,6 +152,35 @@ void main() {
         expect(stop.created, '2018-09-14T14:06:36.80459-04:00');
         expect(stop.updated, '2018-09-14T14:06:36.80459-04:00');
         expect(stop.description, 'Shuttle stop in front of the Student Union');
+      });
+
+      test('Stop equality test', () {
+        final stop1 = ShuttleStop(
+            id: 1,
+            name: 'Student Union',
+            latitude: 42.73029109316892,
+            longitude: -73.67655873298646,
+            created: '2018-09-14T14:06:36.80459-04:00',
+            updated: '2018-09-14T14:06:36.80459-04:00',
+            description: 'Shuttle stop in front of the Student Union');
+        final stop2 = ShuttleStop(
+            id: 1,
+            name: 'Student Union',
+            latitude: 42.73154808884768,
+            longitude: -73.68611276149751,
+            created: '2018-09-14T14:06:36.80459-04:00',
+            updated: '2018-09-14T14:06:36.80459-04:00',
+            description: 'Shuttle stop in front of the Student Union');
+        final stop3 = ShuttleStop(
+            id: 1,
+            name: 'Blitman Residence Commons',
+            latitude: 42.73154808884768,
+            longitude: -73.68611276149751,
+            created: '2018-09-14T14:06:36.80459-04:00',
+            updated: '2018-09-14T14:06:36.80459-04:00',
+            description: 'Stop at Blitman Residence Commons');
+        expect(stop1, equals(stop2));
+        expect(stop2, isNot(equals(stop3)));
       });
     },
   );

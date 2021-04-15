@@ -16,7 +16,7 @@ class ShuttleApiProvider {
     var client = http.Client();
     http.Response response;
     try {
-      response = await client.get('https://shuttles.rpi.edu/$type');
+      response = await client.get(Uri.https('shuttles.rpi.edu', type));
 
       if (response.statusCode == 200) {
         isConnected = true;
@@ -34,7 +34,7 @@ class ShuttleApiProvider {
   /// Getter method to retrieve the list of routes
   Future<List<ShuttleRoute>> getRoutes() async {
     var response = await fetch('routes');
-    print("ROUTES DATA FETCHED");
+    print('ROUTES DATA FETCHED');
     List<ShuttleRoute> routeList = response != null
         ? json
             .decode(response.body)

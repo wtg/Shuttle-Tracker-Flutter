@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
 
 import '../../blocs/on_tap_bloc/on_tap_bloc.dart';
-import '../../global_widgets/stop.dart';
+import '../../widgets/stop.dart';
 import 'shuttle_point.dart';
 
 // ignore: must_be_immutable
@@ -66,7 +66,7 @@ class ShuttleStop extends ShuttlePoint {
         height: 44.0,
         point: getLatLng,
         builder: (ctx) => BlocBuilder<OnTapBloc, OnTapState>(
-            cubit: bloc,
+            bloc: bloc,
             builder: (_, state) {
               if (state is TappedState) {
                 if (state.stopName == name) {
@@ -78,7 +78,6 @@ class ShuttleStop extends ShuttlePoint {
                 selected: selected,
                 context: context,
                 name: name,
-                theme: theme,
                 bloc: bloc,
                 getLatLng: getLatLng,
                 index: index,

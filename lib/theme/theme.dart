@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 
 final ThemeData lightMode = ThemeData(
@@ -10,17 +8,12 @@ final ThemeData lightMode = ThemeData(
   cardColor: Colors.white,
   bottomAppBarColor: Colors.white,
   brightness: Brightness.light,
-  hoverColor: Colors.black,
-  primarySwatch: Colors.red,
+  primaryColor: Colors.black,
   textTheme: TextTheme(
     bodyText1: TextStyle(
-        color: Colors.black,
-        fontSize: Platform.isIOS ? 12.0 : 14.0,
-        fontStyle: FontStyle.normal),
+        color: Colors.black, fontSize: 14.0, fontStyle: FontStyle.normal),
     subtitle1: TextStyle(
-        color: Colors.black,
-        fontSize: Platform.isIOS ? 10.0 : 12.0,
-        fontStyle: FontStyle.normal),
+        color: Colors.black, fontSize: 14.0, fontStyle: FontStyle.normal),
   ),
 );
 
@@ -35,17 +28,11 @@ final ThemeData darkMode = ThemeData(
   cardColor: Color(0xFF242424),
   bottomAppBarColor: Colors.black,
   brightness: Brightness.dark,
-  canvasColor: Color(0xFF181818),
-  hoverColor: Colors.white,
-  primarySwatch: Colors.red,
+  primaryColor: Colors.white,
   textTheme: TextTheme(
     bodyText1: TextStyle(
-        color: Colors.white,
-        fontSize: Platform.isIOS ? 12.0 : 14.0,
-        fontStyle: FontStyle.normal),
+        color: Colors.white, fontSize: 14.0, fontStyle: FontStyle.normal),
     subtitle1: TextStyle(
-        color: Colors.white,
-        fontSize: Platform.isIOS ? 10.0 : 12.0,
-        fontStyle: FontStyle.normal),
+        color: Colors.white, fontSize: 14.0, fontStyle: FontStyle.normal),
   ),
 );

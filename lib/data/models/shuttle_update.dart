@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_map/flutter_map.dart';
 
-import '../../global_widgets/shuttle.dart';
-import '../../global_widgets/shuttle_svg.dart';
+import '../../widgets/shuttle.dart';
+import '../../widgets/shuttle_svg.dart';
 import 'shuttle_point.dart';
 
 // ignore: must_be_immutable
@@ -94,7 +94,9 @@ class ShuttleUpdate extends ShuttlePoint {
   @override
   String toString() {
     // ignore: lines_longer_than_80_chars
-    return "$trackerId $latitude $longitude $heading $speed $time $created $vehicleId $routeId";
+    //return "$trackerId $latitude $longitude $heading $speed $time $created $vehicleId $routeId";
+    // ignore: lines_longer_than_80_chars
+    return 'routeId: $routeId vehicleId: $vehicleId created: $created time: $time';
   }
 
   @override

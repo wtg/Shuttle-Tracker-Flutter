@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_shuttletracker/widgets/shuttle_svg.dart';
 
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:flutter_shuttletracker/data/models/shuttle_route.dart';
 import 'package:flutter_shuttletracker/data/repository/shuttle_repository.dart';
-import 'package:flutter_shuttletracker/global_widgets/shuttle_svg.dart';
 import 'package:flutter_shuttletracker/theme/helpers.dart';
 
 void main() {

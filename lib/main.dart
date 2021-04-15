@@ -4,9 +4,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' as services;
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_shuttletracker/pages/schedules_page.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
+import 'package:path_provider/path_provider.dart';
 
-import 'android_material_app.dart';
 import 'blocs/fusion_bloc/fusion_bloc.dart';
 import 'blocs/map_bloc/map_bloc.dart';
 import 'blocs/on_tap_bloc/on_tap_bloc.dart';
@@ -14,27 +15,26 @@ import 'blocs/routes_bloc/routes_bloc.dart';
 import 'blocs/theme_bloc/theme_bloc.dart';
 import 'data/fusion/fusion_socket.dart';
 import 'data/repository/shuttle_repository.dart';
-import 'ios_cupertino_app.dart';
-import 'pages/map_page/map_page.dart';
-import 'pages/routes_page/routes_page.dart';
-import 'pages/settings_page/settings_page.dart';
+import 'pages/map_page.dart';
+import 'pages/routes_page.dart';
+import 'pages/settings_page.dart';
+import 'widgets/android_material_app.dart';
+import 'widgets/ios_cupertino_app.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  HydratedBloc.storage = await HydratedStorage.build();
-  return runApp(MyApp()
-      // DevicePreview(
-      //     enabled: false, //!kReleaseMode,
-      //     builder: (context) => MyApp()),
-      );
+  HydratedBloc.storage = await HydratedStorage.build(
+    storageDirectory: await getTemporaryDirectory(),
+  );
+  return runApp(App());
 }
 
-class MyApp extends StatefulWidget {
+class App extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() => MyAppState();
+  State<StatefulWidget> createState() => AppState();
 }
 
-class MyAppState extends State<MyApp> {
+class AppState extends State<App> {
   final _pageOptions = [
     MultiBlocProvider(
       providers: [
@@ -53,10 +53,8 @@ class MyAppState extends State<MyApp> {
     BlocProvider(
         create: (context) => RoutesBloc(repository: ShuttleRepository()),
         child: RoutesPage()),
-    BlocProvider(
-      create: (context) => RoutesBloc(repository: ShuttleRepository()),
-      child: SettingsPage(),
-    ),
+    SchedulesPage(),
+    SettingsPage(),
   ];
 
   @override
@@ -76,10 +74,8 @@ class MyAppState extends State<MyApp> {
             services.DeviceOrientation.portraitUp,
           ]);
           return Platform.isIOS
-              ? IOSCupertinoApp(
-                  theme: theme.getTheme, pageOptions: _pageOptions)
-              : AndroidMaterialApp(
-                  theme: theme.getTheme, pageOptions: _pageOptions);
+              ? IOSCupertinoApp(pageOptions: _pageOptions)
+              : AndroidMaterialApp(pageOptions: _pageOptions);
         }));
   }
 }

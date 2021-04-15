@@ -9,7 +9,7 @@ import '../../data/models/shuttle_route.dart';
 import '../../data/models/shuttle_stop.dart';
 import '../../data/models/shuttle_update.dart';
 import '../../data/repository/shuttle_repository.dart';
-import '../../global_widgets/shuttle_svg.dart';
+import '../../widgets/shuttle_svg.dart';
 import '../on_tap_bloc/on_tap_bloc.dart';
 
 part 'map_event.dart';
@@ -57,7 +57,6 @@ class MapBloc extends Bloc<MapEvent, MapState> {
         ));
       }
     }
-    //print("Number of stops on map: ${markers.length}");
     return markers;
   }
 
@@ -77,7 +76,6 @@ class MapBloc extends Bloc<MapEvent, MapState> {
 
       markers.add(update.getMarker(animatedMapMove, context));
     }
-    //print("Number of shuttles on map: ${markers.length}");
     return markers;
   }
 

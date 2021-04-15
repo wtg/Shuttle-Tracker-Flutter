@@ -19,6 +19,6 @@ class ShuttleETA {
 
   @override
   String toString() {
-    return "$stopId $vehicleId $routeId $eta $arriving";
+    return '$stopId $vehicleId $routeId $eta $arriving';
   }
 }

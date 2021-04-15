@@ -27,10 +27,10 @@ class FusionBloc extends Bloc<FusionEvent, FusionState> {
   }
 
   void connect({@required FusionSocket fusionSocket}) {
-    print("WS is connected");
+    print('WS is connected');
     fusionSocket.openWS();
-    fusionSocket.subscribe("eta");
-    fusionSocket.subscribe("vehicle_location");
+    fusionSocket.subscribe('eta');
+    fusionSocket.subscribe('vehicle_location');
 
     fusionSocket.channel.stream.listen((message) {
       fusionSocket.streamController.add(message);
@@ -53,35 +53,27 @@ class FusionBloc extends Bloc<FusionEvent, FusionState> {
       print(error);
       fusionSocket.closeWS();
     }, onDone: () async {
-      print("WS is done");
+      print('WS is done');
       await Future.delayed(Duration(
           seconds: 3)); // Check every 3 seconds to reestablish the connection
       connect(fusionSocket: fusionSocket);
     });
   }
 
-  set setShuttleColors(Map<int, Color> colors) => shuttleColors = colors;
-
   @override
   Stream<FusionState> mapEventToState(
     FusionEvent event,
   ) async* {
     if (event is GetFusionVehicleData) {
-      // print(shuttleColors);
-
       var data = await event.shuttleUpdate;
       if (shuttleColors[data.routeId] != null) {
         data.setColor = shuttleColors[data.routeId];
       } else {
         data.setColor = Colors.white;
       }
-      if (data.routeId != null &&
-          data.time.day == DateTime.now().day &&
-          data.time.month == DateTime.now().month &&
-          data.time.year == DateTime.now().year) {
-        fusionMap[data] = data.getMarker();
-        print(fusionMap.length);
-      }
+
+      addShuttle(shuttle: data);
+      removeOldShuttles();
 
       var list = <Marker>[];
       fusionMap.forEach((k, v) => list.add(v));
@@ -90,9 +82,33 @@ class FusionBloc extends Bloc<FusionEvent, FusionState> {
 
       yield FusionVehicleLoaded(updates: currentShuttles);
     } else if (event is GetFusionETAData) {
-      var data = await event.shuttleETAs;
+      var data = event.shuttleETAs;
       yield FusionETALoaded(etas: data, updates: currentShuttles);
     }
+  }
+
+  set setShuttleColors(Map<int, Color> colors) => shuttleColors = colors;
+
+  void addShuttle({ShuttleUpdate shuttle}) {
+    // Only include shuttles that are within 5 minutes of the current time
+    var currentTime = DateTime.now().toUtc();
+    if (currentTime.difference(shuttle.time).inMinutes < 7) {
+      fusionMap[shuttle] = shuttle.getMarker();
+    }
+  }
+
+  void removeOldShuttles() {
+    // - Loop through fusionMap
+    // - Check if any shuttle in fusionMap is too old and remove it
+    var currentTime = DateTime.now().toUtc();
+    fusionMap.removeWhere((key, value) {
+      bool isRemoved;
+      isRemoved = currentTime.difference(key.time).inMinutes >= 7 ?? false;
+      if (isRemoved) {
+        print('Removed $key');
+      }
+      return isRemoved;
+    });
   }
 
   @override

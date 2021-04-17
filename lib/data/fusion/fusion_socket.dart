@@ -91,6 +91,7 @@ class FusionSocket {
   */
   /// Prints and returns updates on Vehicle Locations
   Future<ShuttleUpdate> handleVehicleLocations(String message) async {
+    //print(message);
     var data = await compute(jsonDecode, message);
     var update = ShuttleUpdate.fromJson(data['message']);
     //print('update $update');

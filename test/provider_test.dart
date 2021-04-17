@@ -47,7 +47,7 @@ void main() {
 
       test('Connection test', () async {
         // Dummy call to check the connection
-        provider.getRoutes();
+        await provider.getRoutes();
         final connected = provider.getIsConnected;
         expect(connected, true);
       });

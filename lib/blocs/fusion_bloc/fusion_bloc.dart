@@ -19,8 +19,6 @@ class FusionBloc extends Bloc<FusionEvent, FusionState> {
   Map<ShuttleUpdate, Marker> fusionMap = {};
   Map<int, Color> shuttleColors = {};
   List<Marker> currentShuttles = [];
-  dynamic currentVehicleMessage;
-  dynamic currentETAMessage;
 
   FusionBloc({@required this.fusionSocket}) : super(FusionInitial()) {
     connect(fusionSocket: fusionSocket);
@@ -33,19 +31,15 @@ class FusionBloc extends Bloc<FusionEvent, FusionState> {
     fusionSocket.subscribe('vehicle_location');
 
     fusionSocket.channel.stream.listen((message) {
-      fusionSocket.streamController.add(message);
-
       var response = jsonDecode(message);
       if (response['type'] == 'server_id') {
         fusionSocket.serverID = response['message'];
-        print(fusionSocket.serverID);
       } else if (response['type'] == 'vehicle_location') {
         add(GetFusionVehicleData(
             shuttleUpdate: fusionSocket.handleVehicleLocations(message)));
       } else if (response['type'] == 'eta') {
         List<dynamic> body = response['message']['stop_etas'];
         if (body.isNotEmpty) {
-          currentETAMessage = message;
           add(GetFusionETAData(shuttleETAs: fusionSocket.handleEtas(message)));
         }
       }

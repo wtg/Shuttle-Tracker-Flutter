@@ -11,7 +11,6 @@ class FusionSocket {
   String serverID;
   List<String> subscriptionTopics = [];
   IOWebSocketChannel channel;
-  StreamController<String> streamController = StreamController.broadcast();
 
   /// Start of the Fusion web socket functions
   /// Initialize a connection with the server, check if the server

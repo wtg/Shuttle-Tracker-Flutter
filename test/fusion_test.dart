@@ -44,16 +44,6 @@ void main() {
           
         });
       });
-
-      // test('Routes test', () async {
-      //   final routes = await provider.getRoutes();
-      //   expect(routes, isNotNull);
-      //   expect(routes, isA<List>());
-      //   routes.forEach((route) {
-      //     expect(route, isNotNull);
-      //     expect(route, isA<ShuttleRoute>());
-      //   });
-      // });
     },
   );
 }

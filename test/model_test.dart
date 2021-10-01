@@ -8,7 +8,7 @@ import 'package:flutter_shuttletracker/data/models/shuttle_stop.dart';
 import 'package:flutter_shuttletracker/data/models/shuttle_eta.dart';
 import 'package:flutter_shuttletracker/data/models/shuttle_update.dart';
 
-import 'package:latlong/latlong.dart';
+import 'package:latlong2/latlong.dart';
 
 void main() {
   group(

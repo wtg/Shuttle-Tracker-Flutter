@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:latlong/latlong.dart';
+import 'package:latlong2/latlong.dart';
 
 import '../blocs/on_tap_bloc/on_tap_bloc.dart';
 import 'eta_panel.dart';
